@@ -1,0 +1,23 @@
+<div class="navbar navbar-default" id="navbar-second">
+
+  <button class="menu-mat" style="font-weight:400;" routerLink='/manager' mat-button ><i class="icon-home2 icon"></i>Trang chủ</button>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="beforeMenu"><i class="icon-cog2 icon"></i>Quản lý hệ thống</button>
+  <mat-menu #beforeMenu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="belowMenu"><i class="icon-magazine icon"></i>Quản lý tuyển dụng</button>
+  <mat-menu #belowMenu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="afterMenu"><i class="icon-users2 icon"></i>Quản lý ứng viên</button>
+  <mat-menu #afterMenu="matMenu">
+    <button mat-menu-item routerLink='/manager/interview'>Hệ thống ứng viên</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+</div>
