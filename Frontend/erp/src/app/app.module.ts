@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
-  declarations: [ //đối với component, khai báo những component của module này
+  declarations: [ //đối với component, khai báo những component của module này sử dụng
     AppComponent
   ],
   imports: [ //đối với module, import những module mà module này cần dùng
