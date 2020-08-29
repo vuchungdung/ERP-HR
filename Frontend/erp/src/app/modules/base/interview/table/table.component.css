@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+.input-search{
+  position: relative;
+  width: 200px;
+  height: 34px;
+  padding: 12px 8px 12px 32px;
+  border: none;
+  background-color: #e7e7e7;
+  outline: none;
+  border-radius: 4px;
+}
+.icon-s{
+  color: #a1758b;
+  font-size: 16px;
+  z-index: 5;
+  top: 46px;
+  left: 25px;
+}
