@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PeriodicElement } from '../interview.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog } from '@angular/material/dialog';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-table',
@@ -10,7 +12,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 
 export class TableComponent implements OnInit {
-
+  @Output() TestData = new EventEmitter<boolean>();
+  status: boolean = true;
   ELEMENT_DATA: PeriodicElement[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'Senior Web Developer'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'Senior Web Developer'},
@@ -47,12 +50,31 @@ export class TableComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    else{
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    }
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(FormComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  change($event,row){
+    console.log($event);
+    $event ? this.selection.toggle(row) : null;
+    console.log(this.selection.selected);
+    return this.TestData.emit($event.checked);
+  }
 
   ngOnInit(): void {
   }
 
+  
+  
 }

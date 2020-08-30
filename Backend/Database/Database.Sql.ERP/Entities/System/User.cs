@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.System
 {
+    [Table("Users")]
     public class User : BaseEntity
     {
         [Key]

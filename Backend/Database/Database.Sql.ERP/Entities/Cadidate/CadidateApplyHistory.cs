@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.CommonModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,8 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Cadidate
 {
-    class CadidateApplyHistory
+    [Table("CadidateApplyHistories")]
+    public class CadidateApplyHistory : BaseEntity
     {
         [Key]
         public int CadidateId { get; set; }

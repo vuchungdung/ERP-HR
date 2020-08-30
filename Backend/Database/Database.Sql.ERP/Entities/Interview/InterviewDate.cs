@@ -1,4 +1,5 @@
-﻿using Core.CommonModel.Enum;
+﻿using Core.CommonModel;
+using Core.CommonModel.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,8 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Interview
 {
-    class InterviewDate
+    [Table("InterviewDates")]
+    public class InterviewDate : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

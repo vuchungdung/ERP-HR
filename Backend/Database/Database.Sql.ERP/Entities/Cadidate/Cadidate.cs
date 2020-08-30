@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Cadidate
 {
+    [Table("Cadidates")]
     public class Cadidate : BaseEntity
     {
         [Key]
@@ -37,7 +38,7 @@ namespace Database.Sql.ERP.Entities.Cadidate
         public int ProviderId { get; set; }
 
         [Required]
-        public string[] SkillId { get; set; }
+        public string SkillId { get; set; }
 
         [Required]
         public DateTime Dob { get; set; }

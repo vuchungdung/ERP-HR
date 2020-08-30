@@ -4,14 +4,14 @@ import { InterviewComponent } from './interview.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { FormComponent } from './form/form.component';
-import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
-import { MatDialog} from '@angular/material/dialog';
+import { TableComponent } from './table/table.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormComponent } from './form/form.component';
 
 const routes = [
   {
@@ -33,7 +33,7 @@ const routes = [
     MatPaginatorModule,
     MatMenuModule,
     MatIconModule,
-    MatDialog
+    MatDialogModule
   ]
 })
 export class InterviewModule { }

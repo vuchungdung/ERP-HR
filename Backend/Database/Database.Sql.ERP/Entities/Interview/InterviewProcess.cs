@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.CommonModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,8 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Interview
 {
-    public class InterviewProcess
+    [Table("InterviewProcess")]
+    public class InterviewProcess : BaseEntity
     {
         [Key]
         [Column(Order =1)]

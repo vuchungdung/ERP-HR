@@ -5,20 +5,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Database.Sql.ERP.Entities.Common
+namespace Database.Sql.ERP.Entities.Interview
 {
-    [Table("JobCategories")]
-    public class JobCategory : BaseEntity
+    [Table("Process")]
+    public class Process : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CategoryId { get; set; }
+        public int ProcessId { get; set; }
 
         [Required]
-        [Column(TypeName ="nvarchar(100)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; }
 
-        [Required]
-        public string Description { get; set; }
+        public string Note { get; set; }
     }
 }

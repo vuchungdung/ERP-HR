@@ -9,15 +9,25 @@ import { FormComponent } from './form/form.component';
   styleUrls: ['./interview.component.css']
 })
 export class InterviewComponent implements OnInit {
-  constructor(
-    public dialog: MatDialog) { }
+  
+  isCheck = false;
 
-  ngOnInit(): void {
-  }
+  constructor(public dialog: MatDialog) {}
+
   openDialog() {
     const dialogRef = this.dialog.open(FormComponent);
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+  
+  hello($event){
+    this.isCheck = $event;
+    console.log(this.isCheck+"...");
+  }
+
+  ngOnInit(): void {
+    
   }
 }
