@@ -15,6 +15,10 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int JobId { get; set; }
 
         [Required]
+        [Column(TypeName ="nvarchar(100)")]
+        public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
 
         [Required]

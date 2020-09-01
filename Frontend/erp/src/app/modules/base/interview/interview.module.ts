@@ -9,20 +9,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
-import { TableComponent } from './table/table.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormComponent } from './form/form.component';
+
 
 const routes = [
   {
     path:'',
-    component:InterviewComponent,
+    component : InterviewComponent,
     pathMatch:'full'
   }
 ]
 
 @NgModule({
-  declarations: [InterviewComponent, TableComponent, FormComponent],
+  declarations: [InterviewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

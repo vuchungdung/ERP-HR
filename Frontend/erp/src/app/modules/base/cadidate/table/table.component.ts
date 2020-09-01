@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PeriodicElement } from '../interview.model';
+import { PeriodicElement } from '../cadidate.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
@@ -70,6 +70,11 @@ export class TableComponent implements OnInit {
     $event ? this.selection.toggle(row) : null;
     console.log(this.selection.selected);
     return this.TestData.emit($event.checked);
+  }
+
+  openDetail(row){
+    console.log(row);
+    this.openDialog();
   }
 
   ngOnInit(): void {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Database.Sql.ERP.Entities.System.System
+namespace Database.Sql.ERP.Entities.System
 {
     [Table("Permissions")]
     public class Permission : BaseEntity

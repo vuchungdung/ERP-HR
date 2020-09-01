@@ -34,3 +34,8 @@ table {
   top: 46px;
   left: 25px;
 }
+
+.mat-row:hover{
+  cursor: pointer;
+  background-color: #f7f7f7;
+}

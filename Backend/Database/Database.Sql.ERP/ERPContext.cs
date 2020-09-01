@@ -3,7 +3,6 @@ using Database.Sql.ERP.Entities.Common;
 using Database.Sql.ERP.Entities.Interview;
 using Database.Sql.ERP.Entities.Recruitment;
 using Database.Sql.ERP.Entities.System;
-using Database.Sql.ERP.Entities.System.System;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database.Sql.ERP

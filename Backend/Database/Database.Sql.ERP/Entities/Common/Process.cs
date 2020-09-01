@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Database.Sql.ERP.Entities.Interview
+namespace Database.Sql.ERP.Entities.Common
 {
     [Table("Process")]
     public class Process : BaseEntity
