@@ -11,7 +11,7 @@
     </th>
     <td mat-cell style="padding-top:6px;" *matCellDef="let row">
       <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="change($event,row)"
+                    (change)="changeCheckBox($event,row)"
                     [checked]="selection.isSelected(row)"
                     [aria-label]="checkboxLabel(row)">
       </mat-checkbox>
@@ -77,7 +77,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openDetail(row)" router-link="/Id"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openDetail(row)"></tr>
 </table>
 <mat-paginator  [length]="100"
                 [pageSize]="10"

@@ -29,6 +29,9 @@ namespace Database.Sql.ERP
             builder.Entity<CommandInFunction>()
                        .HasKey(c => new { c.CommandId, c.FunctionId });
 
+            builder.Entity<RecruitmentPlan>()
+                       .HasKey(c => new { c.PlanId, c.JobId });
+
             builder.HasSequence("ERPSequence");
         }
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }

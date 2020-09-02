@@ -6,8 +6,8 @@ namespace Core.CommonModel.Enum
 {
     public enum PlanStatus
     {
-        Short,
-        Enough,
-        Redundant
+        Open,
+        Close,
+        Pause
     }
 }

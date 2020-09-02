@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess;
+using Database.Sql.ERP.Entities.Common;
 using Database.Sql.ERP.Entities.Interview;
 using System;
 using System.Collections.Generic;

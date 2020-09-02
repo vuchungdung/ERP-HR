@@ -4,7 +4,6 @@ using Database.Sql.ERP.Entities.Common;
 using Database.Sql.ERP.Entities.Interview;
 using Database.Sql.ERP.Entities.Recruitment;
 using Database.Sql.ERP.Entities.System;
-using Database.Sql.ERP.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -50,7 +49,7 @@ namespace Database.Sql.ERP
 
         public ITableGenericRepository<Permission> PermissionRepository => throw new NotImplementedException();
 
-        ITableGenericRepository<UserRole> ISystemUnitOfWork.CadidateRepository => throw new NotImplementedException();
+        public ITableGenericRepository<UserRole> UserRoleRepository => throw new NotImplementedException();
 
         public void BeginTransaction()
         {

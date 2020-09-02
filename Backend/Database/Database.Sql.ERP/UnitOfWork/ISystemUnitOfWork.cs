@@ -10,7 +10,7 @@ namespace Database.Sql.ERP.UnitOfWork
     {
         ITableGenericRepository<User> UserRepository { get; }
         ITableGenericRepository<Role> RoleRepository { get; }
-        ITableGenericRepository<UserRole> CadidateRepository { get; }
+        ITableGenericRepository<UserRole> UserRoleRepository { get; }
         ITableGenericRepository<Command> CommandRepository { get; }
         ITableGenericRepository<CommandInFunction> CommandInFunctionRepository { get; }
         ITableGenericRepository<Function> FunctionRepository { get; }

@@ -26,8 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'cadidate',
-        loadChildren: () => import('../base/cadidate/cadidate.module').then(m => m.CadidateModule),
-        pathMatch: 'full'
+        loadChildren: () => import('../base/cadidate/cadidate.module').then(m => m.CadidateModule)
       },
       {
         path: '**',

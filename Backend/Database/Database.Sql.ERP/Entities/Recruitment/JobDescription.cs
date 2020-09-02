@@ -26,5 +26,9 @@ namespace Database.Sql.ERP.Entities.Recruitment
 
         [Required]
         public int LevelId { get; set; }
+
+        public int OfferFrom { get; set; }
+
+        public int OfferTo { get; set; }
     }
 }

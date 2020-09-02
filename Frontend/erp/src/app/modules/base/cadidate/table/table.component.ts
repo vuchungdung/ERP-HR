@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from '../form/form.component';
+import { DetailComponent } from '../detail/detail.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -12,7 +14,7 @@ import { FormComponent } from '../form/form.component';
 })
 
 export class TableComponent implements OnInit {
-  @Output() TestData = new EventEmitter<boolean>();
+  @Output() isChecked = new EventEmitter<boolean>();
   status: boolean = true;
   ELEMENT_DATA: PeriodicElement[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'Senior Web Developer'},
@@ -31,21 +33,18 @@ export class TableComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
     this.selection.clear() :
     this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: PeriodicElement): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
@@ -55,31 +54,30 @@ export class TableComponent implements OnInit {
     }
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(FormComponent);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  changeCheckBox($event,row){
+    $event ? this.selection.toggle(row) : null;
+    return this.isChecked.emit($event.checked);
+  }
+
+  openDialogDetail(row?: PeriodicElement){
+    this.router.navigate(['/manager/cadidate/detail'], {});
+    const dialogRef = this.dialog.open(DetailComponent,{
+      height: '600px',
+      width: '1200px',
     });
   }
-
-  change($event,row){
-    console.log($event);
-    $event ? this.selection.toggle(row) : null;
-    console.log(this.selection.selected);
-    return this.TestData.emit($event.checked);
-  }
-
   openDetail(row){
-    console.log(row);
-    this.openDialog();
+    this.openDialogDetail(row);
   }
 
   ngOnInit(): void {
-  }
-
-  
-  
+  } 
 }

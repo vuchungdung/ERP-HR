@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.CommonModel.ViewModel
+namespace Services.Cadidate.Interfaces
 {
-    class CadidateViewModel
+    interface ICadidateService
     {
     }
 }

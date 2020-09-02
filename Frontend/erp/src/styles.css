@@ -10,3 +10,9 @@ body {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
+.mat-dialog-container {
+  padding: 0px 12px 12px 12px !important;
+}
+.mat-tab-label-content{
+  font-size: 14px;
+}

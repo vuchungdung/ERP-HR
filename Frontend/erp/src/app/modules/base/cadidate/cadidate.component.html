@@ -6,7 +6,7 @@
           <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH ỨNG VIÊN</h4>
         </div>
         <div class="options">
-          <ng-container *ngIf="isCheck == true">
+          <ng-container *ngIf="isChecked == true">
             <button mat-raised-button (click)="openDialog()" style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-envelop5 icon"></i>Gửi email
             </button>
@@ -50,7 +50,7 @@
     <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
-          <app-table (TestData) = "hello($event)"></app-table>
+          <app-table (isChecked) = "checkRecord($event)"></app-table>
         </div>  
       </div>
     </div>

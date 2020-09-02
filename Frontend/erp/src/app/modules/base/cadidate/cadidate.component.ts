@@ -9,21 +9,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CadidateComponent implements OnInit {
 
-  isCheck = false;
+  isChecked = false;
 
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(FormComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
   
-  hello($event){
-    this.isCheck = $event;
-    console.log(this.isCheck+"...");
+  checkRecord($event){
+    this.isChecked = $event;
   }
 
   ngOnInit(): void {

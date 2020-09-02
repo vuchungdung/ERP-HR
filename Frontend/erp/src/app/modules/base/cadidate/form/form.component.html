@@ -1,102 +1,104 @@
-<h2 mat-dialog-title>Thêm mới ứng viên</h2>
-<mat-dialog-content class="mat-typography scroll-bar">
-  <form [formGroup] ="cadidateForm">
-    <div class="row">
-      <div class="col-lg-2">
-        <div class="avt">
-          <span class="avt-text">Ảnh đại diện</span>
-          <input type="file" accept="image" class="hidden-input"/>
+<div class="page-container" style="padding-bottom: 20px;padding-top: 10px;">
+  <h2 mat-dialog-title>Thêm mới ứng viên</h2>
+  <mat-dialog-content class="mat-typography scroll-bar">
+    <form [formGroup] ="cadidateForm">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="avt">
+            <span class="avt-text">Ảnh đại diện</span>
+            <input type="file" accept="image" class="hidden-input"/>
+          </div>
+          <div class="icon-edit">
+            <i class="icon-pencil icon-p"></i>
+          </div>
         </div>
-        <div class="icon-edit">
-          <i class="icon-pencil icon-p"></i>
-        </div>
-      </div>
-      <div class="col-lg-5" style="margin-left: -20px;">
-        <div class="form-group">
-          <label class="lb-input"><i class="icon-arrow-small-right"></i>Họ và tên</label>
-          <input type="text" formControlName="name" class="form-input" placeholder="Nhập họ và tên" />
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày sinh</label>
-              <input matInput formControlName="dob" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker2">
-              <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
-                <mat-icon matDatepickerToggleIcon>today</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker2 color="primary"></mat-datepicker>
+        <div class="col-lg-5" style="margin-left: -20px;">
+          <div class="form-group">
+            <label class="lb-input"><i class="icon-arrow-small-right"></i>Họ và tên</label>
+            <input type="text" formControlName="name" class="form-input" placeholder="Nhập họ và tên" />
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày sinh</label>
+                <input matInput formControlName="dob" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker2">
+                <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
+                  <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+              </div>
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Giới tính</label>
+                <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
+                  <mat-radio-group>
+                    <mat-radio-button value="nam">Nam</mat-radio-button>
+                    <mat-radio-button style="margin-left:20px" value="nu">Nữ</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
             </div>
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Giới tính</label>
-              <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
-                <mat-radio-group>
-                  <mat-radio-button value="nam">Nam</mat-radio-button>
-                  <mat-radio-button style="margin-left:20px" value="nu">Nữ</mat-radio-button>
-                </mat-radio-group>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Số điện thoại</label>
+                <input type="text" formControlName="name" class="form-input" placeholder="Nhập SĐT" />
+              </div>
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Email</label>
+                <input type="text" formControlName="name" class="form-input" placeholder="Nhập email" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa chỉ</label>
+            <input type="text" class="form-input" placeholder="Nhập địa chỉ" />
+          </div>  
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-5">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Trình độ đào tạo</label>
+                <input type="text" class="form-input" placeholder="Trình độ đào tạo" />
+                <!-- <mat-select>
+                  <mat-option>
+                    Chưa có dữ liệu
+                  </mat-option>
+                </mat-select> -->
+              </div>
+              <div class="col-lg-7">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Nơi đào tạo</label>
+                <input type="text" class="form-input" placeholder="Nơi đào tạo" />
               </div>
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Số điện thoại</label>
-              <input type="text" formControlName="name" class="form-input" placeholder="Nhập SĐT" />
-            </div>
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Email</label>
-              <input type="text" formControlName="name" class="form-input" placeholder="Nhập email" />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa chỉ</label>
-          <input type="text" class="form-input" placeholder="Nhập địa chỉ" />
-        </div>  
-        <div class="form-group">
-          <div class="row">
-            <div class="col-lg-5">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Trình độ đào tạo</label>
-              <input type="text" class="form-input" placeholder="Trình độ đào tạo" />
-              <!-- <mat-select>
-                <mat-option>
-                  Chưa có dữ liệu
-                </mat-option>
-              </mat-select> -->
-            </div>
-            <div class="col-lg-7">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Nơi đào tạo</label>
-              <input type="text" class="form-input" placeholder="Nơi đào tạo" />
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="lb-input"><i class="icon-arrow-small-right"></i>Chuyên ngành đào tạo</label>
+            <input type="text" class="form-input" placeholder="Nhập chuyên ngành" />
+          </div>  
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
+                <input matInput formControlName="date" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker3">
+                <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
+                  <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker3 color="primary"></mat-datepicker>
+              </div>
+              <div class="col-lg-6">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
+                <input type="text" class="form-input" placeholder="Nguồn ứng viên" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-5">
-        <div class="form-group">
-          <label class="lb-input"><i class="icon-arrow-small-right"></i>Chuyên ngành đào tạo</label>
-          <input type="text" class="form-input" placeholder="Nhập chuyên ngành" />
-        </div>  
-        <div class="form-group">
-          <div class="row">
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
-              <input matInput formControlName="date" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker3">
-              <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
-                <mat-icon matDatepickerToggleIcon>today</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker3 color="primary"></mat-datepicker>
-            </div>
-            <div class="col-lg-6">
-              <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
-              <input type="text" class="form-input" placeholder="Nguồn ứng viên" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Đóng</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Thêm ứng viên</button>
-</mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Đóng</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Thêm ứng viên</button>
+  </mat-dialog-actions>  
+</div>

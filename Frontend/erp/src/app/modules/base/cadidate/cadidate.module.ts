@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CadidateComponent } from './cadidate.component';
-import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -18,23 +17,18 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-
-const routes = [
-  {
-    path:'',
-    component:CadidateComponent,
-    pathMatch:'full'
-  }
-]
+import { CadidateRoutingModule } from './cadidate-routing.module';
 
 @NgModule({
-  declarations: [CadidateComponent, TableComponent, FormComponent],
+  declarations: [
+    CadidateComponent, 
+    TableComponent,
+    FormComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
     MatButtonModule,
     MatSelectModule,
     MatTableModule,
@@ -47,7 +41,8 @@ const routes = [
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    CadidateRoutingModule
   ]
 })
 export class CadidateModule { }
