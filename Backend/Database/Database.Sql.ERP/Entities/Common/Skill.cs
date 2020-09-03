@@ -15,6 +15,6 @@ namespace Database.Sql.ERP.Entities.Common
         public int SkillId { get; set; }
 
         [Required]
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 }

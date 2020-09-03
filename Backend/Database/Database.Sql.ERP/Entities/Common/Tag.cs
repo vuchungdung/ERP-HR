@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Common
 {
+    [Table("Tags")]
     public class Tag
     {
         [Key]

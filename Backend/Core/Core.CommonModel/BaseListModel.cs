@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Core.CommonModel
 {
-    class BaseListModel
+    public class BaseListModel<T>
+        where T : class
     {
+        public IList<T> Items { get; set; }
+        public int TotalItems { get; set; }
     }
 }

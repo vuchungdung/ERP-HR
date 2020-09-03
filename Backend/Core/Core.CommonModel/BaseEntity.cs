@@ -8,10 +8,6 @@ namespace Core.CommonModel
 {
     public class BaseEntity
     {
-        [Column(TypeName = "int")]
-        [Required]
-        public int Precedence { get; set; }
-
         [Column(TypeName = "bit")]
         [Required]
         public bool IsActive { get; set; }

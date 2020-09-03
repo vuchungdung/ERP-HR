@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Core.CommonModel
 {
-    class ResponseModel
+    public class ResponseModel
     {
+        public ResponseModel()
+        {
+            this.Errors = new List<string>();
+        }
+        public List<string> Errors { get; set; }
+        public object Result { get; set; }
     }
 }

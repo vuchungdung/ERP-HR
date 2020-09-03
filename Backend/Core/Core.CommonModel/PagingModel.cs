@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Core.CommonModel
 {
-    class PagingModel
+    public class PagingModel
     {
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
     }
 }

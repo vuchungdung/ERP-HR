@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Core.CommonModel
 {
-    class FilterModel
+    public class FilterModel
     {
+        public string Text { get; set; }
+        public PagingModel Paging { get; set; } = new PagingModel();
     }
 }

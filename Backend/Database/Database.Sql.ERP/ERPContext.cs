@@ -53,5 +53,6 @@ namespace Database.Sql.ERP
         public DbSet<User> Users { set; get; }
         public DbSet<UserRole> UserRoles { set; get; }
         public DbSet<Role> Roles { set; get; }
+        public DbSet<Tag> Tags { set; get; }
     }
 }
