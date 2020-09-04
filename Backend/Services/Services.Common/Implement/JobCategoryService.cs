@@ -1,40 +1,44 @@
 ﻿using Core.CommonModel;
-using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
-using Services.Common.ViewModel;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Services.Common.ViewModel;
+using System.Security.Claims;
+using Core.CommonModel.Enum;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.Common.Implement
 {
-    public class SkillService : ISkillService
+    public class JobCategoryService : IJobCategoryService
     {
         private readonly IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
 
-        public SkillService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
+        public JobCategoryService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
         {
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(SkillViewModel model)
+
+        public async Task<ResponseModel> Delete(JobCategoryViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                JobCategory md = _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == model.CategoryId);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
-                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier));
 
-                _context.SkillRepository.Update(md);
+                _context.JobCategoryRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
@@ -48,7 +52,7 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropDownSelection()
+        public Task<ResponseModel> DropdowmSelection()
         {
             throw new NotImplementedException();
         }
@@ -58,25 +62,25 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.SkillRepository.Query()
+                var query = from m in _context.JobCategoryRepository.Query()
                             where !m.Deleted
                             orderby m.Name
-                            select new SkillViewModel()
+                            select new JobCategoryViewModel()
                             {
-                                SkillId = m.SkillId,
+                                CategoryId = m.CategoryId,
                                 Name = m.Name,
-                                
+                                Description = m.Description
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower()));
+                    query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower())
+                                    || x.Description.ToLower().Contains(filter.Text.ToLower()));
                 }
-                BaseListModel<SkillViewModel> listItems = new BaseListModel<SkillViewModel>();
-                listItems.Items = await query
-                    .Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                    .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
-                    .ToListAsync()
-                    .ConfigureAwait(true);
+                BaseListModel<JobCategoryViewModel> listItems = new BaseListModel<JobCategoryViewModel>();
+
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                                    .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
+                                    .ToListAsync().ConfigureAwait(true);
                 listItems.TotalItems = await query.CountAsync();
 
                 response.Result = listItems;
@@ -90,18 +94,19 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Insert(SkillViewModel model)
+        public async Task<ResponseModel> Insert(JobCategoryViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = new Skill();
+                JobCategory md = new JobCategory();
 
                 md.Name = model.Name;
+                md.Description = model.Description;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _context.SkillRepository.AddAsync(md);
+                await _context.JobCategoryRepository.AddAsync(md);
 
                 response.Status = ResponseStatus.Success;
             }
@@ -118,15 +123,15 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = await _context.SkillRepository.FirstOrDefaultAsync(x=>x.SkillId == id);
+                JobCategory md = await _context.JobCategoryRepository.FirstOrDefaultAsync(x => x.CategoryId == id);
 
-                SkillViewModel model = new SkillViewModel()
-                {
-                    SkillId = md.SkillId,
-                    Name = md.Name
-                };
+                JobCategoryViewModel model = new JobCategoryViewModel();
+
+                model.CategoryId = md.CategoryId;
+                model.Name = md.Name;
+                model.Description = md.Description;
+
                 response.Result = model;
-
                 response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
@@ -137,18 +142,19 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Update(SkillViewModel model)
+        public async Task<ResponseModel> Update(JobCategoryViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                JobCategory md = _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == model.CategoryId);
 
                 md.Name = model.Name;
+                md.Description = model.Description;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.SkillRepository.Update(md);
+                _context.JobCategoryRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 

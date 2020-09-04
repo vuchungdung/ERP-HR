@@ -65,6 +65,9 @@ namespace Database.Sql.ERP.Entities.Cadidate
         public int ProviderId { get; set; }
 
         [Required]
+        public int CategoryId { get; set; }
+
+        [Required]
         public string SkillId { get; set; }
 
         public int JobId { get; set; }

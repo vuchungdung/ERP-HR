@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.CommonModel.Enum;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,6 @@ namespace Core.CommonModel
         }
         public List<string> Errors { get; set; }
         public object Result { get; set; }
+        public ResponseStatus Status { get; set; }
     }
 }

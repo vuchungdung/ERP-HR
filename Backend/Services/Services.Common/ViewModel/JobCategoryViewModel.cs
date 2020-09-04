@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Services.Common.ViewModel
 {
-    public class SkillViewModel
+    public class JobCategoryViewModel
     {
-        public int SkillId { get; set; }
+        public int CategoryId { get; set; }
+
         public string Name { get; set; }
 
+        public string Description { get; set; }
     }
 }

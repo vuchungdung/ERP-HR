@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Sql.ERP.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class initialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,7 @@ namespace Database.Sql.ERP.Migrations
                     LinkIn = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     ProviderId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
                     SkillId = table.Column<string>(nullable: false),
                     JobId = table.Column<int>(nullable: false),
                     TagId = table.Column<int>(nullable: false)

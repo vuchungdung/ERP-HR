@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20200903091938_Initial-Db")]
-    partial class InitialDb
+    [Migration("20200904153037_initial-Db")]
+    partial class initialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<DateTime>("ApplyDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CreateBy")
                         .HasColumnType("int");

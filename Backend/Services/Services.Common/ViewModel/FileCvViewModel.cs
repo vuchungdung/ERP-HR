@@ -4,10 +4,7 @@ using System.Text;
 
 namespace Services.Common.ViewModel
 {
-    public class SkillViewModel
+    class FileCvViewModel
     {
-        public int SkillId { get; set; }
-        public string Name { get; set; }
-
     }
 }

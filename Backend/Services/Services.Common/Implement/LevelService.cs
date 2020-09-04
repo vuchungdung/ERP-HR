@@ -3,38 +3,40 @@ using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.Common.Implement
 {
-    public class SkillService : ISkillService
+    public class LevelService : ILevelService
     {
         private readonly IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
 
-        public SkillService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
+        public LevelService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
         {
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(SkillViewModel model)
+        public async Task<ResponseModel> Delete(LevelViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Level md = _context.LevelRepository.FirstOrDefault(x => x.LevelId == model.LevelId);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.SkillRepository.Update(md);
+                _context.LevelRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
@@ -48,7 +50,7 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropDownSelection()
+        public Task<ResponseModel> DropdownSelection()
         {
             throw new NotImplementedException();
         }
@@ -58,29 +60,34 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.SkillRepository.Query()
+                var query = from m in _context.LevelRepository.Query()
                             where !m.Deleted
                             orderby m.Name
-                            select new SkillViewModel()
+                            select new LevelViewModel()
                             {
-                                SkillId = m.SkillId,
+                                LevelId = m.LevelId,
                                 Name = m.Name,
-                                
+                                Description = m.Description
                             };
+
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
-                    query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower()));
+                    query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower())
+                    || x.Description.ToLower().Contains(filter.Text.ToLower()));
                 }
-                BaseListModel<SkillViewModel> listItems = new BaseListModel<SkillViewModel>();
-                listItems.Items = await query
-                    .Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                    .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
-                    .ToListAsync()
-                    .ConfigureAwait(true);
+
+                BaseListModel<LevelViewModel> listItems = new BaseListModel<LevelViewModel>();
+
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                                        .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
+                                        .ToListAsync()
+                                        .ConfigureAwait(true);
+
                 listItems.TotalItems = await query.CountAsync();
 
                 response.Result = listItems;
                 response.Status = ResponseStatus.Success;
+
             }
             catch(Exception ex)
             {
@@ -90,22 +97,23 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Insert(SkillViewModel model)
-        {
+        public async Task<ResponseModel> Insert(LevelViewModel model)
+        { 
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = new Skill();
+                Level md = new Level();
 
                 md.Name = model.Name;
+                md.Description = model.Description;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _context.SkillRepository.AddAsync(md);
+                await _context.LevelRepository.AddAsync(md);
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -118,18 +126,19 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = await _context.SkillRepository.FirstOrDefaultAsync(x=>x.SkillId == id);
+                Level md = await _context.LevelRepository.FirstOrDefaultAsync(x => x.LevelId == id);
 
-                SkillViewModel model = new SkillViewModel()
+                LevelViewModel model = new LevelViewModel()
                 {
-                    SkillId = md.SkillId,
-                    Name = md.Name
+                    LevelId = md.LevelId,
+                    Name = md.Name,
+                    Description = md.Description
                 };
                 response.Result = model;
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -137,24 +146,25 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Update(SkillViewModel model)
+        public async Task<ResponseModel> Update(LevelViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Level md = _context.LevelRepository.FirstOrDefault(x => x.LevelId == model.LevelId);
 
                 md.Name = model.Name;
+                md.Description = model.Description;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.SkillRepository.Update(md);
+                _context.LevelRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
