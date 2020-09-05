@@ -39,9 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Common", "Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Recruitment", "Services\Services.Recruitment\Services.Recruitment.csproj", "{AF08C2D3-C31B-4A54-AA63-1F3978C96F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Interview", "Services\Services.Interview\Services.Interview.csproj", "{C74223FE-BFC2-4791-BDC2-A12F218873B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Interview", "Services\Services.Interview\Services.Interview.csproj", "{C74223FE-BFC2-4791-BDC2-A12F218873B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Cadidate", "Services\Services.Cadidate\Services.Cadidate.csproj", "{86B83EA8-8831-4185-B812-6226B1AF95EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Cadidates", "Services\Services.Cadidate\Services.Cadidates.csproj", "{86B83EA8-8831-4185-B812-6226B1AF95EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

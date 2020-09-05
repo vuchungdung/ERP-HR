@@ -3,44 +3,45 @@ using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Services.Common.Interfaces;
 using Services.Common.ViewModel;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Security.Claims;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Services.Common.Interfaces;
 
 namespace Services.Common.Implement
 {
-    public class SkillService : ISkillService
+    public class ProcessService : IProcessService
     {
         private readonly IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
 
-        public SkillService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
+        public ProcessService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
         {
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(SkillViewModel model)
+        public async Task<ResponseModel> Delete(ProcessViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == model.ProcessId);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.SkillRepository.Update(md);
+                _context.ProcessRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -48,7 +49,7 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropdownSelection()
+        public Task<ResponseModel> DropdowmSelection()
         {
             throw new NotImplementedException();
         }
@@ -58,20 +59,21 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.SkillRepository.Query()
+                var query = from m in _context.ProcessRepository.Query()
                             where !m.Deleted
                             orderby m.Name
-                            select new SkillViewModel()
+                            select new ProcessViewModel()
                             {
-                                SkillId = m.SkillId,
+                                ProcessId = m.ProcessId,
                                 Name = m.Name,
-                                
+                                Note = m.Note
+
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower()));
                 }
-                BaseListModel<SkillViewModel> listItems = new BaseListModel<SkillViewModel>();
+                BaseListModel<ProcessViewModel> listItems = new BaseListModel<ProcessViewModel>();
                 listItems.Items = await query
                     .Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                     .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
@@ -82,7 +84,7 @@ namespace Services.Common.Implement
                 response.Result = listItems;
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -90,22 +92,22 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Insert(SkillViewModel model)
+        public async Task<ResponseModel> Insert(ProcessViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = new Skill();
+                Process md = new Process();
 
                 md.Name = model.Name;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _context.SkillRepository.AddAsync(md);
+                await _context.ProcessRepository.AddAsync(md);
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -118,18 +120,19 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = await _context.SkillRepository.FirstOrDefaultAsync(x=>x.SkillId == id);
+                Process md = await _context.ProcessRepository.FirstOrDefaultAsync(x => x.ProcessId == id);
 
-                SkillViewModel model = new SkillViewModel()
+                ProcessViewModel model = new ProcessViewModel()
                 {
-                    SkillId = md.SkillId,
-                    Name = md.Name
+                    ProcessId = md.ProcessId,
+                    Name = md.Name,
+                    Note = md.Note
                 };
                 response.Result = model;
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;
@@ -137,24 +140,25 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Update(SkillViewModel model)
+        public async Task<ResponseModel> Update(ProcessViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == model.ProcessId);
 
                 md.Name = model.Name;
+                md.Note = md.Note;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.SkillRepository.Update(md);
+                _context.ProcessRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 throw ex;

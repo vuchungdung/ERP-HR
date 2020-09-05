@@ -62,6 +62,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FileId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -177,9 +180,6 @@ namespace Database.Sql.ERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CadidateId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CreateBy")
                         .HasColumnType("int");

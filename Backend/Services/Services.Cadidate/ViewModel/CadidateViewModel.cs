@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Cadidate.ViewModel
+namespace Services.Cadidates.ViewModel
 {
     public class CadidateViewModel
     {
@@ -44,10 +44,14 @@ namespace Services.Cadidate.ViewModel
 
         public int ProviderId { get; set; }
 
+        public int CategoryId { get; set; }
+
         public string SkillId { get; set; }
 
         public int JobId { get; set; }
 
         public int TagId { get; set; }
+
+        public string FileId { get; set; }
     }
 }

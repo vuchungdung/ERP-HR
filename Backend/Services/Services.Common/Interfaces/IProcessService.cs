@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Services.Common.Interfaces
 {
-    public interface ISkillService : IBaseInterfaceService<SkillViewModel>
+    public interface IProcessService : IBaseInterfaceService<ProcessViewModel>
     {
-        Task<ResponseModel> DropdownSelection();
+        Task<ResponseModel> DropdowmSelection();
     }
 }

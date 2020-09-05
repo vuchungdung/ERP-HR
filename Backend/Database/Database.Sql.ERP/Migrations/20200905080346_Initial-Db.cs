@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Sql.ERP.Migrations
 {
-    public partial class initialDb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,7 @@ namespace Database.Sql.ERP.Migrations
                     LinkIn = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     ProviderId = table.Column<int>(nullable: false),
+                    FileId = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
                     SkillId = table.Column<string>(nullable: false),
                     JobId = table.Column<int>(nullable: false),
@@ -126,8 +127,7 @@ namespace Database.Sql.ERP.Migrations
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "timestamp", nullable: true),
                     FileName = table.Column<string>(maxLength: 200, nullable: false),
-                    FilePath = table.Column<string>(maxLength: 200, nullable: false),
-                    CadidateId = table.Column<int>(nullable: false)
+                    FilePath = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {

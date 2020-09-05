@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20200904153037_initial-Db")]
-    partial class initialDb
+    [Migration("20200905080346_Initial-Db")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("FaceBook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -179,9 +182,6 @@ namespace Database.Sql.ERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CadidateId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CreateBy")
                         .HasColumnType("int");

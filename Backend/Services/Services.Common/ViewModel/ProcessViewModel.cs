@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Services.Common.ViewModel
 {
-    class ProcessViewModel
+    public class ProcessViewModel
     {
+        public int ProcessId { get; set; }
+
+        public string Name { get; set; }
+
+        public string Note { get; set; }
     }
 }

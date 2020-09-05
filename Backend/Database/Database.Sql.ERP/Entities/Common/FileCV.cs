@@ -21,7 +21,5 @@ namespace Database.Sql.ERP.Entities.Common
         [Required]
         [MaxLength(200)]
         public string FilePath { get; set; }
-
-        public int CadidateId { get; set; }
     }
 }

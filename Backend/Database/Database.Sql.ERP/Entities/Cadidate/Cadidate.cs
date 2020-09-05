@@ -64,6 +64,8 @@ namespace Database.Sql.ERP.Entities.Cadidate
         [Required]
         public int ProviderId { get; set; }
 
+        public string FileId { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
 
