@@ -5,6 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from './login.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -18,7 +21,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatButtonModule,
     SharedModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers:[LoginService]
 })
 export class LoginModule { }

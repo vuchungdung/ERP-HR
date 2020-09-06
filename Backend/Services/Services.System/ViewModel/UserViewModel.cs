@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Core.CommonModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Services.System.ViewModel
 {
-    public class UserViewModel
+    public class UserViewModel : BaseViewModel
     {
         public int UserId { get; set; }
 
@@ -21,5 +22,7 @@ namespace Services.System.ViewModel
         public string Password { get; set; }
 
         public string Image { get; set; }
+
+        public bool isActive { get; set; }
     }
 }

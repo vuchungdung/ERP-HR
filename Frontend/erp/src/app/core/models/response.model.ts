@@ -1,7 +1,7 @@
 import { ResponseStatus } from '../enums/response-status.enum';
 
 export class ResponseModel {
-  responseStatus: ResponseStatus;
+  status: ResponseStatus;
   errors: any[];
   result: any;
 }

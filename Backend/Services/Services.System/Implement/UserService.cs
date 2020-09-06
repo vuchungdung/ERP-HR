@@ -36,6 +36,7 @@ namespace Services.System.Implement
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.isActive = false;
 
                 _context.UserRepository.Update(md);
                 await _context.SaveChangesAsync();
@@ -109,13 +110,16 @@ namespace Services.System.Implement
                 md.Address = model.Address;
                 md.Email = model.Email;
                 md.Phone = model.Phone;
+                md.isActive = true;
+                md.Deleted = false;
                 md.UserName = model.UserName;
                 md.Image = model.Image;
                 md.Password = PasswordSecurity.GetHashedPassword(model.Password);
                 md.CreateDate = DateTime.Now;
-                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.UserRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
@@ -132,7 +136,7 @@ namespace Services.System.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                User md = await _context.UserRepository.FirstOrDefaultAsync(x => x.UserId == id);
+                User md = await _context.UserRepository.FirstOrDefaultAsync(x => x.UserId == id && !x.Deleted);
 
                 UserViewModel model = new UserViewModel()
                 {
@@ -142,7 +146,8 @@ namespace Services.System.Implement
                     Phone = md.Phone,
                     Address = md.Address,
                     Image = md.Image,
-                    UserName = md.UserName
+                    UserName = md.UserName,
+                    isActive = md.isActive
                 };
                 response.Result = model;
 
@@ -169,6 +174,7 @@ namespace Services.System.Implement
                 md.Phone = model.Phone;
                 md.UserName = model.UserName;
                 md.Image = model.Image;
+                md.isActive = model.isActive;
                 md.Password = PasswordSecurity.GetHashedPassword(model.Password);
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);

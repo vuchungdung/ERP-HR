@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Common;
+using API.System;
+using Core.Services;
+using Core.Services.InterfaceService;
 using Core.Utility;
 using Database.Sql.ERP;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -70,9 +73,12 @@ namespace APIGateway
 
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
 
+            services.AddScoped<IJwtTokenSecurityService, JwtTokenSecurityService>();
+
             services.AddDirectoryBrowser();
 
             services.AddCommonServices(Configuration);
+            services.AddSystemServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

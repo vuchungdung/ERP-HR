@@ -6,11 +6,9 @@ namespace Core.CommonModel
 {
     public class BaseViewModel
     {
-        public bool IsActive { get; set; } = true;
-
         public string CreateBy { get; set; }
 
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; }
 
         public string UpdateBy { get; set; }
 
@@ -18,6 +16,5 @@ namespace Core.CommonModel
 
         public bool Deleted { get; set; } = false;
 
-        public byte[] RowVersion { get; set; }
     }
 }

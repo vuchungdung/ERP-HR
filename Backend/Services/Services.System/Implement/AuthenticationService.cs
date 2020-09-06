@@ -1,5 +1,7 @@
 ﻿using Core.CommonModel;
+using Core.CommonModel.Enum;
 using Core.Services.InterfaceService;
+using Core.Utility.Security;
 using Database.Sql.ERP;
 using Services.System.Interfaces;
 using Services.System.ViewModel;
@@ -21,9 +23,30 @@ namespace Services.System.Implement
             _context = context;
         }
 
-        public Task<ResponseModel> AuthencitateUser(LoginViewModel model)
+        public async Task<ResponseModel> AuthencitateUser(LoginViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var password = PasswordSecurity.GetHashedPassword(model.Password);
+
+                var md = await _context.UserRepository.FirstOrDefaultAsync(x => x.UserName == model.UserName
+                                                                           && x.Password == password
+                                                                           && !x.Deleted
+                                                                           && x.isActive).ConfigureAwait(false);
+
+                if(md != null)
+                {
+                    JwtTokenModel token = _tokenService.CreateToken(md);
+                    response.Status = ResponseStatus.Success;
+                    response.Result = token;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public Task<ResponseModel> RefreshToken(TokenModel model)

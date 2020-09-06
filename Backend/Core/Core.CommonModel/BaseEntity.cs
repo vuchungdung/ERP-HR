@@ -9,8 +9,7 @@ namespace Core.CommonModel
     public class BaseEntity
     {
         [Column(TypeName = "int")]
-        [Required]
-        public int CreateBy { get; set; }
+        public int? CreateBy { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required]

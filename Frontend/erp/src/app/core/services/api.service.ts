@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 import { ResponseModel } from '../models/response.model';
 import { ResponseStatus } from '../enums/response-status.enum';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
 
   constructor(private http: HttpClient){}
@@ -14,11 +16,11 @@ export class ApiService {
   getList(url:string, filter:FilterModel):Observable<ResponseModel>{
     return this.http.post<ResponseModel>(url,filter).pipe(
       map((data:ResponseModel)=>{
-        if(data.responseStatus == ResponseStatus.success){
+        if(data.status == ResponseStatus.success){
           return data;
         }
         else{
-          console.log(data.responseStatus);
+          console.log(data.status);
         }
       })
     );
@@ -27,11 +29,11 @@ export class ApiService {
   item(url:string, id:number):Observable<ResponseModel>{
     return this.http.get<ResponseModel>(url+"?id="+id).pipe(
       map((data:ResponseModel)=>{
-        if(data.responseStatus == ResponseStatus.success){
+        if(data.status == ResponseStatus.success){
           return data;
         }
         else{
-          console.log(data.responseStatus);
+          console.log(data.status);
         }
       })
     );
@@ -40,11 +42,11 @@ export class ApiService {
   insert(url, model:any):Observable<ResponseModel>{
     return this.http.post<ResponseModel>(url,model).pipe(
       map((data:ResponseModel)=>{
-        if(data.responseStatus == ResponseStatus.success){
+        if(data.status == ResponseStatus.success){
           return data;
         }
         else{
-          console.log(data.responseStatus);
+          console.log(data.status);
         }
       })
     );
@@ -53,11 +55,11 @@ export class ApiService {
   update(url, model:any):Observable<ResponseModel>{
     return this.http.put<ResponseModel>(url,model).pipe(
       map((data:ResponseModel) => {
-        if(data.responseStatus == ResponseStatus.success){
+        if(data.status == ResponseStatus.success){
           return data;
         }
         else{
-          console.log(data.responseStatus);
+          console.log(data.status);
         }
       })
     );
@@ -66,11 +68,11 @@ export class ApiService {
   delete(url, id:number):Observable<ResponseModel>{
     return this.http.delete<ResponseModel>(url+"?id="+id).pipe(
       map((data:ResponseModel) => {
-        if(data.responseStatus == ResponseStatus.success){
+        if(data.status == ResponseStatus.success){
           return data;
         }
         else{
-          console.log(data.responseStatus);
+          console.log(data.status);
         }
       })
     );

@@ -39,5 +39,8 @@ namespace Database.Sql.ERP.Entities.System
         public string Password { get; set; }
 
         public string Image { get; set; }
+
+        [Required]
+        public bool isActive { get; set; }
     }
 }

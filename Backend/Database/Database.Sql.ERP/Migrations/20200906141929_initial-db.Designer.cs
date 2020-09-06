@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20200906080016_initial-db")]
+    [Migration("20200906141929_initial-db")]
     partial class initialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -134,7 +134,7 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -171,7 +171,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -208,7 +208,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -243,7 +243,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -278,7 +278,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -312,7 +312,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -366,7 +366,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("CadidateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -415,7 +415,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("ProcessId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -445,7 +445,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("CadidateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -481,7 +481,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -532,7 +532,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -573,7 +573,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -608,7 +608,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -634,7 +634,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -689,7 +689,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -716,7 +716,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -754,7 +754,7 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -792,6 +792,9 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -805,7 +808,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
