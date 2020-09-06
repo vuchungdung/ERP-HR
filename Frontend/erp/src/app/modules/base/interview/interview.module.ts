@@ -10,6 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DateComponent } from './date/date.component';
 
 
 const routes = [
@@ -21,7 +22,7 @@ const routes = [
 ]
 
 @NgModule({
-  declarations: [InterviewComponent],
+  declarations: [InterviewComponent, DateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -160,9 +160,47 @@ namespace Services.Cadidates.Implement
             return response;
         }
 
-        public Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(int id)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Cadidate md = await _context.CadidateRepository.FirstOrDefaultAsync(x => x.CadidateId == id);
+
+                CadidateViewModel model = new CadidateViewModel()
+                {
+                    Name = md.Name,
+                    Email = md.Email,
+                    Address = md.Address,
+                    Phone = md.Phone,
+                    Gender = md.Gender,
+                    Image = md.Image,
+                    Degree = md.Degree,
+                    University = md.University,
+                    Major = md.Major,
+                    ApplyDate = md.ApplyDate,
+                    Experience = md.Experience,
+                    Rating = md.Rating,
+                    ProviderId = md.ProviderId,
+                    CategoryId = md.CategoryId,
+                    SkillId = md.SkillId,
+                    JobId = md.JobId,
+                    TagId = md.TagId,
+                    FaceBook = md.FaceBook,
+                    Zalo = md.Zalo,
+                    LinkIn = md.LinkIn,
+                    FileId = md.FileId,
+                    Dob = md.Dob,
+                };
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                response.Status = ResponseStatus.Error;
+            }
+            return response;
         }
 
         public Task<ResponseModel> Tagging(int id)

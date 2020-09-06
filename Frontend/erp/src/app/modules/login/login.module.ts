@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { Routes, RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginModule { }

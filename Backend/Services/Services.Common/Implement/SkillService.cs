@@ -42,7 +42,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -84,7 +83,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -99,15 +97,17 @@ namespace Services.Common.Implement
 
                 md.Name = model.Name;
                 md.CreateDate = DateTime.Now;
-                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.CreateBy = 1;
+                md.Deleted = false;
 
                 await _context.SkillRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -120,6 +120,11 @@ namespace Services.Common.Implement
             {
                 Skill md = await _context.SkillRepository.FirstOrDefaultAsync(x=>x.SkillId == id);
 
+                if (md == null)
+                {
+                    throw new Exception();
+                }
+
                 SkillViewModel model = new SkillViewModel()
                 {
                     SkillId = md.SkillId,
@@ -131,7 +136,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -156,7 +160,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;

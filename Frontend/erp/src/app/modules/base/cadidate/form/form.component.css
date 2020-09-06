@@ -61,3 +61,26 @@
 .form-date{
   position: relative;
 }
+.hidden-input-cv{
+  opacity: 0;
+  position: relative;
+  height: 110px;
+  cursor: pointer;
+  width: 100%;
+}
+.file-text{
+  position: absolute;
+  top: 30px;
+  left: 34px;
+  font-size: 13px;
+}
+.text-top{
+  text-align: center;
+  color: blue;
+}
+.file{
+  border: 1px dashed #a1758b;
+  width: 100%;
+  margin-top: 40px;
+  border-radius: 4px;
+}

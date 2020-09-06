@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Common.ViewModel
+namespace Services.System.ViewModel
 {
-    public class TagViewModel
+    class RoleViewModel
     {
     }
 }

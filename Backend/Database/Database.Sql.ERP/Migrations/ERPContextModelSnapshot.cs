@@ -71,9 +71,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("JobId")
                         .HasColumnType("int");
 
@@ -96,9 +93,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<string>("SkillId")
                         .IsRequired()
@@ -147,15 +141,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Position")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("TimeEnd")
                         .HasColumnType("datetime2");
@@ -200,12 +188,6 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
-
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
@@ -237,15 +219,9 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -278,15 +254,9 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -315,18 +285,12 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -355,15 +319,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -415,9 +373,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("JodId")
                         .HasColumnType("int");
 
@@ -426,9 +381,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<int>("RecruitType")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<bool>("SendMail")
                         .HasColumnType("bit");
@@ -470,12 +422,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
-
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
@@ -509,17 +455,11 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Result")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -552,9 +492,6 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("LevelId")
                         .HasColumnType("int");
 
@@ -563,9 +500,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<int>("OfferTo")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<string>("SkillId")
                         .IsRequired()
@@ -605,17 +539,11 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quatity")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -652,16 +580,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -693,12 +615,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
-
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
@@ -729,9 +645,6 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
@@ -740,9 +653,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("ParentId")
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -786,12 +696,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
-
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
@@ -822,15 +726,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -870,9 +768,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -884,9 +779,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("varchar(20)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -919,12 +811,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("timestamp");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");

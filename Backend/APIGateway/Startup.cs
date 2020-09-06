@@ -89,7 +89,7 @@ namespace APIGateway
 
             app.UseCors("CorsPolicy");
 
-            app.UseMiddleware<JwtMiddlewares>();
+            //app.UseMiddleware<JwtMiddlewares>();
 
             app.UseHttpsRedirection();
 

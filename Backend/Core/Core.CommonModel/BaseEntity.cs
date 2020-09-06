@@ -8,10 +8,6 @@ namespace Core.CommonModel
 {
     public class BaseEntity
     {
-        [Column(TypeName = "bit")]
-        [Required]
-        public bool IsActive { get; set; }
-
         [Column(TypeName = "int")]
         [Required]
         public int CreateBy { get; set; }
@@ -29,8 +25,5 @@ namespace Core.CommonModel
         [Column(TypeName = "bit")]
         [Required]
         public bool Deleted { get; set; }
-
-        [Column(TypeName = "timestamp")]
-        public byte[] RowVersion { get; set; }
     }
 }

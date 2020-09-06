@@ -1,6 +1,7 @@
 ﻿using Core.CommonModel;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Interfaces;
+using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,14 @@ namespace API.Common.Controllers
         public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _skillService.Item(id);
+            return response;
+        }
+
+        [HttpPost]
+        [Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] SkillViewModel model)
+        {
+            var response = await _skillService.Insert(model);
             return response;
         }
     }

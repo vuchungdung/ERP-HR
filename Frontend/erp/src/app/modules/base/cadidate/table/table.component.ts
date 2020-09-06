@@ -29,7 +29,7 @@ export class TableComponent implements OnInit {
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Senior Web Developer'},
   ];
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'demo1','demo2','demo3','options'];
+  displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','source','field'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 

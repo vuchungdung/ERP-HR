@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Common.Implement
 {
-    class TagService
+    public class TagService
     {
     }
 }

@@ -1,3 +1,4 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <div class="login-container">
     <div class="navbar navbar-inverse bg-indigo">
         <div class="navbar-header">
@@ -33,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button mat-button class="btn btn-primary btn-block">Đăng nhập</button>
+                        <button (click)="login()" mat-button class="btn btn-primary btn-block">Đăng nhập</button>
                     </div>
                     <div class="text-center">
                         <a href="login_password_recover.html">Quên mật khẩu?</a>
