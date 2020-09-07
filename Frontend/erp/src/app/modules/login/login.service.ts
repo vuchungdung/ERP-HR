@@ -11,10 +11,15 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
   providedIn: 'root'
 })
 export class LoginService{
+  
+  url = {
+    login:'/system/authen/login'
+  };
+
   constructor(private http: HttpClient){}
 
   login(model: LoginModel): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(`${environment.apiUrl}/api/system/authen/login`, model).pipe(
+    return this.http.post<ResponseModel>(`${environment.apiUrl}${this.url.login}`, model).pipe(
       map((data:ResponseModel)=>{
         if(data.status == ResponseStatus.success){
           return data;

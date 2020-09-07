@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Services.System.ViewModel
 {
-    public class UserViewModel : BaseViewModel
+    public class UserViewModel
     {
         public int UserId { get; set; }
 

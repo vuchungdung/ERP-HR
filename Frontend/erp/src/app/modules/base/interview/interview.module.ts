@@ -11,6 +11,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DateComponent } from './date/date.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const routes = [
@@ -33,7 +34,8 @@ const routes = [
     MatPaginatorModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    SharedModule
   ]
 })
 export class InterviewModule { }

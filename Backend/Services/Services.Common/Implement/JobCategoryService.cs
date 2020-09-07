@@ -46,7 +46,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -88,7 +87,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -112,7 +110,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -136,7 +133,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -162,7 +158,6 @@ namespace Services.Common.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
