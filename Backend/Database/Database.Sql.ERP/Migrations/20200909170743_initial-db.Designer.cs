@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20200906141929_initial-db")]
+    [Migration("20200909170743_initial-db")]
     partial class initialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,14 +64,8 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("JobId")
                         .HasColumnType("int");
@@ -164,12 +158,15 @@ namespace Database.Sql.ERP.Migrations
                     b.ToTable("CadidateApplyHistories");
                 });
 
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Common.FileCV", b =>
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Common.File", b =>
                 {
-                    b.Property<int>("CVId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CadidateId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
                         .HasColumnType("int");
@@ -190,15 +187,23 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
+                    b.Property<int>("FileSize")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime");
 
-                    b.HasKey("CVId");
+                    b.HasKey("Id");
 
-                    b.ToTable("FileCVs");
+                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Common.JobCategory", b =>
@@ -234,41 +239,6 @@ namespace Database.Sql.ERP.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("JobCategories");
-                });
-
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Common.Level", b =>
-                {
-                    b.Property<int>("LevelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CreateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("UpdateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("LevelId");
-
-                    b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Common.Process", b =>
@@ -481,6 +451,9 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
@@ -493,9 +466,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LevelId")
-                        .HasColumnType("int");
 
                     b.Property<int>("OfferFrom")
                         .HasColumnType("int");

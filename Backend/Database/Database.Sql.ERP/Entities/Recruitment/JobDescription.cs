@@ -25,7 +25,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public string SkillId { get; set; }
 
         [Required]
-        public int LevelId { get; set; }
+        public int CategoryId { get; set; }
 
         public int OfferFrom { get; set; }
 

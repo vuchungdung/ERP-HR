@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Database.Sql.ERP.Entities.Common
 {
-    [Table("FileCVs")]
-    public class FileCV : BaseEntity
+    [Table("Files")]
+    public class File : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CVId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(200)]
@@ -21,5 +21,15 @@ namespace Database.Sql.ERP.Entities.Common
         [Required]
         [MaxLength(200)]
         public string FilePath { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string FileType { get; set; }
+
+        [Required]
+        public int FileSize { get; set; }
+
+        [Required]
+        public int CadidateId { get; set; }
     }
 }

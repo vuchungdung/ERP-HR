@@ -30,5 +30,9 @@
     <ProjectReference Include="..\Database\Database.Sql.ERP\Database.Sql.ERP.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\cadidate-cv\" />
+  </ItemGroup>
+
 
 </Project>

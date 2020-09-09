@@ -9,8 +9,7 @@ namespace Database.Sql.ERP.UnitOfWork
     public interface ICommonUnitOfWork
     {
         ITableGenericRepository<JobCategory> JobCategoryRepository { get; }
-        ITableGenericRepository<FileCV> FileCVRepository { get; }
-        ITableGenericRepository<Level> LevelRepository { get; }
+        ITableGenericRepository<File> FileCVRepository { get; }
         ITableGenericRepository<Skill> SkillRepository { get; }
 
     }

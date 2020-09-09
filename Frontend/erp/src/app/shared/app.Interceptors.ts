@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NetworkInterceptor } from '../core/interceptor/network.interceptor';
-import { HeaderInterceptor } from '../core/interceptor/header.interceptor';
-import { ErrorInterceptor } from '../core/interceptor/error.interceptor';
+import { NetworkInterceptor } from '../core/interceptors/network.interceptor';
+import { HeaderInterceptor } from '../core/interceptors/header.interceptor';
+import { ErrorInterceptor } from '../core/interceptors/error.interceptor';
 
 export const appInterceptors = [
   { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true },

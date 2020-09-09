@@ -37,9 +37,8 @@ namespace Database.Sql.ERP
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }
         public DbSet<Cadidate> Cadidates { get; set; }
         public DbSet<CadidateApplyHistory> CadidateApplyHistories { get; set; }
-        public DbSet<FileCV> FileCVs { get; set; }
+        public DbSet<File> FileCVs { get; set; }
         public DbSet<JobCategory> JobCategories { get; set; }
-        public DbSet<Level> Levels { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<InterviewDate> InterviewDates { get; set; }
         public DbSet<InterviewProcess> InterviewProcess { get; set; }

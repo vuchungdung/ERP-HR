@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Core.CommonModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Services.System.Interfaces
 {
-    class IPermissionService
+    public interface IPermissionService
     {
+        Task<ResponseModel> GetPermissionScreen();
     }
 }

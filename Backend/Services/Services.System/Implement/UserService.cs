@@ -45,7 +45,6 @@ namespace Services.System.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -93,7 +92,6 @@ namespace Services.System.Implement
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -125,7 +123,6 @@ namespace Services.System.Implement
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -137,6 +134,11 @@ namespace Services.System.Implement
             try
             {
                 User md = await _context.UserRepository.FirstOrDefaultAsync(x => x.UserId == id && !x.Deleted);
+
+                if (md == null)
+                {
+                    throw new Exception();
+                }
 
                 UserViewModel model = new UserViewModel()
                 {
@@ -155,7 +157,6 @@ namespace Services.System.Implement
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
@@ -185,7 +186,6 @@ namespace Services.System.Implement
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;

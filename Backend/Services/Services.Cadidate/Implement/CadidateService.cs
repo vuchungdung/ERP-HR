@@ -11,6 +11,10 @@ using Database.Sql.ERP.Entities.Cadidate;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
+using Core.Services.InterfaceService;
+using System.Net.Http.Headers;
+using System.IO;
+using Database.Sql.ERP.Entities.Common;
 
 namespace Services.Cadidates.Implement
 {
@@ -18,11 +22,17 @@ namespace Services.Cadidates.Implement
     {
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
-
-        public CadidateService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
+        private IStorageService _storageService;
+        private ISequenceService _sequenceService;
+        public CadidateService(IERPUnitOfWork context,
+            IHttpContextAccessor httpContext,
+            IStorageService storageService,
+            ISequenceService sequenceService)
         {
             _context = context;
             _httpContext = httpContext;
+            _storageService = storageService;
+            _sequenceService = sequenceService;
         }
 
         public Task<ResponseModel> ApplyToJob(int id)
@@ -44,7 +54,7 @@ namespace Services.Cadidates.Implement
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
-                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.UpdateBy = 1;
 
                 _context.CadidateRepository.Update(md);
 
@@ -81,7 +91,6 @@ namespace Services.Cadidates.Implement
                                 Address = m.Address,
                                 Phone = m.Phone,
                                 Gender = m.Gender,
-                                Image = m.Image,
                                 Degree = m.Degree,
                                 University = m.University,
                                 Major = m.Major,
@@ -130,14 +139,13 @@ namespace Services.Cadidates.Implement
             try
             {
                 Cadidate md = new Cadidate();
-
+                var cadidateId = await _sequenceService.GetCadidateNewId();
                 md.Name = model.Name;
                 md.Email = model.Email;
                 md.Address = model.Address;
                 md.Dob = model.Dob;
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
-                md.Image = model.Image;
                 md.Degree = model.Degree;
                 md.University = model.University;
                 md.Major = model.Major;
@@ -146,16 +154,21 @@ namespace Services.Cadidates.Implement
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
                 md.SkillId = model.SkillId;
-                md.FileId = model.FileId;
-
+                if(model.File != null && model.File.Count() > 0)
+                {
+                    foreach(var item in model.File)
+                    {
+                        var fileEntity = await SaveFile(cadidateId, item);
+                        _context.FileCVRepository.Add(fileEntity.Result as Database.Sql.ERP.Entities.Common.File);
+                    }
+                }
                 await _context.CadidateRepository.AddAsync(md);
 
                 response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
-                response.Errors.Add(ex.InnerException.InnerException.Message);
+                throw ex;
             }
             return response;
         }
@@ -174,7 +187,6 @@ namespace Services.Cadidates.Implement
                     Address = md.Address,
                     Phone = md.Phone,
                     Gender = md.Gender,
-                    Image = md.Image,
                     Degree = md.Degree,
                     University = md.University,
                     Major = md.Major,
@@ -189,7 +201,6 @@ namespace Services.Cadidates.Implement
                     FaceBook = md.FaceBook,
                     Zalo = md.Zalo,
                     LinkIn = md.LinkIn,
-                    FileId = md.FileId,
                     Dob = md.Dob,
                 };
 
@@ -198,7 +209,32 @@ namespace Services.Cadidates.Implement
             }
             catch(Exception ex)
             {
-                response.Status = ResponseStatus.Error;
+                throw ex;
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> SaveFile(int cadidateId, IFormFile file)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                var fileName = $"{originalFileName.Substring(0, originalFileName.LastIndexOf('.'))}{Path.GetExtension(originalFileName)}";
+                await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+                var model = new Database.Sql.ERP.Entities.Common.File()
+                {
+                    FileName = fileName,
+                    FilePath = _storageService.GetFileUrl(fileName),
+                    FileSize = Convert.ToInt32(file.Length),
+                    FileType = Path.GetExtension(fileName),
+                    CadidateId = cadidateId
+                };
+                response.Result = model;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
             return response;
         }

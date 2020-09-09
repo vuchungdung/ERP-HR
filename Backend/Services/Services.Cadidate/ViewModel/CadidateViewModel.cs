@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,8 +20,6 @@ namespace Services.Cadidates.ViewModel
         public DateTime Dob { get; set; }
 
         public int Gender { get; set; }
-
-        public string Image { get; set; }
 
         public string Degree { get; set; }
 
@@ -52,6 +51,6 @@ namespace Services.Cadidates.ViewModel
 
         public int TagId { get; set; }
 
-        public string FileId { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 }

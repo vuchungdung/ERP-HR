@@ -3,6 +3,7 @@ using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Services.System.Interfaces;
 using Services.System.ViewModel;
 using System;
@@ -57,19 +58,89 @@ namespace Services.System.Implement
             throw new NotImplementedException();
         }
 
-        public Task<ResponseModel> Insert(RoleViewModel model)
+        public async Task<ResponseModel> Insert(RoleViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Role md = new Role();
+
+                md.Name = model.Name;
+                md.Description = model.Description;
+                md.Deleted = false;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = 1;
+
+                await _context.RoleRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(int id)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Role md = await _context.RoleRepository.FirstOrDefaultAsync(x => x.RoleId == id && !x.Deleted);
+
+                if (md == null)
+                {
+                    throw new Exception();
+                }
+
+                RoleViewModel model = new RoleViewModel()
+                {
+                    Name = md.Name,
+                    Description = md.Description,
+                    CreateDate = md.CreateDate
+                };
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Update(RoleViewModel model)
+        public async Task<ResponseModel> Update(RoleViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Role md = _context.RoleRepository.FirstOrDefault(x => x.RoleId == model.RoleId && !x.Deleted);
+
+                if (md == null)
+                {
+                    throw new Exception();
+                }
+
+                md.Name = model.Name;
+                md.Description = model.Description;
+                md.UpdateDate = DateTime.Now;
+                md.UpdateBy = 1;
+
+                _context.RoleRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
     }
 }

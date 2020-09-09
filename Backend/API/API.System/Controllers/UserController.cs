@@ -36,5 +36,20 @@ namespace API.System.Controllers
             return response;
         }
 
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<ResponseModel> Delete([FromBody] UserViewModel model)
+        {
+            var response = await _userService.Delete(model);
+            return response;
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ResponseModel> Update([FromBody] UserViewModel model)
+        {
+            var response = await _userService.Update(model);
+            return response;
+        }
     }
 }

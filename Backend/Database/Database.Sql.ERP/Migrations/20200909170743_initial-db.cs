@@ -48,7 +48,6 @@ namespace Database.Sql.ERP.Migrations
                     Phone = table.Column<string>(type: "varchar(20)", nullable: false),
                     Dob = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
-                    Image = table.Column<string>(nullable: true),
                     Degree = table.Column<string>(type: "nvarchar(20)", nullable: true),
                     University = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Major = table.Column<string>(type: "nvarchar(100)", nullable: true),
@@ -60,7 +59,6 @@ namespace Database.Sql.ERP.Migrations
                     LinkIn = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
                     ProviderId = table.Column<int>(nullable: false),
-                    FileId = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
                     SkillId = table.Column<string>(nullable: false),
                     JobId = table.Column<int>(nullable: false),
@@ -106,10 +104,10 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileCVs",
+                name: "Files",
                 columns: table => new
                 {
-                    CVId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreateBy = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -117,11 +115,14 @@ namespace Database.Sql.ERP.Migrations
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     FileName = table.Column<string>(maxLength: 200, nullable: false),
-                    FilePath = table.Column<string>(maxLength: 200, nullable: false)
+                    FilePath = table.Column<string>(maxLength: 200, nullable: false),
+                    FileType = table.Column<string>(maxLength: 100, nullable: false),
+                    FileSize = table.Column<int>(nullable: false),
+                    CadidateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileCVs", x => x.CVId);
+                    table.PrimaryKey("PK_Files", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,32 +243,13 @@ namespace Database.Sql.ERP.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Description = table.Column<string>(nullable: false),
                     SkillId = table.Column<string>(nullable: false),
-                    LevelId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
                     OfferFrom = table.Column<int>(nullable: false),
                     OfferTo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JobDescriptions", x => x.JobId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Levels",
-                columns: table => new
-                {
-                    LevelId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateBy = table.Column<int>(type: "int", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    UpdateBy = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Description = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Levels", x => x.LevelId);
                 });
 
             migrationBuilder.CreateTable(
@@ -438,7 +420,7 @@ namespace Database.Sql.ERP.Migrations
                 name: "Commands");
 
             migrationBuilder.DropTable(
-                name: "FileCVs");
+                name: "Files");
 
             migrationBuilder.DropTable(
                 name: "Functions");
@@ -457,9 +439,6 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "JobDescriptions");
-
-            migrationBuilder.DropTable(
-                name: "Levels");
 
             migrationBuilder.DropTable(
                 name: "Permissions");

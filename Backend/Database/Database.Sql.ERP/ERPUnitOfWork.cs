@@ -46,21 +46,12 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<FileCV> _fileCVRepository;
-        public ITableGenericRepository<FileCV> FileCVRepository
+        private ITableGenericRepository<File> _fileCVRepository;
+        public ITableGenericRepository<File> FileCVRepository
         {
             get
             {
-                return _fileCVRepository = _fileCVRepository ?? new TableGenericRepository<FileCV>(_context);
-            }
-        }
-
-        private ITableGenericRepository<Level> _levelRepository;
-        public ITableGenericRepository<Level> LevelRepository
-        {
-            get
-            {
-                return _levelRepository = _levelRepository ?? new TableGenericRepository<Level>(_context);
+                return _fileCVRepository = _fileCVRepository ?? new TableGenericRepository<File>(_context);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.InterfaceService;
+using Microsoft.AspNetCore.Http;
 using Services.Cadidates.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Services.Cadidates.Interfaces
         Task<ResponseModel> ApplyToJob(int id);
         Task<ResponseModel> ChangeProcess(int id);
         Task<ResponseModel> Tagging(int id);
+        Task<ResponseModel> SaveFile(int cadidateId, IFormFile file);
     }
 }
