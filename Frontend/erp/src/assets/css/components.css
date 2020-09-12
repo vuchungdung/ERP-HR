@@ -562,6 +562,7 @@ a.badge,
 .sidebar-default .navigation li > a:hover,
 .sidebar-default .navigation li > a:focus {
   background-color: #f8f8f8;
+  border-left: 4px solid;
 }
 .sidebar-default .navigation li.active > a,
 .sidebar-default .navigation li.active > a:hover,

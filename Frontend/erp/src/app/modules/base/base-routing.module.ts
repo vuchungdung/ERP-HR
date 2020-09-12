@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../base/cadidate/cadidate.module').then(m => m.CadidateModule)
       },
       {
+        path: 'common',
+        loadChildren: () => import('../base/config-system/config-system.module').then(m => m.ConfigSystemModule)
+      },
+      {
         path: '**',
         component: DashboardComponent
       }

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
+import { ApiService } from './core/services/api.service';
 @NgModule({
   declarations: [ //đối với component, khai báo những component của module này sử dụng
     AppComponent
@@ -21,7 +22,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     SharedModule
   ],
-  providers: [], //đối với services,class,.....,khai báo những services, class mà module này có thể dùng
+  providers: [ApiService], //đối với services,class,.....,khai báo những services, class mà module này có thể dùng
   bootstrap: [AppComponent]
 })
 export class AppModule { }

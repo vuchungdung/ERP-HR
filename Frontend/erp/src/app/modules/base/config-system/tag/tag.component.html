@@ -1,0 +1,36 @@
+<div class="page-container" style="padding-top: 0px;">
+  <div class="row">
+    <div class="panel panel-flat" style="margin-bottom: 10px; padding: 10px 20px;">
+      <h3 style="margin-bottom:4px"><i style="padding-right: 4px;" class="icon-price-tags"></i>Thẻ ứng viên</h3>
+      <small>Sử dụng thẻ để phân loại và quản lý ứng viên tốt hơn.</small>
+    </div>
+    <div class="panel panel-flat">
+      <div class="container-fluid">
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" style="width:100%">
+    
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef > <span style="font-weight: 600;font-size: 14px; color: black;">Tên thẻ</span> </th>
+              <td mat-cell *matCellDef="let element"> <span class="{{element.color}}">{{element.name}}</span> </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;"> <span style="font-weight: 500;">Ghi chú</span> </th>
+              <td mat-cell *matCellDef="let element"> <span>{{element.content}}</span> </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="options">
+              <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 10%;"> <span style="font-weight: 500;">Nghiệp vụ</span> </th>
+              <td mat-cell *matCellDef="let element">
+                Xóa|Sửa
+              </td>
+            </ng-container>  
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

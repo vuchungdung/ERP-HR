@@ -14,6 +14,14 @@ namespace Database.Sql.ERP.Entities.Common
 
         [Required]
         [Column(TypeName ="nvarchar(200)")]
+        public string Name { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(200)")]
         public string Content { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(20)")]
+        public string Color { get; set; }
     }
 }
