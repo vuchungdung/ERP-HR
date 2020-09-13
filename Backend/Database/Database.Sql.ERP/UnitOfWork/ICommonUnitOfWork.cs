@@ -11,6 +11,7 @@ namespace Database.Sql.ERP.UnitOfWork
         ITableGenericRepository<JobCategory> JobCategoryRepository { get; }
         ITableGenericRepository<File> FileCVRepository { get; }
         ITableGenericRepository<Skill> SkillRepository { get; }
+        ITableGenericRepository<Tag> TagRepository { get; }
 
     }
 }

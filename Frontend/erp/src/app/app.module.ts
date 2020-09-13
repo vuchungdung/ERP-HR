@@ -19,8 +19,7 @@ import { ApiService } from './core/services/api.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    SharedModule
+    HttpClientModule
   ],
   providers: [ApiService], //đối với services,class,.....,khai báo những services, class mà module này có thể dùng
   bootstrap: [AppComponent]

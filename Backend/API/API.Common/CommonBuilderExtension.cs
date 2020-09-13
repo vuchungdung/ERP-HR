@@ -13,6 +13,7 @@ namespace API.Common
         public static IServiceCollection AddCommonServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<ITagService, TagService>();
             return services;
         }
     } 

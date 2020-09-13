@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormComponent } from '../tag/form/form.component';
 import { Tag } from './tag.model';
 
 @Component({
@@ -10,8 +12,15 @@ import { Tag } from './tag.model';
 
 export class TagComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
+  openDialog() {
+    const dialogRef = this.dialog.open(FormComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
 
   }

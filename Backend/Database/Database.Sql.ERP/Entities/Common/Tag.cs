@@ -10,6 +10,7 @@ namespace Database.Sql.ERP.Entities.Common
     public class Tag
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

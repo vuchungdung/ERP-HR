@@ -64,12 +64,12 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<InterviewDate> _interviewRepository;
-        public ITableGenericRepository<InterviewDate> InterviewRepository
+        private ITableGenericRepository<InterviewDate> _interviewDateRepository;
+        public ITableGenericRepository<InterviewDate> InterviewDateRepository
         {
             get
             {
-                return _interviewRepository = _interviewRepository ?? new TableGenericRepository<InterviewDate>(_context);
+                return _interviewDateRepository = _interviewDateRepository ?? new TableGenericRepository<InterviewDate>(_context);
             }
         }
 
@@ -176,6 +176,15 @@ namespace Database.Sql.ERP
             get
             {
                 return _userRoleRepository = _userRoleRepository ?? new TableGenericRepository<UserRole>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Tag> _tagRepository;
+        public ITableGenericRepository<Tag> TagRepository
+        {
+            get
+            {
+                return _tagRepository = _tagRepository ?? new TableGenericRepository<Tag>(_context);
             }
         }
 

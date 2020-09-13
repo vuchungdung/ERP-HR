@@ -11,6 +11,10 @@ namespace Database.Sql.ERP.Entities.Cadidate
     public class CadidateApplyHistory : BaseEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
         public int CadidateId { get; set; }
 
         [Required]
@@ -25,6 +29,6 @@ namespace Database.Sql.ERP.Entities.Cadidate
 
         [Required]
         [Column(TypeName = "nvarchar(200)")]
-        public string Position { get; set; }
+        public string Description { get; set; }
     }
 }

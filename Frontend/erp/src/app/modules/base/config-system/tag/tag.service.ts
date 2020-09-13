@@ -4,6 +4,7 @@ import { FilterModel } from 'src/app/core/models/filter.model';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ApiService } from 'src/app/core/services/api.service';
+import { environment } from 'src/environments/environment';
 import { Tag } from './tag.model';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class TagService{
 
   }
   insert(model: Tag):Observable<ResponseModel>{
-    return this.api.insert(this.url.insert,model);
+    return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
   
   update(model: Tag):Observable<ResponseModel>{
