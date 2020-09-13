@@ -1,0 +1,55 @@
+<div class="page-container" style="padding: 10px;">
+  <div class="page-content">
+    <div class="sidebar sidebar-main sidebar-default" style="padding-right: 10px;">
+      <div class="sidebar-content" style="height: 82vh;margin-bottom: 0px;">
+        <div class="sidebar-category sidebar-category-visible">
+          <div class="category-content no-padding">
+            <ul class="navigation navigation-main navigation-accordion">
+              <li>
+                <a style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-profile"></i>
+                  Quản lý CV của ứng viên
+                </a>
+              </li>
+              <li>
+                <a style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-clipboard5"></i>
+                  Quản lý mảng công việc
+                </a>
+              </li>
+              <li>
+                <a style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-tree6"></i>
+                  Thiết lập lộ trình tuyển dụng
+                </a>
+              </li>
+              <li>
+                <a routerLink="/manager/common/skill" style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-puzzle3"></i>
+                  Công nghệ cần tuyển dụng
+                </a>
+              </li>
+              <li>
+                <a routerLink="/manager/common/tag" style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-price-tags"></i>
+                  Thiết lập thẻ ứng viên
+                </a>
+              </li>
+              <li>
+                <a style="font-weight: 400;font-size: 14px;">
+                  <i style="font-size: 14px;" class="icon-address-book2"></i>
+                  Nguồn ứng viên
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-wrapper">
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

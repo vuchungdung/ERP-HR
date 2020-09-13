@@ -1,0 +1,54 @@
+﻿using Core.CommonModel;
+using Microsoft.AspNetCore.Mvc;
+using Services.System.Interfaces;
+using Services.System.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace API.System.Controllers
+{
+    [Route("/api/system/role")]
+    [ApiController]
+    public class RoleController : ControllerBase
+    {
+        private readonly IRoleService _roleService;
+        public RoleController(IRoleService roleService)
+        {
+            _roleService = roleService;
+        }
+
+        [HttpPost]
+        [Route("insert")]
+        public async Task<ResponseModel> Insert([FromBody] RoleViewModel model)
+        {
+            var response = await _roleService.Insert(model);
+            return response;
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<ResponseModel> Delete([FromBody] RoleViewModel model)
+        {
+            var response = await _roleService.Delete(model);
+            return response;
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ResponseModel> Update([FromBody] RoleViewModel model)
+        {
+            var response = await _roleService.Update(model);
+            return response;
+        }
+
+        [HttpGet]
+        [Route("item")]
+        public async Task<ResponseModel> Item([FromQuery] int id)
+        {
+            var response = await _roleService.Item(id);
+            return response;
+        }
+    }
+}

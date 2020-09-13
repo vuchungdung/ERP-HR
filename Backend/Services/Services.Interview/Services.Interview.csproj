@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.CommonModel\Core.CommonModel.csproj" />
+    <ProjectReference Include="..\..\Core\Core.Services\Core.Services.csproj" />
+    <ProjectReference Include="..\..\Database\Database.Sql.ERP\Database.Sql.ERP.csproj" />
+  </ItemGroup>
+
+</Project>

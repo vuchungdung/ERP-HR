@@ -1,0 +1,26 @@
+<div class="navbar navbar-default" id="navbar-second">
+
+  <button class="menu-mat" style="font-weight:400;" routerLink='/manager' mat-button ><i class="icon-home2 icon"></i>Trang chủ</button>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="beforeMenu"><i class="icon-cog2 icon"></i>Quản lý hệ thống</button>
+  <mat-menu #beforeMenu="matMenu">
+    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Phân quyền người dùng</button>
+    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Quản lý người dùng</button>
+    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Quản lý nhóm người dùng</button>
+  </mat-menu>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="belowMenu"><i class="icon-magazine icon"></i>Quản lý tuyển dụng</button>
+  <mat-menu #belowMenu="matMenu">
+    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Quản lý tin tuyển dụng</button>
+    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Kế hoạch tuyển dụng</button>
+  </mat-menu>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/cadidate'><i class="icon-users2 icon"></i>Quản lý ứng viên</button>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/interview'><i class="icon-calendar22 icon"></i>Lịch phỏng vấn</button>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/common'><i class="icon-equalizer2 icon"></i>Thiếp lập thông tin</button>
+
+  <button class="menu-mat" style="font-weight:400;" mat-button><i class="icon-stats-growth icon"></i>Báo cáo</button>
+
+</div>

@@ -1,0 +1,21 @@
+.btn-primary{
+  background-color: #2196F3;
+  color: white;
+}
+.login-container{
+  position: relative;
+}
+
+.overlay-loading{
+  position: absolute;
+  z-index: 5;
+  top: 36%;
+  left: 46.5%;
+}
+.overlay{
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
