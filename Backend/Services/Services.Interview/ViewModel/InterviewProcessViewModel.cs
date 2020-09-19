@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Interview.ViewModel
 {
-    class InterviewProcessViewModel
+    public class InterviewProcessViewModel
     {
     }
 }

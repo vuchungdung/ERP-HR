@@ -67,6 +67,7 @@ namespace APIGateway
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+
             services.AddMvc();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -95,7 +96,7 @@ namespace APIGateway
 
             app.UseCors("CorsPolicy");
 
-            //app.UseMiddleware<JwtMiddlewares>();
+            app.UseMiddleware<JwtMiddlewares>();
 
             app.UseHttpsRedirection();
 

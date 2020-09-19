@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Core.Services.InterfaceService;
+using Services.Interview.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Services.Interview.Interfaces
 {
-    class IInterviewProcessService
+    public interface IInterviewProcessService : IBaseInterfaceService<InterviewProcessViewModel>
     {
     }
 }

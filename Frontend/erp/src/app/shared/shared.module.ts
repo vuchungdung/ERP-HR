@@ -4,8 +4,8 @@ import { ApiService } from '../core/services/api.service';
 
 @NgModule({
   providers:[
-    appInterceptors,
-    ApiService
+    ApiService,
+    appInterceptors
   ]
 })
 export class SharedModule { }

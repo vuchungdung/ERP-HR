@@ -71,6 +71,22 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CadidateUsers",
+                columns: table => new
+                {
+                    CatidateUserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(80)", nullable: false),
+                    Password = table.Column<string>(type: "varchar(120)", nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CadidateUsers", x => x.CatidateUserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CommandInFunctions",
                 columns: table => new
                 {
@@ -356,6 +372,11 @@ namespace Database.Sql.ERP.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateBy = table.Column<int>(type: "int", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UpdateBy = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(20)", nullable: false)
@@ -415,6 +436,9 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cadidates");
+
+            migrationBuilder.DropTable(
+                name: "CadidateUsers");
 
             migrationBuilder.DropTable(
                 name: "CommandInFunctions");

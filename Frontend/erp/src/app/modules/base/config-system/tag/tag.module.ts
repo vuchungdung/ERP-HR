@@ -9,6 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormComponent } from './form/form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptor } from 'src/app/core/interceptors/header.interceptor';
 
 
 const route : Routes = [
@@ -32,7 +34,8 @@ const route : Routes = [
     ReactiveFormsModule
   ],
   providers:[
-    TagService
+    TagService,
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ]
 })
 export class TagModule { }

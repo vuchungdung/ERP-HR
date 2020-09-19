@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { BaseRoutingModule } from './base-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BaseRoutingModule } from './base-routing.module';
     MatTabsModule,
     MatButtonModule,
     MatMenuModule,
-    BaseRoutingModule
+    BaseRoutingModule,
+    SharedModule
   ]
 })
 export class BaseModule { }

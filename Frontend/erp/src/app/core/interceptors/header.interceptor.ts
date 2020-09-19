@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    debugger
     const token = localStorage.getItem('token');
-    const modified = this.setHeader(req,this.jwtToken(token));
+    var obtoken = JSON.parse(token);
+    const modified = this.setHeader(req,this.jwtToken(obtoken.accessToken));
     return next.handle(modified);
   }
 
@@ -14,6 +16,7 @@ export class HeaderInterceptor implements HttpInterceptor {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization',token);
     headers = headers.append('Content-Type', 'application/json');
+    console.log(headers);
     return request.clone( {headers });
   }
   private jwtToken(token):string{

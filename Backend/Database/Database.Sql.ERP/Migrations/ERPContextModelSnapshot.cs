@@ -159,6 +159,32 @@ namespace Database.Sql.ERP.Migrations
                     b.ToTable("CadidateApplyHistories");
                 });
 
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.CadidateUser", b =>
+                {
+                    b.Property<int>("CatidateUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(80)");
+
+                    b.HasKey("CatidateUserId");
+
+                    b.ToTable("CadidateUsers");
+                });
+
             modelBuilder.Entity("Database.Sql.ERP.Entities.Common.File", b =>
                 {
                     b.Property<int>("Id")
@@ -322,9 +348,24 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("CreateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("UpdateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 

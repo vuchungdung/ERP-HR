@@ -46,12 +46,13 @@ namespace Database.Sql.ERP
         public DbSet<Process> Process { get; set; }
         public DbSet<JobDescription> JobDescriptions { get; set; }
         public DbSet<RecruitmentPlan> RecruitmentPlans { get; set; }
-        public DbSet<Command> Commands { set; get; }
-        public DbSet<Function> Functions { set; get; }
-        public DbSet<Permission> Permissions { set; get; }
-        public DbSet<User> Users { set; get; }
-        public DbSet<UserRole> UserRoles { set; get; }
-        public DbSet<Role> Roles { set; get; }
-        public DbSet<Tag> Tags { set; get; }
+        public DbSet<Command> Commands { get; set; }
+        public DbSet<Function> Functions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<CadidateUser> CadidateUsers { get; set; }
     }
 }
