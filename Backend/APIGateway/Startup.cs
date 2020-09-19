@@ -58,13 +58,13 @@ namespace APIGateway
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
+                    ValidateIssuer = true,  
+                    ValidateAudience = true,   
+                    ValidateLifetime = true,   
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    ValidIssuer = Configuration["Jwt:Issuer"], 
+                    ValidAudience = Configuration["Jwt:Audience"], 
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                 };
             });
 
@@ -96,9 +96,11 @@ namespace APIGateway
 
             app.UseCors("CorsPolicy");
 
-            app.UseMiddleware<JwtMiddlewares>();
+            //app.UseMiddleware<JwtMiddlewares>();
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

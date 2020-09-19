@@ -25,14 +25,6 @@ namespace API.Common.Controllers
         [Authorize]
         public async Task<ResponseModel> Insert([FromBody]TagViewModel model)
         {
-            try
-            {
-                var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
             var response = await _tagService.Insert(model);
             return response;
         }
