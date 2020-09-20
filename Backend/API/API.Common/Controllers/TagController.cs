@@ -37,5 +37,21 @@ namespace API.Common.Controllers
             var response = await _tagService.GetList(model);
             return response;
         }
+        [Route("update")]
+        [HttpPut]
+        [Authorize]
+        public async Task<ResponseModel> Update([FromBody] TagViewModel model)
+        {
+            var response = await _tagService.Update(model);
+            return response;
+        }
+        [Route("delete")]
+        [HttpDelete]
+        [Authorize]
+        public async Task<ResponseModel> Delete([FromBody] TagViewModel model)
+        {
+            var response = await _tagService.Delete(model);
+            return response;
+        }
     }
 }

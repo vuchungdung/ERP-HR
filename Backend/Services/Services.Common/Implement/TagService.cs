@@ -62,6 +62,7 @@ namespace Services.Common.Implement
                             orderby t.CreateDate
                             select new TagViewModel()
                             {
+                                Id = t.Id,
                                 Name = t.Name,
                                 Color = t.Color,
                                 Content = t.Content

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { switchMap } from 'rxjs/operators';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -17,6 +18,8 @@ import { TagService } from './tag.service';
 
 export class TagComponent implements OnInit {
 
+  @ViewChild(FormComponent) form : FormComponent;
+
   paging = new PagingModel();
   searchText = '';
 
@@ -33,11 +36,6 @@ export class TagComponent implements OnInit {
   displayedColumns: string[] = ['name', 'content','options'];
   dataSource : any;
 
-  openDialog() {
-    const dialogRef = this.dialog.open(FormComponent);
-    
-  }
-
   getList(){
     return this.tagService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
@@ -45,5 +43,18 @@ export class TagComponent implements OnInit {
         this.paging.length = res.result.totalItems;
       }
     })
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(FormComponent);
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result==true){
+        this.getList();
+      }
+    })
+  }
+
+  update(id:number){
+    this.form.onUpdateForm(id);
   }
 }

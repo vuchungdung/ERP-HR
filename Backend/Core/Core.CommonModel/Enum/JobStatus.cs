@@ -4,9 +4,7 @@ using System.Text;
 
 namespace Core.CommonModel.Enum
 {
-    public enum ResponseStatus
+    public interface JobStatus
     {
-        Success = 1,
-        Error = -1
     }
 }

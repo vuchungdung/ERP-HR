@@ -13,8 +13,9 @@ import { TagService } from '../tag.service';
 })
 export class FormComponent implements OnInit {
   
-  @Output() reLoadData = new EventEmitter<boolean>();
+  reLoadData : boolean;
   tagForm: FormGroup;
+  item: Tag;
 
   constructor(
     private fb:FormBuilder,
@@ -47,13 +48,40 @@ export class FormComponent implements OnInit {
     }
     this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
       if(res.status == ResponseStatus.success){
-        console.log("success");
-        this.reLoadData.emit(true);
+        //.................
       }
       else{
         console.log("Error");
       }
     })
   }
-  
+  updateForm(){
+    if(this.tagForm.invalid){
+      return;
+    }
+    this.tagService.update(this.tagForm.getRawValue()).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        //..................
+      }
+    })
+  }
+
+  onUpdateForm(id:number){
+    this.getItem(id);
+  }
+
+  getItem(id:number){
+    this.tagService.item(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.item = res.result;
+        this.setDataToForm(this.item);
+      }
+    })
+  }
+
+  private setDataToForm(data: Tag) {
+    this.tagForm.get('name').setValue(data.name);
+    this.tagForm.get('content').setValue(data.content);
+    this.tagForm.get('color').setValue(data.color);
+  }
 }

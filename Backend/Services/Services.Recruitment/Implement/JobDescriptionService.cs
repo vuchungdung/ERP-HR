@@ -1,0 +1,174 @@
+﻿using Core.CommonModel;
+using Core.CommonModel.Enum;
+using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Recruitment;
+using Database.Sql.ERP.Entities.System;
+using Microsoft.AspNetCore.Http;
+using Services.Recruitment.Interface;
+using Services.Recruitment.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace Services.Recruitment.Implement
+{
+    public class JobDescriptionService : IJobDescriptionService
+    {
+        private readonly IERPUnitOfWork _context;
+        private IHttpContextAccessor _httpContext;
+
+        public JobDescriptionService(IERPUnitOfWork context, IHttpContextAccessor httpContext)
+        {
+            _context = context;
+            _httpContext = httpContext;
+        }
+        public async Task<ResponseModel> Delete(JobDescriptionViewModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                JobDescription md = _context.JobDescriptionRepository.FirstOrDefault(x => x.JobId == model.JobId && !x.Deleted);
+
+                md.Deleted = true;
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.UpdateDate = DateTime.Now;
+
+                _context.JobDescriptionRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> GetList(FilterModel filter)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from j in _context.JobDescriptionRepository.Query()
+                            where !j.Deleted
+                            orderby j.CreateDate
+                            select new JobDescriptionViewModel()
+                            {
+                                JobId = j.JobId,
+                                Title = j.Title,
+                                Description = j.Description,
+                                SkillNames = GetArrSkill(j.SkillId),
+                                CategoryName = GetNameCategory(j.CategoryId),
+                                OfferFrom = j.OfferFrom,
+                                OfferTo = j.OfferTo
+                            };
+
+                if (!string.IsNullOrEmpty(filter.Text))
+                {
+                    query = query.Where(x => x.CategoryName.ToLower().Contains(filter.Text.ToLower())
+                                        || x.SkillId.ToLower().Contains(filter.Text.ToLower())
+                                        || x.Title.ToLower().Contains(filter.Text.ToLower()));
+                }
+
+                BaseListModel<JobDescriptionViewModel> listItems = new BaseListModel<JobDescriptionViewModel>();
+
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                                                .Take(filter.Paging.PageSize)
+                                                .OrderByDescending(x => x.CreateDate)
+                                                .ToListAsync()
+                                                .ConfigureAwait(true);
+
+                listItems.TotalItems = await query.CountAsync();
+
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public string GetNameCategory(int id)
+        {
+            return _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == id && !x.Deleted).Name;
+        }
+        public List<string> GetArrSkill(string id)
+        {
+            List<string> results = new List<string>();
+
+            string[] arr = id.Split(',');
+
+            foreach(var item in arr)
+            {
+                results.Add(_context.SkillRepository.FirstOrDefault(x => x.SkillId.ToString() == item && !x.Deleted).Name);
+            }
+            return results;
+        }
+        public async Task<ResponseModel> Insert(JobDescriptionViewModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                JobDescription md = new JobDescription();
+
+                md.Title = model.Title;
+                md.Description = model.Description;
+                md.Endow = model.Endow;
+                md.SkillId = model.SkillId;
+                md.CategoryId = model.CategoryId;
+                md.OfferFrom = model.OfferFrom;
+                md.OfferTo = model.OfferTo;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.CreateDate = DateTime.Now;
+                md.Status = model.Status;
+                md.Deleted = false;
+
+                await _context.JobDescriptionRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> Item(int id)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
+        public async Task<ResponseModel> Update(JobDescriptionViewModel model)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+    }
+}

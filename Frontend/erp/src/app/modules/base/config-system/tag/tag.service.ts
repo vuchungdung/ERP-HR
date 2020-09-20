@@ -37,5 +37,9 @@ export class TagService{
     filter.paging.pageSize = paging.pageSize;
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
+
+  item(id:number):Observable<ResponseModel>{
+    return this.api.item(this.url.item,id);
+  }
 }
 
