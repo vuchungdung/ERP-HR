@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from 'src/app/core/interceptors/header.interceptor';
 
-
 const route : Routes = [
   {
     path:'',

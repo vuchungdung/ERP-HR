@@ -7,23 +7,36 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
-import { ApiService } from './core/services/api.service';
-import { appInterceptors } from './shared/app.Interceptors';
-import { HeaderInterceptor } from './core/interceptors/header.interceptor';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
-  declarations: [ //đối với component, khai báo những component của module này sử dụng
+  declarations: [
     AppComponent
   ],
-  imports: [ //đối với module, import những module mà module này cần dùng
+  imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    SharedModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
+      maxOpened: 1,
+      autoDismiss: true,
+      enableHtml: true
+    }), 
   ],
-  providers: [ApiService,{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }], //đối với services,class,.....,khai báo những services, class mà module này có thể dùng
+  providers:[
+    AuthenticationGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

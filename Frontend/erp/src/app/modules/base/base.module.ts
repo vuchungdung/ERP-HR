@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { BaseRoutingModule } from './base-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { appInterceptors } from 'src/app/shared/app.Interceptors';
+import { AuthenticationGuard } from 'src/app/core/guards/authentication.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,7 +21,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatButtonModule,
     MatMenuModule,
     BaseRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
+  ],
+  providers:[
+    appInterceptors,
+    AuthenticationGuard
   ]
 })
 export class BaseModule { }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EmbeddedViewRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { emitWarning } from 'process';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Tag } from '../tag.model';
@@ -12,6 +13,7 @@ import { TagService } from '../tag.service';
 })
 export class FormComponent implements OnInit {
   
+  @Output() reLoadData = new EventEmitter<boolean>();
   tagForm: FormGroup;
 
   constructor(
@@ -45,7 +47,8 @@ export class FormComponent implements OnInit {
     }
     this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
       if(res.status == ResponseStatus.success){
-        console.log("Success");
+        console.log("success");
+        this.reLoadData.emit(true);
       }
       else{
         console.log("Error");

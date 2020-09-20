@@ -103,6 +103,8 @@ namespace Services.Common.Implement
                 md.Name = model.Name;
                 md.Content = model.Content;
                 md.Color = model.Color;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = 1;
 
                 await _context.TagRepository.AddAsync(md);
 

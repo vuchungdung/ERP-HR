@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { PagingModel } from 'src/app/core/models/paging.model';
+import { ResponseModel } from 'src/app/core/models/response.model';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { FormComponent } from '../tag/form/form.component';
 import { Tag } from './tag.model';
+import { TagService } from './tag.service';
 
 @Component({
   selector: 'app-tag',
@@ -12,27 +17,33 @@ import { Tag } from './tag.model';
 
 export class TagComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  paging = new PagingModel();
+  searchText = '';
+
+  constructor(
+    private dialog: MatDialog,
+    private tagService: TagService,
+    private toastr: NotificationService) {}
+
+  isLoad: boolean;
+  ngOnInit(): void {
+    this.getList();
+  }
+
+  displayedColumns: string[] = ['name', 'content','options'];
+  dataSource : any;
 
   openDialog() {
     const dialogRef = this.dialog.open(FormComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  ngOnInit(): void {
-
+    
   }
 
-  ELEMENT_DATA: Tag[] = [
-    {name: 'Chưa có kinh nghiệm', content: 'Đang là thực tập sinh, chưa có kinh nghiệm', color:'label label-success'},
-    {name: 'Chuyên môn tốt', content: 'Đã đi làm nhiều năm, có nhiều kinh nghiệm làm việc', color:'label label-danger'},
-    {name: 'Có kinh nghiệm', content: 'Đã có kinh nghiệm nhưng chưa lâu', color:'label label-default'},
-    {name: 'Hồ sơ tốt', content: 'Hồ sơ xin việc có nhiều công nghệ đáng chú ý', color:'label label-primary'},
-    {name: 'Giao tiếp tốt', content: 'Ứng viên có tác phong tốt, giao tiếp lưu loát', color:'label label-warning'},
-  ];
-
-  displayedColumns: string[] = ['name', 'content','options'];
-  dataSource = this.ELEMENT_DATA;
+  getList(){
+    return this.tagService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
+      if(res.status === ResponseStatus.success){
+        this.dataSource = res.result.items;
+        this.paging.length = res.result.totalItems;
+      }
+    })
+  }
 }

@@ -35,7 +35,7 @@ export class TagService{
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
-    return this.api.getList(this.url.getlist,filter);
+    return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
 }
 

@@ -28,5 +28,14 @@ namespace API.Common.Controllers
             var response = await _tagService.Insert(model);
             return response;
         }
+
+        [Route("get-list")]
+        [HttpPost]
+        [Authorize]
+        public async Task<ResponseModel> GetList ([FromBody] FilterModel model)
+        {
+            var response = await _tagService.GetList(model);
+            return response;
+        }
     }
 }
