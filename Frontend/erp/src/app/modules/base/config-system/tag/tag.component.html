@@ -6,7 +6,7 @@
         <small>Sử dụng thẻ để phân loại và quản lý ứng viên tốt hơn.</small>
       </div>
       <div>
-        <button mat-raised-button (click)="openDialog()" style="height: 33px;margin-top: 18px;font-size: 13px;" color="primary">
+        <button mat-raised-button (click)="insertDialog()" style="height: 33px;margin-top: 18px;font-size: 13px;" color="primary">
           <i class="icon-database-add" style="padding-right: 8px;"></i>Thêm mới
         </button>
       </div>
@@ -29,7 +29,7 @@
             <ng-container matColumnDef="options">
               <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 10%;"> <span style="font-weight: 500;">Nghiệp vụ</span> </th>
               <td mat-cell *matCellDef="let element">
-                <mat-icon (click)="update(element.id)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
+                <mat-icon (click)="updateDialog(element.id)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
                 <mat-icon style="color: red;cursor: pointer;">delete</mat-icon>
               </td>
             </ng-container>  

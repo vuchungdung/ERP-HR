@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { switchMap } from 'rxjs/operators';
+import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { FormComponent } from '../tag/form/form.component';
-import { Tag } from './tag.model';
 import { TagService } from './tag.service';
 
 @Component({
@@ -45,7 +44,7 @@ export class TagComponent implements OnInit {
     })
   }
 
-  openDialog() {
+  insertDialog() {
     var isCheck = false;
     const dialogRef = this.dialog.open(FormComponent);
     dialogRef.componentInstance.isReloadData.subscribe((data)=>{
@@ -60,7 +59,9 @@ export class TagComponent implements OnInit {
     })
   }
 
-  update(id:number){
-    this.form.onUpdateForm(id);
+  updateDialog(id:number){
+    const dialogRef = this.dialog.open(FormComponent);
+    dialogRef.componentInstance.id = id;
+    dialogRef.componentInstance.action = FormStatus.Update;
   }
 }

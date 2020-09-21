@@ -1,5 +1,7 @@
-import { Component, EmbeddedViewRef, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EmbeddedViewRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Tag } from '../tag.model';
@@ -16,10 +18,13 @@ export class FormComponent implements OnInit {
   reLoadData : boolean;
   tagForm: FormGroup;
   item: Tag;
+  id: number;
+  action: FormStatus;
 
   constructor(
     private fb:FormBuilder,
-    private tagService: TagService) { }
+    private tagService: TagService,
+    private dialogRef: MatDialogRef<FormComponent>) { }
 
   ngOnInit(): void {
     this.tagForm = this.fb.group({
@@ -43,17 +48,19 @@ export class FormComponent implements OnInit {
   }
 
   saveForm(){
-    if(this.tagForm.invalid){
-      return;
-    }
-    this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
-      if(res.status == ResponseStatus.success){
-        this.isReloadData.emit(true);
-      }
-      else{
-        console.log("Error");
-      }
-    })
+    const id = this.dialogRef.componentInstance.id;
+    const action = this.dialogRef.componentInstance.action;
+    // if(this.tagForm.invalid){
+    //   return;
+    // }
+    // this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
+    //   if(res.status == ResponseStatus.success){
+    //     this.isReloadData.emit(true);
+    //   }
+    //   else{
+    //     console.log("Error");
+    //   }
+    // })
   }
   updateForm(){
     if(this.tagForm.invalid){
@@ -67,7 +74,7 @@ export class FormComponent implements OnInit {
   }
 
   onUpdateForm(id:number){
-    this.getItem(id);
+    console.log(id);
   }
 
   getItem(id:number){

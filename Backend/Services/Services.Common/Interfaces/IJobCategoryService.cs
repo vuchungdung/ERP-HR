@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services.Common.Interfaces
 {
-    interface IJobCategoryService : IBaseInterfaceService<JobCategoryViewModel>
+    public interface IJobCategoryService : IBaseInterfaceService<JobCategoryViewModel>
     {
         Task<ResponseModel> DropdowmSelection();
     }
