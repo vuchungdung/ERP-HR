@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.CommonModel.Enum
 {
-    public interface JobStatus
+    public enum JobStatus
     {
     }
 }

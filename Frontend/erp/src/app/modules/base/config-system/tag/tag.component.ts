@@ -46,10 +46,16 @@ export class TagComponent implements OnInit {
   }
 
   openDialog() {
+    var isCheck = false;
     const dialogRef = this.dialog.open(FormComponent);
+    dialogRef.componentInstance.isReloadData.subscribe((data)=>{
+      isCheck = data;
+    })
     dialogRef.afterClosed().subscribe(result =>{
       if(result==true){
-        this.getList();
+        if(isCheck == true){
+          this.getList();
+        }
       }
     })
   }

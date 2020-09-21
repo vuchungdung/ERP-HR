@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       this.isLoading = false;
       this.toastr.showWarning("Vui lòng nhập tài khoản và mật khẩu","");     
     }
-    this.authen.login(this.loginForm.value).subscribe((response: ResponseModel)=>{
+    this.authen.login(this.loginForm.value).subscribe(
+      (response: ResponseModel)=>{
         if(response.status == ResponseStatus.success){
           this.isLoading = false;
           localStorage.setItem('token',JSON.stringify(response.result));

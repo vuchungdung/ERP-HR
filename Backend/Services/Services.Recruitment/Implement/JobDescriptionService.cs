@@ -99,6 +99,7 @@ namespace Services.Recruitment.Implement
         {
             return _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == id && !x.Deleted).Name;
         }
+
         public List<string> GetArrSkill(string id)
         {
             List<string> results = new List<string>();
@@ -148,7 +149,22 @@ namespace Services.Recruitment.Implement
             ResponseModel response = new ResponseModel();
             try
             {
+                JobDescription md = await _context.JobDescriptionRepository.FirstOrDefaultAsync(x => x.JobId == id && !x.Deleted);
 
+                JobDescriptionViewModel model = new JobDescriptionViewModel();
+
+                model.JobId = md.JobId;
+                model.Title = md.Title;
+                model.Description = md.Description;
+                model.Endow = md.Endow;
+                model.SkillNames = GetArrSkill(md.SkillId);
+                model.CategoryName = GetNameCategory(md.CategoryId);
+                model.OfferFrom = md.OfferFrom;
+                model.OfferTo = md.OfferTo;
+                model.Status = md.Status;
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
             }
             catch (Exception ex)
             {
@@ -162,7 +178,22 @@ namespace Services.Recruitment.Implement
             ResponseModel response = new ResponseModel();
             try
             {
+                JobDescription md = _context.JobDescriptionRepository.FirstOrDefault(x => x.JobId == model.JobId && !x.Deleted);
 
+                md.Title = model.Title;
+                md.Description = model.Description;
+                md.Endow = model.Endow;
+                md.SkillId = model.SkillId;
+                md.CategoryId = model.CategoryId;
+                md.OfferFrom = model.OfferFrom;
+                md.OfferTo = model.OfferTo;
+                md.Status = model.Status;
+                md.UpdateDate = DateTime.Now;
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _context.JobDescriptionRepository.Update(md);
+
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
