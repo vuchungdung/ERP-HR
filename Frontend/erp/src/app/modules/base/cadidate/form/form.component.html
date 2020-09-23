@@ -6,7 +6,7 @@
         <div class="col-lg-2">
           <div class="avt">
             <span class="avt-text">Ảnh đại diện</span>
-            <input type="file" accept="image" class="hidden-input"/>
+            <input type="file" #file (change)="uploadFile(file.files)" class="hidden-input"/>
           </div>
           <div class="icon-edit">
             <i class="icon-pencil icon-p"></i>
@@ -119,7 +119,7 @@
                 <p class="text-top">Bấm vào đây để tải lên CV</p>
                 <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
               </div>
-              <input type="file" accept=".docx, .pdf, .doc" class="hidden-input-cv"/>
+              <input type="file" #file accept=".docx, .pdf, .doc" (change)="uploadFile(file.files)" class="hidden-input-cv"/>
             </div>
           </div>
         </div>

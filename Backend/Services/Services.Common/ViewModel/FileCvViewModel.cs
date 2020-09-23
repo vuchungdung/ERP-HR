@@ -19,5 +19,7 @@ namespace Services.Common.ViewModel
         public string Name { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public int CadidateId { get; set; }
     }
 }

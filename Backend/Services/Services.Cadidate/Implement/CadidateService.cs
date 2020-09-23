@@ -22,16 +22,13 @@ namespace Services.Cadidates.Implement
     {
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
-        private IStorageService _storageService;
         private ISequenceService _sequenceService;
         public CadidateService(IERPUnitOfWork context,
             IHttpContextAccessor httpContext,
-            IStorageService storageService,
             ISequenceService sequenceService)
         {
             _context = context;
             _httpContext = httpContext;
-            _storageService = storageService;
             _sequenceService = sequenceService;
         }
 
@@ -154,15 +151,9 @@ namespace Services.Cadidates.Implement
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
                 md.SkillId = model.SkillId;
-                if(model.File != null && model.File.Count() > 0)
-                {
-                    foreach(var item in model.File)
-                    {
-                        var fileEntity = await SaveFile(cadidateId, item);
-                        _context.FileCVRepository.Add(fileEntity.Result as Database.Sql.ERP.Entities.Common.File);
-                    }
-                }
+
                 await _context.CadidateRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
@@ -206,31 +197,6 @@ namespace Services.Cadidates.Implement
 
                 response.Result = model;
                 response.Status = ResponseStatus.Success;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            return response;
-        }
-
-        public async Task<ResponseModel> SaveFile(int cadidateId, IFormFile file)
-        {
-            ResponseModel response = new ResponseModel();
-            try
-            {
-                var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                var fileName = $"{originalFileName.Substring(0, originalFileName.LastIndexOf('.'))}{Path.GetExtension(originalFileName)}";
-                await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-                var model = new Database.Sql.ERP.Entities.Common.File()
-                {
-                    FileName = fileName,
-                    FilePath = _storageService.GetFileUrl(fileName),
-                    FileSize = Convert.ToInt32(file.Length),
-                    FileType = Path.GetExtension(fileName),
-                    CadidateId = cadidateId
-                };
-                response.Result = model;
             }
             catch(Exception ex)
             {

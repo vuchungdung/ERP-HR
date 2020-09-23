@@ -15,6 +15,5 @@ namespace Services.Cadidates.Interfaces
         Task<ResponseModel> ApplyToJob(int id);
         Task<ResponseModel> ChangeProcess(int id);
         Task<ResponseModel> Tagging(int id);
-        Task<ResponseModel> SaveFile(int cadidateId, IFormFile file);
     }
 }
