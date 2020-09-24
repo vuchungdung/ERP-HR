@@ -11,7 +11,7 @@ namespace Database.Sql.ERP.Entities.Cadidate
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CatidateUserId { get; set; }
+        public int UserId { get; set; }
         [Required]
         [Column(TypeName ="nvarchar(80)")]
         public string UserName { get; set; }
@@ -20,5 +20,7 @@ namespace Database.Sql.ERP.Entities.Cadidate
         public string Password { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+
+        public string CadidateId { get; set; }
     }
 }

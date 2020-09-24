@@ -16,18 +16,7 @@ import { Router } from '@angular/router';
 export class TableComponent implements OnInit {
   @Output() isChecked = new EventEmitter<boolean>();
   status: boolean = true;
-  ELEMENT_DATA: PeriodicElement[] = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'Senior Web Developer'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'Senior Web Developer'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Senior Web Developer'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Senior Web Developer'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'Senior Web Developer'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'Senior Web Developer'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'Senior Web Developer'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'Senior Web Developer'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'Senior Web Developer'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Senior Web Developer'},
-  ];
+  ELEMENT_DATA: any = [];
 
   displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','source','field'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
@@ -50,7 +39,7 @@ export class TableComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     else{
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+      //return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
   }
 

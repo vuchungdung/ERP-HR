@@ -62,10 +62,10 @@ namespace Core.Services
             var accessTokenLifetime = now.AddMinutes(accessTokenLifeTimeValue);
 
             var claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Address),
-                new Claim(JwtRegisteredClaimNames.Prn, user.Email),
-                new Claim(JwtRegisteredClaimNames.Aud, user.Image),
-                new Claim(JwtRegisteredClaimNames.GivenName, user.Name)
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.MobilePhone, user.Phone),
+                new Claim(ClaimTypes.UserData, user.UserName)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration[JwtConstant.SECRET_KEY]));

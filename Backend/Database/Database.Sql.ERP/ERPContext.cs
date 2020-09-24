@@ -32,7 +32,9 @@ namespace Database.Sql.ERP
             builder.Entity<RecruitmentPlan>()
                        .HasKey(c => new { c.PlanId, c.JobId });
 
-            builder.HasSequence("ERPSequence");
+            builder.HasSequence<int>("Cadidates", schema: "shared")
+                        .StartsAt(1)
+                        .IncrementsBy(1);
         }
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }
         public DbSet<Cadidate> Cadidates { get; set; }
@@ -44,6 +46,7 @@ namespace Database.Sql.ERP
         public DbSet<InterviewProcess> InterviewProcess { get; set; }
         public DbSet<InterviewResult> InterviewResults { get; set; }
         public DbSet<Process> Process { get; set; }
+        public DbSet<Provider> Providers { get; set; }
         public DbSet<JobDescription> JobDescriptions { get; set; }
         public DbSet<RecruitmentPlan> RecruitmentPlans { get; set; }
         public DbSet<Command> Commands { get; set; }

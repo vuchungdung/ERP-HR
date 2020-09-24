@@ -2,7 +2,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,9 +31,9 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
       id:[0],
-      name:[''],
-      dob:[''],
-      date:['']
+      name:['',Validators.required],
+      dob:['',Validators.required],
+      date:['',Validators.required],
     });
   }
   uploadFile(files){

@@ -1,6 +1,18 @@
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  name : string,
+  email : string,
+  address : string,
+  phone : string,
+  gender : number,
+  degree : string,
+  university : string,
+  major : string,
+  applyDate : any,
+  experience : number,
+  rating : number,
+  provider : string,
+  category : string,
+  skill : string,
+  job : string,
+  tag : string
 }

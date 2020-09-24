@@ -11,6 +11,7 @@ namespace Database.Sql.ERP.Entities.Cadidate
     public class Cadidate : BaseEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CadidateId { get; set; }
 
         [Required]

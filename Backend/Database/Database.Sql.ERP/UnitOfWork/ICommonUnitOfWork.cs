@@ -12,6 +12,6 @@ namespace Database.Sql.ERP.UnitOfWork
         ITableGenericRepository<File> FileCVRepository { get; }
         ITableGenericRepository<Skill> SkillRepository { get; }
         ITableGenericRepository<Tag> TagRepository { get; }
-
+        ITableGenericRepository<Provider> ProviderRepository { get; }
     }
 }

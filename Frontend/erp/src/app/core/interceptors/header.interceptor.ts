@@ -14,7 +14,8 @@ export class HeaderInterceptor implements HttpInterceptor {
   setHeader(request,token){
     let headers = new HttpHeaders();
     headers = headers.append('Authorization',token);
-    headers = headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
     return request.clone( {headers });
   }
   private jwtToken(token):string{

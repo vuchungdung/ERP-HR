@@ -38,7 +38,7 @@ namespace API.Common.Controllers
             {
                 FileCvViewModel model = new FileCvViewModel();
                 var file = Request.Form.Files[0];
-                var folderName = Path.Combine("cadidate-cv");
+                var folderName = Path.Combine("wwwroot/cadidate-cv");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if(file.Length > 0)
                 {
