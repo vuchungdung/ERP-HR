@@ -29,6 +29,15 @@ namespace API.Common.Controllers
             return response;
         }
 
+        [Route("item")]
+        [HttpGet]
+        [Authorize]
+        public async Task<ResponseModel> Item([FromQuery] int id)
+        {
+            var response = await _tagService.Item(id);
+            return response;
+        }
+
         [Route("get-list")]
         [HttpPost]
         [Authorize]

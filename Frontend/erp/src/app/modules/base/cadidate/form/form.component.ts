@@ -30,10 +30,19 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
-      id:[0],
       name:['',Validators.required],
       dob:['',Validators.required],
-      date:['',Validators.required],
+      phone:['',Validators.required],
+      email:['',Validators.required],
+      address:['',Validators.required],
+      degree:['',Validators.required],
+      university:['',Validators.required],
+      major:['',Validators.required],
+      jobcategory:['',Validators.required],
+      applyDate:['',Validators.required],
+      provider:['',Validators.required],
+      skill:['',Validators.required],
+      experience:['',Validators.required],
     });
   }
   uploadFile(files){

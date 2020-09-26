@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Common;
+using API.Recruitment;
 using API.System;
 using Core.Services;
 using Core.Services.InterfaceService;
@@ -90,6 +91,7 @@ namespace APIGateway
 
             services.AddCommonServices(Configuration);
             services.AddSystemServices(Configuration);
+            services.AddRecruitmentServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

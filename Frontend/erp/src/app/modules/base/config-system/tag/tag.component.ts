@@ -44,9 +44,10 @@ export class TagComponent implements OnInit {
     })
   }
 
-  insertDialog() {
+  insertTag() {
     var isCheck = false;
     const dialogRef = this.dialog.open(FormComponent);
+    dialogRef.componentInstance.action = FormStatus.Insert;
     dialogRef.componentInstance.isReloadData.subscribe((data)=>{
       isCheck = data;
     })
@@ -59,9 +60,23 @@ export class TagComponent implements OnInit {
     })
   }
 
-  updateDialog(id:number){
+  updateTag(id:number){
+    var isCheck = false;
     const dialogRef = this.dialog.open(FormComponent);
     dialogRef.componentInstance.id = id;
     dialogRef.componentInstance.action = FormStatus.Update;
+    dialogRef.componentInstance.isReloadData.subscribe((data)=>{
+      isCheck = data;
+    })
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result==true){
+        if(isCheck == true){
+          this.getList();
+        }
+      }
+    })
+  }
+  deleteTag(id:number){
+
   }
 }

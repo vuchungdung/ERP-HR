@@ -42,23 +42,23 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Số điện thoại</label>
-                <input type="text" formControlName="name" class="form-input" placeholder="Nhập SĐT" />
+                <input type="text" formControlName="phone" class="form-input" placeholder="Nhập SĐT" />
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Email</label>
-                <input type="text" formControlName="name" class="form-input" placeholder="Nhập email" />
+                <input type="text" formControlName="email" class="form-input" placeholder="Nhập email" />
               </div>
             </div>
           </div>
           <div class="form-group">
             <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa chỉ</label>
-            <input type="text" class="form-input" placeholder="Nhập địa chỉ" />
+            <input type="text" class="form-input" formControlName="address" placeholder="Nhập địa chỉ" />
           </div>  
           <div class="form-group">
             <div class="row">
               <div class="col-lg-5">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Trình độ đào tạo</label>
-                <input type="text" class="form-input" placeholder="Trình độ đào tạo" />
+                <input type="text" class="form-input" formControlName="degree" placeholder="Trình độ đào tạo" />
                 <!-- <mat-select>
                   <mat-option>
                     Chưa có dữ liệu
@@ -67,7 +67,7 @@
               </div>
               <div class="col-lg-7">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Nơi đào tạo</label>
-                <input type="text" class="form-input" placeholder="Nơi đào tạo" />
+                <input type="text" class="form-input" formControlName="university" placeholder="Nơi đào tạo" />
               </div>
             </div>
           </div>
@@ -77,12 +77,12 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Chuyên ngành đào tạo</label>
-                <input type="text" class="form-input" placeholder="Nhập chuyên ngành" />
+                <input type="text" class="form-input" formControlName="major" placeholder="Nhập chuyên ngành" />
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
                 <section class="form-input">
-                  <mat-select value="0" style="height: 36px; line-height: 36px;">
+                  <mat-select formControlName="jobcategory" value="0" style="height: 36px; line-height: 36px;">
                     <mat-option value="0">----------Chọn----------</mat-option>
                     <mat-option value="option1">Option 1</mat-option>
                     <mat-option value="option2">Option 2</mat-option>
@@ -96,7 +96,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
-                <input matInput formControlName="date" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker3">
+                <input matInput formControlName="applydate" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker3">
                 <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
                   <mat-icon matDatepickerToggleIcon>today</mat-icon>
                 </mat-datepicker-toggle>
@@ -106,7 +106,7 @@
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
                 <section class="form-input">
                   <mat-select value="0" style="height: 36px; line-height: 36px;">
-                    <mat-option value="0">----------Chọn----------</mat-option>
+                    <mat-option formControlName="provider" value="0">----------Chọn----------</mat-option>
                     <mat-option value="option1">Option 1</mat-option>
                     <mat-option value="option2">Option 2</mat-option>
                     <mat-option value="option3">Option 3</mat-option>
@@ -121,7 +121,7 @@
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
                 <section class="form-input">
                   <mat-select value="0" style="height: 36px; line-height: 36px;">
-                    <mat-option value="0">----------Chọn----------</mat-option>
+                    <mat-option formControlName="skill" value="0">----------Chọn----------</mat-option>
                     <mat-option value="option1">Option 1</mat-option>
                     <mat-option value="option2">Option 2</mat-option>
                     <mat-option value="option3">Option 3</mat-option>
@@ -130,7 +130,7 @@
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Số năm kinh nghiệm</label>
-                <input type="number" class="form-input" placeholder="Số năm kinh nghiệm" />
+                <input type="number" class="form-input" formControlName="experience" placeholder="Số năm kinh nghiệm" />
               </div>
             </div>
           </div>  

@@ -12,7 +12,7 @@ export interface PeriodicElement {
   rating : number,
   provider : string,
   category : string,
-  skill : string,
+  skill : [],
   job : string,
   tag : string
 }
