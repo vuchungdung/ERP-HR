@@ -29,7 +29,7 @@ namespace Services.Cadidates.ViewModel
 
         public DateTime ApplyDate { get; set; }
 
-        public int Experience { get; set; }
+        public string Experience { get; set; }
 
         public string FaceBook { get; set; }
 
@@ -45,7 +45,7 @@ namespace Services.Cadidates.ViewModel
 
         public int CategoryId { get; set; }
 
-        public string SkillId { get; set; }
+        public string Skill { get; set; }
 
         public int JobId { get; set; }
 

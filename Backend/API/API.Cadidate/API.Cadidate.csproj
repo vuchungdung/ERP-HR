@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Services.Cadidate\Services.Cadidates.csproj" />
+    <ProjectReference Include="..\..\Services\Services.System\Services.System.csproj" />
   </ItemGroup>
 
 </Project>

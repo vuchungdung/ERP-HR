@@ -96,7 +96,7 @@ namespace Services.Cadidates.Implement
                                 Rating = m.Rating,
                                 ProviderId = m.ProviderId,
                                 CategoryId = m.CategoryId,
-                                SkillId = m.SkillId,
+                                Skill = m.Skill,
                                 JobId = m.JobId,
                                 TagId = m.TagId
                             };
@@ -150,7 +150,9 @@ namespace Services.Cadidates.Implement
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.SkillId = model.SkillId;
+                md.Skill = model.Skill;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.CadidateRepository.AddAsync(md);
                 await _context.SaveChangesAsync();
@@ -186,7 +188,7 @@ namespace Services.Cadidates.Implement
                     Rating = md.Rating,
                     ProviderId = md.ProviderId,
                     CategoryId = md.CategoryId,
-                    SkillId = md.SkillId,
+                    Skill = md.Skill,
                     JobId = md.JobId,
                     TagId = md.TagId,
                     FaceBook = md.FaceBook,

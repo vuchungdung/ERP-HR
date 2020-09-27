@@ -1,5 +1,6 @@
 export interface Cadidate {
   id : number,
+  dob : Date,
   name : string,
   email : string,
   address : string,
@@ -8,12 +9,12 @@ export interface Cadidate {
   degree : string,
   university : string,
   major : string,
-  applyDate : any,
-  experience : number,
+  applydate : Date,
+  experience : string,
   rating : number,
   provider : string,
   category : string,
-  skill : [],
+  skill : string,
   job : string,
   tag : string
 }

@@ -9,6 +9,7 @@ using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Services.Common.Implement
@@ -105,11 +106,11 @@ namespace Services.Common.Implement
                 md.Content = model.Content;
                 md.Color = model.Color;
                 md.CreateDate = DateTime.Now;
-                md.CreateBy = 1;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.TagRepository.AddAsync(md);
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }

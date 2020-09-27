@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Cadidate;
 using API.Common;
 using API.Recruitment;
 using API.System;
@@ -92,6 +93,7 @@ namespace APIGateway
             services.AddCommonServices(Configuration);
             services.AddSystemServices(Configuration);
             services.AddRecruitmentServices(Configuration);
+            services.AddCadidateServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

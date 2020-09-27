@@ -33,8 +33,7 @@ const route : Routes = [
     ReactiveFormsModule
   ],
   providers:[
-    TagService,
-    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+    TagService
   ]
 })
 export class TagModule { }

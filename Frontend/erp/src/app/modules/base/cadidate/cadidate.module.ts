@@ -18,6 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CadidateRoutingModule } from './cadidate-routing.module';
+import { CadidateService } from './cadidate.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,9 @@ import { CadidateRoutingModule } from './cadidate-routing.module';
     MatRadioModule,
     MatInputModule,
     CadidateRoutingModule
+  ],
+  providers:[
+    CadidateService
   ]
 })
 export class CadidateModule { }

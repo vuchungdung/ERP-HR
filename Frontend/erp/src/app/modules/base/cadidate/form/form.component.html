@@ -1,7 +1,7 @@
-<div class="page-container" style="padding-bottom: 20px;padding-top: 10px;">
+<div class="page-container" style="padding-bottom: 20px;padding-top: 20px;">
   <h2 mat-dialog-title>Thêm mới ứng viên</h2>
-  <mat-dialog-content class="mat-typography scroll-bar">
-    <form [formGroup] ="cadidateForm">
+  <mat-dialog-content class="mat-typography scroll-bar" style="width: 100%;overflow: hidden;">
+    <form [formGroup] ="cadidateForm" (submit)="saveForm()">
       <div class="row">
         <div class="col-lg-2">
           <div class="avt">
@@ -81,14 +81,12 @@
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
-                <section class="form-input">
-                  <mat-select formControlName="jobcategory" value="0" style="height: 36px; line-height: 36px;">
-                    <mat-option value="0">----------Chọn----------</mat-option>
-                    <mat-option value="1">Option 1</mat-option>
-                    <mat-option value="2">Option 2</mat-option>
-                    <mat-option value="3">Option 3</mat-option>
-                  </mat-select>
-                </section>
+                <mat-select class="form-input" formControlName="jobcategory" value=0 style="height: 36px; line-height: 36px;">
+                  <mat-option value=0>----------Chọn----------</mat-option>
+                  <mat-option value=1>Option 1</mat-option>
+                  <mat-option value=2>Option 2</mat-option>
+                  <mat-option value=3>Option 3</mat-option>
+                </mat-select>
               </div>
             </div>
           </div>  
@@ -104,14 +102,12 @@
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
-                <section class="form-input">
-                  <mat-select formControlName="provider" value="0" style="height: 36px; line-height: 36px;">
-                    <mat-option value="0">----------Chọn----------</mat-option>
-                    <mat-option value="1">Option 1</mat-option>
-                    <mat-option value="2">Option 2</mat-option>
-                    <mat-option value="3">Option 3</mat-option>
-                  </mat-select>
-                </section>
+                <mat-select class="form-input" formControlName="provider" value=0 style="height: 36px; line-height: 36px;">
+                  <mat-option value=0>----------Chọn----------</mat-option>
+                  <mat-option value=1>Option 1</mat-option>
+                  <mat-option value=2>Option 2</mat-option>
+                  <mat-option value=3>Option 3</mat-option>
+                </mat-select>
               </div>
             </div>
           </div>
@@ -119,18 +115,16 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
-                <section class="form-input">
-                  <mat-select formControlName="skill" value="0" style="height: 36px; line-height: 36px;">
-                    <mat-option value="0">----------Chọn----------</mat-option>
-                    <mat-option value="1">Option 1</mat-option>
-                    <mat-option value="2">Option 2</mat-option>
-                    <mat-option value="3">Option 3</mat-option>
-                  </mat-select>
-                </section>
+                <mat-select class="form-input" formControlName="skill" value="0" style="height: 36px; line-height: 36px;">
+                  <mat-option value="0">----------Chọn----------</mat-option>
+                  <mat-option value="1">Option 1</mat-option>
+                  <mat-option value="2">Option 2</mat-option>
+                  <mat-option value="3">Option 3</mat-option>
+                </mat-select>
               </div>
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Số năm kinh nghiệm</label>
-                <input type="number" class="form-input" formControlName="experience" placeholder="Số năm kinh nghiệm" />
+                <input type="text" class="form-input" formControlName="experience" placeholder="Số năm kinh nghiệm" />
               </div>
             </div>
           </div>  
@@ -140,15 +134,15 @@
                 <p class="text-top">Bấm vào đây để tải lên CV</p>
                 <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
               </div>
-              <input type="file" #file accept=".docx, .pdf, .doc" (change)="uploadFile(file.files)" class="hidden-input-cv"/>
+              <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input-cv"/>
             </div>
           </div>
         </div>
       </div>
+      <div class="form-group" style="margin-bottom: 0px;margin-left: 76%;">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Thêm ứng viên</button>
+      </div>
     </form>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Đóng</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Thêm ứng viên</button>
-  </mat-dialog-actions>  
+  </mat-dialog-content> 
 </div>

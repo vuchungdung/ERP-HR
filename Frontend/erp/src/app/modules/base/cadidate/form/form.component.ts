@@ -49,9 +49,8 @@ export class FormComponent implements OnInit {
       degree:['',Validators.required],
       university:['',Validators.required],
       major:['',Validators.required],
-      jobcategory:['',Validators.required],
-      applyDate:['',Validators.required],
-      provider:['',Validators.required],
+      jobcategory:[0,Validators.required],
+      provider:[0,Validators.required],
       skill:['',Validators.required],
       applydate:['',Validators.required],
       experience:['',Validators.required],
@@ -59,14 +58,13 @@ export class FormComponent implements OnInit {
     this.initCadidateForm();
   }
   uploadFile(files){
+    debugger
+    const formData = new FormData();
     if (files.length === 0) {
       return;
     }
-    
     let fileToUpload = <File>files[0];
-    const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    
     this.http.post(`${environment.apiUrl}${this.url.upload}`, formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
@@ -102,6 +100,7 @@ export class FormComponent implements OnInit {
   }
 
   saveForm(){
+    debugger
     const action = this.dialogRef.componentInstance.action;
     if(this.cadidateForm.invalid){
       return;
