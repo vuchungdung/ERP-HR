@@ -1,4 +1,5 @@
-export interface PeriodicElement {
+export interface Cadidate {
+  id : number,
   name : string,
   email : string,
   address : string,

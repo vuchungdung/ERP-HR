@@ -17,8 +17,6 @@ import { TagService } from './tag.service';
 
 export class TagComponent implements OnInit {
 
-  @ViewChild(FormComponent) form : FormComponent;
-
   paging = new PagingModel();
   searchText = '';
 
@@ -48,7 +46,7 @@ export class TagComponent implements OnInit {
     var isCheck = false;
     const dialogRef = this.dialog.open(FormComponent);
     dialogRef.componentInstance.action = FormStatus.Insert;
-    dialogRef.componentInstance.isReloadData.subscribe((data)=>{
+    dialogRef.componentInstance.isReLoadTag.subscribe(data=>{
       isCheck = data;
     })
     dialogRef.afterClosed().subscribe(result =>{
@@ -65,7 +63,7 @@ export class TagComponent implements OnInit {
     const dialogRef = this.dialog.open(FormComponent);
     dialogRef.componentInstance.id = id;
     dialogRef.componentInstance.action = FormStatus.Update;
-    dialogRef.componentInstance.isReloadData.subscribe((data)=>{
+    dialogRef.componentInstance.isReLoadTag.subscribe((data)=>{
       isCheck = data;
     })
     dialogRef.afterClosed().subscribe(result =>{

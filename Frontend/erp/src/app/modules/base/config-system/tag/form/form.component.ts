@@ -1,7 +1,6 @@
 import { Component, EmbeddedViewRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { access } from 'fs';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -15,13 +14,12 @@ import { TagService } from '../tag.service';
 })
 export class FormComponent implements OnInit {
   
-  @Output() isReloadData = new EventEmitter<boolean>();
+  @Output() isReLoadTag = new EventEmitter<boolean>();
   
-  reLoadData : boolean;
-  tagForm: FormGroup;
-  item: Tag;
-  id: number;
-  action: FormStatus;
+  public tagForm: FormGroup;
+  public item: Tag;
+  public id: number;
+  public action: FormStatus;
 
   constructor(
     private fb:FormBuilder,
@@ -45,7 +43,6 @@ export class FormComponent implements OnInit {
   
   initTagForm(){
     const action = this.dialogRef.componentInstance.action;
-    console.log(action);
     if(action == FormStatus.Insert){
       this.tagForm.get('name').reset();
       this.tagForm.get('content').reset();
@@ -59,14 +56,13 @@ export class FormComponent implements OnInit {
 
   saveForm(){
     const action = this.dialogRef.componentInstance.action;
-    console.log(action);
     if(this.tagForm.invalid){
       return;
     }
     if(action == FormStatus.Insert){
       this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
         if(res.status == ResponseStatus.success){
-          this.isReloadData.emit(true);
+          this.isReLoadTag.emit(true);
         }
         else{
           console.log("Error Insert");
@@ -76,7 +72,7 @@ export class FormComponent implements OnInit {
     else if(action == FormStatus.Update){
       this.tagService.update(this.tagForm.getRawValue()).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
-          this.isReloadData.emit(true);
+          this.isReLoadTag.emit(true);
         }
         else{
           console.log("Error Update");

@@ -3,7 +3,13 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormStatus } from 'src/app/core/enums/form-status.enum';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { ResponseModel } from 'src/app/core/models/response.model';
 import { environment } from 'src/environments/environment';
+import { Cadidate } from '../cadidate.model';
+import { CadidateService } from '../cadidate.service';
 
 @Component({
   selector: 'app-form',
@@ -12,21 +18,26 @@ import { environment } from 'src/environments/environment';
 })
 export class FormComponent implements OnInit {
 
-  @Output() public onUploadFinished = new EventEmitter();
+  @Output() onUploadFinished = new EventEmitter();
+  @Output() isReLoadCadidate = new EventEmitter();
 
-  cadidateForm : FormGroup;
+  public cadidateForm : FormGroup;
   public progress: number;
   public _url: any;
+  public item: Cadidate;
+  public id: number;
+  public action: FormStatus;
 
-  
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialogRef: MatDialogRef<FormComponent>,
+    private cadidateService: CadidateService
   ) { }
 
-    url = {
-      upload: '/common/file/upload'
-    }
+  url = {
+    upload: '/common/file/upload',
+  }  
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
@@ -42,8 +53,10 @@ export class FormComponent implements OnInit {
       applyDate:['',Validators.required],
       provider:['',Validators.required],
       skill:['',Validators.required],
+      applydate:['',Validators.required],
       experience:['',Validators.required],
     });
+    this.initCadidateForm();
   }
   uploadFile(files){
     if (files.length === 0) {
@@ -64,5 +77,52 @@ export class FormComponent implements OnInit {
           console.log(this._url);
         }
       });
+  }
+  initCadidateForm(){
+    const action = this.dialogRef.componentInstance.action;
+    if(action == FormStatus.Insert){
+      this.cadidateForm.get('name').reset();
+      this.cadidateForm.get('dob').reset();
+      this.cadidateForm.get('email').reset();
+      this.cadidateForm.get('address').reset();
+      this.cadidateForm.get('degree').reset();
+      this.cadidateForm.get('phone').reset();
+      this.cadidateForm.get('skill').reset();
+      this.cadidateForm.get('provider').reset();
+      this.cadidateForm.get('applydate').reset();
+      this.cadidateForm.get('jobcategory').reset();
+      this.cadidateForm.get('experience').reset();
+      this.cadidateForm.get('university').reset();
+      this.cadidateForm.get('major').reset();
+      this.cadidateForm.get('experience').reset();
+    }
+    else if(action == FormStatus.Update){
+      const id = this.dialogRef.componentInstance.id;
+    }
+  }
+
+  saveForm(){
+    const action = this.dialogRef.componentInstance.action;
+    if(this.cadidateForm.invalid){
+      return;
+    }
+    if(action == FormStatus.Insert){
+      this.cadidateService.insert(this.cadidateForm.getRawValue()).subscribe((res: ResponseModel)=>{
+        if(res.status == ResponseStatus.success){
+          this.isReLoadCadidate.emit(true);
+        }
+        else{
+          console.log("Error Insert");
+        }
+      });
+    }
+  }
+
+  getItem(){
+
+  }
+
+  setDataForm(){
+
   }
 }
