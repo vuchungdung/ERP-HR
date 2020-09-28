@@ -7,6 +7,7 @@
           <div class="avt">
             <span class="avt-text">Ảnh đại diện</span>
             <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input"/>
+            <img *ngIf="_img" [src]="createImgPath()" style="width:62.5%; height:101%;position: absolute;top: -1px;left: 10px;border-radius: 50%;">
           </div>
           <div class="icon-edit">
             <i class="icon-pencil icon-p"></i>
@@ -130,11 +131,34 @@
           </div>  
           <div class="form-group">
             <div class="file">
-              <div class="file-text">
-                <p class="text-top">Bấm vào đây để tải lên CV</p>
-                <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
+              <div *ngIf="_pdf.url==''">
+                <div class="file-text">
+                  <p class="text">Bấm vào đây để tải lên CV</p>
+                  <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
+                </div>
               </div>
               <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input-cv"/>
+              <div *ngIf="_pdf.url!=''">
+                <div class="file-text" 
+                style="z-index: 10;
+                      width: 100%;
+                      height: 100%;
+                      background-color: #f5f5f5;
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      border-radius: 4px;
+                      display: flex;
+                      justify-content: space-around;">
+                  <div style="width:100px">
+                    <img style="width:100%;padding-top:6px" src="../../../../../assets/images/icon-pdf.png" alt="#">
+                  </div>
+                  <div style="margin-left: -50%;padding-top: 24px;font: 14px;">
+                    <p class="text" style="margin-bottom: 0px;">{{_pdf.name}}</p>
+                    <span class="text">{{_pdf.size}}KB</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

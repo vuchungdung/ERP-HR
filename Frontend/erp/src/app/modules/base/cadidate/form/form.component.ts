@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { PDFfile } from 'src/app/core/models/pdf.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validators';
 import { environment } from 'src/environments/environment';
@@ -25,6 +26,8 @@ export class FormComponent implements OnInit {
   public cadidateForm : FormGroup;
   public progress: number;
   public _url: any;
+  public _pdf = new PDFfile();
+  public _img: any;
   public item: Cadidate;
   public id: number;
   public action: FormStatus;
@@ -59,7 +62,6 @@ export class FormComponent implements OnInit {
     this.initCadidateForm();
   }
   uploadFile(files){
-    debugger
     const formData = new FormData();
     if (files.length === 0) {
       return;
@@ -68,12 +70,18 @@ export class FormComponent implements OnInit {
     formData.append('file', fileToUpload, fileToUpload.name);
     this.http.post(`${environment.apiUrl}${this.url.upload}`, formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress)
-          this.progress = Math.round(100 * event.loaded / event.total);
-        else if (event.type === HttpEventType.Response) {
+        if (event.type === HttpEventType.Response) {
           this.onUploadFinished.emit(event.body);
           this._url = event.body;
-          console.log(this._url);
+          if(this._url.result[2]==".pdf"){
+            this._pdf.url = this._url.result[0];
+            this._pdf.size = this._url.result[1];
+            this._pdf.name = this._url.result[3];
+          }
+          else if(this._url.result[2]==".jpg"){
+            this._img = this._url.result[0];
+          }
+          console.log(this._url.result[0]);
         }
       });
   }
@@ -124,5 +132,9 @@ export class FormComponent implements OnInit {
 
   setDataForm(){
 
+  }
+
+  createImgPath(){
+    return `https://localhost:44379/${this._img}`;
   }
 }

@@ -60,6 +60,14 @@ namespace API.Common.Controllers
                     {
                         file.CopyTo(stream);
                     }
+                    string[] arr = new string[4]
+                    {
+                        dbPath,
+                        fileSize.ToString(),
+                        fileType,
+                        fileName
+                    };
+                    response.Result = arr;
                 }
             }
             catch (Exception ex)
