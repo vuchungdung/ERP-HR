@@ -7,6 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { AppValidator } from 'src/app/core/validators/app.validators';
 import { environment } from 'src/environments/environment';
 import { Cadidate } from '../cadidate.model';
 import { CadidateService } from '../cadidate.service';
@@ -44,13 +45,13 @@ export class FormComponent implements OnInit {
       name:['',Validators.required],
       dob:['',Validators.required],
       phone:['',Validators.required],
-      email:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
       address:['',Validators.required],
       degree:['',Validators.required],
       university:['',Validators.required],
       major:['',Validators.required],
-      jobcategory:[0,Validators.required],
-      provider:[0,Validators.required],
+      category:[0,[Validators.required,AppValidator.number]],
+      provider:[0,[Validators.required,AppValidator.number]],
       skill:['',Validators.required],
       applydate:['',Validators.required],
       experience:['',Validators.required],
@@ -85,10 +86,10 @@ export class FormComponent implements OnInit {
       this.cadidateForm.get('address').reset();
       this.cadidateForm.get('degree').reset();
       this.cadidateForm.get('phone').reset();
-      this.cadidateForm.get('skill').reset();
-      this.cadidateForm.get('provider').reset();
+      this.cadidateForm.get('skill').setValue('0');
+      this.cadidateForm.get('provider').setValue(0);
       this.cadidateForm.get('applydate').reset();
-      this.cadidateForm.get('jobcategory').reset();
+      this.cadidateForm.get('category').setValue(0);
       this.cadidateForm.get('experience').reset();
       this.cadidateForm.get('university').reset();
       this.cadidateForm.get('major').reset();
