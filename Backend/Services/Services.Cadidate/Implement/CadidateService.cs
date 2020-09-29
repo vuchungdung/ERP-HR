@@ -13,12 +13,12 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.InterfaceService;
 using System.Net.Http.Headers;
-using System.IO;
 using Database.Sql.ERP.Entities.Common;
+using Services.Common.ViewModel;
 
 namespace Services.Cadidates.Implement
 {
-    public class CadidateService : ICadidateService
+    public partial class CadidateService : ICadidateService
     {
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
@@ -155,6 +155,7 @@ namespace Services.Cadidates.Implement
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.CadidateRepository.AddAsync(md);
+                //await _context.FileCVRepository.AddAsync();
                 await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
@@ -206,7 +207,28 @@ namespace Services.Cadidates.Implement
             }
             return response;
         }
+        public File Insert(FileCvViewModel model)
+        {
+            try
+            {
+                File md = new File();
 
+                md.CadidateId = model.CadidateId;
+                md.Deleted = false;
+                md.FileName = model.FileName;
+                md.FilePath = model.FilePath;
+                md.FileSize = model.FileSize;
+                md.FileType = model.FileType;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.CreateDate = DateTime.Now;
+
+                return md;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public Task<ResponseModel> Tagging(int id)
         {
             throw new NotImplementedException();

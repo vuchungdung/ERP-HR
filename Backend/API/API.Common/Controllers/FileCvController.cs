@@ -54,20 +54,12 @@ namespace API.Common.Controllers
                     model.FileSize = Convert.ToInt32(fileSize);
                     model.FileType = fileType;
 
-                    response = await _fileCvService.Insert(model);
+                    response.Result = model;
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
-                    string[] arr = new string[4]
-                    {
-                        dbPath,
-                        fileSize.ToString(),
-                        fileType,
-                        fileName
-                    };
-                    response.Result = arr;
                 }
             }
             catch (Exception ex)

@@ -50,5 +50,7 @@ namespace Services.Cadidates.ViewModel
         public int JobId { get; set; }
 
         public int TagId { get; set; }
+
+        public List<IFormFile> Files { get; set; }
     }
 }

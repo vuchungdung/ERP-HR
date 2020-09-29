@@ -93,6 +93,12 @@ namespace Services.Common.Implement
             }
             return response;
         }
+
+        public Task<ResponseModel> Insert(FileCvViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ResponseModel> Item(int id)
         {
             ResponseModel response = new ResponseModel();
@@ -115,33 +121,6 @@ namespace Services.Common.Implement
             }
             return response;
         }
-        public async Task<ResponseModel> Insert(FileCvViewModel model)
-        {
-            ResponseModel response = new ResponseModel();
-            try
-            {
-                File md = new File();
-
-                md.CadidateId = model.CadidateId;
-                md.Deleted = false;
-                md.FileName = model.FileName;
-                md.FilePath = model.FilePath;
-                md.FileSize = model.FileSize;
-                md.FileType = model.FileType;
-                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                md.CreateDate = DateTime.Now;
-
-                await _context.FileCVRepository.AddAsync(md);
-
-                response.Status = ResponseStatus.Success;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            return response;
-        }
-
         public Task<ResponseModel> Update(FileCvViewModel model)
         {
             throw new NotImplementedException();
