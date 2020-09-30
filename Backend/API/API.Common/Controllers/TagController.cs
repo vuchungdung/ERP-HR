@@ -25,6 +25,7 @@ namespace API.Common.Controllers
         [Authorize]
         public async Task<ResponseModel> Insert([FromBody]TagViewModel model)
         {
+            var req = HttpContext.Request;
             var response = await _tagService.Insert(model);
             return response;
         }

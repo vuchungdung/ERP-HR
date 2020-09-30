@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Database.Sql.ERP.Entities.Common;
+using Microsoft.AspNetCore.Http;
+using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Phone { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime Dob { get; set; } = DateTime.Now;
 
         public int Gender { get; set; }
 
@@ -27,7 +29,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Major { get; set; }
 
-        public DateTime ApplyDate { get; set; }
+        public DateTime ApplyDate { get; set; } = DateTime.Now;
 
         public string Experience { get; set; }
 
@@ -52,5 +54,6 @@ namespace Services.Cadidates.ViewModel
         public int TagId { get; set; }
 
         public List<IFormFile> Files { get; set; }
+
     }
 }

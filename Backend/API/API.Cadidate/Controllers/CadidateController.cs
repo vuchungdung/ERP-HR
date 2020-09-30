@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Cadidates.Interfaces;
 using Services.Cadidates.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Cadidate.Controllers
@@ -24,7 +21,7 @@ namespace API.Cadidate.Controllers
         [HttpPost]
         [Route("insert")]
         [Authorize]
-        public async Task<ResponseModel> Insert([FromBody] CadidateViewModel model)
+        public async Task<ResponseModel> Insert([FromForm] CadidateViewModel model)
         {
             var response = await _cadidateService.Insert(model);
             return response;

@@ -53,6 +53,7 @@ namespace API.Common.Controllers
                     model.FilePath = fullPath;
                     model.FileSize = Convert.ToInt32(fileSize);
                     model.FileType = fileType;
+                    model.DbPath = dbPath;
 
                     response.Result = model;
 

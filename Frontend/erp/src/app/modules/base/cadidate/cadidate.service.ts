@@ -23,7 +23,7 @@ export class CadidateService{
     item: '/cadidate/cadidate/item'
   }
 
-  insert(model: Cadidate):Observable<ResponseModel>{
+  insert(model: FormData):Observable<ResponseModel>{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
   

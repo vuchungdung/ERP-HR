@@ -140,13 +140,13 @@ namespace Services.Cadidates.Implement
                 md.Name = model.Name;
                 md.Email = model.Email;
                 md.Address = model.Address;
-                md.Dob = model.Dob;
+                //md.Dob = model.Dob;
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
                 md.Degree = model.Degree;
                 md.University = model.University;
                 md.Major = model.Major;
-                md.ApplyDate = model.ApplyDate;
+                //md.ApplyDate = model.ApplyDate;
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
@@ -154,8 +154,23 @@ namespace Services.Cadidates.Implement
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+                foreach(var item in model.Files)
+                {
+                    File f = new File();
+                    f.CadidateId = cadidateId;
+                    f.Deleted = false;
+                    f.FileName = item.FileName;
+                    //f.FilePath = item.FilePath;
+                    //f.FileSize = item.FileSize;
+                    //f.FileType = item.FileType;
+                    f.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                    f.CreateDate = DateTime.Now;
+
+                    _context.FileCVRepository.Add(f);
+                    _context.SaveChanges();
+                }
+
                 await _context.CadidateRepository.AddAsync(md);
-                //await _context.FileCVRepository.AddAsync();
                 await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
@@ -206,28 +221,6 @@ namespace Services.Cadidates.Implement
                 throw ex;
             }
             return response;
-        }
-        public File Insert(FileCvViewModel model)
-        {
-            try
-            {
-                File md = new File();
-
-                md.CadidateId = model.CadidateId;
-                md.Deleted = false;
-                md.FileName = model.FileName;
-                md.FilePath = model.FilePath;
-                md.FileSize = model.FileSize;
-                md.FileType = model.FileType;
-                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                md.CreateDate = DateTime.Now;
-
-                return md;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         public Task<ResponseModel> Tagging(int id)
         {
