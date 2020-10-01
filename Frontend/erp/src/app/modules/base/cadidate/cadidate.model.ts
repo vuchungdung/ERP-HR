@@ -15,5 +15,6 @@ export interface Cadidate {
   category : string,
   job : string,
   tag : string,
-  dob : Date
+  dob : Date,
+  skill : string
 }

@@ -97,7 +97,7 @@ namespace Services.Cadidates.Implement
                                 Rating = m.Rating,
                                 ProviderId = m.ProviderId,
                                 CategoryId = m.CategoryId,
-                                //Skills = m.Skill,
+                                Skill = m.Skill,
                                 JobId = m.JobId,
                                 TagId = m.TagId
                             };
@@ -151,7 +151,7 @@ namespace Services.Cadidates.Implement
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.Skill = JsonConvert.SerializeObject(model.Skills);
+                md.Skill = JsonConvert.SerializeObject(model.Skill);
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -212,7 +212,7 @@ namespace Services.Cadidates.Implement
                     Rating = md.Rating,
                     ProviderId = md.ProviderId,
                     CategoryId = md.CategoryId,
-                    //Skills = JsonConvert.DeserializeObject(md.Skill),
+                    Skill = md.Skill,
                     JobId = md.JobId,
                     TagId = md.TagId,
                     FaceBook = md.FaceBook,

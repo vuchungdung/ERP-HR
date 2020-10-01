@@ -47,7 +47,7 @@ namespace Services.Cadidates.ViewModel
 
         public int CategoryId { get; set; }
 
-        public List<string> Skills { get; set; }
+        public string Skill { get; set; }
 
         public int JobId { get; set; }
 

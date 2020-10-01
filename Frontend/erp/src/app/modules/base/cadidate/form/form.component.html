@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày sinh</label>
-                <input matInput formControlName="dob" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker2">
+                <input matInput formControlName="dob" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
                 <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
                   <mat-icon matDatepickerToggleIcon>today</mat-icon>
                 </mat-datepicker-toggle>
@@ -83,7 +83,7 @@
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
                 <mat-select class="form-input" formControlName="category" style="height: 36px; line-height: 36px;">
-                  <mat-option [value]="0">----------Chọn----------</mat-option>
+                  <mat-option>None</mat-option>
                   <mat-option [value]="1">Option 1</mat-option>
                   <mat-option [value]="2">Option 2</mat-option>
                   <mat-option [value]="3">Option 3</mat-option>
@@ -95,7 +95,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
-                <input matInput formControlName="applydate" class="form-input form-date" placeholder="dd/MM/yyyy" [matDatepicker]="picker3">
+                <input matInput formControlName="applydate" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
                 <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
                   <mat-icon matDatepickerToggleIcon>today</mat-icon>
                 </mat-datepicker-toggle>
@@ -104,7 +104,7 @@
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
                 <mat-select class="form-input" formControlName="provider" style="height: 36px; line-height: 36px;">
-                  <mat-option [value]="0">----------Chọn----------</mat-option>
+                  <mat-option>None</mat-option>
                   <mat-option [value]="1">Option 1</mat-option>
                   <mat-option [value]="2">Option 2</mat-option>
                   <mat-option [value]="3">Option 3</mat-option>
@@ -117,7 +117,6 @@
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
                 <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
-                  <mat-option [value]="">----------Chọn----------</mat-option>
                   <mat-option *ngFor="let option of listOps" value={{option.skillId}}>{{option.name}}</mat-option>
                 </mat-select>
               </div>

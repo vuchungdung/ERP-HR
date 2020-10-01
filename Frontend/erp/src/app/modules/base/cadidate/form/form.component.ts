@@ -49,20 +49,20 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
-      name:['demo',Validators.required],
+      name:['',Validators.required],
       dob:['',[Validators.required]],
       gender:[0,Validators.required],
-      phone:['demo',Validators.required],
-      email:['demo@gmail.com',[Validators.required,Validators.email]],
-      address:['demo',Validators.required],
-      degree:['demo',Validators.required],
-      university:['demo',Validators.required],
-      major:['demo',Validators.required],
-      category:[0,[Validators.required,AppValidator.number]],
-      provider:[0,[Validators.required,AppValidator.number]],
-      skill:[[""],Validators.required],
+      phone:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
+      address:['',Validators.required],
+      degree:['',Validators.required],
+      university:['',Validators.required],
+      major:['',Validators.required],
+      category:['',[Validators.required,AppValidator.number]],
+      provider:['',[Validators.required,AppValidator.number]],
+      skill:['',Validators.required],
       applydate:['',[Validators.required]],
-      experience:['demo',Validators.required],
+      experience:['',Validators.required],
     });
     this.initCadidateForm();
     this.dropdown();
@@ -101,10 +101,10 @@ export class FormComponent implements OnInit {
       this.cadidateForm.get('address').reset();
       this.cadidateForm.get('degree').reset();
       this.cadidateForm.get('phone').reset();
-      this.cadidateForm.get('skill').setValue('0');
-      this.cadidateForm.get('provider').setValue(0);
+      this.cadidateForm.get('skill').reset();
+      this.cadidateForm.get('provider').reset();
       this.cadidateForm.get('applydate').reset();
-      this.cadidateForm.get('category').setValue(0);
+      this.cadidateForm.get('category').reset();
       this.cadidateForm.get('experience').reset();
       this.cadidateForm.get('university').reset();
       this.cadidateForm.get('major').reset();
@@ -148,7 +148,21 @@ export class FormComponent implements OnInit {
   ToFormData(formValue: any) {
     const formData = new FormData();
     for (const key of Object.keys(formValue)) {
-      const value = formValue[key];
+      let value = formValue[key];
+      if(key === "dob" || key ==="applydate"){
+        const month = value.getMonth()+1;
+        const day = value.getDate();
+        const year = value.getFullYear();
+        value = `${month}-${day}-${year}`;
+        console.log(value);
+      }
+      else if(key==="skill"){
+        let tmp = "";
+        value.forEach(element => {
+          tmp = tmp + "," + element;
+        });
+        value = tmp.substr(0,tmp.length-1);
+      }
       formData.append(key, value);
     }
     return formData;
