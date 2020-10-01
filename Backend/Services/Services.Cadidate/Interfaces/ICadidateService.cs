@@ -13,7 +13,7 @@ namespace Services.Cadidates.Interfaces
     {
         Task<ResponseModel> DropdownSelection();
         Task<ResponseModel> ApplyToJob(int id);
-        Task<ResponseModel> ChangeProcess(int id);
-        Task<ResponseModel> Tagging(int id);
+        Task<ResponseModel> ChangeProcess(int id, int processId);
+        Task<ResponseModel> Tagging(int id,int tagId);
     }
 }

@@ -9,6 +9,7 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validators';
 import { environment } from 'src/environments/environment';
+import { SkillService } from '../../config-system/skill/skill.service';
 import { Cadidate} from '../cadidate.model';
 import { CadidateService } from '../cadidate.service';
 
@@ -32,23 +33,24 @@ export class FormComponent implements OnInit {
   public resFile : any;
   public listFile = [];
   public json:string;
+  public listOps: any[];
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private dialogRef: MatDialogRef<FormComponent>,
-    private cadidateService: CadidateService
+    private cadidateService: CadidateService,
+    private skillService: SkillService
   ) { }
 
   url = {
-    upload: '/common/file/upload',
-    insert : '/cadidate/cadidate/insert'
+    upload: '/common/file/upload'
   }  
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
       name:['demo',Validators.required],
-      //dob:['',Validators.required],
+      dob:['',[Validators.required]],
       gender:[0,Validators.required],
       phone:['demo',Validators.required],
       email:['demo@gmail.com',[Validators.required,Validators.email]],
@@ -58,11 +60,12 @@ export class FormComponent implements OnInit {
       major:['demo',Validators.required],
       category:[0,[Validators.required,AppValidator.number]],
       provider:[0,[Validators.required,AppValidator.number]],
-      skill:['0',Validators.required],
-      //applydate:['',Validators.required],
+      skill:[[""],Validators.required],
+      applydate:['',[Validators.required]],
       experience:['demo',Validators.required],
     });
-    //this.initCadidateForm();
+    this.initCadidateForm();
+    this.dropdown();
   }
   uploadFile(files){
     const formData = new FormData();
@@ -93,14 +96,14 @@ export class FormComponent implements OnInit {
     const action = this.dialogRef.componentInstance.action;
     if(action == FormStatus.Insert){
       this.cadidateForm.get('name').reset();
-      //this.cadidateForm.get('dob').reset();
+      this.cadidateForm.get('dob').reset();
       this.cadidateForm.get('email').reset();
       this.cadidateForm.get('address').reset();
       this.cadidateForm.get('degree').reset();
       this.cadidateForm.get('phone').reset();
       this.cadidateForm.get('skill').setValue('0');
       this.cadidateForm.get('provider').setValue(0);
-      //this.cadidateForm.get('applydate').reset();
+      this.cadidateForm.get('applydate').reset();
       this.cadidateForm.get('category').setValue(0);
       this.cadidateForm.get('experience').reset();
       this.cadidateForm.get('university').reset();
@@ -124,7 +127,6 @@ export class FormComponent implements OnInit {
       this.listFile.forEach(file => {
         formData.append('files', file, file.name);
       });
-      console.log(JSON.stringify(formData));
       this.cadidateService.insert(formData).subscribe((res:ResponseModel)=>{
 
       })
@@ -150,5 +152,14 @@ export class FormComponent implements OnInit {
       formData.append(key, value);
     }
     return formData;
+  }
+
+  dropdown(){
+    return this.skillService.dropdown().subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.listOps = res.result;
+        console.log(this.listOps);
+      }
+    })
   }
 }

@@ -64,5 +64,14 @@ namespace API.Common.Controllers
             var response = await _skillService.Delete(model);
             return response;
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("drop-down")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _skillService.DropdownSelection();
+            return response;
+        }
     }
 }

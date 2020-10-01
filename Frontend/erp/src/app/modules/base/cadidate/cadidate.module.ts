@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CadidateRoutingModule } from './cadidate-routing.module';
 import { CadidateService } from './cadidate.service';
+import { SkillService } from '../config-system/skill/skill.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CadidateService } from './cadidate.service';
     CadidateRoutingModule
   ],
   providers:[
-    CadidateService
+    CadidateService,
+    SkillService
   ]
 })
 export class CadidateModule { }

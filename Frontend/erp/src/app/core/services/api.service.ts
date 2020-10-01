@@ -26,6 +26,19 @@ export class ApiService {
     );
   }
 
+  dropDown(url:string):Observable<ResponseModel>{
+    return this.http.get<ResponseModel>(url).pipe(
+      map((data:ResponseModel)=>{
+        if(data.status == ResponseStatus.success){
+          return data;
+        }
+        else{
+          console.log(data.status);
+        }
+      })
+    );
+  }
+
   item(url:string, id:number):Observable<ResponseModel>{
     return this.http.get<ResponseModel>(url+"?id="+id).pipe(
       map((data:ResponseModel)=>{

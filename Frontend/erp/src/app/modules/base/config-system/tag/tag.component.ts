@@ -17,21 +17,24 @@ import { TagService } from './tag.service';
 
 export class TagComponent implements OnInit {
 
-  paging = new PagingModel();
-  searchText = '';
+  public paging = new PagingModel();
+  public searchText = '';
+
+  public isLoad: boolean;
+  public displayedColumns: string[] = ['name', 'content','options'];
+  public dataSource : any;
 
   constructor(
     private dialog: MatDialog,
     private tagService: TagService,
     private toastr: NotificationService) {}
 
-  isLoad: boolean;
+  
   ngOnInit(): void {
     this.getList();
   }
 
-  displayedColumns: string[] = ['name', 'content','options'];
-  dataSource : any;
+  
 
   getList(){
     return this.tagService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{

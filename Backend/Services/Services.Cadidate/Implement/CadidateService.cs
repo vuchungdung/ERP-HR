@@ -9,12 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Database.Sql.ERP.Entities.Cadidate;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.InterfaceService;
 using System.Net.Http.Headers;
 using Database.Sql.ERP.Entities.Common;
 using Services.Common.ViewModel;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Services.Cadidates.Implement
 {
@@ -37,7 +38,7 @@ namespace Services.Cadidates.Implement
             throw new NotImplementedException();
         }
 
-        public Task<ResponseModel> ChangeProcess(int id)
+        public Task<ResponseModel> ChangeProcess(int id, int processId)
         {
             throw new NotImplementedException();
         }
@@ -96,7 +97,7 @@ namespace Services.Cadidates.Implement
                                 Rating = m.Rating,
                                 ProviderId = m.ProviderId,
                                 CategoryId = m.CategoryId,
-                                Skill = m.Skill,
+                                //Skills = m.Skill,
                                 JobId = m.JobId,
                                 TagId = m.TagId
                             };
@@ -140,32 +141,39 @@ namespace Services.Cadidates.Implement
                 md.Name = model.Name;
                 md.Email = model.Email;
                 md.Address = model.Address;
-                //md.Dob = model.Dob;
+                md.Dob = model.Dob;
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
                 md.Degree = model.Degree;
                 md.University = model.University;
                 md.Major = model.Major;
-                //md.ApplyDate = model.ApplyDate;
+                md.ApplyDate = model.ApplyDate;
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.Skill = model.Skill;
+                md.Skill = JsonConvert.SerializeObject(model.Skills);
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 foreach(var item in model.Files)
                 {
-                    File f = new File();
+                    Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
                     f.CadidateId = cadidateId;
                     f.Deleted = false;
                     f.FileName = item.FileName;
-                    //f.FilePath = item.FilePath;
-                    //f.FileSize = item.FileSize;
-                    //f.FileType = item.FileType;
+                    var folderName = Path.Combine("wwwroot/cadidate-cv");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var fileSize = item.Length / 1024;
+                    var fileType = Path.GetExtension(fileName);
+                    f.CadidateId = Convert.ToInt32(await _sequenceService.GetCadidateNewId());
+                    f.FileName = fileName;
+                    f.FilePath = fullPath;
+                    f.FileSize = Convert.ToInt32(fileSize);
+                    f.FileType = fileType;
                     f.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                     f.CreateDate = DateTime.Now;
-
                     _context.FileCVRepository.Add(f);
                     _context.SaveChanges();
                 }
@@ -204,7 +212,7 @@ namespace Services.Cadidates.Implement
                     Rating = md.Rating,
                     ProviderId = md.ProviderId,
                     CategoryId = md.CategoryId,
-                    Skill = md.Skill,
+                    //Skills = JsonConvert.DeserializeObject(md.Skill),
                     JobId = md.JobId,
                     TagId = md.TagId,
                     FaceBook = md.FaceBook,
@@ -222,9 +230,25 @@ namespace Services.Cadidates.Implement
             }
             return response;
         }
-        public Task<ResponseModel> Tagging(int id)
+        public async Task<ResponseModel> Tagging(int id,int tagId)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
+
+                md.TagId = tagId;
+                md.UpdateDate = DateTime.Now;
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _context.CadidateRepository.Update(md);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public Task<ResponseModel> Update(CadidateViewModel model)

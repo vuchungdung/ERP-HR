@@ -8,12 +8,12 @@ export interface Cadidate {
   degree : string,
   university : string,
   major : string,
-  //applydate : Date,
+  applydate : Date,
   experience : number,
   rating : number,
   provider : string,
   category : string,
   job : string,
   tag : string,
-  //dob : Date
+  dob : Date
 }

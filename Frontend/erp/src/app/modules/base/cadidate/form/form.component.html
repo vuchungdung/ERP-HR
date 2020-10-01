@@ -116,11 +116,9 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
-                <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;">
-                  <mat-option value="0">----------Chọn----------</mat-option>
-                  <mat-option value="1">Option 1</mat-option>
-                  <mat-option value="2">Option 2</mat-option>
-                  <mat-option value="3">Option 3</mat-option>
+                <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
+                  <mat-option [value]="">----------Chọn----------</mat-option>
+                  <mat-option *ngFor="let option of listOps" value={{option.skillId}}>{{option.name}}</mat-option>
                 </mat-select>
               </div>
               <div class="col-lg-6">

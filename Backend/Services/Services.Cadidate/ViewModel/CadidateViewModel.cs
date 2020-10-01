@@ -19,7 +19,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Phone { get; set; }
 
-        public DateTime Dob { get; set; } = DateTime.Now;
+        public DateTime Dob { get; set; }
 
         public int Gender { get; set; }
 
@@ -29,7 +29,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Major { get; set; }
 
-        public DateTime ApplyDate { get; set; } = DateTime.Now;
+        public DateTime ApplyDate { get; set; }
 
         public string Experience { get; set; }
 
@@ -47,7 +47,7 @@ namespace Services.Cadidates.ViewModel
 
         public int CategoryId { get; set; }
 
-        public string Skill { get; set; }
+        public List<string> Skills { get; set; }
 
         public int JobId { get; set; }
 
