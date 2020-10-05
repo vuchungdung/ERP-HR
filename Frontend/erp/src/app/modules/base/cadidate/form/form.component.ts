@@ -49,22 +49,22 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
-      name:['',Validators.required],
+      name:['demo',Validators.required],
       dob:['',[Validators.required]],
       gender:[0,Validators.required],
-      phone:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      address:['',Validators.required],
-      degree:['',Validators.required],
-      university:['',Validators.required],
-      major:['',Validators.required],
-      category:['',[Validators.required,AppValidator.number]],
-      provider:['',[Validators.required,AppValidator.number]],
+      phone:['demo',Validators.required],
+      email:['demo@gmail.com',[Validators.required,Validators.email]],
+      address:['demo',Validators.required],
+      degree:['demo',Validators.required],
+      university:['demo',Validators.required],
+      major:['demo',Validators.required],
+      categoryid:['',[Validators.required,AppValidator.number]],
+      providerid:['',[Validators.required,AppValidator.number]],
       skill:['',Validators.required],
       applydate:['',[Validators.required]],
-      experience:['',Validators.required],
+      experience:['demo',Validators.required],
     });
-    this.initCadidateForm();
+    //this.initCadidateForm();
     this.dropdown();
   }
   uploadFile(files){
@@ -102,9 +102,9 @@ export class FormComponent implements OnInit {
       this.cadidateForm.get('degree').reset();
       this.cadidateForm.get('phone').reset();
       this.cadidateForm.get('skill').reset();
-      this.cadidateForm.get('provider').reset();
+      this.cadidateForm.get('providerid').reset();
       this.cadidateForm.get('applydate').reset();
-      this.cadidateForm.get('category').reset();
+      this.cadidateForm.get('categoryid').reset();
       this.cadidateForm.get('experience').reset();
       this.cadidateForm.get('university').reset();
       this.cadidateForm.get('major').reset();
@@ -159,12 +159,13 @@ export class FormComponent implements OnInit {
       else if(key==="skill"){
         let tmp = "";
         value.forEach(element => {
-          tmp = tmp + "," + element;
+          tmp = tmp + element + ",";
         });
-        value = tmp.substr(0,tmp.length-1);
+        value = tmp;
       }
       formData.append(key, value);
     }
+    console.log(formData.get('category'))
     return formData;
   }
 

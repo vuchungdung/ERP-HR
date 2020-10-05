@@ -12,14 +12,8 @@ namespace Database.Sql.ERP.Entities.Recruitment
     public class RecruitmentPlan : BaseEntity
     {
         [Key]
-        [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PlanId { get; set; }
-
-        [Required]
-        [Key]
-        [Column(Order =2)]
-        public int JobId { get; set; }
 
         [Required]
         public int Quatity { get; set; }

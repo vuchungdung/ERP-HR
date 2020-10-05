@@ -15,6 +15,8 @@ namespace Database.Sql.ERP.Entities.Recruitment
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int JobId { get; set; }
 
+        public int PlanId { get; set; }
+
         [Required]
         [Column(TypeName ="nvarchar(100)")]
         public string Title { get; set; }

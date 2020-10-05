@@ -11,9 +11,9 @@ export interface Cadidate {
   applydate : Date,
   experience : number,
   rating : number,
-  provider : string,
-  category : string,
-  job : string,
+  providerid : string,
+  categoryid : string,
+  jobid : string,
   tag : string,
   dob : Date,
   skill : string

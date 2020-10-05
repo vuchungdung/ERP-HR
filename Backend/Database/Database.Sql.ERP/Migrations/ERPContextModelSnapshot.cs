@@ -17,7 +17,7 @@ namespace Database.Sql.ERP.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("Relational:Sequence:shared.Cadidates", "'Cadidates', 'shared', '1', '1', '', '', 'Int32', 'False'")
+                .HasAnnotation("Relational:Sequence:.DBSequence", "'DBSequence', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.Cadidate", b =>
@@ -25,7 +25,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("CadidateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasDefaultValueSql("NEXT VALUE FOR DBSequence");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -564,6 +564,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("OfferTo")
                         .HasColumnType("int");
 
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SkillId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -592,9 +595,6 @@ namespace Database.Sql.ERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
                         .HasColumnType("int");
@@ -626,7 +626,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime");
 
-                    b.HasKey("PlanId", "JobId");
+                    b.HasKey("PlanId");
 
                     b.ToTable("RecruitmentPlans");
                 });

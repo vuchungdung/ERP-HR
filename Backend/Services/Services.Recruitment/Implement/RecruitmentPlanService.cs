@@ -56,7 +56,7 @@ namespace Services.Recruitment.Implement
             {
                 var query = from r in _context.RecruitmentPlanRepository.Query()
                             join j in _context.JobDescriptionRepository.Query()
-                            on r.JobId equals j.JobId
+                            on r.PlanId equals j.PlanId
                             join jc in _context.JobCategoryRepository.Query()
                             on j.CategoryId equals jc.CategoryId
                             where !r.Deleted && !j.Deleted && !jc.Deleted
@@ -64,7 +64,6 @@ namespace Services.Recruitment.Implement
                             select new RecruitmentPlanViewModel()
                             {
                                 PlanId = r.PlanId,
-                                JobId = r.JobId,
                                 Quatity = r.Quatity,
                                 Status = r.Status,
                                 Note = r.Note,
