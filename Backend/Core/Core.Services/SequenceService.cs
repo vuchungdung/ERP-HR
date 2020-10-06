@@ -28,7 +28,7 @@ namespace Core.Services
                     await conn.OpenAsync();
                 }
 
-                var result = await conn.ExecuteScalarAsync<int>(@"SELECT (NEXT VALUE FOR shared.Cadidates)", null, null, 120, CommandType.Text);
+                var result = await conn.ExecuteScalarAsync<int>(@"SELECT (NEXT VALUE FOR DBSequence)", null, null, 120, CommandType.Text);
                 return result;
             }
         }

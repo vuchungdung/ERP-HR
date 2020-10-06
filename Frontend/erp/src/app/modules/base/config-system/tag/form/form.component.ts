@@ -28,6 +28,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.tagForm = this.fb.group({
+      id:[0,Validators.required],
       name:['',Validators.required],
       content:['',Validators.required],
       color:['',Validators.required]
@@ -50,6 +51,7 @@ export class FormComponent implements OnInit {
     }
     else if(action == FormStatus.Update){
       const id = this.dialogRef.componentInstance.id;
+      this.tagForm.get('id').setValue(id);
       this.getItem(id);
     }
   }

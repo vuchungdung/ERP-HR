@@ -49,20 +49,20 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
-      name:['demo',Validators.required],
+      name:['',Validators.required],
       dob:['',[Validators.required]],
       gender:[0,Validators.required],
-      phone:['demo',Validators.required],
-      email:['demo@gmail.com',[Validators.required,Validators.email]],
-      address:['demo',Validators.required],
-      degree:['demo',Validators.required],
-      university:['demo',Validators.required],
-      major:['demo',Validators.required],
+      phone:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
+      address:['',Validators.required],
+      degree:['',Validators.required],
+      university:['',Validators.required],
+      major:['',Validators.required],
       categoryid:['',[Validators.required,AppValidator.number]],
       providerid:['',[Validators.required,AppValidator.number]],
       skill:['',Validators.required],
       applydate:['',[Validators.required]],
-      experience:['demo',Validators.required],
+      experience:['',Validators.required],
     });
     //this.initCadidateForm();
     this.dropdown();

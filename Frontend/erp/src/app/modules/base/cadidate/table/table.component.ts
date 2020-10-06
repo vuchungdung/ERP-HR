@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Cadidate } from '../cadidate.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -10,6 +10,7 @@ import { CadidateService } from '../cadidate.service';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-table',
@@ -18,13 +19,13 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 })
 
 export class TableComponent implements OnInit {
-  status: boolean = true;
-  ELEMENT_DATA: any = [];
-  public paging: PagingModel;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  public status: boolean = true;
+  public paging = new PagingModel();
   public searchText = '';
   public dataSource : any;
 
-  displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','source','field'];
+  displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','field','source','status','tag','options'];
   selection = new SelectionModel<Cadidate>(true, []);
 
   isAllSelected() {
@@ -48,17 +49,25 @@ export class TableComponent implements OnInit {
     }
   }
 
+  changeCheckBox($event,row){
+    $event ? this.selection.toggle(row) : null;
+  }
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private cadidateService: CadidateService) {}
 
-  openDialog() {
+  ngOnInit(): void {
+    this.getList();
+  } 
+
+  deleteCadidate() {
     const dialogRef = this.dialog.open(FormComponent);
   }
 
-  changeCheckBox($event,row){
-    $event ? this.selection.toggle(row) : null;
+  updateCadidate() {
+    const dialogRef = this.dialog.open(FormComponent);
   }
 
   openDialogDetail(row?: Cadidate){
@@ -71,9 +80,6 @@ export class TableComponent implements OnInit {
   openDetail(row){
     this.openDialogDetail(row);
   }
-
-  ngOnInit(): void {
-  } 
 
   getList(){
     return this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{

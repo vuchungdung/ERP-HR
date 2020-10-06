@@ -110,7 +110,7 @@ namespace Services.Common.Implement
 
                 await _context.TagRepository.AddAsync(md);
 
-                //await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }

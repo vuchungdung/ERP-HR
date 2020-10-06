@@ -26,6 +26,7 @@ export class CadidateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   insertCadidate(){
@@ -38,7 +39,7 @@ export class CadidateComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){
         if(isCheck == true){
-          this.readLoadTable.getList();
+          
         }
       }
     })

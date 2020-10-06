@@ -53,5 +53,14 @@ namespace API.Cadidate.Controllers
             var response = await _cadidateService.Update(model);
             return response;
         }
+
+        [HttpPost]
+        [Route("get-list")]
+        [Authorize]
+        public async Task<ResponseModel> GetList([FromBody] FilterModel model)
+        {
+            var response = await _cadidateService.GetList(model);
+            return response;
+        }
     }
 }
