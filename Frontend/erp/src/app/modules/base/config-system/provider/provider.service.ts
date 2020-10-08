@@ -5,7 +5,7 @@ import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ApiService } from 'src/app/core/services/api.service';
 import { environment } from 'src/environments/environment';
-import { Provider } from './provider.model';
+import { Providers } from './provider.model';
 
 @Injectable({
   providedIn:'root'
@@ -24,11 +24,11 @@ export class ProviderService{
 
   };
 
-  insert(model: Provider):Observable<ResponseModel>{
+  insert(model: Providers):Observable<ResponseModel>{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
 
-  update(model: Provider):Observable<ResponseModel>{
+  update(model: Providers):Observable<ResponseModel>{
     return this.api.update(this.url.update,model);
   }
 

@@ -1,4 +1,4 @@
-export interface Provider{
+export interface Providers{
   name:string;
   link:string;
 }

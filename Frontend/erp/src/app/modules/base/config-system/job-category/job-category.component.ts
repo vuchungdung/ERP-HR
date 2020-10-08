@@ -10,6 +10,7 @@ export class JobCategoryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+     
   }
 
 }

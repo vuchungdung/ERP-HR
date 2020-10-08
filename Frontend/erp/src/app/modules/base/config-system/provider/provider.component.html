@@ -11,7 +11,7 @@
         </button>
       </div>
     </div>
-    <!-- <div class="panel panel-flat">
+    <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
           <table mat-table [dataSource]="dataSource" style="width:100%">
@@ -23,13 +23,13 @@
           
             <ng-container matColumnDef="content">
             <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 65%;"> <span style="font-weight: 500;">Ghi chú</span> </th>
-              <td mat-cell *matCellDef="let element"> <span style="color: black; font-size :13px;">{{element.content}}</span> </td>
+              <td mat-cell *matCellDef="let element"> <span style="color: black; font-size :13px;">{{element.link}}</span> </td>
             </ng-container>
           
             <ng-container matColumnDef="options">
               <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 10%;"> <span style="font-weight: 500;">Nghiệp vụ</span> </th>
               <td mat-cell *matCellDef="let element">
-                <mat-icon (click)="updateDialog(element.id)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
+                <mat-icon (click)="updateProvider(element.id)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
                 <mat-icon style="color: red;cursor: pointer;">delete</mat-icon>
               </td>
             </ng-container>  
@@ -39,6 +39,6 @@
           </table>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ export class TagComponent implements OnInit {
   public paging = new PagingModel();
   public searchText = '';
 
-  public isLoad: boolean;
+  //public isLoad: boolean;
   public displayedColumns: string[] = ['name', 'content','options'];
   public dataSource : any;
 

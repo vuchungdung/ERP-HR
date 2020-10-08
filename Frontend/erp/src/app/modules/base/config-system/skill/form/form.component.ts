@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
   public action : FormStatus
   public skillForm : FormGroup;
   public id : number;
+  public item : Skill;
   public listOps : any[] = [];
   constructor(
     private fb: FormBuilder,
@@ -44,7 +45,7 @@ export class FormComponent implements OnInit {
           this.isReLoadSkill.emit(true);
         }
         else{
-          console.log('error');
+          console.log('Error Insert');
         }
       })
     }
@@ -62,7 +63,12 @@ export class FormComponent implements OnInit {
   }
 
   getItem(id:number){
-
+    this.skillService.item(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.item = res.result;
+        this.setDataForm(this.item);
+      }
+    })
   }
 
   setDataForm(data:Skill){
