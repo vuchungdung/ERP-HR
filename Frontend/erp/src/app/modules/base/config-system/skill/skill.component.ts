@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { FormComponent } from './form/form.component';
 import { SkillService } from './skill.service';
 
@@ -22,7 +24,8 @@ export class SkillComponent implements OnInit {
 
   constructor(
     private skillService:SkillService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,11 @@ export class SkillComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){
         if(isCheck == true){
+          this.toastr.showSuccess("Thêm mới thành công","Thông báo");
           this.getList();
+        }
+        else{
+          this.toastr.showWarning("Thêm mới thất bại","Thông báo");
         }
       }
     })
@@ -52,6 +59,17 @@ export class SkillComponent implements OnInit {
     dialogRef.componentInstance.id = id
     dialogRef.componentInstance.isReLoadSkill.subscribe(data=>{
       isCheck = data;
+    })
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result == true){
+        if(isCheck == true){
+          this.toastr.showSuccess("Cập nhật thành công","Thông báo");
+          this.getList();
+        }
+        else{
+          this.toastr.showWarning("Cập nhật thất bại","Thông báo");
+        }
+      }
     })
   }
 

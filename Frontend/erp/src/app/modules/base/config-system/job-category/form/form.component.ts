@@ -1,8 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EmbeddedViewRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { EventEmitter } from 'protractor';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { ResponseModel } from 'src/app/core/models/response.model';
 import { JobCategory } from '../job-category.model';
 import { JobCategoryService } from '../job-category.service';
 
@@ -13,7 +14,7 @@ import { JobCategoryService } from '../job-category.service';
 })
 export class FormComponent implements OnInit {
 
-  @Output() isReloadJobCategory = new EventEmitter();
+  @Output() isReloadJobCategory = new EventEmitter<boolean>();
 
   public action : FormStatus;
   public formJobC : FormGroup;
@@ -27,26 +28,64 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.formJobC = this.fb.group({
+      name:['',Validators.required],
+      description:['',Validators.required]
+    });
+    this.initialJobCategoryForm();
   }
 
   initialJobCategoryForm(){
     const action = this.dialogref.componentInstance.action;
     if(action == FormStatus.Insert){
-      this.formJobC.get('').reset();
-      this.formJobC.get('').reset();
-      this.formJobC.get('').reset();
+      this.formJobC.get('name').reset();
+      this.formJobC.get('description').reset();
+    }
+    else if(action == FormStatus.Update){
+      const id = this.dialogref.componentInstance.id;
+      this.formJobC.get('id').setValue(id);
+      this.getItem(id);
     }
   }
 
   setDataForm(){
-
+    const action = this.dialogref.componentInstance.action;
+    if(this.formJobC.invalid){
+      return;
+    }
+    if(action == FormStatus.Insert){
+      this.jobCService.insert(this.formJobC.getRawValue()).subscribe((res:ResponseModel)=>{
+        if(res.status == ResponseStatus.success){
+          this.isReloadJobCategory.emit(true);
+        }
+        else{
+          console.log("Error Insert");
+        }
+      })
+    }
+    if(action == FormStatus.Update){
+      this.jobCService.update(this.formJobC.getRawValue()).subscribe((res:ResponseModel)=>{
+        if(res.status == ResponseStatus.success){
+          this.isReloadJobCategory.emit(true);
+        }
+        else{
+          console.log("Error Update");
+        }
+      })
+    }
   }
 
   getItem(id:number){
-
+    this.jobCService.item(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.item = res.result;
+        this.setDataToForm(this.item);
+      }
+    })
   }
 
-  saveForm(){
-    
+  private setDataToForm(data: JobCategory) {
+    this.formJobC.get('name').setValue(data.name);
+    this.formJobC.get('description').setValue(data.description);
   }
 }

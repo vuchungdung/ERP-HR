@@ -127,11 +127,11 @@ namespace Services.Cadidates.Implement
                 }
                 BaseListModel<ListCadidateViewModel> listItems = new BaseListModel<ListCadidateViewModel>();
 
-                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                                       .Take(filter.Paging.PageSize)
-                                       .OrderByDescending(x => x.Name)
-                                       .ToListAsync()
-                                       .ConfigureAwait(true);
+                //listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                //                       .Take(filter.Paging.PageSize)
+                //                       .OrderByDescending(x => x.Name)
+                //                       .ToListAsync()
+                //                       .ConfigureAwait(true);
                 listItems.TotalItems = await query.CountAsync();
 
                 response.Result = listItems;
@@ -139,8 +139,6 @@ namespace Services.Cadidates.Implement
             }
             catch(Exception ex)
             {
-                response.Errors.Add(ex.InnerException.InnerException.Message);
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;

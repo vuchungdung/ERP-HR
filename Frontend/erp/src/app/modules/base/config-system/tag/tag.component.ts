@@ -55,7 +55,11 @@ export class TagComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if(result==true){
         if(isCheck == true){
+          this.toastr.showSuccess("Thêm mới thành công","Thông báo");
           this.getList();
+        }
+        else{
+          this.toastr.showWarning("Thêm mới thất bại","Thông báo");
         }
       }
     })
@@ -72,9 +76,14 @@ export class TagComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if(result==true){
         if(isCheck == true){
+          this.toastr.showSuccess("Cập nhật thành công","Thông báo");
           this.getList();
         }
+        else{
+          this.toastr.showWarning("Cập nhật thất bại","Thông báo");
+        }
       }
+      
     })
   }
   deleteTag(id:number){

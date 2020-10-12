@@ -17,12 +17,12 @@
           <table mat-table [dataSource]="dataSource" style="width:100%">
     
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 25%;"><span style="font-weight: 500;">Tên thẻ</span> </th>
+              <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 25%;"><span style="font-weight: 500;">Tên</span> </th>
               <td mat-cell *matCellDef="let element"> <span class="label {{element.color}}">{{element.name}}</span> </td>
             </ng-container>
           
-            <ng-container matColumnDef="content">
-            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 65%;"> <span style="font-weight: 500;">Ghi chú</span> </th>
+            <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 65%;"> <span style="font-weight: 500;">Website</span> </th>
               <td mat-cell *matCellDef="let element"> <span style="color: black; font-size :13px;">{{element.link}}</span> </td>
             </ng-container>
           
