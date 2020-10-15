@@ -36,6 +36,7 @@ export class ProviderComponent implements OnInit {
     dialogRef.componentInstance.action = FormStatus.Insert;
     dialogRef.componentInstance.isReLoadProvider.subscribe(data=>{
       isCheck = data;
+      console.log(data);
     });
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){
@@ -69,7 +70,7 @@ export class ProviderComponent implements OnInit {
 
   getList(){
     this.providerService.getList(this.paging,this.searchText).subscribe((res:ResponseModel)=>{
-      if(res.result == ResponseStatus.success){
+      if(res.status == ResponseStatus.success){
         this.dataSource = res.result.items;
         this.paging.length = res.result.totalItems;
       }

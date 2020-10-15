@@ -38,7 +38,7 @@ namespace Services.Common.Implement
                 _context.ProviderRepository.Update(md);
 
                 await _context.SaveChangesAsync();
-
+                response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
             {
@@ -71,7 +71,7 @@ namespace Services.Common.Implement
             {
                 throw ex;
             }
-            return response; throw new NotImplementedException();
+            return response;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -127,6 +127,7 @@ namespace Services.Common.Implement
 
                 await _context.ProviderRepository.AddAsync(md);
                 await _context.SaveChangesAsync();
+                response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
             {

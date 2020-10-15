@@ -20,7 +20,8 @@ export class JobCategoryService{
     update:'/common/jobcategory/update',
     getlist:'/common/jobcategory/get-list',
     delete:'/common/jobcategory/delete',
-    item:'/common/jobcategory/item'
+    item:'/common/jobcategory/item',
+    dropdown:'/common/jobcategory/dropdown'
   }
 
   insert(model:JobCategory):Observable<ResponseModel>{
@@ -45,5 +46,9 @@ export class JobCategoryService{
 
   item(id:number):Observable<ResponseModel>{
     return this.api.item(`${environment.apiUrl}${this.url.insert}`,id);
+  }
+
+  dropdown():Observable<ResponseModel>{
+    return this.api.dropDown(`${environment.apiUrl}${this.url.dropdown}`)
   }
 }

@@ -9,6 +9,8 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validators';
 import { environment } from 'src/environments/environment';
+import { JobCategoryService } from '../../config-system/job-category/job-category.service';
+import { ProviderService } from '../../config-system/provider/provider.service';
 import { SkillService } from '../../config-system/skill/skill.service';
 import { Cadidate} from '../cadidate.model';
 import { CadidateService } from '../cadidate.service';
@@ -33,14 +35,19 @@ export class FormComponent implements OnInit {
   public resFile : any;
   public listFile = [];
   public json:string;
-  public listOps: any[];
+  public listSkills: any[];
+  public listCategorys: any[];
+  public listProviders: any[];
+
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private dialogRef: MatDialogRef<FormComponent>,
     private cadidateService: CadidateService,
-    private skillService: SkillService
+    private skillService: SkillService,
+    private providerService: ProviderService,
+    private jobcategoryService: JobCategoryService
   ) { }
 
   url = {
@@ -64,8 +71,10 @@ export class FormComponent implements OnInit {
       applydate:['',[Validators.required]],
       experience:['',Validators.required],
     });
-    //this.initCadidateForm();
-    this.dropdown();
+    this.initCadidateForm();
+    this.dropdownSkill();
+    this.dropdownProvider();
+    this.dropdownCategory();
   }
   uploadFile(files){
     const formData = new FormData();
@@ -169,11 +178,26 @@ export class FormComponent implements OnInit {
     return formData;
   }
 
-  dropdown(){
+  dropdownSkill(){
     return this.skillService.dropdown().subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
-        this.listOps = res.result;
-        console.log(this.listOps);
+        this.listSkills = res.result;
+      }
+    })
+  }
+  dropdownProvider(){
+    return this.providerService.dropdown().subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.listProviders = res.result;
+        console.log(res.result);
+      }
+    })
+  }
+  dropdownCategory(){
+    return this.jobcategoryService.dropdown().subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.listCategorys = res.result;
+        console.log(res.result);
       }
     })
   }

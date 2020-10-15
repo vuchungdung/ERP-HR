@@ -17,6 +17,7 @@ using Services.Common.ViewModel;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Services.Common.Interfaces;
 
 namespace Services.Cadidates.Implement
 {
@@ -25,13 +26,16 @@ namespace Services.Cadidates.Implement
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
         private ISequenceService _sequenceService;
+        private ISkillService _skillService;
         public CadidateService(IERPUnitOfWork context,
             IHttpContextAccessor httpContext,
-            ISequenceService sequenceService)
+            ISequenceService sequenceService,
+            ISkillService skillService)
         {
             _context = context;
             _httpContext = httpContext;
             _sequenceService = sequenceService;
+            _skillService = skillService;
         }
 
         public Task<ResponseModel> ApplyToJob(int id)
@@ -81,24 +85,15 @@ namespace Services.Cadidates.Implement
             try
             {
                 var query = from m in _context.CadidateRepository.Query()
-                            join f in _context.FileCVRepository.Query()
-                            on m.CadidateId equals f.CadidateId
-                            join t in _context.TagRepository.Query()
-                            on m.TagId equals t.Id
                             join p in _context.ProviderRepository.Query()
                             on m.ProviderId equals p.ProviderId
-                            join cp in _context.InterviewProcessRepository.Query()
-                            on m.CadidateId equals cp.CadidateId
-                            join ps in _context.ProcessRepository.Query()
-                            on cp.ProcessId equals ps.ProcessId
                             join c in _context.JobCategoryRepository.Query()
                             on m.CategoryId equals c.CategoryId
-                            join j in _context.JobDescriptionRepository.Query()
-                            on m.JobId equals j.JobId
                             where !m.Deleted
                             orderby m.Name
                             select new ListCadidateViewModel()
                             {
+                                CadidateId = m.CadidateId,
                                 Name = m.Name,
                                 Email = m.Email,
                                 Address = m.Address,
@@ -110,11 +105,10 @@ namespace Services.Cadidates.Implement
                                 ApplyDate = m.ApplyDate,
                                 Experience = m.Experience,
                                 Rating = m.Rating,
-                                Skill = GetListSkill(m.Skill),
+                                Skill = _skillService.GetListSkill(m.Skill),
                                 Provider = p.Name,
                                 Category = c.Name,
-                                Job = j.Title,
-                                Tag = t.Name
+                                Dob = m.Dob
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -127,11 +121,10 @@ namespace Services.Cadidates.Implement
                 }
                 BaseListModel<ListCadidateViewModel> listItems = new BaseListModel<ListCadidateViewModel>();
 
-                //listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                //                       .Take(filter.Paging.PageSize)
-                //                       .OrderByDescending(x => x.Name)
-                //                       .ToListAsync()
-                //                       .ConfigureAwait(true);
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                                       .Take(filter.Paging.PageSize)
+                                       .ToListAsync()
+                                       .ConfigureAwait(true);
                 listItems.TotalItems = await query.CountAsync();
 
                 response.Result = listItems;
@@ -143,16 +136,8 @@ namespace Services.Cadidates.Implement
             }
             return response;
         }
-        public List<string> GetListSkill(string stringId)
-        {
-            string[] arr = stringId.Split(',');
-            List<string> result = new List<string>();
-            for(int i = 0;i< arr.Length; i++)
-            {
-                result.Add(arr[i]);
-            }
-            return result;
-        }
+
+
         public async Task<ResponseModel> Insert(CadidateViewModel model)
         {
             ResponseModel response = new ResponseModel();
@@ -173,7 +158,7 @@ namespace Services.Cadidates.Implement
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.Skill = JsonConvert.SerializeObject(model.Skill);
+                md.Skill = model.Skill;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

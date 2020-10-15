@@ -1,4 +1,4 @@
-import { Component, EmbeddedViewRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
     }
   }
 
-  setDataForm(){
+  saveForm(){
     const action = this.dialogref.componentInstance.action;
     if(this.formJobC.invalid){
       return;

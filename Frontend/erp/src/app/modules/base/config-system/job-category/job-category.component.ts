@@ -72,6 +72,7 @@ export class JobCategoryComponent implements OnInit {
     this.jobcategoryService.getList(this.paging,this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
         this.dataSource = res.result.items;
+        console.log(this.dataSource)
         this.paging.length = res.result.totalItems;
       }
     })

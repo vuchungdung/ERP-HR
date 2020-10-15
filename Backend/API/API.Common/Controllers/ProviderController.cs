@@ -12,6 +12,7 @@ namespace API.Common.Controllers
 {
     [ApiController]
     [Route("/api/common/provider")]
+    [Authorize]
     public class ProviderController : ControllerBase
     {
         private IProviderService _providerService;
@@ -60,6 +61,15 @@ namespace API.Common.Controllers
         public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _providerService.Item(id);
+            return response;
+        }
+
+        [Route("dropdown")]
+        [HttpGet]
+        [Authorize]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _providerService.DropdownSelection();
             return response;
         }
     }

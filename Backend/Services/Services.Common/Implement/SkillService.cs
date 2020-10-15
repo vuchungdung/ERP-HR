@@ -109,6 +109,17 @@ namespace Services.Common.Implement
             }
             return response;
         }
+        public List<Skill> GetListSkill(string id)
+        {
+            string[] arr = id.Split(',');
+            List<Skill> result = new List<Skill>();
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == Convert.ToInt32(arr[i]));
+                result.Add(md);
+            }
+            return result;
+        }
 
         public async Task<ResponseModel> Insert(SkillViewModel model)
         {

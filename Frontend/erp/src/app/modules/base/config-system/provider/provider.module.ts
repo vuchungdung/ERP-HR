@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { ProviderService } from './provider.service';
 
 const route : Routes = [
   {
@@ -29,6 +30,9 @@ const route : Routes = [
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  providers:[
+    ProviderService
   ]
 })
 export class ProviderModule { }

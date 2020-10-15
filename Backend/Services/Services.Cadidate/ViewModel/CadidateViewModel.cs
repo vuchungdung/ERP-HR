@@ -96,7 +96,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Category { get; set; }
 
-        public List<string> Skill { get; set; }
+        public List<Skill> Skill { get; set; }
 
         public string Job { get; set; }
 

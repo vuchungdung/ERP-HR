@@ -42,6 +42,12 @@ const routes: Routes = [
         loadChildren: () => import('../base/config-system/config-system.module').then(m => m.ConfigSystemModule)
       },
       {
+        path: 'recruitment',
+        canActivate:[AuthenticationGuard],
+        canActivateChild:[AuthenticationGuard],
+        loadChildren: () => import('../base/recruitment/recruitment.module').then(m => m.RecruitmentModule)
+      },
+      {
         path: '**',
         component: DashboardComponent
       }

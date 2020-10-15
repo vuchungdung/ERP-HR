@@ -17,7 +17,8 @@ export class ProviderService{
     item:'/common/provider/item',
     getlist:'/common/provider/get-list',
     update:'/common/provider/update',
-    delete:'/common/provider/delete'
+    delete:'/common/provider/delete',
+    dropdown:'/common/provider/dropdown'
   };
 
   constructor(private api: ApiService){
@@ -42,5 +43,9 @@ export class ProviderService{
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
+  }
+
+  dropdown():Observable<ResponseModel>{
+    return this.api.dropDown(`${environment.apiUrl}${this.url.dropdown}`)
   }
 }

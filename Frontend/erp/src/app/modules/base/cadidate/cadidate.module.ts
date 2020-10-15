@@ -20,6 +20,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CadidateRoutingModule } from './cadidate-routing.module';
 import { CadidateService } from './cadidate.service';
 import { SkillService } from '../config-system/skill/skill.service';
+import { JobCategoryService } from '../config-system/job-category/job-category.service';
+import { ProviderService } from '../config-system/provider/provider.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { SkillService } from '../config-system/skill/skill.service';
   ],
   providers:[
     CadidateService,
-    SkillService
+    SkillService,
+    JobCategoryService,
+    ProviderService
   ]
 })
 export class CadidateModule { }

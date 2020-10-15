@@ -19,6 +19,8 @@ namespace API.Common
             services.AddScoped<IFileCvService, FileCvService>();
             services.AddScoped<ISequenceService, SequenceService>();
             services.AddScoped<IProviderService, ProviderService>();
+            services.AddScoped<IJobCategoryService, JobCategoryService>();
+
             return services;
         }
     } 

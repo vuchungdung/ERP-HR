@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.InterfaceService;
+using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
 using Services.Cadidates.ViewModel;
 using System;

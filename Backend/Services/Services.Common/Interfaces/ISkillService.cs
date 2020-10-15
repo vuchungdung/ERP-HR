@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.InterfaceService;
+using Database.Sql.ERP.Entities.Common;
 using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Services.Common.Interfaces
 {
     public interface ISkillService : IBaseInterfaceService<SkillViewModel>
     {
+        List<Skill> GetListSkill(string id);
         Task<ResponseModel> DropdownSelection();
     }
 }

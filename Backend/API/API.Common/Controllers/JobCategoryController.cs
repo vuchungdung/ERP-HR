@@ -66,5 +66,14 @@ namespace API.Common.Controllers
             var response = await _jobcategoryService.Delete(model);
             return response;
         }
+
+        [Route("dropdown")]
+        [HttpGet]
+        [Authorize]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _jobcategoryService.DropdowmSelection();
+            return response;
+        }
     }
 }
