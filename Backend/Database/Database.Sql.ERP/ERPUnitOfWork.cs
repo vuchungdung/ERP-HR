@@ -55,6 +55,15 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<Provider> _providerRepository;
+        public ITableGenericRepository<Provider> ProviderRepository
+        {
+            get
+            {
+                return _providerRepository = _providerRepository ?? new TableGenericRepository<Provider>(_context);
+            }
+        }
+
         private ITableGenericRepository<Skill> _skillRepository;
         public ITableGenericRepository<Skill> SkillRepository
         {

@@ -29,10 +29,11 @@ namespace Database.Sql.ERP
             builder.Entity<CommandInFunction>()
                        .HasKey(c => new { c.CommandId, c.FunctionId });
 
-            builder.Entity<RecruitmentPlan>()
-                       .HasKey(c => new { c.PlanId, c.JobId });
-
-            builder.HasSequence("ERPSequence");
+            builder.HasSequence<int>("DBSequence")
+                              .StartsAt(1).IncrementsBy(1);
+            builder.Entity<Cadidate>()
+               .Property(x => x.CadidateId)
+               .HasDefaultValueSql("NEXT VALUE FOR DBSequence");
         }
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }
         public DbSet<Cadidate> Cadidates { get; set; }
@@ -44,14 +45,16 @@ namespace Database.Sql.ERP
         public DbSet<InterviewProcess> InterviewProcess { get; set; }
         public DbSet<InterviewResult> InterviewResults { get; set; }
         public DbSet<Process> Process { get; set; }
+        public DbSet<Provider> Providers { get; set; }
         public DbSet<JobDescription> JobDescriptions { get; set; }
         public DbSet<RecruitmentPlan> RecruitmentPlans { get; set; }
-        public DbSet<Command> Commands { set; get; }
-        public DbSet<Function> Functions { set; get; }
-        public DbSet<Permission> Permissions { set; get; }
-        public DbSet<User> Users { set; get; }
-        public DbSet<UserRole> UserRoles { set; get; }
-        public DbSet<Role> Roles { set; get; }
-        public DbSet<Tag> Tags { set; get; }
+        public DbSet<Command> Commands { get; set; }
+        public DbSet<Function> Functions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<CadidateUser> CadidateUsers { get; set; }
     }
 }

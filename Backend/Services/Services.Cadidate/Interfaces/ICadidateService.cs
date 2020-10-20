@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.Services.InterfaceService;
+using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
 using Services.Cadidates.ViewModel;
 using System;
@@ -13,8 +14,7 @@ namespace Services.Cadidates.Interfaces
     {
         Task<ResponseModel> DropdownSelection();
         Task<ResponseModel> ApplyToJob(int id);
-        Task<ResponseModel> ChangeProcess(int id);
-        Task<ResponseModel> Tagging(int id);
-        Task<ResponseModel> SaveFile(int cadidateId, IFormFile file);
+        Task<ResponseModel> ChangeProcess(int id, int processId);
+        Task<ResponseModel> Tagging(int id,int tagId);
     }
 }

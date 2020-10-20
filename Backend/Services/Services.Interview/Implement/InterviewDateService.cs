@@ -3,11 +3,12 @@ using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Interview;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Services.Interview.Interfaces;
 using Services.Interview.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Services.Interview.Implement
@@ -51,24 +52,127 @@ namespace Services.Interview.Implement
             return response;
         }
 
-        public Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from i in _context.InterviewDateRepository.Query()
+                            where !i.Deleted
+                            orderby i.TimeDate
+                            select new InterviewDateViewModel()
+                            {
+                                CadidateId = i.CadidateId,
+                                DateId = i.DateId,
+                                TimeDate = i.TimeDate,
+                                TimeStart = i.TimeStart,
+                                Address = i.Address,
+                                RecruitType = i.RecruitType,
+                                Time = i.Time,
+                                JodId = i.JodId,
+                                Note = i.Note,
+                                SendMail = i.SendMail
+                            };
+
+                if (!string.IsNullOrEmpty(filter.Text))
+                {
+                    query = query.Where(x => x.TimeDate == Convert.ToDateTime(filter.Text));
+                }
+
+                BaseListModel<InterviewDateViewModel> listItems = new BaseListModel<InterviewDateViewModel>();
+
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                    .Take(filter.Paging.PageSize)
+                    .ToListAsync()
+                    .ConfigureAwait(true);
+
+                listItems.TotalItems = await query.CountAsync();
+
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Insert(InterviewDateViewModel model)
+        public async Task<ResponseModel> Insert(InterviewDateViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                InterviewDate md = new InterviewDate();
+
+                md.CadidateId = model.CadidateId;
+                md.Address = model.Address;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = 1;
+                md.Deleted = false;
+                md.JodId = model.JodId;
+                md.Time = md.Time;
+                md.RecruitType = model.RecruitType;
+                md.TimeStart = model.TimeStart;
+                md.TimeDate = model.TimeDate;
+                md.Note = model.Note;
+
+                await _context.InterviewDateRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(int id)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                InterviewDate md = await _context.InterviewDateRepository.FirstOrDefaultAsync(x => x.DateId == id && !x.Deleted);
+
+                InterviewDate model = new InterviewDate();
+
+                model.DateId = md.DateId;
+                model.CadidateId = md.CadidateId;
+                model.Address = md.Address;
+                model.CreateDate = DateTime.Now;
+                model.JodId = md.JodId;
+                model.Time = md.Time;
+                model.RecruitType = md.RecruitType;
+                model.TimeStart = md.TimeStart;
+                model.TimeDate = md.TimeDate;
+                model.Note = md.Note;
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Update(InterviewDateViewModel model)
+        public async Task<ResponseModel> Update(InterviewDateViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
     }
 }

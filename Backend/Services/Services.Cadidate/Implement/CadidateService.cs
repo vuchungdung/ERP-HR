@@ -9,30 +9,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Database.Sql.ERP.Entities.Cadidate;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Core.Services.InterfaceService;
 using System.Net.Http.Headers;
-using System.IO;
 using Database.Sql.ERP.Entities.Common;
+using Services.Common.ViewModel;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using Services.Common.Interfaces;
 
 namespace Services.Cadidates.Implement
 {
-    public class CadidateService : ICadidateService
+    public partial class CadidateService : ICadidateService
     {
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
-        private IStorageService _storageService;
         private ISequenceService _sequenceService;
+        private ISkillService _skillService;
         public CadidateService(IERPUnitOfWork context,
             IHttpContextAccessor httpContext,
-            IStorageService storageService,
-            ISequenceService sequenceService)
+            ISequenceService sequenceService,
+            ISkillService skillService)
         {
             _context = context;
             _httpContext = httpContext;
-            _storageService = storageService;
             _sequenceService = sequenceService;
+            _skillService = skillService;
         }
 
         public Task<ResponseModel> ApplyToJob(int id)
@@ -40,7 +43,7 @@ namespace Services.Cadidates.Implement
             throw new NotImplementedException();
         }
 
-        public Task<ResponseModel> ChangeProcess(int id)
+        public Task<ResponseModel> ChangeProcess(int id, int processId)
         {
             throw new NotImplementedException();
         }
@@ -82,10 +85,17 @@ namespace Services.Cadidates.Implement
             try
             {
                 var query = from m in _context.CadidateRepository.Query()
-                            where !m.Deleted
+                            join p in _context.ProviderRepository.Query()
+                            on m.ProviderId equals p.ProviderId
+                            join c in _context.JobCategoryRepository.Query()
+                            on m.CategoryId equals c.CategoryId
+                            join f in _context.FileCVRepository.Query()
+                            on m.CadidateId equals f.CadidateId
+                            where !m.Deleted && f.FileType != ".pdf"
                             orderby m.Name
-                            select new CadidateViewModel()
+                            select new ListCadidateViewModel()
                             {
+                                CadidateId = m.CadidateId,
                                 Name = m.Name,
                                 Email = m.Email,
                                 Address = m.Address,
@@ -97,11 +107,11 @@ namespace Services.Cadidates.Implement
                                 ApplyDate = m.ApplyDate,
                                 Experience = m.Experience,
                                 Rating = m.Rating,
-                                ProviderId = m.ProviderId,
-                                CategoryId = m.CategoryId,
-                                SkillId = m.SkillId,
-                                JobId = m.JobId,
-                                TagId = m.TagId
+                                Skill = _skillService.GetListSkill(m.Skill),
+                                Provider = p.Name,
+                                Category = c.Name,
+                                Dob = m.Dob,
+                                Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -112,11 +122,10 @@ namespace Services.Cadidates.Implement
                                         || x.Degree.ToLower().Contains(filter.Text.ToLower())
                                         );
                 }
-                BaseListModel<CadidateViewModel> listItems = new BaseListModel<CadidateViewModel>();
+                BaseListModel<ListCadidateViewModel> listItems = new BaseListModel<ListCadidateViewModel>();
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                                        .Take(filter.Paging.PageSize)
-                                       .OrderByDescending(x => x.Name)
                                        .ToListAsync()
                                        .ConfigureAwait(true);
                 listItems.TotalItems = await query.CountAsync();
@@ -126,12 +135,11 @@ namespace Services.Cadidates.Implement
             }
             catch(Exception ex)
             {
-                response.Errors.Add(ex.InnerException.InnerException.Message);
-                response.Status = ResponseStatus.Error;
                 throw ex;
             }
             return response;
         }
+
 
         public async Task<ResponseModel> Insert(CadidateViewModel model)
         {
@@ -153,16 +161,35 @@ namespace Services.Cadidates.Implement
                 md.Experience = model.Experience;              
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.SkillId = model.SkillId;
-                if(model.File != null && model.File.Count() > 0)
+                md.Skill = model.Skill;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                foreach(var item in model.Files)
                 {
-                    foreach(var item in model.File)
-                    {
-                        var fileEntity = await SaveFile(cadidateId, item);
-                        _context.FileCVRepository.Add(fileEntity.Result as Database.Sql.ERP.Entities.Common.File);
-                    }
+                    Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
+                    f.CadidateId = cadidateId;
+                    f.Deleted = false;
+                    f.FileName = item.FileName;
+                    var folderName = Path.Combine("wwwroot/cadidate-cv");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var fileSize = item.Length / 1024;
+                    var fileType = Path.GetExtension(fileName);
+                    f.CadidateId = Convert.ToInt32(await _sequenceService.GetCadidateNewId());
+                    f.FileName = fileName;
+                    f.FilePath = fullPath;
+                    f.FileSize = Convert.ToInt32(fileSize);
+                    f.FileType = fileType;
+                    f.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                    f.CreateDate = DateTime.Now;
+                    _context.FileCVRepository.Add(f);
+                    _context.SaveChanges();
                 }
+
                 await _context.CadidateRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }
@@ -195,7 +222,7 @@ namespace Services.Cadidates.Implement
                     Rating = md.Rating,
                     ProviderId = md.ProviderId,
                     CategoryId = md.CategoryId,
-                    SkillId = md.SkillId,
+                    Skill = md.Skill,
                     JobId = md.JobId,
                     TagId = md.TagId,
                     FaceBook = md.FaceBook,
@@ -213,35 +240,25 @@ namespace Services.Cadidates.Implement
             }
             return response;
         }
-
-        public async Task<ResponseModel> SaveFile(int cadidateId, IFormFile file)
+        public async Task<ResponseModel> Tagging(int id,int tagId)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                var fileName = $"{originalFileName.Substring(0, originalFileName.LastIndexOf('.'))}{Path.GetExtension(originalFileName)}";
-                await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-                var model = new Database.Sql.ERP.Entities.Common.File()
-                {
-                    FileName = fileName,
-                    FilePath = _storageService.GetFileUrl(fileName),
-                    FileSize = Convert.ToInt32(file.Length),
-                    FileType = Path.GetExtension(fileName),
-                    CadidateId = cadidateId
-                };
-                response.Result = model;
+                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
+
+                md.TagId = tagId;
+                md.UpdateDate = DateTime.Now;
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                _context.CadidateRepository.Update(md);
+                await _context.SaveChangesAsync();
             }
             catch(Exception ex)
             {
                 throw ex;
             }
             return response;
-        }
-
-        public Task<ResponseModel> Tagging(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<ResponseModel> Update(CadidateViewModel model)

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { LoginService } from './login.service';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: Router,
     private authen: LoginService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private toastr: NotificationService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -27,21 +29,30 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-
   login(){
     this.isLoading = true;
     if(this.loginForm.invalid){
       console.log("Error");
+      this.isLoading = false;
+      this.toastr.showWarning("Vui lòng nhập tài khoản và mật khẩu","");     
     }
-    this.authen.login(this.loginForm.value).subscribe((response: ResponseModel)=>{
-      console.log(response);
-      if(response.status == ResponseStatus.success){
+    this.authen.login(this.loginForm.value).subscribe(
+      (response: ResponseModel)=>{
+        if(response.status == ResponseStatus.success){
+          this.isLoading = false;
+          localStorage.setItem('token',JSON.stringify(response.result));
+          this.route.navigate(['/manager'], {});
+        }
+        else{
+          this.isLoading = false;
+          this.toastr.showWarning("Tài khoản hoặc mật khẩu không hợp lệ","")
+        }
+      },
+      (err)=>{
         this.isLoading = false;
-        localStorage.setItem('token',JSON.stringify(response.result));
-        this.route.navigate(['/manager'], {});
+        this.toastr.showWarning("Không có kết nối Server","")
       }
-    })
+    )
   }
 
 }

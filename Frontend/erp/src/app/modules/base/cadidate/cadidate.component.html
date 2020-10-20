@@ -6,21 +6,21 @@
           <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH ỨNG VIÊN</h4>
         </div>
         <div class="options">
-          <ng-container *ngIf="isChecked == true">
-            <button mat-raised-button (click)="openDialog()" style="margin-right: 5px;" class="btn-interview" color="primary">
+          <ng-container>
+            <button mat-raised-button (click)="sendMail()" style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-envelop5 icon"></i>Gửi email
             </button>
-            <button mat-raised-button (click)="openDialog()" style="margin-right: 5px;" class="btn-interview" color="primary">
+            <button mat-raised-button (click)="addTag()" style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-price-tag2 icon"></i>Gắn thẻ
             </button>
             <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-bin icon"></i>Xóa ứng viên
             </button>
           </ng-container>
-          <button mat-raised-button (click)="openDialog()" style="margin-right: 5px;" class="btn-interview" color="primary">
+          <button mat-raised-button (click)="openChart()" style="margin-right: 5px;" class="btn-interview" color="primary">
             <i class="icon-pie-chart2 icon"></i>Biểu đồ ứng viên
           </button>
-          <button mat-raised-button (click)="openDialog()" style="margin-right: 5px;" class="btn-interview" color="primary">
+          <button mat-raised-button (click)="insertCadidate()" style="margin-right: 5px;" class="btn-interview" color="primary">
             <i class="icon-user-plus icon"></i>Thêm ứng viên mới
           </button>        
           <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
@@ -50,7 +50,7 @@
     <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
-          <app-table (isChecked) = "checkRecord($event)"></app-table>
+          <app-table></app-table>
         </div>  
       </div>
     </div>

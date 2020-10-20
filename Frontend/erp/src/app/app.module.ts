@@ -3,25 +3,41 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
-import { ApiService } from './core/services/api.service';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { CKEditorModule } from 'ckeditor4-angular';
+
 @NgModule({
-  declarations: [ //đối với component, khai báo những component của module này sử dụng
+  declarations: [
     AppComponent
   ],
-  imports: [ //đối với module, import những module mà module này cần dùng
+  imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    SharedModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
+      maxOpened: 1,
+      autoDismiss: true,
+      enableHtml: true
+    }), 
   ],
-  providers: [ApiService], //đối với services,class,.....,khai báo những services, class mà module này có thể dùng
+  providers:[
+    AuthenticationGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

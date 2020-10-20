@@ -27,7 +27,7 @@ export class TagService{
   }
   
   update(model: Tag):Observable<ResponseModel>{
-    return this.api.update(this.url.update,model);
+    return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
   getList(paging: PagingModel,searchText:string):Observable<ResponseModel>{
@@ -35,7 +35,11 @@ export class TagService{
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
-    return this.api.getList(this.url.getlist,filter);
+    return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
+  }
+
+  item(id:number):Observable<ResponseModel>{
+    return this.api.item(`${environment.apiUrl}${this.url.item}`,id);
   }
 }
 

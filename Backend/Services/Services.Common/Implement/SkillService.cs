@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -47,9 +48,30 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropdownSelection()
-        {
-            throw new NotImplementedException();
+        public async Task<ResponseModel> DropdownSelection()
+        { 
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.SkillRepository.Query()
+                            where !m.Deleted
+                            orderby m.Name
+                            select new SkillViewModel()
+                            {
+                                SkillId = m.SkillId,
+                                Name = m.Name
+                            };
+
+                List<SkillViewModel> listItems = await query.ToListAsync();
+
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -86,6 +108,17 @@ namespace Services.Common.Implement
                 throw ex;
             }
             return response;
+        }
+        public List<Skill> GetListSkill(string id)
+        {
+            string[] arr = id.Split(',');
+            List<Skill> result = new List<Skill>();
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == Convert.ToInt32(arr[i]));
+                result.Add(md);
+            }
+            return result;
         }
 
         public async Task<ResponseModel> Insert(SkillViewModel model)

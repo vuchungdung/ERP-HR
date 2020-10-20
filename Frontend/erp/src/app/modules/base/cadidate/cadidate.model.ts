@@ -1,6 +1,20 @@
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface Cadidate {
+  id : number,
+  name : string,
+  email : string,
+  address : string,
+  phone : string,
+  gender : number,
+  degree : string,
+  university : string,
+  major : string,
+  applydate : Date,
+  experience : number,
+  rating : number,
+  providerid : string,
+  categoryid : string,
+  jobid : string,
+  tag : string,
+  dob : Date,
+  skill : string
 }

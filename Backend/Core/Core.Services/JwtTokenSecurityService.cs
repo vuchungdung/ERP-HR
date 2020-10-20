@@ -5,10 +5,8 @@ using Database.Sql.ERP.Entities.System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Core.Services
@@ -36,8 +34,7 @@ namespace Core.Services
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                     Expiration = jwtSecurityToken.ValidTo.ToLocalTime().Ticks,
-                    RefreshToken = GenerateRefreshToken(),
-                    UserName = user.UserName,
+                    UserName = user.UserName
                 };
 
                 return token;
@@ -55,29 +52,7 @@ namespace Core.Services
 
         public bool ValidateToken(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[JwtConstant.SECRET_KEY]));
-            try
-            {
-                tokenHandler.ValidateToken(token, new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = key,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken)validatedToken;
-
-                Console.WriteLine(jwtToken);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            throw new NotImplementedException();
         }
         private JwtSecurityToken GetJwtSecurityToken(User user)
         {
@@ -86,10 +61,11 @@ namespace Core.Services
             var now = DateTime.UtcNow;
             var accessTokenLifetime = now.AddMinutes(accessTokenLifeTimeValue);
 
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
+            var claims = new[] {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.MobilePhone, user.Phone),
+                new Claim(ClaimTypes.UserData, user.UserName)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration[JwtConstant.SECRET_KEY]));
@@ -103,15 +79,6 @@ namespace Core.Services
                                         notBefore: now,
                                         expires: accessTokenLifetime,
                                         signingCredentials: creds);
-        }
-        private string GenerateRefreshToken()
-        {
-            var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
         }
     }
 }

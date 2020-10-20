@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.System.Interfaces;
 using Services.System.ViewModel;
@@ -19,6 +20,7 @@ namespace API.System.Controllers
             _roleService = roleService;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("insert")]
         public async Task<ResponseModel> Insert([FromBody] RoleViewModel model)
@@ -27,6 +29,7 @@ namespace API.System.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("delete")]
         public async Task<ResponseModel> Delete([FromBody] RoleViewModel model)
@@ -35,6 +38,7 @@ namespace API.System.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpPut]
         [Route("update")]
         public async Task<ResponseModel> Update([FromBody] RoleViewModel model)
@@ -43,6 +47,7 @@ namespace API.System.Controllers
             return response;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("item")]
         public async Task<ResponseModel> Item([FromQuery] int id)

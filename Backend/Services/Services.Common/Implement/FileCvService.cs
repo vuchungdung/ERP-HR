@@ -1,6 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
 using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Services.Common.Implement
@@ -24,9 +26,28 @@ namespace Services.Common.Implement
             _httpContext = httpContext;
         }
 
-        public Task<ResponseModel> Delete(FileCvViewModel model)
+        public async Task<ResponseModel> Delete(FileCvViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                File md = _context.FileCVRepository.FirstOrDefault(x => x.Id == model.CVId && !x.Deleted);
+
+                md.Deleted = true;
+                md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.UpdateDate = DateTime.Now;
+
+                _context.FileCVRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex) 
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -72,22 +93,38 @@ namespace Services.Common.Implement
             }
             return response;
         }
-        public Task<ResponseModel> Item(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        /*
-         -------------------------------------------------------
-         */
         public Task<ResponseModel> Insert(FileCvViewModel model)
         {
             throw new NotImplementedException();
         }
 
+        public async Task<ResponseModel> Item(int id)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                File md = await _context.FileCVRepository.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
+
+                FileCvViewModel model = new FileCvViewModel();
+
+                model.FileName = md.FileName;
+                model.FilePath = md.FilePath;
+                model.CadidateId = md.CadidateId;
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
         public Task<ResponseModel> Update(FileCvViewModel model)
         {
             throw new NotImplementedException();
         }
+
     }
 }

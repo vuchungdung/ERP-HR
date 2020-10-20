@@ -51,9 +51,31 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropdowmSelection()
+        public async Task<ResponseModel> DropdowmSelection()
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from p in _context.JobCategoryRepository.Query()
+                            where !p.Deleted
+                            orderby p.Name
+                            select new JobCategoryViewModel()
+                            {
+                                CategoryId = p.CategoryId,
+                                Name = p.Name,
+                                Description = p.Description
+                            };
+
+                List<JobCategoryViewModel> items = await query.ToListAsync();
+
+                response.Result = items;
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -78,8 +100,10 @@ namespace Services.Common.Implement
                 BaseListModel<JobCategoryViewModel> listItems = new BaseListModel<JobCategoryViewModel>();
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                                    .Take(filter.Paging.PageSize).OrderByDescending(x => x.Name)
-                                    .ToListAsync().ConfigureAwait(true);
+                                    .Take(filter.Paging.PageSize)
+                                    .OrderByDescending(x => x.Name)
+                                    .ToListAsync()
+                                    .ConfigureAwait(true);
                 listItems.TotalItems = await query.CountAsync();
 
                 response.Result = listItems;
@@ -105,6 +129,7 @@ namespace Services.Common.Implement
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.JobCategoryRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }

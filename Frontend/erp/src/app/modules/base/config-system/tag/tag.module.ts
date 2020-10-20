@@ -9,7 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormComponent } from './form/form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptor } from 'src/app/core/interceptors/header.interceptor';
 
 const route : Routes = [
   {

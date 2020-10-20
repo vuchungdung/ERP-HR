@@ -3,11 +3,13 @@ using Core.CommonModel.Enum;
 using Database.Sql.ERP;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Services.Common.Implement
@@ -27,7 +29,17 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
+                Tag md = _context.TagRepository.FirstOrDefault(x => x.Id == model.Id && !x.Deleted);
 
+                md.Deleted = true;
+                md.UpdateBy = 1;
+                md.UpdateDate = DateTime.Now;
+
+                _context.TagRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
             }
             catch(Exception ex)
             {
@@ -41,9 +53,46 @@ namespace Services.Common.Implement
             throw new NotImplementedException();
         }
 
-        public Task<ResponseModel> GetList(FilterModel filter)
+        public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from t in _context.TagRepository.Query()
+                            where !t.Deleted
+                            orderby t.CreateDate
+                            select new TagViewModel()
+                            {
+                                Id = t.Id,
+                                Name = t.Name,
+                                Color = t.Color,
+                                Content = t.Content
+                            };
+
+                if (!string.IsNullOrEmpty(filter.Text))
+                {
+                    query = query.Where(x => x.Name.ToLower().Contains(filter.Text.ToLower())
+                                        || x.Content.ToLower().Contains(filter.Text.ToLower()));
+                }
+
+                BaseListModel<TagViewModel> listItems = new BaseListModel<TagViewModel>();
+
+                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
+                                             .Take(filter.Paging.PageSize)
+                                             .OrderByDescending(x => x.Name)
+                                             .ToListAsync()
+                                             .ConfigureAwait(true);
+                listItems.TotalItems = await query.CountAsync();
+
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public async Task<ResponseModel> Insert(TagViewModel model)
@@ -56,6 +105,8 @@ namespace Services.Common.Implement
                 md.Name = model.Name;
                 md.Content = model.Content;
                 md.Color = model.Color;
+                md.CreateDate = DateTime.Now;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 await _context.TagRepository.AddAsync(md);
 
@@ -70,14 +121,57 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(int id)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Tag md = await _context.TagRepository.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
+
+                if(md == null)
+                {
+                    throw new Exception();
+                }
+
+                TagViewModel model = new TagViewModel();
+
+                model.Id = md.Id;
+                model.Name = md.Name;
+                model.Content = md.Content;
+                model.Color = md.Color;
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Update(TagViewModel model)
+        public async Task<ResponseModel> Update(TagViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                Tag md = _context.TagRepository.FirstOrDefault(x => x.Id == model.Id && !x.Deleted);
+
+                md.Name = model.Name;
+                md.Content = model.Content;
+                md.Color = model.Color;
+
+                _context.TagRepository.Update(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
     }
 }

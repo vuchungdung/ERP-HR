@@ -7,7 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
-import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -23,7 +22,8 @@ const routes: Routes = [
     SharedModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers:[LoginService]
 })
