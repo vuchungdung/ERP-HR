@@ -20,12 +20,11 @@ import { MatSort } from '@angular/material/sort';
 
 export class TableComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  public status: boolean = true;
   public paging = new PagingModel();
   public searchText = '';
   public dataSource : any;
 
-  displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','field','source','status','tag','options'];
+  displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','category','source','status','tag','options'];
   selection = new SelectionModel<Cadidate>(true, []);
 
   isAllSelected() {
@@ -85,6 +84,7 @@ export class TableComponent implements OnInit {
     return this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
         this.dataSource = res.result.items;
+        console.log(this.dataSource);
         this.paging.length = res.result.totalItems;
       }
     })

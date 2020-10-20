@@ -35,8 +35,8 @@ export class CadidateService{
   getList(paging: PagingModel,searchText:string):Observable<ResponseModel>{
     const filter = new FilterModel();
     filter.text = searchText;
-    //filter.paging.pageIndex = paging.pageIndex;
-    //filter.paging.pageSize = paging.pageSize;
+    filter.paging.pageIndex = paging.pageIndex;
+    filter.paging.pageSize = paging.pageSize;
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
 

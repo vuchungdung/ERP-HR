@@ -89,7 +89,9 @@ namespace Services.Cadidates.Implement
                             on m.ProviderId equals p.ProviderId
                             join c in _context.JobCategoryRepository.Query()
                             on m.CategoryId equals c.CategoryId
-                            where !m.Deleted
+                            join f in _context.FileCVRepository.Query()
+                            on m.CadidateId equals f.CadidateId
+                            where !m.Deleted && f.FileType != ".pdf"
                             orderby m.Name
                             select new ListCadidateViewModel()
                             {
@@ -108,7 +110,8 @@ namespace Services.Cadidates.Implement
                                 Skill = _skillService.GetListSkill(m.Skill),
                                 Provider = p.Name,
                                 Category = c.Name,
-                                Dob = m.Dob
+                                Dob = m.Dob,
+                                Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {

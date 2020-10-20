@@ -16,6 +16,9 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int PlanId { get; set; }
 
         [Required]
+        public string Title { get; set; }
+
+        [Required]
         public int Quatity { get; set; }
 
         [Required]

@@ -25,7 +25,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public string Description { get; set; }
 
         [Required]
-        public string Endow { get; set; }
+        public string Endow { get; set; } //quyền lợi
 
         [Required]
         public string SkillId { get; set; }

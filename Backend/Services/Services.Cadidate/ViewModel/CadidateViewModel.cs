@@ -60,6 +60,8 @@ namespace Services.Cadidates.ViewModel
     {
         public int CadidateId { get; set; }
 
+        public string Img { get; set; }
+
         public string Name { get; set; }
 
         public string Email { get; set; }

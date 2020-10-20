@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { ToastrModule } from 'ngx-toastr';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
