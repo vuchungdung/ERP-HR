@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace API.Interview
+﻿namespace API.Interview
 {
     public class InterviewBuilderExtension
     {

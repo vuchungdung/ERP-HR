@@ -25,6 +25,12 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public string Description { get; set; }
 
         [Required]
+        public string RequestJob { get; set; }
+
+        [Required]
+        public string Benefit { get; set; }
+
+        [Required]
         public string Endow { get; set; } //quyền lợi
 
         [Required]
@@ -40,5 +46,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int OfferTo { get; set; }
 
         public JobStatus Status { get; set; }
+
+        public Core.CommonModel.Enum.Type Type { get; set; }
     }
 }

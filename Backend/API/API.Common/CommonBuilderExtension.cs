@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Services;
+﻿using Core.Services;
 using Core.Services.InterfaceService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,5 +20,5 @@ namespace API.Common
 
             return services;
         }
-    } 
+    }
 }

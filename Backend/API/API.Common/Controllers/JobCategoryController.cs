@@ -1,12 +1,8 @@
 ﻿using Core.CommonModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Common.Implement;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Common.Controllers

@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Services.System.Interfaces;
 using Services.System.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.System.Controllers
