@@ -16,12 +16,12 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ERPContext _context;
+        private IJobDescriptionService _jobDescriptionService;
 
-        public HomeController(ILogger<HomeController> logger, ERPContext context)
+        public HomeController(ILogger<HomeController> logger, IJobDescriptionService jobDescriptionService)
         {
             _logger = logger;
-            _context = context;
+            _jobDescriptionService = jobDescriptionService;
         }
 
         public IActionResult Index()
@@ -39,16 +39,10 @@ namespace MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<IActionResult> GetListJob(FilterModel model)
+        public async Task<ResponseModel> GetListJob(FilterModel model)
         {
-            try
-            {                
-                return View();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            var response = await _jobDescriptionService.GetList(model);
+            return response;
         }
     }
 }

@@ -1,4 +1,4 @@
-<div class="page-container" style="padding: 10px 20px;">
+<div class="page-container" style="padding: 10px 20px;" [class.opened]="showForm()">
   <div class="row">
     <form novalidate>
       <div class="panel panel-flat">
@@ -70,8 +70,8 @@
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between">
-            <button type="submit" class="btn btn-xs btn-default" ui-sref="teachers"><i class="icon-arrow-left13"></i>Quay lại </button>
-            <button type="submit" class="btn btn-xs btn-primary" ng-disabled="frmAddTeacher.$invalid">Thêm mới <i class="icon-arrow-right14"></i></button>
+            <button type="submit" class="btn btn-xs btn-default" (click)="onBack()"><i class="icon-arrow-left13"></i>Quay lại </button>
+            <button type="submit" class="btn btn-xs btn-primary">Thêm mới <i class="icon-arrow-right14"></i></button>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
-<app-form></app-form>
-<div class="page-container" style="padding: 10px 20px;">
+<app-form (isShow)="changeStatus($event)"></app-form>
+<div class="page-container" style="padding: 10px 20px;" [class.opened]="showTable()">
   <div class="row">
     <div class="panel panel-flat" style="margin-bottom:10px">
       <div class="panel-heading content-header" style="padding-top:10px; padding-bottom:10px">
@@ -7,7 +7,7 @@
           <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH TIN TUYỂN DỤNG</h4>
         </div>
         <div class="options">
-          <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
+          <button mat-raised-button style="margin-right: 5px;" (click)="OnInsertClick()" class="btn-interview" color="primary">
             <i class="icon-user-plus icon"></i>Thêm tin tuyển dụng mới
           </button>
         </div>

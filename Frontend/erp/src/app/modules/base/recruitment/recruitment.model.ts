@@ -5,5 +5,8 @@ export interface Recruitment{
   skill:string,
   category:string,
   offerfrom:number,
-  offerto:number
+  offerto:number,
+  requestJob:string,
+  benefit:string,
+  endow:string
 }
