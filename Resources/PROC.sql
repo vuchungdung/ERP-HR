@@ -25,3 +25,33 @@ AS
 	END;
 GO
 
+CREATE PROC SP_JOBDESCRIPTION_GET_PAGING
+@PAGESIZE INT = 10,
+@KEYWORD NVARCHAR(MAX) = NULL,
+@CATEGORYID INT,
+@TYPE INT
+AS 
+	BEGIN
+		SELECT TOP(@PAGESIZE) JOB.Title,
+			JOB.Description,
+			JOB.Endow,
+			JOB.Benefit,
+			JOB.SkillId,
+			JOB.OfferFrom,
+			JOB.OfferTo,
+			JOB.RequestJob,
+			JOB.Status,
+			CAT.Name,
+			REC.TimeStart,
+			REC.TimeEnd
+		FROM DBO.JobDescriptions AS JOB,
+			DBO.RecruitmentPlans AS REC,
+			DBO.JobCategories AS CAT
+			WHERE 
+				JOB.CategoryId = CAT.CategoryId AND
+				JOB.PlanId = REC.PlanId AND
+				JOB.Title = @KEYWORD AND
+				JOB.CategoryId = @CATEGORYID AND
+				JOB.Type = @TYPE
+	END;
+GO

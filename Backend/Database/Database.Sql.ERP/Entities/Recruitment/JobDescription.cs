@@ -31,7 +31,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public string Benefit { get; set; }
 
         [Required]
-        public string Endow { get; set; } //quyền lợi
+        public string Endow { get; set; } 
 
         [Required]
         public string SkillId { get; set; }
