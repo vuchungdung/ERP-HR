@@ -1,23 +1,20 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
+using Core.Services.InterfaceService;
 using Database.Sql.ERP;
+using Database.Sql.ERP.Entities.Cadidate;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Services.Cadidates.Interfaces;
 using Services.Cadidates.ViewModel;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Database.Sql.ERP.Entities.Cadidate;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
-using Core.Services.InterfaceService;
-using System.Net.Http.Headers;
-using Database.Sql.ERP.Entities.Common;
-using Services.Common.ViewModel;
-using System.IO;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using Services.Common.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Services.Cadidates.Implement
 {
@@ -27,6 +24,7 @@ namespace Services.Cadidates.Implement
         private IHttpContextAccessor _httpContext;
         private ISequenceService _sequenceService;
         private ISkillService _skillService;
+
         public CadidateService(IERPUnitOfWork context,
             IHttpContextAccessor httpContext,
             ISequenceService sequenceService,
@@ -65,7 +63,7 @@ namespace Services.Cadidates.Implement
 
                 response.Result = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = ResponseStatus.Error;
                 response.Errors.Add(ex.InnerException.InnerException.Message);
@@ -133,13 +131,12 @@ namespace Services.Cadidates.Implement
                 response.Result = listItems;
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             return response;
         }
-
 
         public async Task<ResponseModel> Insert(CadidateViewModel model)
         {
@@ -158,14 +155,14 @@ namespace Services.Cadidates.Implement
                 md.University = model.University;
                 md.Major = model.Major;
                 md.ApplyDate = model.ApplyDate;
-                md.Experience = model.Experience;              
+                md.Experience = model.Experience;
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
                 md.Skill = model.Skill;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                foreach(var item in model.Files)
+                foreach (var item in model.Files)
                 {
                     Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
                     f.CadidateId = cadidateId;
@@ -193,7 +190,7 @@ namespace Services.Cadidates.Implement
 
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -234,13 +231,14 @@ namespace Services.Cadidates.Implement
                 response.Result = model;
                 response.Status = ResponseStatus.Success;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             return response;
         }
-        public async Task<ResponseModel> Tagging(int id,int tagId)
+
+        public async Task<ResponseModel> Tagging(int id, int tagId)
         {
             ResponseModel response = new ResponseModel();
             try
@@ -254,7 +252,7 @@ namespace Services.Cadidates.Implement
                 _context.CadidateRepository.Update(md);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

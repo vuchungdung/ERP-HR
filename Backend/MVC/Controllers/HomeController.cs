@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.CommonModel;
-using Database.Sql.ERP;
+﻿using Core.CommonModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
 using Services.Recruitment.Interface;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace MVC.Controllers
 {
@@ -39,6 +34,7 @@ namespace MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public async Task<ResponseModel> GetListJob(FilterModel model)
         {
             var response = await _jobDescriptionService.GetList(model);
