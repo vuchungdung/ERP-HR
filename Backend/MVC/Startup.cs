@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC.Helper;
+using MVC.Services.Interfaces;
+using Services.Recruitment.Implement;
 
 namespace MVC
 {
@@ -29,6 +32,8 @@ namespace MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
+            services.AddScoped<IDatabaseHelper, DatabaseHelper>();
+            services.AddScoped<IJobDescriptionService, MVC.Services.JobDescriptionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

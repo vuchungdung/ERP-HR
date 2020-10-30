@@ -24,9 +24,12 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <!--angular js here-->
+    <script src="~/assests/angular/angular.min.js"></script>
+    <script src="~/assests/libs/dirPagination.js"></script>
 </head>
 
-<body>
+<body ng-app="erp">
     <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -350,7 +353,11 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
-
     <script src="js/main.js"></script>
+
+    <!--angular js here-->
+    <script src="~/app/app.js"></script>
+    <script src="~/app/shared/ajaxService.js"></script>
+    <script src="~/app/controller/jobdescriptionController.js"></script>
 </body>
 </html>

@@ -34,11 +34,16 @@ namespace MVC.Helper
         public DataTable ExecuteSProcedure(string nameProc, params object[] paramObjects)
         {
             DataTable tb = new DataTable();
+            SqlConnection connection;
             try
             {
                 OpenConnection();
+                
+                SqlCommand cmd = new SqlCommand { CommandType = CommandType.StoredProcedure, CommandText = nameProc };
 
-                SqlCommand cmd = new SqlCommand();
+                connection = new SqlConnection(StrConnection);
+                cmd.Connection = connection;
+
                 int parameterInput = (paramObjects.Length) / 2;
 
                 int j = 0;
@@ -46,25 +51,14 @@ namespace MVC.Helper
                 {
                     string paramName = Convert.ToString(paramObjects[j++]).Trim();
                     object value = paramObjects[j++];
-                    if (paramName.ToLower().Contains("json"))
-                    {
-                        cmd.Parameters.Add(new SqlParameter()
-                        {
-                            ParameterName = paramName,
-                            Value = value ?? DBNull.Value,
-                            SqlDbType = SqlDbType.NVarChar
-                        });
-                    }
-                    else
-                    {
-                        cmd.Parameters.Add(new SqlParameter(paramName, value ?? DBNull.Value));
-                    }
+                    cmd.Parameters.Add(new SqlParameter(paramName, value ?? DBNull.Value));
                 }
 
                 SqlDataAdapter ad = new SqlDataAdapter(cmd);
                 ad.Fill(tb);
                 cmd.Dispose();
                 ad.Dispose();
+                connection.Dispose();
             }
             catch (Exception exception)
             {

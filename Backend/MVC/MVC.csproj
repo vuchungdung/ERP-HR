@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\app\controller\homeController.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\JobDescriptionService.cs~RF21802df.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
@@ -23,7 +31,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\assests\" />
     <Folder Include="Views\JobDescription\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\app\app.js" />
+    <None Include="wwwroot\app\controller\jobdescriptionController.js" />
+    <None Include="wwwroot\assests\angular\angular-csp.css" />
+    <None Include="wwwroot\assests\angular\angular.js" />
+    <None Include="wwwroot\assests\angular\angular.min.js" />
+    <None Include="wwwroot\assests\angular\angular.min.js.gzip" />
+    <None Include="wwwroot\assests\angular\angular.min.js.map" />
+    <None Include="wwwroot\assests\angular\index.js" />
+    <None Include="wwwroot\assests\angular\LICENSE.md" />
+    <None Include="wwwroot\assests\angular\README.md" />
+    <None Include="wwwroot\assests\libs\dirPagination.js" />
   </ItemGroup>
 
 </Project>

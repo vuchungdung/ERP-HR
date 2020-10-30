@@ -11,12 +11,10 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private IJobDescriptionService _jobDescriptionService;
 
-        public HomeController(ILogger<HomeController> logger, IJobDescriptionService jobDescriptionService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _jobDescriptionService = jobDescriptionService;
         }
 
         public IActionResult Index()
@@ -33,12 +31,6 @@ namespace MVC.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<ResponseModel> GetListJob(FilterModel model)
-        {
-            var response = await _jobDescriptionService.GetList(model);
-            return response;
         }
     }
 }

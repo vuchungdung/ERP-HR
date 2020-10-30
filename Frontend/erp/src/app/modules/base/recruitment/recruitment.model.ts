@@ -8,5 +8,6 @@ export interface Recruitment{
   offerto:number,
   requestJob:string,
   benefit:string,
-  endow:string
+  endow:string,
+  createdate:Date
 }

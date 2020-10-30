@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 using MVC.Services;
+using MVC.Services.Interfaces;
 
 namespace MVC.Controllers
 {
     public class JobDescriptionController : Controller
     {
-        private readonly JobDescriptionService _jobDescriptionService;
+        private readonly IJobDescriptionService _jobDescriptionService;
 
-        public JobDescriptionController(JobDescriptionService jobDescriptionService)
+        public JobDescriptionController(IJobDescriptionService jobDescriptionService)
         {
             _jobDescriptionService = jobDescriptionService;
         }
@@ -17,10 +19,13 @@ namespace MVC.Controllers
             return View();
         }
 
-        public JsonResult GetAllPaging(int page, int pagesize, string keyword, int categoryid, int type)
+        [HttpPost]
+        public JsonResult GetAllPaging(PageViewModel model)
         {
-            var result = _jobDescriptionService.GetJobPaging(page, pagesize, keyword, categoryid, type);
-            return Json(result);
+            model.Page = 1;
+            model.Pagesize = 10;
+            var response = _jobDescriptionService.GetJobPaging(model);
+            return Json(response);
         }
     }
 }
