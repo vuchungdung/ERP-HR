@@ -2,6 +2,7 @@
 using MVC.Models;
 using MVC.Services;
 using MVC.Services.Interfaces;
+using System;
 
 namespace MVC.Controllers
 {
@@ -22,10 +23,15 @@ namespace MVC.Controllers
         [HttpPost]
         public JsonResult GetAllPaging(PageViewModel model)
         {
-            model.Page = 1;
-            model.Pagesize = 10;
-            var response = _jobDescriptionService.GetJobPaging(model);
-            return Json(response);
+            try
+            {
+                var response = _jobDescriptionService.GetJobPaging(model);
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -10,18 +10,18 @@ namespace MVC.Services
 {
     public class JobDescriptionService : IJobDescriptionService
     {
-        private readonly IDatabaseHelper _dbHelper;
+        private readonly IDatabaseHelper _helper;
 
-        public JobDescriptionService(IDatabaseHelper dbHelper)
+        public JobDescriptionService(IDatabaseHelper helper)
         {
-            _dbHelper = dbHelper;
+            _helper = helper;
         }
 
         public PageResult<JobDescriptionViewModel> GetJobPaging(PageViewModel model)
         {
             try
             {
-                var dt = _dbHelper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.Page);
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.Page);
                 var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
                 if (!String.IsNullOrEmpty(model.Keyword))
                 {

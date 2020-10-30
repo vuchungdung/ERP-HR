@@ -27,12 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\Services.Recruitment\Services.Recruitment.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\assests\" />
-    <Folder Include="Views\JobDescription\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +42,10 @@
     <None Include="wwwroot\assests\angular\LICENSE.md" />
     <None Include="wwwroot\assests\angular\README.md" />
     <None Include="wwwroot\assests\libs\dirPagination.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.Sql.ERP\Database.Sql.ERP.csproj" />
   </ItemGroup>
 
 </Project>

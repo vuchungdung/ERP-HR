@@ -1,390 +1,88 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-lg-12 col-md-12" ng-controller="jobdescriptionController">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
+<partial name="/Views/Component/_Slider.cshtml" />
+
+<partial name="/Views/Component/_Category.cshtml" />
+
+<partial name="/Views/Component/_Popular.cshtml" />
+
+<div class="job_listing_area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="section_title">
+                    <h3>Danh sách công việc</h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="brouse_job text-right">
+                    <a href="jobs.html" class="boxed-btn4">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+        <div class="job_lists">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-9">
+                                <div class="jobs_left d-flex align-items-center">
+                                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
+                                        <img src="~/img/svg_icon/1.svg" alt="">
+                                    </div>
+                                    <div class="jobs_conetent">
+                                        <a href="job_details.html"><h5>Software Engineer</h5></a>
+                                        <div class="links_locat d-flex align-items-center">
+                                            <div class="location">
+                                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
+                                            </div>
+                                            <div class="location">
+                                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
+                                            </div>
+                                        </div>
+                                        <p style="margin-bottom:8px">
+                                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
+                                        </p>
+                                        <ul style="display:flex;margin-bottom:5px">
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
+                                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
+                                    <div class="apply_now">
+                                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
+                                    </div>
+                                    <div class="date" style="text-align:left">
+                                        <p>Date line: 31 Jan 2020</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="pagination_wrap">
+                        <ul>
+                            <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                            <li><a href="#"><span>01</span></a></li>
+                            <li><a href="#"><span>02</span></a></li>
+                            <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12">
-    <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
-        <div class="row">
-            <div class="col-md-9 col-lg-9">
-                <div class="jobs_left d-flex align-items-center">
-                    <div class="thumb" style="margin-right:48px;margin-left:26px;margin-bottom:12px">
-                        <img src="img/svg_icon/1.svg" alt="">
-                    </div>
-                    <div class="jobs_conetent">
-                        <a href="job_details.html"><h5>Software Engineer</h5></a>
-                        <div class="links_locat d-flex align-items-center">
-                            <div class="location">
-                                <p style="color:red"> <i class="fa fa-map-marker"></i> Up to 3000$</p>
-                            </div>
-                            <div class="location">
-                                <p style="color:black"> <i class="fa fa-clock-o"></i> Full time</p>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:8px">
-                            Tham gia vào dự án dài hạn làm các hệ thống liên quan đến tài chính, phát triển bằng python và VBA. Viết thiết kế, code, viết kịch bản test, execute...
-                        </p>
-                        <ul style="display:flex;margin-bottom:5px">
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">ASP.NET</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">PHP</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Angular</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">React</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Java</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">Vue</a></li>
-                            <li style="margin:5px"><a class="badge badge-secondary" style="font-size:13px;font-weight:400;padding:8px" href="#">C++</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="jobs_right" style="padding-left:10px;margin-top:40px;margin-left:40px">
-                    <div class="apply_now">
-                        <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                        <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-                    </div>
-                    <div class="date" style="text-align:left">
-                        <p>Date line: 31 Jan 2020</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-12">
-    <div class="pagination_wrap">
-        <ul>
-            <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
-            <li><a href="#"><span>01</span></a></li>
-            <li><a href="#"><span>02</span></a></li>
-            <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
-        </ul>
     </div>
 </div>

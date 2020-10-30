@@ -6,8 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVC.Helper;
+using MVC.Interfaces;
+using MVC.Services;
 using MVC.Services.Interfaces;
-using Services.Recruitment.Implement;
 
 namespace MVC
 {
@@ -33,7 +34,9 @@ namespace MVC
 
             services.AddMvc();
             services.AddScoped<IDatabaseHelper, DatabaseHelper>();
-            services.AddScoped<IJobDescriptionService, MVC.Services.JobDescriptionService>();
+            services.AddScoped<IJobDescriptionService, JobDescriptionService>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

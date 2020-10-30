@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
-using Services.Recruitment.Interface;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
