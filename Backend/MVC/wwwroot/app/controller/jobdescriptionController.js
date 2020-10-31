@@ -26,24 +26,24 @@
             })
         };
 
-        $scope.getAllCategory = function () {
-            ajaxService.get('/Category/GetAll', null, function (res) {
-                $scope.listCategory = res.data;
+        $scope.getCount = function () {
+            ajaxService.get('/JobDescription/GetAll', null, function (res) {
+                $scope.count = res.data.length;
                 console.log(res.data);
             }, function (err) {
                 console.log(err);
             })
+        }
+        $scope.getAllNew = function () {
+            ajaxService.get('/JobDescription/GetAllNew', null, function (res) {
+                $scope.listJobNew = res.data;
+                console.log(res.data);
+            }, function (err) {
+                console.log(err);
+            });
         }
 
-        $scope.getAllSkill = function () {
-            ajaxService.get('/Skill/GetAll', null, function (res) {
-                $scope.listSkill = res.data;
-                console.log(res.data);
-            }, function (err) {
-                console.log(err);
-            })
-        }
-        $scope.getAllSkill();
-        $scope.getAllCategory();
+        $scope.getAllNew();
+        $scope.getCount();
     }
 })(angular.module('erp'));

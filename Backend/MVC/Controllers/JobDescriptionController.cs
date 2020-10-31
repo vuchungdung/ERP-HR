@@ -33,5 +33,32 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public JsonResult GetAll()
+        {
+            try
+            {
+                var response = _jobDescriptionService.GetAll();
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public JsonResult GetAllNew()
+        {
+            try
+            {
+                var response = _jobDescriptionService.GetAllNew();
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

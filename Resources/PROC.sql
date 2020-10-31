@@ -64,11 +64,72 @@ AS
 	END
 GO
 
-EXEC SP_SKILL_GET_ALL
-
 CREATE PROC SP_CATEGORY_GET_ALL
 AS
 	BEGIN
-		SELECT JC.CategoryId,JC.Name FROM DBO.JobCategories AS JC WHERE JC.Deleted = 0
+		SELECT JC.CategoryId,JC.Name,COUNT(JOB.JobId) AS Total
+		FROM DBO.JobCategories AS JC,DBO.JobDescriptions AS JOB 
+		WHERE JC.Deleted = 0 AND JC.CategoryId = JOB.CategoryId
+		GROUP BY JC.CategoryId,JC.Name
 	END
 GO
+
+
+CREATE PROC SP_JOBDESCRIPTION_GET_ALL
+AS 
+	BEGIN
+		SELECT JOB.Title,
+			JOB.Description,
+			JOB.Endow,
+			JOB.Benefit,
+			JOB.SkillId,
+			JOB.OfferFrom,
+			JOB.OfferTo,
+			JOB.RequestJob,
+			JOB.Status,
+			CAT.Name,
+			REC.TimeStart,
+			REC.TimeEnd,
+			JOB.CategoryId,
+			JOB.Type,
+			JOB.CreateDate
+		FROM DBO.JobDescriptions AS JOB,
+			DBO.RecruitmentPlans AS REC,
+			DBO.JobCategories AS CAT
+			WHERE 
+				JOB.CategoryId = CAT.CategoryId AND
+				JOB.PlanId = REC.PlanId AND
+				JOB.Deleted = 0
+	END;
+GO
+
+CREATE PROC SP_JOBDESCRIPTION_GET_ALL_NEW
+AS 
+	BEGIN
+		SELECT TOP(8) JOB.Title,
+			JOB.Description,
+			JOB.Endow,
+			JOB.Benefit,
+			JOB.SkillId,
+			JOB.OfferFrom,
+			JOB.OfferTo,
+			JOB.RequestJob,
+			JOB.Status,
+			CAT.Name,
+			REC.TimeStart,
+			REC.TimeEnd,
+			JOB.CategoryId,
+			JOB.Type,
+			JOB.CreateDate
+		FROM DBO.JobDescriptions AS JOB,
+			DBO.RecruitmentPlans AS REC,
+			DBO.JobCategories AS CAT
+			WHERE 
+				JOB.CategoryId = CAT.CategoryId AND
+				JOB.PlanId = REC.PlanId AND
+				JOB.Deleted = 0
+			ORDER BY JOB.CreateDate DESC
+	END;
+GO
+
+EXEC SP_JOBDESCRIPTION_GET_ALL_NEW

@@ -1,6 +1,7 @@
 ﻿using Database.Sql.ERP;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -13,16 +14,6 @@ namespace MVC.Controllers
         {
             _logger = logger;
             _context = context;
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
         }
     }
 }
