@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Database.Sql.ERP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC.Helper;
+using MVC.Interfaces;
+using MVC.Services;
+using MVC.Services.Interfaces;
 
 namespace MVC
 {
@@ -34,6 +33,10 @@ namespace MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
+            services.AddScoped<IDatabaseHelper, DatabaseHelper>();
+            services.AddScoped<IJobDescriptionService, JobDescriptionService>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

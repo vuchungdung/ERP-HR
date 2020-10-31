@@ -1,10 +1,7 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Database.Sql.ERP.Entities.Recruitment
 {
@@ -18,14 +15,20 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int PlanId { get; set; }
 
         [Required]
-        [Column(TypeName ="nvarchar(100)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; }
 
         [Required]
         public string Description { get; set; }
 
         [Required]
-        public string Endow { get; set; } //quyền lợi
+        public string RequestJob { get; set; }
+
+        [Required]
+        public string Benefit { get; set; }
+
+        [Required]
+        public string Endow { get; set; }
 
         [Required]
         public string SkillId { get; set; }
@@ -40,5 +43,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int OfferTo { get; set; }
 
         public JobStatus Status { get; set; }
+
+        public Core.CommonModel.Enum.Type Type { get; set; }
     }
 }

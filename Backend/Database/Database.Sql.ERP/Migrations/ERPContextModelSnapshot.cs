@@ -15,7 +15,7 @@ namespace Database.Sql.ERP.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("Relational:Sequence:.DBSequence", "'DBSequence', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -538,6 +538,10 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Benefit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -567,6 +571,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("PlanId")
                         .HasColumnType("int");
 
+                    b.Property<string>("RequestJob")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SkillId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -577,6 +585,9 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -619,6 +630,10 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<DateTime>("TimeStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");

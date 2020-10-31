@@ -45,7 +45,15 @@ const routes: Routes = [
         path: 'recruitment',
         canActivate:[AuthenticationGuard],
         canActivateChild:[AuthenticationGuard],
-        loadChildren: () => import('../base/recruitment/recruitment.module').then(m => m.RecruitmentModule)
+        loadChildren: () => import('../base/recruitment/recruitment.module').then(m => m.RecruitmentModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'plan-recruit',
+        canActivate:[AuthenticationGuard],
+        canActivateChild:[AuthenticationGuard],
+        loadChildren: () => import('../base/plan-recruit/plan-recruit.module').then(m => m.PlanRecruitModule),
+        pathMatch: 'full'
       },
       {
         path: '**',

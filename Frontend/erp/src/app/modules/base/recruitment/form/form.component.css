@@ -19,3 +19,15 @@
   font-weight: 500;
   font-size: 13px;
 }
+.page-container.opened{
+  display: block;
+}
+.page-container{
+  display: none;
+}
+
+.btn-interview{
+  font-size: 12px;
+  height: 28px;
+  line-height: 28px;
+}

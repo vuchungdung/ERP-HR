@@ -2,9 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Services.System.Implement;
 using Services.System.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace API.System
 {

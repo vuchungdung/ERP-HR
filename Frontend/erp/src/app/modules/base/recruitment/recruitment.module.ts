@@ -18,7 +18,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { RecruitmentRoutingModule } from './recruitment-routing.module';
-import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { RecruitmentService } from './recruitment.service';
 
 @NgModule({
   declarations: [RecruitmentComponent, FormComponent, TableComponent],
@@ -41,6 +42,9 @@ import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
     MatInputModule,
     RecruitmentRoutingModule,
     CKEditorModule
+  ],
+  providers:[
+    RecruitmentService
   ]
 })
 export class RecruitmentModule { }

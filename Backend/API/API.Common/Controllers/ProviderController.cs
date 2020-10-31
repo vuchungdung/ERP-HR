@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Common.Controllers
@@ -39,6 +36,7 @@ namespace API.Common.Controllers
             var response = await _providerService.GetList(model);
             return response;
         }
+
         [Route("update")]
         [HttpPut]
         [Authorize]
@@ -47,6 +45,7 @@ namespace API.Common.Controllers
             var response = await _providerService.Update(model);
             return response;
         }
+
         [Route("delete")]
         [HttpDelete]
         [Authorize]
@@ -55,6 +54,7 @@ namespace API.Common.Controllers
             var response = await _providerService.Delete(model);
             return response;
         }
+
         [Route("item")]
         [HttpDelete]
         [Authorize]

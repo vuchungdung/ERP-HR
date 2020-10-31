@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Recruitment.Interface;
 using Services.Recruitment.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Recruitment.Controllers
@@ -38,6 +35,7 @@ namespace API.Recruitment.Controllers
             var response = await _jobDescriptionService.GetList(model);
             return response;
         }
+
         [Route("update")]
         [HttpPut]
         [Authorize]
@@ -46,6 +44,7 @@ namespace API.Recruitment.Controllers
             var response = await _jobDescriptionService.Update(model);
             return response;
         }
+
         [Route("delete")]
         [HttpDelete]
         [Authorize]
