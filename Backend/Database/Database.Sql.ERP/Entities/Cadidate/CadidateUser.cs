@@ -18,9 +18,6 @@ namespace Database.Sql.ERP.Entities.Cadidate
         [Required]
         [Column(TypeName ="varchar(120)")]
         public string Password { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-
         public string CadidateId { get; set; }
     }
 }

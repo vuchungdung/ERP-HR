@@ -7,5 +7,7 @@ namespace MVC.Models
 {
     public class RegisterViewModel
     {
+        public string Password { get; set; }
+        public string Username { get; set; }
     }
 }

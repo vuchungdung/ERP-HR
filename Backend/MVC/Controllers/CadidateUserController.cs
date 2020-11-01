@@ -1,19 +1,66 @@
-﻿using Database.Sql.ERP;
+﻿using Core.CommonModel;
+using Database.Sql.ERP;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MVC.Common;
 using MVC.Models;
+using MVC.Services.Interfaces;
+using Newtonsoft.Json;
+using System;
+using System.Diagnostics.Eventing.Reader;
 
 namespace MVC.Controllers
 {
     public class CadidateUserController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly ERPContext _context;
+        private readonly ICadidateUserService _cadidateUserService;
 
-        public CadidateUserController(ILogger<HomeController> logger, ERPContext context)
+        public CadidateUserController(ICadidateUserService cadidateUserService)
         {
-            _logger = logger;
-            _context = context;
+            _cadidateUserService = cadidateUserService;
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromBody]LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var response = _cadidateUserService.Login(model);
+                    if (response != null)
+                    {
+                        var user = new UserSession();
+                        user.Username = response.Username;
+                        user.Password = response.Password;
+                        HttpContext.Session.SetString(CommonSession.USER_SESSION, JsonConvert.SerializeObject(user));
+                    }
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return Json(false);
+        }
+        [HttpPost]
+        public IActionResult Register([FromBody]RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var response = _cadidateUserService.Register(model);
+                    return Json(true);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return Json(false);
         }
     }
 }

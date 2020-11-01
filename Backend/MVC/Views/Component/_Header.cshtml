@@ -1,4 +1,7 @@
-﻿<script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+
+<script src="~/js/vendor/jquery-1.12.4.min.js"></script>
 <header>
     <div class="header-area ">
         <div id="sticky-header" class="main-header-area">
@@ -15,14 +18,26 @@
                         <div class="col-xl-6 col-lg-7">
                         </div>
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                            <div class="Appointment">
-                                <div class="phone_num d-none d-xl-block">
-                                    <a href="" class="authen__login-link">Đăng nhập</a>
-                                </div>
-                                <div class="d-none d-lg-block" data-toggle="modal" data-target="#modalLRForm">
-                                    <a class="boxed-btn3 authen__signin-link" href="" >Đăng ký</a>
-                                </div>
-                            </div>
+                            @{
+                                if (Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION) == null)
+                                {
+                                    <div class="Appointment">
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a href="" class="authen__login-link">Đăng nhập</a>
+                                        </div>
+                                        <div class="d-none d-lg-block" data-toggle="modal" data-target="#modalLRForm">
+                                            <a class="boxed-btn3 authen__signin-link" href="">Đăng ký</a>
+                                        </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    var session = JsonConvert.DeserializeObject(Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION)) as LoginViewModel;
+                                    <h1>@session.Username</h1>
+                                }
+                            }
+
                         </div>
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
@@ -34,355 +49,397 @@
     </div>
 </header>
 <style>
-    *{
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    list-style: none;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-:root{
-    --background-color:#E5101D;
-    --height-header: 190px;
-    --height-top-header: 40px;
-    --text-focus-color:#fe9705;
-    --background-color-all: #F5F5F5;
-    --background-color-foo:#232F3E;
-}
-.wrapper{
-    overflow: hidden;
-}
-aside,main,footer,.bread_crumb,.product-references{
-    background-color: var(--background-color-all);
-}
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        list-style: none;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
 
-a.on_top{
-    opacity:0.6;
-    display: none;
-    z-index: 99;
-}
-a.on_top:hover{
-    background-color: #007bb6;
-    color: #fff;
-    border: 1px solid #007bb6;
-    opacity:1;
-}
-a.on_top i{ font-size: 20px;}
-a.on_top {
-    border-radius: 6px;
-    background-color: #333333;
-    padding: 10px 12px;
-    white-space: nowrap; color: #fff;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    height: 44px;
-}
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 6;
-    padding-top: 120px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, .4);
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 70%;
-    position: relative;
-    border-radius: 5px;
-}
-.close {
-    position: absolute;
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    top:  0px;
-    right: 8px;
-}
-.close:hover,
-.close:focus {
-    cursor: pointer;
-}
-.none{
-    display: none;
-}
-.notifi-modal-content{
-    background-color: #80BB35;
-    margin: auto;
-    padding: 20px;
-    width: 22%;
-    position: relative;
-    border-radius: 5px;
-    color: white;
-}
-.notifi-modal{
-    position: fixed;
-    z-index: 6;
-    padding-top: 120px;
-    left: 34%;
-    top: 70%;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    display: none;
-}
-.close-notify {
-    position: absolute;
-    color: #ffffff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    top:  0px;
-    right: 8px;
-}
-.close-notify:hover,
-.close-notify:focus {
-    cursor: pointer;
-}
-.modal-authen{
-    position: fixed;
-    top:0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, .4);
-    display: none;
-}
-.modal__body-1,.modal__body-2{
-    width: 500px;
-    margin: auto;
-    background-color: white;
-    z-index: 1;
-    border-radius: 5px;
-    display: none;
-}
-/*! -----------------Authen Modal Register----------------- */
-.authen-form__container{
-    margin: 0 32px;
-}
-.authen-form__header{
-    padding-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.authen-form__heading{
-    padding-left: 12px;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--text-color);
-}
-.authen-form__text{
-    padding-right: 12px;
-    font-size: 18px;
-    color: var(--background-color);
-    cursor: pointer;
-    font-weight: 400;
-}
+    :root {
+        --background-color: #E5101D;
+        --height-header: 190px;
+        --height-top-header: 40px;
+        --text-focus-color: #fe9705;
+        --background-color-all: #F5F5F5;
+        --background-color-foo: #232F3E;
+    }
 
-.authen-form__input{
-    height: 40px;
-    margin-top: 16px;
-    padding:0 12px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    outline: none;
-}
-.authen-form__input:focus{
-    border-color: #888;
-}
-.authen-form__aside{
-    margin-top: 18px;
-}
-.authen-form__policy-text{
-    text-align: center;
-    padding:  0 12px;
-    color: black;
-    font-size: 12px;
-}
-.authen-form__policy-link{
-    font-size: 12px;
-    color:var(--background-color);
-}
-.authen-form__controls{
-    display: flex;
-}
-.authen-form__controls{
-    margin-top: 60px;
-    display: flex;
-    justify-content: flex-end;
-}
-.authen-form__social{
-    padding: 8px 32px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-around;
-}
-/* ? Css cho button Facebook */
-.btn.authen-form__icon-fb,.btn-size-s.authen-form__icon-fb{
-    background-color: #4267B2;
-    color: white;
-    margin-right: 8px;
-}
-.authen-form__social-icon{
-    font-size: 26px;
-    margin: auto;
-    margin-left: 8px;
-    margin-right: 18px;
-}
-.authen-form__label{
-    margin: auto 5px;
-    font-weight: 500;
-}
-/* ? Css cho button Google */
-.btn.authen-form__icon-gg,.btn-size-s.authen-form__icon-gg{
-    background-color: white;
-    color: #4267B2;
-    margin-left: 8px;
-}
-.authen-form{
-    margin-top: 100px;
-}
-/*! -----------------Authen Modal Login----------------- */
-.authen-form__help{
-    display: flex;
-    justify-content: flex-end;
-    font-size: 1.4rem;
-}
-.authen-form__help-forgot{
-    margin-right: 16px;
-    color: var(--background-color);
-    font-weight: 400;
-}
-.authen-form__help-contact{
-    margin-left: 16px;
-    color: rgb(167, 167, 167);
-    font-weight: 400;
-}
-.authen-form__separate{
-    border: 0.5px solid rgb(167, 167, 167);
-    height: 20px;
-}
-.btn{
-    width: 140px;
-    height: 34px;
-    border: none;
-    border-radius: 2px;
-    font-size: 14px;
-    font-weight: 300;
-    padding: 0;
-    margin-left: 8px;
-    cursor: pointer;
-    outline: none;
-    background-color: white;
-    line-height: 34px;
-}
-.btn.btn-normal:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-}
-.btn.btn-danger{
-    color: white;
-    background-color: var(--background-color);
-}
-.btn-size-s{
-    height: 32px;
-    font-size: 1.2rem;
-    display: flex;
-    border-radius: 3px;
-}
-.btn-with-icon{
-    width: 100%;
-    margin-left: 0;
-}
+    .wrapper {
+        overflow: hidden;
+    }
+
+    aside, main, footer, .bread_crumb, .product-references {
+        background-color: var(--background-color-all);
+    }
+
+    a.on_top {
+        opacity: 0.6;
+        display: none;
+        z-index: 99;
+    }
+
+        a.on_top:hover {
+            background-color: #007bb6;
+            color: #fff;
+            border: 1px solid #007bb6;
+            opacity: 1;
+        }
+
+        a.on_top i {
+            font-size: 20px;
+        }
+
+    a.on_top {
+        border-radius: 6px;
+        background-color: #333333;
+        padding: 10px 12px;
+        white-space: nowrap;
+        color: #fff;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        height: 44px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 6;
+        padding-top: 120px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, .4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%;
+        position: relative;
+        border-radius: 5px;
+    }
+
+    .close {
+        position: absolute;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        top: 0px;
+        right: 8px;
+    }
+
+        .close:hover,
+        .close:focus {
+            cursor: pointer;
+        }
+
+    .none {
+        display: none;
+    }
+
+    .notifi-modal-content {
+        background-color: #80BB35;
+        margin: auto;
+        padding: 20px;
+        width: 22%;
+        position: relative;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .notifi-modal {
+        position: fixed;
+        z-index: 6;
+        padding-top: 120px;
+        left: 34%;
+        top: 70%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        display: none;
+    }
+
+    .close-notify {
+        position: absolute;
+        color: #ffffff;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        top: 0px;
+        right: 8px;
+    }
+
+        .close-notify:hover,
+        .close-notify:focus {
+            cursor: pointer;
+        }
+
+    .modal-authen {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, .4);
+        display: none;
+    }
+
+    .modal__body-1, .modal__body-2 {
+        width: 500px;
+        margin: auto;
+        background-color: white;
+        z-index: 1;
+        border-radius: 5px;
+        display: none;
+    }
+    /*! -----------------Authen Modal Register----------------- */
+    .authen-form__container {
+        margin: 0 32px;
+    }
+
+    .authen-form__header {
+        padding-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .authen-form__heading {
+        padding-left: 12px;
+        font-size: 28px;
+        font-weight: 400;
+        color: var(--text-color);
+    }
+
+    .authen-form__text {
+        padding-right: 12px;
+        font-size: 18px;
+        color: var(--background-color);
+        cursor: pointer;
+        font-weight: 400;
+    }
+
+    .authen-form__input {
+        height: 40px;
+        margin-top: 16px;
+        padding: 0 12px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+        outline: none;
+    }
+
+        .authen-form__input:focus {
+            border-color: #888;
+        }
+
+    .authen-form__aside {
+        margin-top: 18px;
+    }
+
+    .authen-form__policy-text {
+        text-align: center;
+        padding: 0 12px;
+        color: black;
+        font-size: 12px;
+    }
+
+    .authen-form__policy-link {
+        font-size: 12px;
+        color: var(--background-color);
+    }
+
+    .authen-form__controls {
+        display: flex;
+    }
+
+    .authen-form__controls {
+        margin-top: 60px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .authen-form__social {
+        padding: 8px 32px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-around;
+    }
+    /* ? Css cho button Facebook */
+    .btn.authen-form__icon-fb, .btn-size-s.authen-form__icon-fb {
+        background-color: #4267B2;
+        color: white;
+        margin-right: 8px;
+    }
+
+    .authen-form__social-icon {
+        font-size: 26px;
+        margin: auto;
+        margin-left: 8px;
+        margin-right: 18px;
+    }
+
+    .authen-form__label {
+        margin: auto 5px;
+        font-weight: 500;
+    }
+    /* ? Css cho button Google */
+    .btn.authen-form__icon-gg, .btn-size-s.authen-form__icon-gg {
+        background-color: white;
+        color: #4267B2;
+        margin-left: 8px;
+    }
+
+    .authen-form {
+        margin-top: 100px;
+    }
+    /*! -----------------Authen Modal Login----------------- */
+    .authen-form__help {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 1.4rem;
+    }
+
+    .authen-form__help-forgot {
+        margin-right: 16px;
+        color: var(--background-color);
+        font-weight: 400;
+    }
+
+    .authen-form__help-contact {
+        margin-left: 16px;
+        color: rgb(167, 167, 167);
+        font-weight: 400;
+    }
+
+    .authen-form__separate {
+        border: 0.5px solid rgb(167, 167, 167);
+        height: 20px;
+    }
+
+    .btn {
+        width: 140px;
+        height: 34px;
+        border: none;
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 0;
+        margin-left: 8px;
+        cursor: pointer;
+        outline: none;
+        background-color: white;
+        line-height: 34px;
+    }
+
+        .btn.btn-normal:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn.btn-danger {
+            color: white;
+            background-color: var(--background-color);
+        }
+
+    .btn-size-s {
+        height: 32px;
+        font-size: 1.2rem;
+        display: flex;
+        border-radius: 3px;
+    }
+
+    .btn-with-icon {
+        width: 100%;
+        margin-left: 0;
+    }
 </style>
 <!-- Modal -->
-<div class="modal-authen">
+<div class="modal-authen" ng-controller="cadidateUserController">
     <div class="modal__body-1">
         <div class="modal__inner">
-            <div class="authen-form">
-                <div class="authen-form__container">
-                    <div class="authen-form__header">
-                        <h3 class="authen-form__heading">Đăng Ký</h3>
-                        <span class="authen-form__text login">Đăng Nhập</span>
+            <form role="form" method="post" ng-submit="register()">
+                <div class="authen-form">
+                    <div class="authen-form__container">
+                        <div class="authen-form__header">
+                            <h3 class="authen-form__heading">Đăng Ký</h3>
+                            <span class="authen-form__text login">Đăng Nhập</span>
+
+                        </div>
+                        <div class="authen-form__form">
+                            <div class="authen-form__group">
+                                <input type="text" ng-model="user.Username" class="authen-form__input signin-phone" placeholder="Tài khoản">
+                            </div>
+                            <div class="authen-form__group">
+                                <input type="password" ng-model="user.Password" class="authen-form__input signin-pass" placeholder="Nhập mật khẩu">
+                            </div>
+                        </div>
+                        <div class="authen-form__aside">
+                            <p class="authen-form__policy-text">
+                                Bằng việc đăng ký bạn đã đồng ý với Job Board về
+                                <a href="#" class="authen-form__policy-link">Điều khoản dịch vụ </a>&
+                                <a href="#" class="authen-form__policy-link">Chính sách bảo mật</a>
+                            </p>
+                        </div>
+                        <div class="authen-form__controls">
+                            <button type="button" class="btn btn-normal back">TRỞ LẠI</button>
+                            <button type="submit" class="btn btn-danger">ĐĂNG KÝ</button>
+                        </div>
+                    </div>
+                    <div class="authen-form__social">
 
                     </div>
-                    <div class="authen-form__form">
-                        <div class="authen-form__group">
-                            <input type="text" class="authen-form__input signin-phone" placeholder="Số điện thoại">
-                        </div>
-                        <div class="authen-form__group">
-                            <input type="password" class="authen-form__input signin-pass" placeholder="Nhập mật khẩu">
-                        </div>
-                        <div class="authen-form__group">
-                            <input type="password" class="authen-form__input signin-pass-too" placeholder="Nhập lại mật khẩu">
-                        </div>
-                    </div>
-                    <div class="authen-form__aside">
-                        <p class="authen-form__policy-text">
-                            Bằng việc đăng ký bạn đã đồng ý với Job Board về
-                            <a href="#" class="authen-form__policy-link">Điều khoản dịch vụ </a>&
-                            <a href="#" class="authen-form__policy-link">Chính sách bảo mật</a>
-                        </p>
-                    </div>
-                    <div class="authen-form__controls">
-                        <button type="button" class="btn btn-normal back">TRỞ LẠI</button>
-                        <button type="button" onclick="ValidationFormSignIn()" class="btn btn-danger">ĐĂNG KÝ</button>
-                    </div>
                 </div>
-                <div class="authen-form__social">
-                    
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="modal__body-2">
         <div class="modal__inner">
-            <div class="authen-form">
-                <div class="authen-form__container">
-                    <div class="authen-form__header">
-                        <h3 class="authen-form__heading">Đăng Nhập</h3>
-                        <span class="authen-form__text signin">Đăng Ký</span>
-                    </div>
-                    <div class="authen-form__form">
-                        <div class="authen-form__group">
-                            <input type="text" class="authen-form__input login-phone" placeholder="Số điện thoại">
+            <form role="form" method="post" ng-submit="login()">
+                <div class="authen-form">
+                    <div class="authen-form__container">
+                        <div class="authen-form__header">
+                            <h3 class="authen-form__heading">Đăng Nhập</h3>
+                            <span class="authen-form__text signin">Đăng Ký</span>
                         </div>
-                        <div class="authen-form__group">
-                            <input type="password" class="authen-form__input login-pass" placeholder="Nhập mật khẩu">
+                        <div class="authen-form__form">
+                            <div class="authen-form__group">
+                                <input type="text" ng-model="user.userName" class="authen-form__input login-phone" placeholder="Tài khoản">
+                            </div>
+                            <div class="authen-form__group">
+                                <input type="password" ng-model="user.password" class="authen-form__input login-pass" placeholder="Nhập mật khẩu">
+                            </div>
+                        </div>
+                        <div class="authen-form__aside">
+                            <div class="authen-form__help">
+                                <a href="#" class="authen-form__link authen-form__help-forgot">Quên mật khẩu</a>
+                                <span class="authen-form__separate"></span>
+                                <a href="#" class="authen-form__link authen-form__help-contact">Cần trợ giúp?</a>
+                            </div>
+                        </div>
+                        <div class="authen-form__controls">
+                            <button type="button" class="btn btn-normal back">TRỞ LẠI</button>
+                            <button type="submit" class="btn btn-danger">ĐĂNG NHẬP</button>
                         </div>
                     </div>
-                    <div class="authen-form__aside">
-                        <div class="authen-form__help">
-                            <a href="#" class="authen-form__link authen-form__help-forgot">Quên mật khẩu</a>
-                            <span class="authen-form__separate"></span>
-                            <a href="#" class="authen-form__link authen-form__help-contact">Cần trợ giúp?</a>
-                        </div>
-                    </div>
-                    <div class="authen-form__controls">
-                        <button type="button" class="btn btn-normal back">TRỞ LẠI</button>
-                        <button type="button" onclick="ValidationFormLogin()" class="btn btn-danger">ĐĂNG NHẬP</button>
+                    <div class="authen-form__social">
+
                     </div>
                 </div>
-                <div class="authen-form__social">
-                    
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
