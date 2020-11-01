@@ -10,7 +10,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-2">
                             <div class="logo" style="margin-top:10px">
-                                <a href="index.html">
+                                <a href="/Home/Index">
                                     <img src="~/img/logo.png" alt="">
                                 </a>
                             </div>
@@ -33,8 +33,23 @@
                                 }
                                 else
                                 {
-                                    var session = JsonConvert.DeserializeObject(Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION)) as LoginViewModel;
-                                    <h1>@session.Username</h1>
+                                    var session = JsonConvert.DeserializeObject<CadidateUserViewModel>(Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION));
+                                    if (session.UserName != null)
+                                    {
+                                        <div class="dropdown" style="margin-left:70px">
+                                            <a class="btn dropdown-toggle" style="width:171px;background-color:#00D363;color:white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                                                @session.UserName
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                                                <a class="dropdown-item" href="#">Việc làm đã lưu</a>
+                                                <a class="dropdown-item" href="#">Việc làm ứng tuyển</a>
+                                                <a class="dropdown-item" href="#">Thông báo tuyển dụng</a>
+                                                <a class="dropdown-item" href="/CadidateUser/LogOut">Đăng xuất</a>
+                                            </div>
+                                        </div>
+                                    }
                                 }
                             }
 

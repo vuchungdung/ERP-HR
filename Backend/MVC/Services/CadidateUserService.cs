@@ -16,14 +16,14 @@ namespace MVC.Services
         {
             _helper = helper;
         }
-        public LoginViewModel Login(LoginViewModel model)
+        public CadidateUserViewModel Login(LoginViewModel model)
         {
             try
             {
                 var dt = _helper.ExecuteSProcedure("SP_CADIDATE_USER_LOGIN",
                     "@USERNAME", model.Username,
                     "@PASSWORD", model.Password);
-                var result = dt.Select().ElementAt(0).GetItem<LoginViewModel>();
+                var result = dt.ConvertTo<CadidateUserViewModel>().ToList().ElementAt(0);
                 return result;
             }
             catch(Exception ex)

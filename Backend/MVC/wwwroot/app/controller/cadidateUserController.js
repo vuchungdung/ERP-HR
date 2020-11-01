@@ -21,7 +21,9 @@
 
         $scope.login = function () {
             ajaxService.post('/CadidateUser/Login', $scope.user, function (res) {
-                console.log(res.data);
+                if (res.data == true) {
+                    window.location.reload();
+                }
             }, function (err) {
                 console.log(err);
             });

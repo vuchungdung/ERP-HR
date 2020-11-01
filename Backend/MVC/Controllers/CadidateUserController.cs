@@ -32,11 +32,11 @@ namespace MVC.Controllers
                     if (response != null)
                     {
                         var user = new UserSession();
-                        user.Username = response.Username;
-                        user.Password = response.Password;
+                        user.Username = response.UserName;
+                        user.UserId = response.UserId;
                         HttpContext.Session.SetString(CommonSession.USER_SESSION, JsonConvert.SerializeObject(user));
                     }
-                    return RedirectToAction("Index", "Home");
+                    return Json(true);
                 }
                 catch (Exception ex)
                 {
@@ -61,6 +61,11 @@ namespace MVC.Controllers
                 }
             }
             return Json(false);
+        }
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

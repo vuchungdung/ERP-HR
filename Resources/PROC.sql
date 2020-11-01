@@ -6,7 +6,7 @@ CREATE PROC SP_CADIDATE_USER_LOGIN
 @PASSWORD NVARCHAR(120)
 AS
     BEGIN
-        SELECT A.UserName,A.UserId,A.Phone,A.Email,A.CadidateId
+        SELECT A.UserName,A.UserId
         FROM DBO.CadidateUsers AS A
         WHERE A.UserName = @USERNAME AND A.Password = @PASSWORD;
     END;
@@ -128,3 +128,4 @@ AS
 			ORDER BY JOB.CreateDate DESC
 	END;
 GO
+

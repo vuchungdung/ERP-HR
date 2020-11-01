@@ -9,6 +9,6 @@ namespace MVC.Services.Interfaces
     public interface ICadidateUserService
     {
         LoginViewModel Register(RegisterViewModel model);
-        LoginViewModel Login(LoginViewModel model);
+        CadidateUserViewModel Login(LoginViewModel model);
     }
 }
