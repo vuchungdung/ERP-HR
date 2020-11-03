@@ -1,9 +1,9 @@
-﻿<div class="catagory_area">
+﻿<div class="catagory_area" ng-controller="skillController">
     <div class="container">
         <div class="row cat_search">
             <div class="col-lg-7 col-md-9">
                 <div class="single_input">
-                    <input type="text" placeholder="Công việc tìm kiếm" ng-model="">
+                    <input type="text" placeholder="Công việc tìm kiếm" ng-model="keyword">
                 </div>
             </div>
             <div class="col-lg-2 col-md-3">
@@ -19,16 +19,16 @@
             </div>
             <div class="col-lg-3 col-md-12">
                 <div class="job_btn">
-                    <a href="/JobDescription/Index" class="boxed-btn3">Tìm kiếm</a>
+                    <a href="/JobDescription/Index" ng-click="setKeyword()" class="boxed-btn3">Tìm kiếm</a>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12" ng-controller="skillController">
+            <div class="col-lg-12">
                 <div class="popular_search d-flex align-items-center">
                     <span>Công nghệ:</span>
                     <ul ng-repeat="item in listSkill">
-                        <li><a href="#">{{item.name}}</a></li>
+                        <li><a href="">{{item.name}}</a></li>
                     </ul>
                 </div>
             </div>

@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\app\controller\homeController.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Services\JobDescriptionService.cs~RF21802df.TMP" />
   </ItemGroup>
 

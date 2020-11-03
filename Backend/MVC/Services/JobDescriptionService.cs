@@ -49,7 +49,7 @@ namespace MVC.Services
         {
             try
             {
-                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.Page);
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.PageIndex);
                 var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
                 if (!String.IsNullOrEmpty(model.Keyword))
                 {

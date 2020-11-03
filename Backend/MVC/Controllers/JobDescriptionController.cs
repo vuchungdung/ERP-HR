@@ -21,7 +21,7 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetAllPaging(PageViewModel model)
+        public IActionResult GetAllPaging([FromBody]PageViewModel model)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAll()
+        public IActionResult GetAll()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MVC.Controllers
             }
         }
         [HttpGet]
-        public JsonResult GetAllNew()
+        public IActionResult GetAllNew()
         {
             try
             {

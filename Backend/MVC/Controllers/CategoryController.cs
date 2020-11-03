@@ -20,7 +20,7 @@ namespace MVC.Controllers
             return View();
         }
         [HttpGet]
-        public JsonResult GetAll()
+        public IActionResult GetAll()
         {
             try
             {

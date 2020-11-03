@@ -5,6 +5,12 @@
 
     function skillController($scope, ajaxService) {
 
+        if (localStorage.getItem('keyword') == null) {
+            $scope.keyword = '';
+        }
+        else {
+            $scope.keyword = localStorage.getItem('keyword');
+        }
         $scope.getAllSkill = function () {
             ajaxService.get('/Skill/GetAll', null, function (res) {
                 $scope.listSkill = res.data;
@@ -14,5 +20,9 @@
             })
         }
         $scope.getAllSkill();
+
+        $scope.setKeyword = function () {
+            localStorage.setItem('keyword', $scope.keyword);
+        }
     }
 })(angular.module('erp'));
