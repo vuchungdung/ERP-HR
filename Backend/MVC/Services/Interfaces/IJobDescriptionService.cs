@@ -9,5 +9,9 @@ namespace MVC.Services.Interfaces
     public interface IJobDescriptionService
     {
         PageResult<JobDescriptionViewModel> GetJobPaging(PageViewModel model);
+
+        List<JobDescriptionViewModel> GetAll();
+
+        List<JobDescriptionViewModel> GetAllNew();
     }
 }

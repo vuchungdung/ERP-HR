@@ -7,7 +7,7 @@ namespace MVC.Models
 {
     public class PageViewModel
     {
-        public int Page { get; set; }
+        public int PageIndex { get; set; }
         public int Pagesize { get; set; }
         public string Keyword { get; set; }
         public int? Categoryid { get; set; }

@@ -5,14 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\app\controller\homeController.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Services\JobDescriptionService.cs~RF21802df.TMP" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
@@ -24,10 +21,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assests\" />
+    <Folder Include="Views\CadidateUser\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,11 +17,39 @@ namespace MVC.Services
             _helper = helper;
         }
 
+        public List<JobDescriptionViewModel> GetAll()
+        {
+            try
+            {
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_ALL");
+                var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
+                return listItems;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<JobDescriptionViewModel> GetAllNew()
+        {
+            try
+            {
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_ALL_NEW");
+                var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
+                return listItems;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public PageResult<JobDescriptionViewModel> GetJobPaging(PageViewModel model)
         {
             try
             {
-                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.Page);
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING","@PAGESIZE",model.Pagesize,"@PAGE",model.PageIndex);
                 var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
                 if (!String.IsNullOrEmpty(model.Keyword))
                 {

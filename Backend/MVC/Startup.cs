@@ -31,12 +31,14 @@ namespace MVC
             services.AddDbContextPool<ERPContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddSession();
             services.AddMvc();
             services.AddScoped<IDatabaseHelper, DatabaseHelper>();
             services.AddScoped<IJobDescriptionService, JobDescriptionService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICadidateUserService, CadidateUserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +60,7 @@ namespace MVC
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -21,11 +21,38 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetAllPaging(PageViewModel model)
+        public IActionResult GetAllPaging([FromBody]PageViewModel model)
         {
             try
             {
                 var response = _jobDescriptionService.GetJobPaging(model);
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var response = _jobDescriptionService.GetAll();
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public IActionResult GetAllNew()
+        {
+            try
+            {
+                var response = _jobDescriptionService.GetAllNew();
                 return Json(response);
             }
             catch(Exception ex)

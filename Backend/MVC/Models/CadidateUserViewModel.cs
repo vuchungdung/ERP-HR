@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace MVC.Models
 {
-    public class RegisterViewModel
+    public class CadidateUserViewModel
     {
-        public string Password { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
+        public int UserId { get; set; }
     }
 }
