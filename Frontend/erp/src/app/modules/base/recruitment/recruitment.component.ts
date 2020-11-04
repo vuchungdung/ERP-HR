@@ -17,7 +17,7 @@ export class RecruitmentComponent implements OnInit {
 
   }
   OnInsertClick(){
-    this.form.insertRecruit();
+    this.form.saveFormRecruit();
   }
 
   showTable(){

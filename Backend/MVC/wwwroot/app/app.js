@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('erp', []).value('keyword', '');
+    angular.module('erp', []);
 })();

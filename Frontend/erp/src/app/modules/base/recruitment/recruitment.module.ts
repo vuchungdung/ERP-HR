@@ -20,6 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { RecruitmentRoutingModule } from './recruitment-routing.module';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { RecruitmentService } from './recruitment.service';
+import { JobCategoryService } from '../config-system/job-category/job-category.service';
+import { SkillService } from '../config-system/skill/skill.service';
 
 @NgModule({
   declarations: [RecruitmentComponent, FormComponent, TableComponent],
@@ -44,7 +46,9 @@ import { RecruitmentService } from './recruitment.service';
     CKEditorModule
   ],
   providers:[
-    RecruitmentService
+    RecruitmentService,
+    SkillService,
+    JobCategoryService,
   ]
 })
 export class RecruitmentModule { }

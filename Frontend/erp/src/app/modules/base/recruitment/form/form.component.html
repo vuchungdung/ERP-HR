@@ -1,6 +1,6 @@
 <div class="page-container" style="padding: 10px 20px;" [class.opened]="showForm()">
   <div class="row">
-    <form novalidate>
+    <form novalidate [formGroup]="recruitmentForm">
       <div class="panel panel-flat">
         <div class="panel-body">
           <div style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:10px">
@@ -10,22 +10,21 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Tiêu đề tin tuyển dụng</label>
-                <input type="text" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                <input type="text" class="form-input" formControlName="title" placeholder="Nhập tiêu đề tin tuyển dụng" />
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ yêu cầu</label>
-                <mat-select class="form-input" style="height: 36px; line-height: 36px;">
-                  <mat-option>None</mat-option>
-                  <!-- <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option> -->
+                <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
+                  <mat-option *ngFor="let option of listSkills" value={{option.categoryId}}>{{option.name}}</mat-option>
                 </mat-select>
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Lợi ích khi tham gia</label>
-                <ckeditor></ckeditor>
+                <ckeditor formControlName="benefit"></ckeditor>
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Mô tả công việc</label>
-                <ckeditor></ckeditor>
+                <ckeditor formControlName="description"></ckeditor>
               </div>
             </div>
             <div class="col-md-6">
@@ -40,9 +39,9 @@
                   </div>
                   <div class="col-lg-6">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
-                    <mat-select class="form-input" style="height: 36px; line-height: 36px;">
+                    <mat-select class="form-input" formControlName="category" style="height: 36px; line-height: 36px;">
                       <mat-option>None</mat-option>
-                      <!-- <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option> -->
+                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
                     </mat-select>
                   </div>
                 </div>
@@ -51,21 +50,21 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mức lương tối thiểu</label>
-                    <input type="text" class="form-input" placeholder="Mức lương tối thiểu" />
+                    <input type="text" class="form-input" formControlName="offerfrom" placeholder="Mức lương tối thiểu" />
                   </div>
                   <div class="col-lg-6">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mức lương tối đa</label>
-                    <input type="text" class="form-input" placeholder="Mức lương tối đa" />
+                    <input type="text" class="form-input" formControlName="offerto" placeholder="Mức lương tối đa" />
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Yêu cầu công việc</label>
-                <ckeditor></ckeditor>
+                <ckeditor formControlName="requestJob"></ckeditor>
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Lý do nên làm việc tại đây</label>
-                <ckeditor></ckeditor>
+                <ckeditor formControlName="endow"></ckeditor>
               </div>
             </div>
           </div>
@@ -73,7 +72,7 @@
             <button mat-raised-button style="margin-right: 5px;" (click)="onBack()" class="btn-interview" color="primary">
               <i class="icon-arrow-left13"></i>Quay lại
             </button>
-            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
+            <button mat-raised-button style="margin-right: 5px;" (click)="saveFormRecruit()" class="btn-interview" color="primary">
               Lưu tin tuyển dụng<i class="icon-arrow-right14"></i>   
             </button>
           </div>
