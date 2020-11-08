@@ -8,6 +8,7 @@ import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validators';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { environment } from 'src/environments/environment';
 import { JobCategoryService } from '../../config-system/job-category/job-category.service';
 import { ProviderService } from '../../config-system/provider/provider.service';
@@ -23,7 +24,7 @@ import { CadidateService } from '../cadidate.service';
 export class FormComponent implements OnInit {
 
   @Output() onUploadFinished = new EventEmitter();
-  @Output() isReLoadCadidate = new EventEmitter();
+  @Output() isReloadTable = new EventEmitter();
   @Output() isShow = new EventEmitter<boolean>();
 
   public cadidateForm : FormGroup;
@@ -46,7 +47,8 @@ export class FormComponent implements OnInit {
     private cadidateService: CadidateService,
     private skillService: SkillService,
     private providerService: ProviderService,
-    private jobcategoryService: JobCategoryService
+    private jobcategoryService: JobCategoryService,
+    private notify : NotificationService
   ) { }
 
   url = {
@@ -101,7 +103,6 @@ export class FormComponent implements OnInit {
     );
   }
   initCadidateForm(){
-    debugger;
     if(this.action == FormStatus.Insert){
       this.isShow.emit(false);
       this.cadidateForm.get('name').reset();
@@ -124,8 +125,8 @@ export class FormComponent implements OnInit {
   }
 
   saveForm(){
-    debugger
     if(this.cadidateForm.invalid){
+      this.notify.showWarning("Vui lòng nhập thông tin!","Thông báo");
       return;
     }
     if(this.action == FormStatus.Insert){
@@ -135,7 +136,13 @@ export class FormComponent implements OnInit {
         formData.append('files', file, file.name);
       });
       this.cadidateService.insert(formData).subscribe((res:ResponseModel)=>{
-
+        if(res.status == ResponseStatus.success){
+          this.isShow.emit(true);
+          this.isReloadTable.emit(true);
+          this.notify.showSuccess("Thêm mới thành công!","Thông báo");
+          this.action = FormStatus.Insert;
+          this.initCadidateForm();
+        }
       })
     }
   }

@@ -1,4 +1,4 @@
-<app-form (isShow)="isShowTable($event)"></app-form>
+<app-form (isShow)="isShowTable($event)" (isReloadTable)="reloadTable($event)"></app-form>
 <div class="page-container" style="padding: 10px 20px;" [class.opened]="showTable()">
   <div class="row">
     <div class="panel panel-flat" style="margin-bottom:10px">
@@ -8,22 +8,22 @@
         </div>
         <div class="options">
           <ng-container>
-            <button mat-raised-button (click)="sendMail()" style="margin-right: 5px;" class="btn-interview" color="primary">
+            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-envelop5 icon"></i>Gửi email
             </button>
-            <button mat-raised-button (click)="addTag()" style="margin-right: 5px;" class="btn-interview" color="primary">
+            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-price-tag2 icon"></i>Gắn thẻ
             </button>
             <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-bin icon"></i>Xóa ứng viên
             </button>
           </ng-container>
-          <button mat-raised-button (click)="openChart()" style="margin-right: 5px;" class="btn-interview" color="primary">
+          <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
             <i class="icon-pie-chart2 icon"></i>Biểu đồ ứng viên
           </button>
           <button mat-raised-button (click)="insertCadidate()" style="margin-right: 5px;" class="btn-interview" color="primary">
             <i class="icon-user-plus icon"></i>Thêm ứng viên mới
-          </button>        
+          </button>
           <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
             <i class="icon-folder-download2 icon"></i>In danh sách
           </button>
@@ -42,17 +42,96 @@
           </div>
           <button class="col-md-1 btn-s" mat-flat-button color="warn">
             Tìm kiếm
-          </button>  
+          </button>
           <div class="col-md-2" style="padding: 0;">
-          </div>        
+          </div>
         </div>
       </div>
     </div>
     <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
-          <app-table></app-table>
-        </div>  
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell style="padding-top:6px;" *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell style="padding-top:6px;" *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="changeCheckBox($event,row)" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="img">
+              <th mat-header-cell *matHeaderCellDef>Hình ảnh</th>
+              <td mat-cell *matCellDef="let element"><img src="https://localhost:44379/{{element.img}}" style="width:40px;height:40px;padding: 2px;border-radius: 50%;" /></td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+              <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
+              <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
+              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container>
+            <ng-container matColumnDef="degree">
+              <th mat-header-cell *matHeaderCellDef>Trình độ</th>
+              <td mat-cell *matCellDef="let element"> {{element.degree}} </td>
+            </ng-container>
+            <ng-container matColumnDef="experience">
+              <th mat-header-cell *matHeaderCellDef>Kinh nghiệm</th>
+              <td mat-cell *matCellDef="let element"> {{element.experience}} </td>
+            </ng-container>
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef>Lĩnh vực</th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+            </ng-container>
+            <ng-container matColumnDef="source">
+              <th mat-header-cell *matHeaderCellDef>Nguồn</th>
+              <td mat-cell *matCellDef="let element"> {{element.provider}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+            <ng-container matColumnDef="tag">
+              <th mat-header-cell *matHeaderCellDef>Gắn thẻ</th>
+              <td mat-cell *matCellDef="let element"> {{element.tag}} </td>
+            </ng-container>
+            <ng-container matColumnDef="options">
+              <th mat-header-cell *matHeaderCellDef style="width:1%;text-align: center;padding-right: 0px;line-height: 1px;">#</th>
+              <td mat-cell *matCellDef="let element" style="padding-right: 0px;">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="deleteCadidate()">
+                    <mat-icon>delete</mat-icon>
+                    <span>Xóa dữ liệu</span>
+                  </button>
+                  <button mat-menu-item (click)="updateCadidate()">
+                    <mat-icon>edit</mat-icon>
+                    <span>Cập nhật</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
       </div>
     </div>
   </div>

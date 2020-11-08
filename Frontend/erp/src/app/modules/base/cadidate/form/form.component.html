@@ -11,7 +11,7 @@
               <div class="avt">
                 <span class="avt-text">Ảnh đại diện</span>
                 <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input"/>
-                <img *ngIf="img" [src]="createImgPath()" style="width:62.5%; height:101%;position: absolute;top: -1px;left: 10px;border-radius: 50%;">
+                <img *ngIf="img" [src]="createImgPath()" style="width:47.5%; height:81%;position: absolute;top: 24px;left: 50px;border-radius: 50%;">
               </div>
               <div class="icon-edit">
                 <i class="icon-pencil icon-p"></i>
@@ -162,9 +162,9 @@
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between">
-            <button mat-raised-button style="margin-right: 5px;" (click)="onBack()"  class="btn-interview" color="primary">
+            <a mat-raised-button style="margin-right: 5px;" (click)="onBack()"  class="btn-interview" color="primary">
               <i class="icon-arrow-left13"></i>Quay lại
-            </button>
+            </a>
             <button mat-raised-button style="margin-right: 5px;"  class="btn-interview" color="primary">
               Lưu tin tuyển dụng<i class="icon-arrow-right14"></i>   
             </button>
