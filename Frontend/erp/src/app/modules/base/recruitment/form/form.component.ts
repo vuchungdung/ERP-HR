@@ -55,6 +55,8 @@ export class FormComponent implements OnInit {
     return true;
   }
   
+  
+
   saveFormRecruit(){
     debugger
     this.action = FormStatus.Insert;

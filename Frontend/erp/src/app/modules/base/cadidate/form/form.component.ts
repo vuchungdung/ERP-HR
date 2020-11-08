@@ -1,5 +1,5 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Output } from '@angular/core';
+import { Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { AppValidator } from 'src/app/core/validators/app.validators';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { environment } from 'src/environments/environment';
 import { JobCategoryService } from '../../config-system/job-category/job-category.service';
 import { ProviderService } from '../../config-system/provider/provider.service';
@@ -23,13 +24,13 @@ import { CadidateService } from '../cadidate.service';
 export class FormComponent implements OnInit {
 
   @Output() onUploadFinished = new EventEmitter();
-  @Output() isReLoadCadidate = new EventEmitter();
+  @Output() isReloadTable = new EventEmitter();
+  @Output() isShow = new EventEmitter<boolean>();
 
   public cadidateForm : FormGroup;
   public progress: number;
   public item: Cadidate;
   public id: number;
-  public action: FormStatus;
   public img: string;
   public pdf: any;
   public resFile : any;
@@ -38,16 +39,16 @@ export class FormComponent implements OnInit {
   public listSkills: any[];
   public listCategorys: any[];
   public listProviders: any[];
-
+  public action : FormStatus = FormStatus.Unknow;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private dialogRef: MatDialogRef<FormComponent>,
     private cadidateService: CadidateService,
     private skillService: SkillService,
     private providerService: ProviderService,
-    private jobcategoryService: JobCategoryService
+    private jobcategoryService: JobCategoryService,
+    private notify : NotificationService
   ) { }
 
   url = {
@@ -71,7 +72,6 @@ export class FormComponent implements OnInit {
       applydate:['',[Validators.required]],
       experience:['',Validators.required],
     });
-    this.initCadidateForm();
     this.dropdownSkill();
     this.dropdownProvider();
     this.dropdownCategory();
@@ -99,11 +99,12 @@ export class FormComponent implements OnInit {
           }
           console.log(this.listFile);
         }
-      });
+      }
+    );
   }
   initCadidateForm(){
-    const action = this.dialogRef.componentInstance.action;
-    if(action == FormStatus.Insert){
+    if(this.action == FormStatus.Insert){
+      this.isShow.emit(false);
       this.cadidateForm.get('name').reset();
       this.cadidateForm.get('dob').reset();
       this.cadidateForm.get('email').reset();
@@ -119,29 +120,36 @@ export class FormComponent implements OnInit {
       this.cadidateForm.get('major').reset();
       this.cadidateForm.get('experience').reset();
     }
-    else if(action == FormStatus.Update){
-      const id = this.dialogRef.componentInstance.id;
+    else if(this.action == FormStatus.Update){
     }
   }
 
   saveForm(){
-    debugger
-    const action = this.dialogRef.componentInstance.action;
     if(this.cadidateForm.invalid){
+      this.notify.showWarning("Vui lòng nhập thông tin!","Thông báo");
       return;
     }
-    if(action == FormStatus.Insert){
+    if(this.action == FormStatus.Insert){
       const formValues = this.cadidateForm.getRawValue();
       const formData = this.ToFormData(formValues);
       this.listFile.forEach(file => {
         formData.append('files', file, file.name);
       });
       this.cadidateService.insert(formData).subscribe((res:ResponseModel)=>{
-
+        if(res.status == ResponseStatus.success){
+          this.isShow.emit(true);
+          this.isReloadTable.emit(true);
+          this.notify.showSuccess("Thêm mới thành công!","Thông báo");
+          this.action = FormStatus.Insert;
+          this.initCadidateForm();
+        }
       })
     }
   }
-
+  openFormInsert(){
+    this.action = FormStatus.Insert;
+    this.initCadidateForm();
+  }
   getItem(){
 
   }
@@ -200,5 +208,16 @@ export class FormComponent implements OnInit {
         console.log(res.result);
       }
     })
+  }
+
+  showForm(){
+    if(this.action == FormStatus.Unknow)
+      return false;
+    return true;
+  }
+
+  onBack(){
+    this.action = FormStatus.Unknow;
+    this.isShow.emit(true);
   }
 }

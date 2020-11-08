@@ -144,7 +144,6 @@ namespace Services.Cadidates.Implement
             try
             {
                 Cadidate md = new Cadidate();
-                var cadidateId = await _sequenceService.GetCadidateNewId();
                 md.Name = model.Name;
                 md.Email = model.Email;
                 md.Address = model.Address;
@@ -161,6 +160,11 @@ namespace Services.Cadidates.Implement
                 md.Skill = model.Skill;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                await _context.CadidateRepository.AddAsync(md);
+                await _context.SaveChangesAsync();
+
+                var cadidateId = await _sequenceService.GetCadidateNewId();
 
                 foreach (var item in model.Files)
                 {
@@ -184,9 +188,6 @@ namespace Services.Cadidates.Implement
                     _context.FileCVRepository.Add(f);
                     _context.SaveChanges();
                 }
-
-                await _context.CadidateRepository.AddAsync(md);
-                await _context.SaveChangesAsync();
 
                 response.Status = ResponseStatus.Success;
             }

@@ -8,8 +8,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
-import { TableComponent } from './table/table.component';
 import { FormComponent } from './form/form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -22,11 +20,11 @@ import { CadidateService } from './cadidate.service';
 import { SkillService } from '../config-system/skill/skill.service';
 import { JobCategoryService } from '../config-system/job-category/job-category.service';
 import { ProviderService } from '../config-system/provider/provider.service';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 
 @NgModule({
   declarations: [
-    CadidateComponent, 
-    TableComponent,
+    CadidateComponent,
     FormComponent
   ],
   imports: [
@@ -40,7 +38,6 @@ import { ProviderService } from '../config-system/provider/provider.service';
     MatPaginatorModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,
@@ -52,7 +49,8 @@ import { ProviderService } from '../config-system/provider/provider.service';
     CadidateService,
     SkillService,
     JobCategoryService,
-    ProviderService
+    ProviderService,
+    NotificationService
   ]
 })
 export class CadidateModule { }
