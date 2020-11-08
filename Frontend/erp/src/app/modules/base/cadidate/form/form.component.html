@@ -1,166 +1,176 @@
-<div class="page-container" style="padding-bottom: 20px;padding-top: 20px;">
-  <h2 mat-dialog-title>Thêm mới ứng viên</h2>
-  <mat-dialog-content class="mat-typography scroll-bar" style="width: 100%;overflow: hidden;">
+<div class="page-container" style="padding: 10px 20px;" [class.opened]="showForm()">
+  <div class="row">
     <form [formGroup] ="cadidateForm" (submit)="saveForm()">
-      <div class="row">
-        <div class="col-lg-2">
-          <div class="avt">
-            <span class="avt-text">Ảnh đại diện</span>
-            <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input"/>
-            <img *ngIf="img" [src]="createImgPath()" style="width:62.5%; height:101%;position: absolute;top: -1px;left: 10px;border-radius: 50%;">
+      <div class="panel panel-flat">
+        <div class="panel-body">
+          <div style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:10px">
+            <span style="font-size:16px;"><i class="icon-reading position-left"></i> Thông tin tin tuyển dụng</span>
           </div>
-          <div class="icon-edit">
-            <i class="icon-pencil icon-p"></i>
-          </div>
-        </div>
-        <div class="col-lg-5" style="margin-left: -20px;">
-          <div class="form-group">
-            <label class="lb-input"><i class="icon-arrow-small-right"></i>Họ và tên</label>
-            <input type="text" formControlName="name" class="form-input" placeholder="Nhập họ và tên" />
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày sinh</label>
-                <input matInput formControlName="dob" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
-                <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
-                  <mat-icon matDatepickerToggleIcon>today</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          <div class="row">
+            <div class="col-lg-2">
+              <div class="avt">
+                <span class="avt-text">Ảnh đại diện</span>
+                <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input"/>
+                <img *ngIf="img" [src]="createImgPath()" style="width:62.5%; height:101%;position: absolute;top: -1px;left: 10px;border-radius: 50%;">
               </div>
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Giới tính</label>
-                <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
-                  <mat-radio-group formControlName="gender">
-                    <mat-radio-button [value]=0>Nam</mat-radio-button>
-                    <mat-radio-button style="margin-left:20px" [value]=1>Nữ</mat-radio-button>
-                  </mat-radio-group>
-                </div>
+              <div class="icon-edit">
+                <i class="icon-pencil icon-p"></i>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Số điện thoại</label>
-                <input type="text" formControlName="phone" class="form-input" placeholder="Nhập SĐT" />
+            <div class="col-lg-5" style="margin-left: -20px;">
+              <div class="form-group">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Họ và tên</label>
+                <input type="text" formControlName="name" class="form-input" placeholder="Nhập họ và tên" />
               </div>
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Email</label>
-                <input type="text" formControlName="email" class="form-input" placeholder="Nhập email" />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa chỉ</label>
-            <input type="text" class="form-input" formControlName="address" placeholder="Nhập địa chỉ" />
-          </div>  
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-5">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Trình độ đào tạo</label>
-                <input type="text" class="form-input" formControlName="degree" placeholder="Trình độ đào tạo" />
-                <!-- <mat-select>
-                  <mat-option>
-                    Chưa có dữ liệu
-                  </mat-option>
-                </mat-select> -->
-              </div>
-              <div class="col-lg-7">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Nơi đào tạo</label>
-                <input type="text" class="form-input" formControlName="university" placeholder="Nơi đào tạo" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Chuyên ngành đào tạo</label>
-                <input type="text" class="form-input" formControlName="major" placeholder="Nhập chuyên ngành" />
-              </div>
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
-                <mat-select class="form-input" formControlName="categoryid" style="height: 36px; line-height: 36px;">
-                  <mat-option>None</mat-option>
-                  <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
-                </mat-select>
-              </div>
-            </div>
-          </div>  
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
-                <input matInput formControlName="applydate" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
-                <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
-                  <mat-icon matDatepickerToggleIcon>today</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker3 color="primary"></mat-datepicker>
-              </div>
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
-                <mat-select class="form-input" formControlName="providerid" style="height: 36px; line-height: 36px;">
-                  <mat-option>None</mat-option>
-                  <mat-option *ngFor="let option of listProviders" value={{option.id}}>{{option.name}}</mat-option>
-                </mat-select>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
-                <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
-                  <mat-option>None</mat-option>
-                  <mat-option *ngFor="let option of listSkills" value={{option.skillId}}>{{option.name}}</mat-option>
-                </mat-select>
-              </div>
-              <div class="col-lg-6">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Số năm kinh nghiệm</label>
-                <input type="text" class="form-input" formControlName="experience" placeholder="Số năm kinh nghiệm" />
-              </div>
-            </div>
-          </div>  
-          <div class="form-group">
-            <div class="file">
-              <div *ngIf="!pdf">
-                <div class="file-text">
-                  <p class="text">Bấm vào đây để tải lên CV</p>
-                  <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
-                </div>
-              </div>
-              <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input-cv"/>
-              <div *ngIf="pdf">
-                <div class="file-text" 
-                style="z-index: 10;
-                      width: 100%;
-                      height: 100%;
-                      background-color: #f5f5f5;
-                      position: absolute;
-                      top: 0;
-                      left: 0;
-                      border-radius: 4px;
-                      display: flex;
-                      justify-content: space-around;">
-                  <div style="width:100px">
-                    <img style="width:100%;padding-top:6px" src="../../../../../assets/images/icon-pdf.png" alt="#">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày sinh</label>
+                    <input matInput formControlName="dob" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
+                    <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
                   </div>
-                  <div style="margin-left: -50%;padding-top: 24px;font: 14px;">
-                    <p class="text" style="margin-bottom: 0px;">{{pdf.name}}</p>
-                    <span class="text">{{pdf.size}}MB</span>
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Giới tính</label>
+                    <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
+                      <mat-radio-group formControlName="gender">
+                        <mat-radio-button [value]=0>Nam</mat-radio-button>
+                        <mat-radio-button style="margin-left:20px" [value]=1>Nữ</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Số điện thoại</label>
+                    <input type="text" formControlName="phone" class="form-input" placeholder="Nhập SĐT" />
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Email</label>
+                    <input type="text" formControlName="email" class="form-input" placeholder="Nhập email" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa chỉ</label>
+                <input type="text" class="form-input" formControlName="address" placeholder="Nhập địa chỉ" />
+              </div>  
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Trình độ đào tạo</label>
+                    <input type="text" class="form-input" formControlName="degree" placeholder="Trình độ đào tạo" />
+                    <!-- <mat-select>
+                      <mat-option>
+                        Chưa có dữ liệu
+                      </mat-option>
+                    </mat-select> -->
+                  </div>
+                  <div class="col-lg-7">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Nơi đào tạo</label>
+                    <input type="text" class="form-input" formControlName="university" placeholder="Nơi đào tạo" />
                   </div>
                 </div>
               </div>
             </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Chuyên ngành đào tạo</label>
+                    <input type="text" class="form-input" formControlName="major" placeholder="Nhập chuyên ngành" />
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
+                    <mat-select class="form-input" formControlName="categoryid" style="height: 36px; line-height: 36px;">
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>  
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Ngày ứng tuyển</label>
+                    <input matInput formControlName="applydate" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
+                    <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker3 color="primary"></mat-datepicker>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Nguồn ứng viên</label>
+                    <mat-select class="form-input" formControlName="providerid" style="height: 36px; line-height: 36px;">
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let option of listProviders" value={{option.id}}>{{option.name}}</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
+                    <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let option of listSkills" value={{option.skillId}}>{{option.name}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Số năm kinh nghiệm</label>
+                    <input type="text" class="form-input" formControlName="experience" placeholder="Số năm kinh nghiệm" />
+                  </div>
+                </div>
+              </div>  
+              <div class="form-group">
+                <div class="file">
+                  <div *ngIf="!pdf">
+                    <div class="file-text">
+                      <p class="text">Bấm vào đây để tải lên CV</p>
+                      <span class="text-bot">Chấp nhận file .pdf và .doc (Dung lượng nhỏ hơn 15MB)</span>
+                    </div>
+                  </div>
+                  <input type="file" #file (change)="uploadFile($event.target.files)" class="hidden-input-cv"/>
+                  <div *ngIf="pdf">
+                    <div class="file-text" 
+                    style="z-index: 10;
+                          width: 100%;
+                          height: 100%;
+                          background-color: #f5f5f5;
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          border-radius: 4px;
+                          display: flex;
+                          justify-content: space-around;">
+                      <div style="width:100px">
+                        <img style="width:100%;padding-top:6px" src="../../../../../assets/images/icon-pdf.png" alt="#">
+                      </div>
+                      <div style="margin-left: -50%;padding-top: 24px;font: 14px;">
+                        <p class="text" style="margin-bottom: 0px;">{{pdf.name}}</p>
+                        <span class="text">{{pdf.size}}MB</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <button mat-raised-button style="margin-right: 5px;" (click)="onBack()"  class="btn-interview" color="primary">
+              <i class="icon-arrow-left13"></i>Quay lại
+            </button>
+            <button mat-raised-button style="margin-right: 5px;"  class="btn-interview" color="primary">
+              Lưu tin tuyển dụng<i class="icon-arrow-right14"></i>   
+            </button>
           </div>
         </div>
-      </div>
-      <div class="form-group" style="margin-bottom: 0px;margin-left: 76%;">
-        <button mat-button mat-dialog-close>Đóng</button>
-        <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Thêm ứng viên</button>
       </div>
     </form>
-  </mat-dialog-content> 
+  </div>
 </div>

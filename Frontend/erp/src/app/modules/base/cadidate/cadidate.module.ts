@@ -8,7 +8,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TableComponent } from './table/table.component';
 import { FormComponent } from './form/form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,7 +39,6 @@ import { ProviderService } from '../config-system/provider/provider.service';
     MatPaginatorModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,

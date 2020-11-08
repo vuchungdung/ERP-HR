@@ -37,3 +37,9 @@
   top: 9px;
   left: 20px;
 }
+.page-container.opened{
+  display: block;
+}
+.page-container{
+  display: none;
+}

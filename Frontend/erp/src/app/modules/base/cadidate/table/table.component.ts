@@ -53,7 +53,6 @@ export class TableComponent implements OnInit {
   }
 
   constructor(
-    private dialog: MatDialog,
     private router: Router,
     private cadidateService: CadidateService) {}
 
@@ -62,22 +61,18 @@ export class TableComponent implements OnInit {
   } 
 
   deleteCadidate() {
-    const dialogRef = this.dialog.open(FormComponent);
+    
   }
 
   updateCadidate() {
-    const dialogRef = this.dialog.open(FormComponent);
+    
   }
 
   openDialogDetail(row?: Cadidate){
-    this.router.navigate(['/manager/cadidate/detail'], {});
-    const dialogRef = this.dialog.open(DetailComponent,{
-      height: '600px',
-      width: '1200px',
-    });
+    
   }
   openDetail(row){
-    this.openDialogDetail(row);
+    
   }
 
   getList(){

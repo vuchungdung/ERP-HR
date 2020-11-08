@@ -1,4 +1,5 @@
-<div class="page-container" style="padding: 10px 20px;">
+<app-form (isShow)="isShowTable($event)"></app-form>
+<div class="page-container" style="padding: 10px 20px;" [class.opened]="showTable()">
   <div class="row">
     <div class="panel panel-flat" style="margin-bottom:10px">
       <div class="panel-heading content-header" style="padding-top:10px; padding-bottom:10px">

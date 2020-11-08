@@ -12,17 +12,16 @@ import { FormStatus } from 'src/app/core/enums/form-status.enum';
 })
 export class CadidateComponent implements OnInit {
 
-  @ViewChild(TableComponent) readLoadTable : TableComponent;
+  @ViewChild(FormComponent) form : FormComponent;
 
-  public isChecked = false;
-
+  public status:boolean = true;
+  public action : FormStatus = FormStatus.Unknow;
   constructor(
-    private dialog: MatDialog,
     private cadidateService: CadidateService
     ) {}
   
   checkRecord($event){
-    this.isChecked = $event;
+    
   }
 
   ngOnInit(): void {
@@ -30,19 +29,7 @@ export class CadidateComponent implements OnInit {
   }
 
   insertCadidate(){
-    var isCheck = false;
-    const dialogRef = this.dialog.open(FormComponent);
-    dialogRef.componentInstance.action = FormStatus.Insert;
-    dialogRef.componentInstance.isReLoadCadidate.subscribe(data=>{
-      isCheck = data;
-    })
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result == true){
-        if(isCheck == true){
-          
-        }
-      }
-    })
+    this.form.openFormInsert();
   }
 
   openChart(){
@@ -55,5 +42,13 @@ export class CadidateComponent implements OnInit {
 
   addTag(){
 
+  }
+
+  showTable(){
+    return this.status;
+  }
+  isShowTable($event){
+    debugger;
+    this.status = $event;
   }
 }
