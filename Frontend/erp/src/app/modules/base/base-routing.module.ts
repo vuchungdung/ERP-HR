@@ -49,6 +49,13 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'plan-recruit',
+        canActivate:[AuthenticationGuard],
+        canActivateChild:[AuthenticationGuard],
+        loadChildren: () => import('../base/plan-recruit/plan-recruit.module').then(m => m.PlanRecruitModule),
+        pathMatch: 'full'
+      },
+      {
         path: '**',
         component: DashboardComponent
       }
