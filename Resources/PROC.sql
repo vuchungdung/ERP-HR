@@ -129,3 +129,32 @@ AS
 	END;
 GO
 
+CREATE PROC SP_JOBDESCRIPTION_GET_DETAIL
+@ID INT = 0
+AS 
+	BEGIN
+		SELECT JOB.Title,
+			JOB.Description,
+			JOB.Endow,
+			JOB.Benefit,
+			JOB.SkillId,
+			JOB.OfferFrom,
+			JOB.OfferTo,
+			JOB.RequestJob,
+			JOB.Status,
+			CAT.Name,
+			REC.TimeStart,
+			REC.TimeEnd,
+			JOB.CategoryId,
+			JOB.Type,
+			JOB.CreateDate
+		FROM DBO.JobDescriptions AS JOB,
+			DBO.RecruitmentPlans AS REC,
+			DBO.JobCategories AS CAT
+			WHERE 
+				JOB.CategoryId = CAT.CategoryId AND
+				JOB.PlanId = REC.PlanId AND
+				JOB.Deleted = 0
+			ORDER BY JOB.CreateDate DESC
+	END;
+GO

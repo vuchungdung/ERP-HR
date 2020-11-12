@@ -40,7 +40,7 @@
     <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
-          <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="select">
               <th mat-header-cell style="padding-top:6px;" *matHeaderCellDef>
                 <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -85,11 +85,11 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="deleteCadidate()">
+                  <button mat-menu-item (click)="deletePlanRecruit()">
                     <mat-icon>delete</mat-icon>
                     <span>Xóa dữ liệu</span>
                   </button>
-                  <button mat-menu-item (click)="updateCadidate()">
+                  <button mat-menu-item (click)="updatePlanRecruit()">
                     <mat-icon>edit</mat-icon>
                     <span>Cập nhật</span>
                   </button>
@@ -98,13 +98,13 @@
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openDetail(row)"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <mat-paginator  [length]="100"
                           [pageSize]="10"
                           [pageSizeOptions]="[5, 10, 20, 100]"
                           showFirstLastButtons>
-          </mat-paginator> -->    
+          </mat-paginator>  
         </div>  
       </div>
     </div>

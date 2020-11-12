@@ -1,6 +1,6 @@
 <div class="page-container" style="padding: 10px 20px;" [class.opened]="showForm()">
   <div class="row">
-    <form novalidate [formGroup]="planForm">
+    <form novalidate [formGroup]="planForm" (submit)="saveForm()">
       <div class="panel panel-flat">
         <div class="panel-body">
           <div style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:10px">
@@ -10,20 +10,24 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Tiêu đề tin tuyển dụng</label>
-                <input type="text" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                <input type="text" formControlName="title" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="lb-input"><i class="icon-arrow-small-right"></i>Số lượng cần tuyển</label>
-                      <input type="text" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                      <input type="text" formControlName="quatity" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="lb-input"><i class="icon-arrow-small-right"></i>Trạng thái</label>
-                      <input type="text" class="form-input" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                      <mat-select class="form-input" formControlName="status" style="height: 36px; line-height: 36px;">
+                        <mat-option value="1">Đang mở</mat-option>
+                        <mat-option value="2">Đã đóng</mat-option>
+                        <mat-option value="3">Tạm dừng</mat-option>
+                      </mat-select>
                     </div>
                   </div>
                 </div>
@@ -33,17 +37,17 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời gian bắt đầu</label>
-                      <input matInput class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
-                      <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
+                      <input matInput formControlName="timeStart" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
+                      <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
                         <mat-icon matDatepickerToggleIcon>today</mat-icon>
                       </mat-datepicker-toggle>
-                      <mat-datepicker #picker3 color="primary"></mat-datepicker>
+                      <mat-datepicker #picker2 color="primary"></mat-datepicker>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời gian kết thúc</label>
-                      <input matInput class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
+                      <input matInput formControlName="timeEnd" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
                       <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
                         <mat-icon matDatepickerToggleIcon>today</mat-icon>
                       </mat-datepicker-toggle>
@@ -56,7 +60,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Ghi chú (nếu có)</label>
-                <ckeditor></ckeditor>
+                <ckeditor formControlName="note"></ckeditor>
               </div>
             </div>
           </div>

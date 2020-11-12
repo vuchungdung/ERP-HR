@@ -19,6 +19,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { ApiService } from 'src/app/core/services/api.service';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
+import { PlanRecruitService } from './plan-recruit.service';
 
 const routes: Routes = [
   {
@@ -49,6 +52,11 @@ const routes: Routes = [
     MatInputModule,
     CKEditorModule,
     RouterModule.forChild(routes)
+  ],
+  providers:[
+    ApiService,
+    NotificationService,
+    PlanRecruitService
   ]
 })
 export class PlanRecruitModule { }

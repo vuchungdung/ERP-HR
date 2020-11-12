@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Recruitment.Interface;
 using Services.Recruitment.ViewModel;
@@ -23,6 +24,7 @@ namespace API.Recruitment.Controllers
 
         [HttpGet]
         [Route("get-list")]
+        [Authorize]
         public async Task<ResponseModel> GetList(FilterModel model)
         {
             var response = await _recruitmentPlanService.GetList(model);
@@ -31,6 +33,7 @@ namespace API.Recruitment.Controllers
 
         [HttpDelete]
         [Route("delete")]
+        [Authorize]
         public async Task<ResponseModel> Delete(RecruitmentPlanViewModel model)
         {
             var response = await _recruitmentPlanService.Delete(model);
@@ -39,6 +42,7 @@ namespace API.Recruitment.Controllers
 
         [HttpGet]
         [Route("item")]
+        [Authorize]
         public async Task<ResponseModel> Item(int id)
         {
             var response = await _recruitmentPlanService.Item(id);
@@ -47,7 +51,8 @@ namespace API.Recruitment.Controllers
 
         [HttpPost]
         [Route("insert")]
-        public async Task<ResponseModel> Insert(RecruitmentPlanViewModel model)
+        [Authorize]
+        public async Task<ResponseModel> Insert([FromForm]RecruitmentPlanViewModel model)
         {
             var response = await _recruitmentPlanService.Insert(model);
             return response;
@@ -55,6 +60,7 @@ namespace API.Recruitment.Controllers
 
         [HttpPut]
         [Route("update")]
+        [Authorize]
         public async Task<ResponseModel> Update(RecruitmentPlanViewModel model)
         {
             var response = await _recruitmentPlanService.Update(model);

@@ -10,6 +10,7 @@ namespace API.Recruitment
         public static IServiceCollection AddRecruitmentServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IJobDescriptionService, JobDescriptionService>();
+            services.AddScoped<IRecruitmentPlanService, RecruitmentPlanService>();
             return services;
         }
     }

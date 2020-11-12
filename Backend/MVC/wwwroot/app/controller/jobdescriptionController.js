@@ -27,6 +27,10 @@
         $scope.searchJob = function () {
             $scope.getPaging($scope.page);        
         }
+
+        $scope.addSession = function (id) {
+
+        }
         $scope.getPaging($scope.page);
     }
 })(angular.module('erp'));

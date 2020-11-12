@@ -9,7 +9,7 @@ namespace Services.Recruitment.ViewModel
     {
         public int PlanId { get; set; }
 
-        public int JobId { get; set; }
+        public string Title { get; set; }
 
         public string JobTitle { get; set; }
 

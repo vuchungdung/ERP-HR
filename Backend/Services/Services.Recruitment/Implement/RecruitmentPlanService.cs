@@ -98,14 +98,61 @@ namespace Services.Recruitment.Implement
             return response;
         }
 
-        public Task<ResponseModel> Insert(RecruitmentPlanViewModel model)
+        public async Task<ResponseModel> Insert(RecruitmentPlanViewModel model)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                RecruitmentPlan md = new RecruitmentPlan();
+
+                md.Title = model.Title;
+                md.Deleted = false;
+                md.TimeEnd = model.TimeEnd;
+                md.TimeStart = model.TimeStart;
+                md.Note = model.Note;
+                md.Quatity = model.Quatity;
+                md.Status = model.Status;
+                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                md.CreateDate = DateTime.Now;
+                md.Deleted = false;
+
+                await _context.RecruitmentPlanRepository.AddAsync(md);
+
+                await _context.SaveChangesAsync();
+
+                response.Status = ResponseStatus.Success;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
-        public Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(int id)
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                RecruitmentPlan md = await _context.RecruitmentPlanRepository.FirstOrDefaultAsync(x => x.PlanId == id && !x.Deleted);
+
+                RecruitmentPlanViewModel model = new RecruitmentPlanViewModel();
+
+                model.PlanId = md.PlanId;
+                model.Title = md.Title;
+                model.Note = md.Note;
+                model.TimeEnd = md.TimeEnd;
+                model.TimeStart = md.TimeStart;
+                model.Status = md.Status;
+
+                response.Result = model;
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public Task<ResponseModel> Update(RecruitmentPlanViewModel model)
