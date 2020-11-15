@@ -13,6 +13,8 @@ namespace Services.Recruitment.ViewModel
 
         public string Description { get; set; }
 
+        public string RequestJob { get; set; }
+
         public string Endow { get; set; }
 
         public List<string> SkillNames { get; set; }
@@ -24,7 +26,9 @@ namespace Services.Recruitment.ViewModel
         public int OfferFrom { get; set; }
 
         public int OfferTo { get; set; }
-
+        public int Quatity { get; set; }
+        public DateTime TimeEnd { get; set; }
+        public DateTime TimeStart { get; set; }
         public string SkillId { get; set; }
 
         public JobStatus Status { get; set; }

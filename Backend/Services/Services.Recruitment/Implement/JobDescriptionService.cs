@@ -61,7 +61,9 @@ namespace Services.Recruitment.Implement
                             {
                                 JobId = j.JobId,
                                 Title = j.Title,
-                                Description = j.Description,
+                                Quatity = j.Quatity,
+                                TimeStart = j.TimeStart,
+                                TimeEnd = j.TimeEnd,
                                 SkillNames = GetArrSkill(j.SkillId),
                                 CategoryName = GetNameCategory(j.CategoryId),
                                 OfferFrom = j.OfferFrom,
