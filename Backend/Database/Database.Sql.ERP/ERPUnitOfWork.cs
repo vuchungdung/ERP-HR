@@ -117,15 +117,6 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<RecruitmentPlan> _recruitmentPlanRepository;
-        public ITableGenericRepository<RecruitmentPlan> RecruitmentPlanRepository 
-        {
-            get
-            {
-                return _recruitmentPlanRepository = _recruitmentPlanRepository ?? new TableGenericRepository<RecruitmentPlan>(_context);
-            }
-        }
-
         private ITableGenericRepository<User> _userRepository;
         public ITableGenericRepository<User> UserRepository 
         {

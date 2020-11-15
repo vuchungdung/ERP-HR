@@ -20,6 +20,11 @@ namespace MVC.Controllers
             return View();
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult GetAllPaging([FromBody]PageViewModel model)
         {

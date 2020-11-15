@@ -77,5 +77,17 @@ namespace MVC.Services
                 throw ex;
             }
         }
+        public JobDescriptionViewModel GetDetail(int id)
+        {
+            try
+            {
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_DETAIL", "@ID", id);
+                return dt.ConvertTo<JobDescriptionViewModel>().ToList().ElementAt(0);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

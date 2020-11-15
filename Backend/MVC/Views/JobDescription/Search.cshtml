@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="/Views/Component/_Bradcam.cshtml" />
+<partial name="/Views/Component/_Category.cshtml" />
+<div class="job_listing_area plus_padding" ng-controller="jobdescriptionController">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="job_filter white-bg">
+                    <div class="form_inner white-bg">
+                        <h3>Lọc chi tiết</h3>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide">
+                                            <option data-display="Mảng công việc">Mảng công việc</option>
+                                            <option value="1">Category 1</option>
+                                            <option value="2">Category 2 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide">
+                                            <option data-display="Kinh nghiệm">Kinh nghiệm</option>
+                                            <option value="1">Experience 1</option>
+                                            <option value="2">Experience 2 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide">
+                                            <option data-display="Loại hình">Loại hình</option>
+                                            <option value="1">full time 1</option>
+                                            <option value="2">part time 2 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="range_wrap">
+                        <label for="amount">Mức lương:</label>
+                        <div id="slider-range"></div>
+                        <p>
+                            <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                        </p>
+                    </div>
+                    <div class="reset_btn">
+                        <button class="boxed-btn3 w-100" type="submit">Làm mới</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="recent_joblist_wrap">
+                    <div class="recent_joblist white-bg ">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4>205 việc làm</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="serch_cat d-flex justify-content-end">
+                                    <select>
+                                        <option data-display="Most Recent">Most Recent</option>
+                                        <option value="1">Marketer</option>
+                                        <option value="2">Wordpress </option>
+                                        <option value="4">Designer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job_lists m-0">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12" ng-repeat="item in listPagingJob">
+                            <div class="single_jobs white-bg d-flex justify-content-between" style="padding:15px 25px 5px 25px">
+                                <div class="row" style="width:100%">
+                                    <div class="col-md-9 col-lg-9">
+                                        <div class="jobs_left d-flex align-items-center">
+                                            <div class="thumb" style="height:135px;width:160px;margin-bottom:12px">
+                                                <img src="~/img/hunting job.png" style="width:100%" alt="">
+                                            </div>
+                                            <div class="jobs_conetent">
+                                                <a href="job_details.html"><h5 style="font-size:26px;font-weight:400;color:black">{{item.title}}</h5></a>
+                                                <div class="links_locat d-flex align-items-center">
+                                                    <div class="location">
+                                                        <p style="color:red;font-size:15px"> <i class="fa fa-money"></i>{{item.offerFrom}} - {{item.offerTo}}$</p>
+                                                    </div>
+                                                    <div class="location">
+                                                        <p style="color:black"> <i class="fa fa-clock-o"></i>{{item.type|typeFilter:item.type}}</p>
+                                                    </div>
+                                                </div>
+                                                <p style="margin-bottom:8px;color:black;font-size:14px">
+                                                    {{item.description}}
+                                                </p>
+                                                <ul style="display:flex;margin-bottom:5px">
+                                                    <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">ASP.NET</a></li>
+                                                    <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">PHP</a></li>
+                                                    <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">Angular</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="jobs_right">
+                                            <div class="apply_now" style="display:flex;margin-top:40px">
+                                                <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                                <a href="job_details.html" class="boxed-btn3" style="padding:8px 12px;font-size:13px">Ứng tuyển</a>
+                                            </div>
+                                            <div class="date" style="text-align:left">
+                                                <p style="color:black">Thời hạn: {{item.timeEnd|dateFilter:item.timeEnd}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pagination_wrap">
+                                <ul>
+                                    <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                                    <li><a href="#"><span>01</span></a></li>
+                                    <li><a href="#"><span>02</span></a></li>
+                                    <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

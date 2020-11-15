@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecruitmentComponent } from './recruitment.component';
 import { FormComponent } from './form/form.component';
-import { TableComponent } from './table/table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -24,7 +23,7 @@ import { JobCategoryService } from '../config-system/job-category/job-category.s
 import { SkillService } from '../config-system/skill/skill.service';
 
 @NgModule({
-  declarations: [RecruitmentComponent, FormComponent, TableComponent],
+  declarations: [RecruitmentComponent, FormComponent],
   imports: [
     CommonModule,
     FormsModule,

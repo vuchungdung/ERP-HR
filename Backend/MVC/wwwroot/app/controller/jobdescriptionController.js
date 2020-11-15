@@ -7,7 +7,6 @@
 
         $scope.page = 1;
         $scope.pageSize = 10;
-        console.log($scope.keyword);
         $scope.getPaging = function (page) {
             $scope.curPage = page;
             var config = {
@@ -27,6 +26,10 @@
 
         $scope.searchJob = function () {
             $scope.getPaging($scope.page);        
+        }
+
+        $scope.addSession = function (id) {
+
         }
         $scope.getPaging($scope.page);
     }
