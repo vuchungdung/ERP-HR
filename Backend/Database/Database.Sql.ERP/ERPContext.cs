@@ -47,7 +47,6 @@ namespace Database.Sql.ERP
         public DbSet<Process> Process { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<JobDescription> JobDescriptions { get; set; }
-        public DbSet<RecruitmentPlan> RecruitmentPlans { get; set; }
         public DbSet<Command> Commands { get; set; }
         public DbSet<Function> Functions { get; set; }
         public DbSet<Permission> Permissions { get; set; }

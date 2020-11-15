@@ -1,5 +1,6 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,8 +12,6 @@ namespace Database.Sql.ERP.Entities.Recruitment
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int JobId { get; set; }
-
-        public int PlanId { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(100)")]
@@ -43,6 +42,15 @@ namespace Database.Sql.ERP.Entities.Recruitment
         public int OfferTo { get; set; }
 
         public JobStatus Status { get; set; }
+
+        [Required]
+        public DateTime TimeStart { get; set; }
+
+        [Required]
+        public DateTime TimeEnd { get; set; }
+
+        [Required]
+        public int Quatity { get; set; }
 
         public Core.CommonModel.Enum.Type Type { get; set; }
     }
