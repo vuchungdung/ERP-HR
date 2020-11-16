@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
-import { appInterceptors } from './app.Interceptors';
 import { ApiService } from '../core/services/api.service';
-import { AuthenticationGuard } from '../core/guards/authentication.guard';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   providers:[
     ApiService
+  ],
+  declarations: [PaginatorComponent],
+  imports:[
+    MatPaginatorModule
+  ],
+  exports:[
+    PaginatorComponent
   ]
 })
 export class SharedModule { }

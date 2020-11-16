@@ -40,16 +40,26 @@
                                                 <p style="color:red;font-size:15px"> <i class="fa fa-money"></i>{{item.offerFrom}} - {{item.offerTo}}$</p>
                                             </div>
                                             <div class="location">
-                                                <p style="color:black"> <i class="fa fa-clock-o"></i>{{item.type|typeFilter:item.type}}</p>
+                                                <p style="color:black;font-size:14px"> <i class="fa fa-clock-o"></i>{{item.type|typeFilter:item.type}}</p>
                                             </div>
                                         </div>
-                                        <p style="margin-bottom:8px;color:black;font-size:14px">
-                                            {{item.description}}
-                                        </p>
+                                        <p style="margin-bottom:8px;color:black;font-size:14px;padding-left:40px;font-weight:500" ng-bind-html="item.endow"></p>
+                                        <p style="
+                                                    color: #808080;
+                                                    list-style: none;
+                                                    width: 500px;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    line-height: 20px;
+                                                    -webkit-line-clamp: 3;
+                                                    height: 60px;
+                                                    display: -webkit-box;
+                                                    -webkit-box-orient: vertical;
+                                                    " ng-bind-html="item.description"></p>
                                         <ul style="display:flex;margin-bottom:5px">
-                                            <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">ASP.NET</a></li>
-                                            <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">PHP</a></li>
-                                            <li><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">Angular</a></li>
+                                            <li style="list-style:none"><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">ASP.NET</a></li>
+                                            <li style="list-style:none"><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">PHP</a></li>
+                                            <li style="list-style:none"><a class="btn btn-outline-success" style="width:74px;font-size:13px;height:30px" href="#">Angular</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -72,3 +82,8 @@
         </div>
     </div>
 </div>
+<style>
+    li {
+        list-style: outside;
+    }
+</style>

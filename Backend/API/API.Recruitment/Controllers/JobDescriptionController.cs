@@ -18,10 +18,10 @@ namespace API.Recruitment.Controllers
             _jobDescriptionService = jobDescriptionService;
         }
 
-        [Route("insert")]
         [HttpPost]
+        [Route("insert")]
         [Authorize]
-        public async Task<ResponseModel> Insert([FromBody] JobDescriptionViewModel model)
+        public async Task<ResponseModel> Insert([FromForm] JobDescriptionViewModel model)
         {
             var response = await _jobDescriptionService.Insert(model);
             return response;

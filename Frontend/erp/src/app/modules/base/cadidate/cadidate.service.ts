@@ -25,6 +25,7 @@ export class CadidateService{
   }
 
   insert(model: FormData):Observable<ResponseModel>{
+    console.log(`${environment.apiUrl}${this.url.insert}`);
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
   
@@ -37,6 +38,7 @@ export class CadidateService{
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
+    console.log(`${environment.apiUrl}${this.url.getlist}`)
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
 
