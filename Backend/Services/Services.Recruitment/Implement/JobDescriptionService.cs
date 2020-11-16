@@ -73,7 +73,7 @@ namespace Services.Recruitment.Implement
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
                     query = query.Where(x => x.CategoryName.ToLower().Contains(filter.Text.ToLower())
-                                        || x.SkillId.ToLower().Contains(filter.Text.ToLower())
+                                        || x.Skill.ToLower().Contains(filter.Text.ToLower())
                                         || x.Title.ToLower().Contains(filter.Text.ToLower()));
                 }
 
@@ -124,14 +124,19 @@ namespace Services.Recruitment.Implement
                 md.Title = model.Title;
                 md.Description = model.Description;
                 md.Endow = model.Endow;
-                md.SkillId = model.SkillId;
+                md.SkillId = model.Skill;
                 md.CategoryId = model.CategoryId;
                 md.OfferFrom = model.OfferFrom;
                 md.OfferTo = model.OfferTo;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 md.CreateDate = DateTime.Now;
                 md.Status = model.Status;
+                md.RequestJob = model.RequestJob;
                 md.Deleted = false;
+                md.TimeStart = model.TimeStart;
+                md.TimeEnd = model.TimeEnd;
+                md.Quatity = model.Quatity;
+                md.Benefit = model.Benefit;
 
                 await _context.JobDescriptionRepository.AddAsync(md);
 
@@ -185,7 +190,7 @@ namespace Services.Recruitment.Implement
                 md.Title = model.Title;
                 md.Description = model.Description;
                 md.Endow = model.Endow;
-                md.SkillId = model.SkillId;
+                md.SkillId = model.Skill;
                 md.CategoryId = model.CategoryId;
                 md.OfferFrom = model.OfferFrom;
                 md.OfferTo = model.OfferTo;

@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('erp', []);
+    angular.module('erp', ['ngSanitize']);
 })();

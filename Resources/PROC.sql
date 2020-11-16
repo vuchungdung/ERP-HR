@@ -37,17 +37,15 @@ AS
 			JOB.RequestJob,
 			JOB.Status,
 			CAT.Name,
-			REC.TimeStart,
-			REC.TimeEnd,
+			JOB.TimeStart,
+			JOB.TimeEnd,
 			JOB.CategoryId,
 			JOB.Type,
 			JOB.CreateDate
 		FROM DBO.JobDescriptions AS JOB,
-			DBO.RecruitmentPlans AS REC,
 			DBO.JobCategories AS CAT
 			WHERE 
 				JOB.CategoryId = CAT.CategoryId AND
-				JOB.PlanId = REC.PlanId AND
 				JOB.Deleted = 0
 			ORDER BY JOB.JobId
 			OFFSET @PAGESIZE*(@PAGE-1) ROW FETCH NEXT @PAGESIZE ROWS ONLY
@@ -85,17 +83,16 @@ AS
 			JOB.RequestJob,
 			JOB.Status,
 			CAT.Name,
-			REC.TimeStart,
-			REC.TimeEnd,
+			JOB.TimeStart,
+			JOB.TimeEnd,
+			JOB.Quatity,
 			JOB.CategoryId,
 			JOB.Type,
 			JOB.CreateDate
 		FROM DBO.JobDescriptions AS JOB,
-			DBO.RecruitmentPlans AS REC,
 			DBO.JobCategories AS CAT
 			WHERE 
 				JOB.CategoryId = CAT.CategoryId AND
-				JOB.PlanId = REC.PlanId AND
 				JOB.Deleted = 0
 	END;
 GO
@@ -113,17 +110,16 @@ AS
 			JOB.RequestJob,
 			JOB.Status,
 			CAT.Name,
-			REC.TimeStart,
-			REC.TimeEnd,
+			JOB.TimeStart,
+			JOB.TimeEnd,
 			JOB.CategoryId,
+			JOB.Quatity,
 			JOB.Type,
 			JOB.CreateDate
 		FROM DBO.JobDescriptions AS JOB,
-			DBO.RecruitmentPlans AS REC,
 			DBO.JobCategories AS CAT
 			WHERE 
 				JOB.CategoryId = CAT.CategoryId AND
-				JOB.PlanId = REC.PlanId AND
 				JOB.Deleted = 0
 			ORDER BY JOB.CreateDate DESC
 	END;
@@ -143,17 +139,16 @@ AS
 			JOB.RequestJob,
 			JOB.Status,
 			CAT.Name,
-			REC.TimeStart,
-			REC.TimeEnd,
+			JOB.TimeStart,
+			JOB.Quatity,
+			JOB.TimeEnd,
 			JOB.CategoryId,
 			JOB.Type,
 			JOB.CreateDate
 		FROM DBO.JobDescriptions AS JOB,
-			DBO.RecruitmentPlans AS REC,
 			DBO.JobCategories AS CAT
 			WHERE 
 				JOB.CategoryId = CAT.CategoryId AND
-				JOB.PlanId = REC.PlanId AND
 				JOB.Deleted = 0
 			ORDER BY JOB.CreateDate DESC
 	END;

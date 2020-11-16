@@ -7,30 +7,32 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { environment } from 'src/environments/environment';
 import { Recruitment } from './recruitment.model';
 
-@Injectable({providedIn:'any'})
+@Injectable({
+  providedIn:'root'
+})
 export class RecruitmentService{
-  constructor(private api: ApiService){
 
-  }
+  constructor(private api: ApiService){}
+
   url = {
-    insert:'/recruitment/jobdescription/insert',
-    update:'/recruitment/jobdescription/update',
-    delete:'/recruitment/jobdescription/delete',
-    item:'/recruitment/jobdescription/item',
-    getlist:'/recruitment/jobdescription/get-list',
-    dropdown:'/recruitment/jobdescription/dropdown'
+    insert: '/recruitment/jobdescription/insert',
+    update: '/recruitment/jobdescription/update',
+    delete: '/recruitment/jobdescription/delete',
+    item: '/recruitment/jobdescription/item',
+    getlist: '/recruitment/jobdescription/get-list',
+    dropdown: '/recruitment/jobdescription/dropdown'
   }
 
-  insert(model: Recruitment):Observable<ResponseModel>{
-    return this.api.insert(`${environment.apiUrl}${this.insert}`,model);
+  insert(model: FormData):Observable<ResponseModel>{
+    return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
 
   update(model: Recruitment):Observable<ResponseModel>{
-    return this.api.update(`${environment.apiUrl}${this.update}`,model);
+    return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
   item(id:number):Observable<ResponseModel>{
-    return this.api.item(`${environment.apiUrl}${this.item}`,id);
+    return this.api.item(`${environment.apiUrl}${this.url.item}`,id);
   }
 
   delete(){

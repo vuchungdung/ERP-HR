@@ -23,13 +23,19 @@ namespace Services.Recruitment.ViewModel
 
         public int CategoryId { get; set; }
 
+        public string Benefit { get; set; }
+
         public int OfferFrom { get; set; }
 
         public int OfferTo { get; set; }
+
         public int Quatity { get; set; }
+
         public DateTime TimeEnd { get; set; }
+
         public DateTime TimeStart { get; set; }
-        public string SkillId { get; set; }
+
+        public string Skill { get; set; }
 
         public JobStatus Status { get; set; }
 

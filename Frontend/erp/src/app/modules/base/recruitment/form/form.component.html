@@ -13,10 +13,18 @@
                 <input type="text" class="form-input" formControlName="title" placeholder="Nhập tiêu đề tin tuyển dụng" />
               </div>
               <div class="form-group">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ yêu cầu</label>
-                <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
-                  <mat-option *ngFor="let option of listSkills" value={{option.categoryId}}>{{option.name}}</mat-option>
-                </mat-select>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ yêu cầu</label>
+                    <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
+                      <mat-option *ngFor="let option of listSkills" value={{option.skillId}}>{{option.name}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Số lượng tuyển</label>
+                    <input type="text" class="form-input" formControlName="quatity" placeholder="Số lượng cần tuyển" />
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="lb-input"><i class="icon-arrow-small-right"></i>Lợi ích khi tham gia</label>
@@ -31,28 +39,37 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-lg-6">
-                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Kế hoạch tháng</label>
-                    <mat-select class="form-input" style="height: 36px; line-height: 36px;">
-                      <mat-option>None</mat-option>
-                      <!-- <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option> -->
-                    </mat-select>
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời gian bắt đầu</label>
+                    <input matInput formControlName="timeStart" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
+                    <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
                   </div>
                   <div class="col-lg-6">
-                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
-                    <mat-select class="form-input" formControlName="category" style="height: 36px; line-height: 36px;">
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
-                    </mat-select>
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời gian kết thúc</label>
+                    <input matInput formControlName="timeEnd" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker3">
+                    <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker3">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker3 color="primary"></mat-datepicker>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
+                    <mat-select class="form-input" formControlName="categoryId" style="height: 36px; line-height: 36px;">
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-4">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mức lương tối thiểu</label>
                     <input type="text" class="form-input" formControlName="offerfrom" placeholder="Mức lương tối thiểu" />
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mức lương tối đa</label>
                     <input type="text" class="form-input" formControlName="offerto" placeholder="Mức lương tối đa" />
                   </div>

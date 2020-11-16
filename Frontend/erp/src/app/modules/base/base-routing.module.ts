@@ -46,7 +46,6 @@ const routes: Routes = [
         canActivate:[AuthenticationGuard],
         canActivateChild:[AuthenticationGuard],
         loadChildren: () => import('../base/recruitment/recruitment.module').then(m => m.RecruitmentModule),
-        pathMatch: 'full'
       },
       {
         path: '**',

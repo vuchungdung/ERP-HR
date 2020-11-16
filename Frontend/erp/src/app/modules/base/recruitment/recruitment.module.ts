@@ -21,6 +21,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { RecruitmentService } from './recruitment.service';
 import { JobCategoryService } from '../config-system/job-category/job-category.service';
 import { SkillService } from '../config-system/skill/skill.service';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 
 @NgModule({
   declarations: [RecruitmentComponent, FormComponent],
@@ -48,6 +49,7 @@ import { SkillService } from '../config-system/skill/skill.service';
     RecruitmentService,
     SkillService,
     JobCategoryService,
+    NotificationService
   ]
 })
 export class RecruitmentModule { }

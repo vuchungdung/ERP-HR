@@ -27,3 +27,12 @@
   height: 28px;
   line-height: 28px;
 }
+.icon-date{
+  position: absolute;
+  top: 18px;
+  right: 0px;
+  margin-right:8px;
+}
+.form-date{
+  position: relative;
+}
