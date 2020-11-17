@@ -7,6 +7,7 @@ import { ResponseModel } from 'src/app/core/models/response.model';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { JobCategoryService } from '../../config-system/job-category/job-category.service';
 import { SkillService } from '../../config-system/skill/skill.service';
+import { Recruitment } from '../recruitment.model';
 import { RecruitmentService } from '../recruitment.service';
 
 @Component({
@@ -23,6 +24,8 @@ export class FormComponent implements OnInit {
   public action:FormStatus;
   public listSkills : any[];
   public listCategorys : any[];
+  public recruitment : Recruitment;
+
 
   constructor(
     private fb : FormBuilder,
@@ -34,6 +37,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.recruitmentForm = this.fb.group({
+      id:[0,Validators.required],
       title:['',Validators.required],
       description:['',Validators.required],
       skill:['',Validators.required],
@@ -63,14 +67,31 @@ export class FormComponent implements OnInit {
       this.notify.showWarning("Nhập đầy đủ thông tin!","Thông báo");
       return;
     }
+    const formValues = this.recruitmentForm.getRawValue();
+    const formData = this.ToFormData(formValues);
     if(this.action == FormStatus.Insert){
-      const formValues = this.recruitmentForm.getRawValue();
-      const formData = this.ToFormData(formValues);
       this.recService.insert(formData).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
           this.isShow.emit(true);
           this.notify.showSuccess("Đã thêm thành công","Thông báo");
+          this.initialForm();
         }
+        else{
+          this.notify.showWarning("Thêm thất bại","Thông báo");
+        }
+      })
+    }
+    else if(this.action == FormStatus.Update){
+      this.recService.update(formData).subscribe((res:ResponseModel)=>{
+        if(res.status == ResponseStatus.success){
+          this.isShow.emit(true);
+          this.notify.showSuccess("Cập nhật thành công","Thông báo");
+          this.action == FormStatus.Insert;
+          this.initialForm();
+        }
+        else{
+          this.notify.showWarning("Cập nhật thất bại","Thông báo");
+        }        
       })
     }
   }
@@ -78,6 +99,11 @@ export class FormComponent implements OnInit {
   OpenFormInsert(){
     this.action = FormStatus.Insert;
     this.isShow.emit(false);
+  }
+  OpenFormUpdate(id:number){
+    this.action = FormStatus.Update;
+    this.isShow.emit(false);
+    this.getItem(id);
   }
 
   ToFormData(formValue: any) {
@@ -122,5 +148,48 @@ export class FormComponent implements OnInit {
         console.log(res.result);
       }
     })
+  }
+
+  initialForm(){
+    if(this.action == FormStatus.Insert){
+      this.recruitmentForm.get('id').reset();
+      this.recruitmentForm.get('title').reset();
+      this.recruitmentForm.get('description').reset();
+      this.recruitmentForm.get('skill').reset();
+      this.recruitmentForm.get('categoryId').reset();
+      this.recruitmentForm.get('offerfrom').reset();
+      this.recruitmentForm.get('offerto').reset();
+      this.recruitmentForm.get('requestJob').reset();
+      this.recruitmentForm.get('benefit').reset();
+      this.recruitmentForm.get('endow').reset();
+      this.recruitmentForm.get('timeEnd').reset();
+      this.recruitmentForm.get('timeStart').reset();
+      this.recruitmentForm.get('quatity').reset();
+    }
+  }
+
+  getItem(id:number){
+    this.recService.item(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.recruitment = res.result;
+        this.setDataForm(this.recruitment);
+      }
+    })
+  }
+
+  setDataForm(data:Recruitment){
+    this.recruitmentForm.get('id').setValue(data.jobid);
+    this.recruitmentForm.get('title').setValue(data.title);
+    this.recruitmentForm.get('description').setValue(data.description);
+    this.recruitmentForm.get('skill').setValue(data.skill);
+    this.recruitmentForm.get('categoryId').setValue(data.category);
+    this.recruitmentForm.get('offerfrom').setValue(data.offerfrom);
+    this.recruitmentForm.get('offerto').setValue(data.offerto);
+    this.recruitmentForm.get('requestJob').setValue(data.requestJob);
+    this.recruitmentForm.get('benefit').setValue(data.benefit);
+    this.recruitmentForm.get('endow').setValue(data.endow);
+    this.recruitmentForm.get('timeEnd').setValue(data.timeEnd);
+    this.recruitmentForm.get('timeStart').setValue(data.timeStart);
+    this.recruitmentForm.get('quatity').setValue(data.quatity);
   }
 }

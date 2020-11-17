@@ -9,5 +9,8 @@ export interface Recruitment{
   requestJob:string,
   benefit:string,
   endow:string,
-  createdate:Date
+  createdate:Date,
+  timeEnd:Date,
+  timeStart:Date,
+  quatity:number
 }

@@ -27,7 +27,7 @@ export class RecruitmentService{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
 
-  update(model: Recruitment):Observable<ResponseModel>{
+  update(model: FormData):Observable<ResponseModel>{
     return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
