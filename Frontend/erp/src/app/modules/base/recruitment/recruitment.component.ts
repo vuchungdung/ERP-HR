@@ -51,6 +51,10 @@ export class RecruitmentComponent implements OnInit {
   }
 
   changeStatus($event){
+    debugger
+    if($event == true){
+      this.getList();
+    }
     this.status = $event;
   }
 
@@ -58,17 +62,18 @@ export class RecruitmentComponent implements OnInit {
     this.recService.getList(this.paging,this.keyword).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
         this.dataSource.data = res.result.items;
+        console.log(res.result.items);
         this.paging.length = res.result.totalItems;
       }
     })
   }
 
-  updateItem(){
-
+  updateItem(id:number){
+    this.form.OpenFormUpdate(id);
   }
 
-  deleteItem(){
-
+  deleteItem(id:number){
+    console.log(id);
   }
   onPageChange($event){
     

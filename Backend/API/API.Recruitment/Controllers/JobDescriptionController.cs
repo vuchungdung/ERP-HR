@@ -53,5 +53,14 @@ namespace API.Recruitment.Controllers
             var response = await _jobDescriptionService.Delete(model);
             return response;
         }
+
+        [Route("item")]
+        [HttpGet]
+        [Authorize]
+        public async Task<ResponseModel> Delete([FromQuery] int id)
+        {
+            var response = await _jobDescriptionService.Item(id);
+            return response;
+        }
     }
 }

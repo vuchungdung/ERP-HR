@@ -37,13 +37,13 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.recruitmentForm = this.fb.group({
-      id:[0,Validators.required],
+      jobId:[0,Validators.required],
       title:['',Validators.required],
       description:['',Validators.required],
       skill:['',Validators.required],
       categoryId:['',Validators.required],
-      offerfrom:['',Validators.required],
-      offerto:['',Validators.required],
+      offerFrom:['',Validators.required],
+      offerTo:['',Validators.required],
       requestJob:['',Validators.required],
       benefit:['',Validators.required],
       endow:['',Validators.required],
@@ -72,7 +72,6 @@ export class FormComponent implements OnInit {
     if(this.action == FormStatus.Insert){
       this.recService.insert(formData).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
-          this.isShow.emit(true);
           this.notify.showSuccess("Đã thêm thành công","Thông báo");
           this.initialForm();
         }
@@ -84,7 +83,6 @@ export class FormComponent implements OnInit {
     else if(this.action == FormStatus.Update){
       this.recService.update(formData).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
-          this.isShow.emit(true);
           this.notify.showSuccess("Cập nhật thành công","Thông báo");
           this.action == FormStatus.Insert;
           this.initialForm();
@@ -99,10 +97,12 @@ export class FormComponent implements OnInit {
   OpenFormInsert(){
     this.action = FormStatus.Insert;
     this.isShow.emit(false);
+    this.initialForm();
   }
   OpenFormUpdate(id:number){
     this.action = FormStatus.Update;
     this.isShow.emit(false);
+    this.initialForm();
     this.getItem(id);
   }
 
@@ -152,16 +152,16 @@ export class FormComponent implements OnInit {
 
   initialForm(){
     if(this.action == FormStatus.Insert){
-      this.recruitmentForm.get('id').reset();
+      this.recruitmentForm.get('id').setValue(0);
       this.recruitmentForm.get('title').reset();
-      this.recruitmentForm.get('description').reset();
+      this.recruitmentForm.get('description').setValue('');
       this.recruitmentForm.get('skill').reset();
       this.recruitmentForm.get('categoryId').reset();
       this.recruitmentForm.get('offerfrom').reset();
       this.recruitmentForm.get('offerto').reset();
-      this.recruitmentForm.get('requestJob').reset();
-      this.recruitmentForm.get('benefit').reset();
-      this.recruitmentForm.get('endow').reset();
+      this.recruitmentForm.get('requestJob').setValue('');
+      this.recruitmentForm.get('benefit').setValue('');
+      this.recruitmentForm.get('endow').setValue('');
       this.recruitmentForm.get('timeEnd').reset();
       this.recruitmentForm.get('timeStart').reset();
       this.recruitmentForm.get('quatity').reset();
@@ -172,19 +172,20 @@ export class FormComponent implements OnInit {
     this.recService.item(id).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
         this.recruitment = res.result;
+        console.log(this.recruitment);
         this.setDataForm(this.recruitment);
       }
     })
   }
 
   setDataForm(data:Recruitment){
-    this.recruitmentForm.get('id').setValue(data.jobid);
+    this.recruitmentForm.get('jobId').setValue(data.jobId);
     this.recruitmentForm.get('title').setValue(data.title);
     this.recruitmentForm.get('description').setValue(data.description);
     this.recruitmentForm.get('skill').setValue(data.skill);
     this.recruitmentForm.get('categoryId').setValue(data.category);
-    this.recruitmentForm.get('offerfrom').setValue(data.offerfrom);
-    this.recruitmentForm.get('offerto').setValue(data.offerto);
+    this.recruitmentForm.get('offerFrom').setValue(data.offerFrom);
+    this.recruitmentForm.get('offerTo').setValue(data.offerTo);
     this.recruitmentForm.get('requestJob').setValue(data.requestJob);
     this.recruitmentForm.get('benefit').setValue(data.benefit);
     this.recruitmentForm.get('endow').setValue(data.endow);

@@ -55,6 +55,8 @@ namespace Services.Recruitment.Implement
             try
             {
                 var query = from j in _context.JobDescriptionRepository.Query()
+                            join c in _context.JobCategoryRepository.Query()
+                            on j.CategoryId equals c.CategoryId
                             where !j.Deleted
                             orderby j.CreateDate
                             select new JobDescriptionViewModel()
@@ -64,8 +66,7 @@ namespace Services.Recruitment.Implement
                                 Quatity = j.Quatity,
                                 TimeStart = j.TimeStart,
                                 TimeEnd = j.TimeEnd,
-                                SkillNames = GetArrSkill(j.SkillId),
-                                CategoryName = GetNameCategory(j.CategoryId),
+                                CategoryName = c.Name,
                                 OfferFrom = j.OfferFrom,
                                 OfferTo = j.OfferTo
                             };
@@ -81,8 +82,7 @@ namespace Services.Recruitment.Implement
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                                                 .Take(filter.Paging.PageSize)
-                                                .OrderByDescending(x => x.CreateDate)
-                                                .ToListAsync()
+                                                .ToListAsync()                         
                                                 .ConfigureAwait(true);
 
                 listItems.TotalItems = await query.CountAsync();
@@ -97,23 +97,6 @@ namespace Services.Recruitment.Implement
             return response;
         }
 
-        public string GetNameCategory(int id)
-        {
-            return _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == id && !x.Deleted).Name;
-        }
-
-        public List<string> GetArrSkill(string id)
-        {
-            List<string> results = new List<string>();
-
-            string[] arr = id.Split(',');
-
-            foreach(var item in arr)
-            {
-                results.Add(_context.SkillRepository.FirstOrDefault(x => x.SkillId.ToString() == item && !x.Deleted).Name);
-            }
-            return results;
-        }
         public async Task<ResponseModel> Insert(JobDescriptionViewModel model)
         {
             ResponseModel response = new ResponseModel();
@@ -164,11 +147,15 @@ namespace Services.Recruitment.Implement
                 model.Title = md.Title;
                 model.Description = md.Description;
                 model.Endow = md.Endow;
-                model.SkillNames = GetArrSkill(md.SkillId);
-                model.CategoryName = GetNameCategory(md.CategoryId);
+                model.CategoryId = md.CategoryId;
                 model.OfferFrom = md.OfferFrom;
                 model.OfferTo = md.OfferTo;
                 model.Status = md.Status;
+                model.TimeEnd = md.TimeEnd;
+                model.TimeStart = md.TimeStart;
+                model.Benefit = md.Benefit;
+                model.Quatity = md.Quatity;
+                model.RequestJob = md.RequestJob;
 
                 response.Result = model;
                 response.Status = ResponseStatus.Success;
