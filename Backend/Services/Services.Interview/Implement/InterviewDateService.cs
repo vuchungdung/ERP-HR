@@ -23,12 +23,12 @@ namespace Services.Interview.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(InterviewDateViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                InterviewDate md = _context.InterviewDateRepository.FirstOrDefault(x => x.DateId == model.DateId && !x.Deleted);
+                InterviewDate md = _context.InterviewDateRepository.FirstOrDefault(x => x.DateId == id && !x.Deleted);
 
                 if(md == null)
                 {

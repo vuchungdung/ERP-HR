@@ -26,12 +26,12 @@ namespace Services.Common.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(FileCvViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                File md = _context.FileCVRepository.FirstOrDefault(x => x.Id == model.CVId && !x.Deleted);
+                File md = _context.FileCVRepository.FirstOrDefault(x => x.Id == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);

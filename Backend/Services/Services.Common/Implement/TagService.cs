@@ -24,12 +24,12 @@ namespace Services.Common.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(TagViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Tag md = _context.TagRepository.FirstOrDefault(x => x.Id == model.Id && !x.Deleted);
+                Tag md = _context.TagRepository.FirstOrDefault(x => x.Id == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateBy = 1;

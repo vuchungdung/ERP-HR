@@ -73,7 +73,7 @@ export class RecruitmentComponent implements OnInit {
   }
 
   deleteItem(id:number){
-    console.log(id);
+    
   }
   onPageChange($event){
     

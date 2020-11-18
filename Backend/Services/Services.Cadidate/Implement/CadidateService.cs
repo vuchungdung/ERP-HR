@@ -46,12 +46,12 @@ namespace Services.Cadidates.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseModel> Delete(CadidateViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == model.CadidateId);
+                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;

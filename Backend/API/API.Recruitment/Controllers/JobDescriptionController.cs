@@ -39,7 +39,7 @@ namespace API.Recruitment.Controllers
         [Route("update")]
         [HttpPut]
         [Authorize]
-        public async Task<ResponseModel> Update([FromBody] JobDescriptionViewModel model)
+        public async Task<ResponseModel> Update([FromForm] JobDescriptionViewModel model)
         {
             var response = await _jobDescriptionService.Update(model);
             return response;
@@ -48,16 +48,16 @@ namespace API.Recruitment.Controllers
         [Route("delete")]
         [HttpDelete]
         [Authorize]
-        public async Task<ResponseModel> Delete([FromBody] JobDescriptionViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _jobDescriptionService.Delete(model);
+            var response = await _jobDescriptionService.Delete(id);
             return response;
         }
 
         [Route("item")]
         [HttpGet]
         [Authorize]
-        public async Task<ResponseModel> Delete([FromQuery] int id)
+        public async Task<ResponseModel> Item([FromQuery] int id)
         {
             var response = await _jobDescriptionService.Item(id);
             return response;

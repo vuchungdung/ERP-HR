@@ -24,12 +24,12 @@ namespace Services.Common.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(SkillViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;

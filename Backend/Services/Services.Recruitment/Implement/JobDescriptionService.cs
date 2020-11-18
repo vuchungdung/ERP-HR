@@ -25,12 +25,12 @@ namespace Services.Recruitment.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(JobDescriptionViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                JobDescription md = _context.JobDescriptionRepository.FirstOrDefault(x => x.JobId == model.JobId && !x.Deleted);
+                JobDescription md = _context.JobDescriptionRepository.FirstOrDefault(x => x.JobId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -182,10 +182,19 @@ namespace Services.Recruitment.Implement
                 md.OfferFrom = model.OfferFrom;
                 md.OfferTo = model.OfferTo;
                 md.Status = model.Status;
+                md.Benefit = model.Benefit;
+                md.TimeEnd = model.TimeEnd;
+                md.TimeStart = model.TimeStart;
+                md.RequestJob = model.RequestJob;
+                md.Quatity = model.Quatity;
+                md.Status = model.Status;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 _context.JobDescriptionRepository.Update(md);
+
+                response.Result = md;
+                response.Status = ResponseStatus.Success;
 
                 await _context.SaveChangesAsync();
             }

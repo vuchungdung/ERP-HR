@@ -35,9 +35,9 @@ namespace API.System.Controllers
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] UserViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _userService.Delete(model);
+            var response = await _userService.Delete(id);
             return response;
         }
 

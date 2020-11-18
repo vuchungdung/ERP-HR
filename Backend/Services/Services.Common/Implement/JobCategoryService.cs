@@ -27,12 +27,12 @@ namespace Services.Common.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(JobCategoryViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                JobCategory md = _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == model.CategoryId);
+                JobCategory md = _context.JobCategoryRepository.FirstOrDefault(x => x.CategoryId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;

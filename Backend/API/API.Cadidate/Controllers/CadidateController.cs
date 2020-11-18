@@ -39,9 +39,9 @@ namespace API.Cadidate.Controllers
         [HttpDelete]
         [Route("delete")]
         [Authorize]
-        public async Task<ResponseModel> Delete([FromBody] CadidateViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _cadidateService.Delete(model);
+            var response = await _cadidateService.Delete(id);
             return response;
         }
 

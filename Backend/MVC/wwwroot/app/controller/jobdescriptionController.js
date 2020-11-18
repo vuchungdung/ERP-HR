@@ -24,6 +24,8 @@
             })
         };
 
+
+
         $scope.searchJob = function () {
             $scope.getPaging($scope.page);        
         }

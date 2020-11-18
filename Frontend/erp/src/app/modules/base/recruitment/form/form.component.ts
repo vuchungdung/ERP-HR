@@ -82,9 +82,9 @@ export class FormComponent implements OnInit {
     }
     else if(this.action == FormStatus.Update){
       this.recService.update(formData).subscribe((res:ResponseModel)=>{
-        if(res.status == ResponseStatus.success){
-          this.notify.showSuccess("Cập nhật thành công","Thông báo");
+        if(res.status == ResponseStatus.success){        
           this.action == FormStatus.Insert;
+          this.notify.showSuccess("Cập nhật thành công","Thông báo");
           this.initialForm();
         }
         else{

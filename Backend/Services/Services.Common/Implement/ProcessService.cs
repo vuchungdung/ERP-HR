@@ -24,12 +24,12 @@ namespace Services.Common.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(ProcessViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == model.ProcessId);
+                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;

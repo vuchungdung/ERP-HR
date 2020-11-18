@@ -57,9 +57,9 @@ namespace API.Common.Controllers
         [HttpDelete]
         [Authorize]
         [Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] ProcessViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _processService.Delete(model);
+            var response = await _processService.Delete(id);
             return response;
         }
     }
