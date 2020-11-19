@@ -21,6 +21,7 @@ import { SkillService } from '../config-system/skill/skill.service';
 import { JobCategoryService } from '../config-system/job-category/job-category.service';
 import { ProviderService } from '../config-system/provider/provider.service';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NotificationService } from 'src/app/shared/services/toastr.service';
     MatDatepickerModule,
     MatRadioModule,
     MatInputModule,
-    CadidateRoutingModule
+    CadidateRoutingModule,
+    SharedModule
   ],
   providers:[
     CadidateService,

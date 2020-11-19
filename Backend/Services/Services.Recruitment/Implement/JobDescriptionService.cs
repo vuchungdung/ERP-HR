@@ -66,6 +66,7 @@ namespace Services.Recruitment.Implement
                                 Quatity = j.Quatity,
                                 TimeStart = j.TimeStart,
                                 TimeEnd = j.TimeEnd,
+                                Skill = j.SkillId,
                                 CategoryName = c.Name,
                                 OfferFrom = j.OfferFrom,
                                 OfferTo = j.OfferTo

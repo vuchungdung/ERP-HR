@@ -1,10 +1,12 @@
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { FormComponent } from './form/form.component';
 import { Recruitment } from './recruitment.model';
 import { RecruitmentService } from './recruitment.service';
@@ -29,9 +31,10 @@ export class RecruitmentComponent implements OnInit {
                                          'timeStart','quatity','options'];
   public paging = new PagingModel();
   public keyword = '';
-
+  public currentPageSize = this.paging.pageSize;
   constructor(
-    private recService: RecruitmentService
+    private recService: RecruitmentService,
+    private notify: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -73,9 +76,22 @@ export class RecruitmentComponent implements OnInit {
   }
 
   deleteItem(id:number){
-    
+    this.recService.delete(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.notify.showSuccess("Xóa thành công!","Thông báo");
+      }
+      else{
+        this.notify.showWarning("Không thể xóa được!","Thông báo");
+      }
+    })
   }
-  onPageChange($event){
-    
+  onPageChange(page: PageEvent){
+    this.paging.pageSize = page.pageSize;
+    this.paging.pageIndex = page.pageIndex+1;
+    if (page.pageSize !== this.currentPageSize) {
+      this.currentPageSize = page.pageSize;
+      this.paging.pageIndex = 1;
+    }
+    this.getList();
   }
 }

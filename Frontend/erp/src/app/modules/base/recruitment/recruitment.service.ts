@@ -36,8 +36,9 @@ export class RecruitmentService{
   }
 
   delete(id:number){
-
+    return this.api.delete(`${environment.apiUrl}${this.url.delete}`,id);
   }
+  
   dropdown():Observable<ResponseModel>{
     return this.api.dropDown(`${environment.apiUrl}${this.url.dropdown}`);
   }

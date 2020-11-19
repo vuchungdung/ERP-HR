@@ -91,7 +91,7 @@ namespace Services.Cadidates.Implement
                             on m.CadidateId equals f.CadidateId
                             where !m.Deleted && f.FileType != ".pdf"
                             orderby m.Name
-                            select new ListCadidateViewModel()
+                            select new CadidateViewModel()
                             {
                                 CadidateId = m.CadidateId,
                                 Name = m.Name,
@@ -105,7 +105,7 @@ namespace Services.Cadidates.Implement
                                 ApplyDate = m.ApplyDate,
                                 Experience = m.Experience,
                                 Rating = m.Rating,
-                                Skill = _skillService.GetListSkill(m.Skill),
+                                Skill = m.Skill,
                                 Provider = p.Name,
                                 Category = c.Name,
                                 Dob = m.Dob,
@@ -120,7 +120,7 @@ namespace Services.Cadidates.Implement
                                         || x.Degree.ToLower().Contains(filter.Text.ToLower())
                                         );
                 }
-                BaseListModel<ListCadidateViewModel> listItems = new BaseListModel<ListCadidateViewModel>();
+                BaseListModel<CadidateViewModel> listItems = new BaseListModel<CadidateViewModel>();
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                                        .Take(filter.Paging.PageSize)

@@ -11,7 +11,7 @@ namespace Services.Common.Interfaces
 {
     public interface ISkillService : IBaseInterfaceService<SkillViewModel>
     {
-        List<Skill> GetListSkill(string id);
+        Task<ResponseModel> Item(string id);
         Task<ResponseModel> DropdownSelection();
     }
 }
