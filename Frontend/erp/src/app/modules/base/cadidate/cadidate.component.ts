@@ -10,6 +10,7 @@ import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Cadidate } from './cadidate.model';
 import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cadidate',
@@ -23,7 +24,7 @@ export class CadidateComponent implements OnInit {
 
   public paging = new PagingModel();
   public searchText = '';
-  public dataSource : any;
+  public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','degree','experience','category','source','status','tag','options'];
   public selection = new SelectionModel<Cadidate>(true, []);
   public status:boolean = true;
@@ -64,10 +65,9 @@ export class CadidateComponent implements OnInit {
   }
 
   getList(){
-    return this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
+    this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
-        this.dataSource = res.result.items;
-        console.log(this.dataSource);
+        this.dataSource.data = res.result.items;
         this.paging.length = res.result.totalItems;
       }
     })
