@@ -53,8 +53,7 @@ export class RecruitmentComponent implements OnInit {
     return this.status;
   }
 
-  changeStatus($event){
-    debugger
+  changeStatus($event:boolean){
     if($event == true){
       this.getList();
     }

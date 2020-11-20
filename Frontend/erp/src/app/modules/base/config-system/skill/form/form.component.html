@@ -1,15 +1,19 @@
-<div style="padding-top: 10px;width: 500px;">
-  <h3 style="margin-bottom: 0px;">Công nghệ dùng</h3>
-  <mat-dialog-content style="width: 100%;padding-left: 12px;">
-    <form [formGroup]="skillForm" (submit)="saveForm()">
-      <div class="form-group">
-        <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ</label>
-        <input type="text" formControlName="name" class="form-input" placeholder="Công nghệ sử dụng" />
+<div class="page-container" [class.opened]="showForm()">
+  <div class="row">
+    <div class="panel panel-flat" style="margin-bottom: 10px; padding: 10px 20px;display: flex;justify-content: space-between;">
+      <div style="padding-top: 10px;width: 500px;">
+        <h3 style="margin-bottom: 0px;">Công nghệ dùng</h3>
+        <form [formGroup]="skillForm" (submit)="saveForm()">
+          <div class="form-group">
+            <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ</label>
+            <input type="text" formControlName="name" class="form-input" placeholder="Công nghệ sử dụng" />
+          </div>
+          <div class="form-group" style="text-align: right;margin-top: 20px; margin-bottom: 0px;">
+            <a mat-button (click)="onBack()">Đóng</a>
+            <button type="submit" mat-button color="primary">Lưu lại</button>
+          </div>
+        </form>  
       </div>
-      <div class="form-group" style="text-align: right;margin-top: 20px; margin-bottom: 0px;">
-        <button mat-button mat-dialog-close>Đóng</button>
-        <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Lưu lại</button>
-      </div>
-    </form>
-  </mat-dialog-content>
+    </div>
+  </div>
 </div>

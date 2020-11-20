@@ -121,7 +121,7 @@ namespace Services.Common.Implement
             try
             {
                 Skill md = new Skill();
-
+                md.SkillId = model.Name;
                 md.Name = model.Name;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = 1;

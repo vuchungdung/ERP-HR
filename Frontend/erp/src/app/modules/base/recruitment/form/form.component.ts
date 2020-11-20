@@ -50,6 +50,7 @@ export class FormComponent implements OnInit {
       timeEnd:['',Validators.required],
       timeStart:['',Validators.required],
       quatity:['',Validators.required],
+      status:[0,Validators.required]
     });
     this.action = FormStatus.Unknow;
     this.dropdownSkill();
