@@ -9,6 +9,8 @@ import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { Cadidate } from './cadidate.model';
+import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cadidate',
@@ -22,11 +24,12 @@ export class CadidateComponent implements OnInit {
 
   public paging = new PagingModel();
   public searchText = '';
-  public dataSource : any;
-  public displayedColumns: string[] = ['select', 'img', 'name', 'address', 'email', 'phone','degree','experience','category','source','status','tag','options'];
+  public dataSource = new MatTableDataSource();
+  public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','degree','experience','category','source','status','tag','options'];
   public selection = new SelectionModel<Cadidate>(true, []);
   public status:boolean = true;
   public action : FormStatus = FormStatus.Unknow;
+  public currentPageSize = this.paging.pageSize;
 
   constructor(
     private cadidateService: CadidateService
@@ -47,32 +50,6 @@ export class CadidateComponent implements OnInit {
     debugger;
     this.status = $event;
   }
-  
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = 0;
-    return numSelected === numRows;
-  }
-
-  masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  checkboxLabel(row?: Cadidate): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    else{
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
-    }
-  }
-
-  changeCheckBox($event,row){
-    $event ? this.selection.toggle(row) : null;
-  }
-
   deleteCadidate() {
     
   }
@@ -88,12 +65,20 @@ export class CadidateComponent implements OnInit {
   }
 
   getList(){
-    return this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
+    this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
-        this.dataSource = res.result.items;
-        console.log(this.dataSource);
+        this.dataSource.data = res.result.items;
         this.paging.length = res.result.totalItems;
       }
     })
+  }
+  onPageChange(page:PageEvent){
+    this.paging.pageSize = page.pageSize;
+    this.paging.pageIndex = page.pageIndex+1;
+    if (page.pageSize !== this.currentPageSize) {
+      this.currentPageSize = page.pageSize;
+      this.paging.pageIndex = 1;
+    }
+    this.getList();
   }
 }

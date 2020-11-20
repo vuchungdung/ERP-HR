@@ -29,7 +29,7 @@ export class CadidateService{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
   
-  update(model: Cadidate):Observable<ResponseModel>{
+  update(model: FormData):Observable<ResponseModel>{
     return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
@@ -38,7 +38,6 @@ export class CadidateService{
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
-    console.log(`${environment.apiUrl}${this.url.getlist}`)
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
 

@@ -57,9 +57,9 @@ namespace API.Common.Controllers
         [HttpDelete]
         [Authorize]
         [Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] SkillViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _skillService.Delete(model);
+            var response = await _skillService.Delete(id);
             return response;
         }
 

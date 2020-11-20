@@ -13,5 +13,7 @@ namespace MVC.Services.Interfaces
         List<JobDescriptionViewModel> GetAll();
 
         List<JobDescriptionViewModel> GetAllNew();
+
+        JobDescriptionViewModel GetDetail(int id);
     }
 }

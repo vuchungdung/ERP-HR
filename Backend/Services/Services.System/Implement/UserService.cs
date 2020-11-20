@@ -26,12 +26,12 @@ namespace Services.System.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(UserViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                User md = _context.UserRepository.FirstOrDefault(x => x.UserId == model.UserId);
+                User md = _context.UserRepository.FirstOrDefault(x => x.UserId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;

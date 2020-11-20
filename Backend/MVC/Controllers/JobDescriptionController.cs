@@ -65,5 +65,24 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public IActionResult Item(int id)
+        {
+            try
+            {
+                var response = _jobDescriptionService.GetDetail(id);
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult Item()
+        {
+            return View();
+        }
     }
 }

@@ -25,12 +25,12 @@ namespace Services.Common.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(ProviderViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Provider md = _context.ProviderRepository.FirstOrDefault(x => x.ProviderId == model.Id && !x.Deleted);
+                Provider md = _context.ProviderRepository.FirstOrDefault(x => x.ProviderId == id && !x.Deleted);
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);

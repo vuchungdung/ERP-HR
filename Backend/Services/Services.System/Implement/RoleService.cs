@@ -24,12 +24,12 @@ namespace Services.System.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(RoleViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Role md = _context.RoleRepository.FirstOrDefault(x => x.RoleId == model.RoleId);
+                Role md = _context.RoleRepository.FirstOrDefault(x => x.RoleId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateBy = 1;

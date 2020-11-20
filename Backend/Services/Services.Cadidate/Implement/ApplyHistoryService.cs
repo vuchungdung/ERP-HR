@@ -25,12 +25,12 @@ namespace Services.Cadidates.Implement
             _httpContext = httpContext;
         }
 
-        public async Task<ResponseModel> Delete(ApplyHistoryViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                CadidateApplyHistory md = _context.CadidateApplyHistoryRepository.FirstOrDefault(x => x.Id == model.Id);
+                CadidateApplyHistory md = _context.CadidateApplyHistoryRepository.FirstOrDefault(x => x.Id == id && !x.Deleted);
 
                 if(md == null)
                 {

@@ -11,8 +11,8 @@ namespace Database.Sql.ERP.Entities.Common
     public class Skill : BaseEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SkillId { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string SkillId { get; set; }
 
         [Required]
         public string Name { get; set; }

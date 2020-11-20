@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -16,15 +17,16 @@ import { SkillService } from './skill.service';
 })
 export class SkillComponent implements OnInit {
 
+  @ViewChild(FormComponent) form : FormComponent;
+
   public paging = new PagingModel();
   public searchText = '';
-  public isLoad : boolean;
   public displayedColumns: string[] = ['name','options'];
   public dataSource : any;
+  public status : boolean;
 
   constructor(
     private skillService:SkillService,
-    private dialog: MatDialog,
     private toastr: NotificationService
   ) { }
 
@@ -32,53 +34,27 @@ export class SkillComponent implements OnInit {
     this.getList();
   }
 
-  insertSkill(){
-    var isCheck = false;
-    const dialogRef = this.dialog.open(FormComponent);
-    dialogRef.componentInstance.action = FormStatus.Insert;
-    dialogRef.componentInstance.isReLoadSkill.subscribe(data=>{
-      isCheck = data;
-    })
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result == true){
-        if(isCheck == true){
-          this.toastr.showSuccess("Thêm mới thành công","Thông báo");
-          this.getList();
-        }
-        else{
-          this.toastr.showWarning("Thêm mới thất bại","Thông báo");
-        }
-      }
-    })
+  isReload($event : boolean){
+    console.log($event);
+    if($event == true){
+      this.getList();
+    }
   }
 
-  updateSkill(id:number){
-    var isCheck = false;
-    const dialogRef = this.dialog.open(FormComponent);
-    dialogRef.componentInstance.action = FormStatus.Update;
-    dialogRef.componentInstance.id = id
-    dialogRef.componentInstance.isReLoadSkill.subscribe(data=>{
-      isCheck = data;
-    })
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result == true){
-        if(isCheck == true){
-          this.toastr.showSuccess("Cập nhật thành công","Thông báo");
-          this.getList();
-        }
-        else{
-          this.toastr.showWarning("Cập nhật thất bại","Thông báo");
-        }
-      }
-    })
+  openInsertForm(){
+    this.form.openInsertForm();
   }
 
-  deleteSkill(){
+  openUpdateForm(id:number){
+    this.form.openUpdateForm(id);
+  }
+
+  deleteItem(){
 
   }
 
   getList(){
-    return this.skillService.getList(this.paging,this.searchText).subscribe((res:ResponseModel)=>{
+    this.skillService.getList(this.paging,this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
         this.dataSource = res.result.items;
         this.paging.length = res.result.totalItems;

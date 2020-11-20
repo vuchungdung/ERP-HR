@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { Skill } from '../skill.model';
 import { SkillService } from '../skill.service';
 
@@ -14,52 +14,84 @@ import { SkillService } from '../skill.service';
 })
 export class FormComponent implements OnInit {
 
-  @Output() isReLoadSkill = new EventEmitter<boolean>();
+  @Output() isReLoadTable = new EventEmitter<boolean>();
 
   public action : FormStatus
   public skillForm : FormGroup;
   public id : number;
   public item : Skill;
   public listOps : any[] = [];
+  public status : boolean;
   constructor(
     private fb: FormBuilder,
     private skillService: SkillService,
-    private dialogRef : MatDialogRef<FormComponent>
+    private notify: NotificationService
   ) { }
 
   ngOnInit(): void {
     this.skillForm = this.fb.group({
+      id:[0,Validators.required],
       name:['',Validators.required]
-    })
-    this.initialSkillForm();
+    });
+  }
+  
+  showForm(){
+    return this.status;
   }
 
   saveForm(){
-    const action = this.dialogRef.componentInstance.action;
     if(this.skillForm.invalid){
       return;
     }
-    if(action == FormStatus.Insert){
+    if(this.action == FormStatus.Insert){
       this.skillService.insert(this.skillForm.getRawValue()).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
-          this.isReLoadSkill.emit(true);
+          this.isReLoadTable.emit(true);
+          this.initialForm();
+          this.notify.showSuccess("Thêm mới thành công!","Thông báo");
         }
         else{
-          console.log('Error Insert');
+          this.notify.showSuccess("Thêm mới thất bại!","Thông báo");
+        }
+      })
+    }
+    else if(this.action == FormStatus.Update){
+      this.skillService.update(this.skillForm.getRawValue()).subscribe((res:ResponseModel)=>{
+        if(res.status == ResponseStatus.success){
+          this.isReLoadTable.emit(true);
+          this.notify.showSuccess("Cập nhật thành công!","Thông báo");
+        }
+        else{
+          this.notify.showSuccess("Cập nhật thất bại!","Thông báo");
         }
       })
     }
   }
 
-  initialSkillForm(){
-    const action = this.dialogRef.componentInstance.action;
-    if(action == FormStatus.Insert){
-      this.skillForm.get('name').reset();
-    }
-    else if(action == FormStatus.Update){
-      const id = this.dialogRef.componentInstance.id;
-      this.getItem(id);
-    }
+
+  openInsertForm(){
+    this.status = true;
+    this.action = FormStatus.Insert;
+    this.isReLoadTable.emit(true);
+    this.initialForm();
+  }
+
+  openUpdateForm(id:number){
+    this.status = true;
+    this.action = FormStatus.Update;
+    this.isReLoadTable.emit(true);
+    this.getItem(id);
+  }
+
+  onBack(){
+    this.status = false;
+    this.isReLoadTable.emit(true);
+    this.showForm();
+  }
+
+  initialForm(){
+    this.skillForm.get('name').reset();
+    this.skillForm.get('id').setValue(0);
   }
 
   getItem(id:number){
@@ -72,6 +104,7 @@ export class FormComponent implements OnInit {
   }
 
   setDataForm(data:Skill){
+    this.skillForm.get('id').setValue(data.id);
     this.skillForm.get('name').setValue(data.name);
   }
 

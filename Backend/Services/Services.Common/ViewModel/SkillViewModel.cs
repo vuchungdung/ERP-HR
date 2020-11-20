@@ -6,7 +6,7 @@ namespace Services.Common.ViewModel
 {
     public class SkillViewModel
     {
-        public int SkillId { get; set; }
+        public string SkillId { get; set; }
         public string Name { get; set; }
 
     }

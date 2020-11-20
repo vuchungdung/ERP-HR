@@ -58,9 +58,9 @@ namespace API.Common.Controllers
         [Route("delete")]
         [HttpDelete]
         [Authorize]
-        public async Task<ResponseModel> Delete([FromBody] TagViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _tagService.Delete(model);
+            var response = await _tagService.Delete(id);
             return response;
         }
     }

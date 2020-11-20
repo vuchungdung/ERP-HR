@@ -30,9 +30,9 @@ namespace API.System.Controllers
         [Authorize]
         [HttpDelete]
         [Route("delete")]
-        public async Task<ResponseModel> Delete([FromBody] RoleViewModel model)
+        public async Task<ResponseModel> Delete([FromQuery] int id)
         {
-            var response = await _roleService.Delete(model);
+            var response = await _roleService.Delete(id);
             return response;
         }
 

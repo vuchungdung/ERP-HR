@@ -18,7 +18,9 @@
   font-size: 14px;
   margin-left: -6px;
 }
-
+table {
+  width: 100%;
+}
 .input-search{
   position: relative;
   width: 100%;

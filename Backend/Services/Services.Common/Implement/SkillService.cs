@@ -24,12 +24,12 @@ namespace Services.Common.Implement
             _context = context;
             _httpContext = httpContext;
         }
-        public async Task<ResponseModel> Delete(SkillViewModel model)
+        public async Task<ResponseModel> Delete(string id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == model.SkillId);
+                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
@@ -46,6 +46,11 @@ namespace Services.Common.Implement
                 throw ex;
             }
             return response;
+        }
+
+        public Task<ResponseModel> Delete(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel> DropdownSelection()
@@ -109,17 +114,6 @@ namespace Services.Common.Implement
             }
             return response;
         }
-        public List<Skill> GetListSkill(string id)
-        {
-            string[] arr = id.Split(',');
-            List<Skill> result = new List<Skill>();
-            for (int i = 0; i < arr.Length - 1; i++)
-            {
-                Skill md = _context.SkillRepository.FirstOrDefault(x => x.SkillId == Convert.ToInt32(arr[i]));
-                result.Add(md);
-            }
-            return result;
-        }
 
         public async Task<ResponseModel> Insert(SkillViewModel model)
         {
@@ -127,7 +121,7 @@ namespace Services.Common.Implement
             try
             {
                 Skill md = new Skill();
-
+                md.SkillId = model.Name;
                 md.Name = model.Name;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = 1;
@@ -146,7 +140,7 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Item(int id)
+        public async Task<ResponseModel> Item(string id)
         {
             ResponseModel response = new ResponseModel();
             try
@@ -172,6 +166,11 @@ namespace Services.Common.Implement
                 throw ex;
             }
             return response;
+        }
+
+        public Task<ResponseModel> Item(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel> Update(SkillViewModel model)

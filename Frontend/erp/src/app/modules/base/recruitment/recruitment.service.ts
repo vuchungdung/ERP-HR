@@ -27,7 +27,7 @@ export class RecruitmentService{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
 
-  update(model: Recruitment):Observable<ResponseModel>{
+  update(model: FormData):Observable<ResponseModel>{
     return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
@@ -35,9 +35,10 @@ export class RecruitmentService{
     return this.api.item(`${environment.apiUrl}${this.url.item}`,id);
   }
 
-  delete(){
-
+  delete(id:number){
+    return this.api.delete(`${environment.apiUrl}${this.url.delete}`,id);
   }
+  
   dropdown():Observable<ResponseModel>{
     return this.api.dropDown(`${environment.apiUrl}${this.url.dropdown}`);
   }

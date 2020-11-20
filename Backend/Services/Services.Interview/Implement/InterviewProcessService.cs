@@ -10,7 +10,7 @@ namespace Services.Interview.Implement
 {
     public class InterviewProcessService : IInterviewProcessService 
     {
-        public Task<ResponseModel> Delete(InterviewProcessViewModel model)
+        public Task<ResponseModel> Delete(int id)
         {
             throw new NotImplementedException();
         }

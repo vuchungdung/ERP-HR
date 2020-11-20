@@ -46,12 +46,12 @@ namespace Services.Cadidates.Implement
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseModel> Delete(CadidateViewModel model)
+        public async Task<ResponseModel> Delete(int id)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == model.CadidateId);
+                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
@@ -105,7 +105,7 @@ namespace Services.Cadidates.Implement
                                 ApplyDate = m.ApplyDate,
                                 Experience = m.Experience,
                                 Rating = m.Rating,
-                                Skill = _skillService.GetListSkill(m.Skill),
+                                Skill = m.Skill,
                                 Provider = p.Name,
                                 Category = c.Name,
                                 Dob = m.Dob,
