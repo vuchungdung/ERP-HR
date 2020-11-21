@@ -28,7 +28,7 @@ export class RecruitmentComponent implements OnInit {
                                          'category','offerto',
                                          'offerfrom',
                                          'timeEnd',
-                                         'timeStart','quatity','options'];
+                                         'timeStart','quatity','status','options'];
   public paging = new PagingModel();
   public keyword = '';
   public currentPageSize = this.paging.pageSize;
@@ -89,6 +89,13 @@ export class RecruitmentComponent implements OnInit {
     this.paging.pageIndex = page.pageIndex+1;
     if (page.pageSize !== this.currentPageSize) {
       this.currentPageSize = page.pageSize;
+      this.paging.pageIndex = 1;
+    }
+    this.getList();
+  }
+
+  search(){
+    if (this.keyword.length > 0) {
       this.paging.pageIndex = 1;
     }
     this.getList();

@@ -56,6 +56,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadidateForm = this.fb.group({
+      cadidateId:[0,Validators.required],
       name:['',Validators.required],
       dob:['',[Validators.required]],
       gender:[0,Validators.required],
@@ -65,10 +66,10 @@ export class FormComponent implements OnInit {
       degree:['',Validators.required],
       university:['',Validators.required],
       major:['',Validators.required],
-      categoryid:['',[Validators.required,AppValidator.number]],
-      providerid:['',[Validators.required,AppValidator.number]],
+      categoryId:['',[Validators.required,AppValidator.number]],
+      providerId:['',[Validators.required,AppValidator.number]],
       skill:['',Validators.required],
-      applydate:['',[Validators.required]],
+      applyDate:['',[Validators.required]],
       experience:['',Validators.required],
     });
     this.dropdownSkill();
@@ -96,14 +97,13 @@ export class FormComponent implements OnInit {
           else if(this.resFile.result.fileType != ".pdf"){
             this.img = this.resFile.result.dbPath;
           }
-          console.log(this.listFile);
         }
       }
     );
   }
   initCadidateForm(){
     if(this.action == FormStatus.Insert){
-      this.isShow.emit(false);
+      this.cadidateForm.get('cadidateId').setValue(0);
       this.cadidateForm.get('name').reset();
       this.cadidateForm.get('dob').reset();
       this.cadidateForm.get('email').reset();
@@ -111,9 +111,9 @@ export class FormComponent implements OnInit {
       this.cadidateForm.get('degree').reset();
       this.cadidateForm.get('phone').reset();
       this.cadidateForm.get('skill').reset();
-      this.cadidateForm.get('providerid').reset();
-      this.cadidateForm.get('applydate').reset();
-      this.cadidateForm.get('categoryid').reset();
+      this.cadidateForm.get('providerId').reset();
+      this.cadidateForm.get('applyDate').reset();
+      this.cadidateForm.get('categoryId').reset();
       this.cadidateForm.get('experience').reset();
       this.cadidateForm.get('university').reset();
       this.cadidateForm.get('major').reset();
@@ -146,6 +146,7 @@ export class FormComponent implements OnInit {
     }
   }
   openFormInsert(){
+    this.isShow.emit(false);
     this.action = FormStatus.Insert;
     this.initCadidateForm();
   }

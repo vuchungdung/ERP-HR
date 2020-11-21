@@ -32,7 +32,8 @@ export class CadidateComponent implements OnInit {
   public currentPageSize = this.paging.pageSize;
 
   constructor(
-    private cadidateService: CadidateService
+    private cadidateService: CadidateService,
+    private router : Router
     ) {}
   
   ngOnInit(): void {
@@ -47,7 +48,6 @@ export class CadidateComponent implements OnInit {
     return this.status;
   }
   isShowTable($event){
-    debugger;
     this.status = $event;
   }
   deleteCadidate() {
@@ -81,4 +81,11 @@ export class CadidateComponent implements OnInit {
     }
     this.getList();
   }
+
+  openFormDetail(row : Cadidate){
+    this.router.navigate(['/manager/cadidate/detail/'+row.cadidateId]);
+    console.log(row);
+    this.status = false;
+  }
+
 }

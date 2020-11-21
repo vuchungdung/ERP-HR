@@ -1,31 +1,39 @@
-<div class="row">
-  <div class="col-lg-5">
-    <div class="page-container">
-
+<div class="page-container" style="padding: 10px 20px;">
+  <div class="row">
+    <div class="panel panel-flat">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="page-container">
+      
+          </div>
+        </div>
+        <div class="col-lg-7" style="border-left:1px solid #f5f5f5;padding: 0px;">
+          <div class="page-container" style="padding: 0px;padding-right: 10px;">
+            <mat-tab-group>
+              <mat-tab label="Hồ sơ ứng viên">
+                <div class="page-container right">
+                  <app-detail-info></app-detail-info>
+                </div>
+              </mat-tab>
+              <mat-tab label="Lịch sử làm việc">
+                <div class="page-container right">
+                  <app-detail-apply-history></app-detail-apply-history>
+                </div>
+              </mat-tab>
+              <mat-tab label="Email">
+                <div class="page-container right">
+                  <app-detail-email></app-detail-email>
+                </div>
+              </mat-tab>
+              <mat-tab label="Kết quả phỏng vấn">
+                <div class="page-container right">
+                  <app-detail-interview-result></app-detail-interview-result>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-7" style="border-left:1px solid #f5f5f5;padding: 0px;">
-    <mat-tab-group>
-      <mat-tab label="Hồ sơ ứng viên">
-        <div class="page-container right">
-          <app-detail-info></app-detail-info>
-        </div>
-      </mat-tab>
-      <mat-tab label="Lịch sử làm việc">
-        <div class="page-container right">
-          <app-detail-apply-history></app-detail-apply-history>
-        </div>
-      </mat-tab>
-      <mat-tab label="Email">
-        <div class="page-container right">
-          <app-detail-email></app-detail-email>
-        </div>
-      </mat-tab>
-      <mat-tab label="Kết quả phỏng vấn">
-        <div class="page-container right">
-          <app-detail-interview-result></app-detail-interview-result>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
   </div>
 </div>

@@ -152,13 +152,13 @@ export class FormComponent implements OnInit {
   }
 
   initialForm(){
-    this.recruitmentForm.get('id').setValue(0);
+    this.recruitmentForm.get('jobId').setValue(0);
     this.recruitmentForm.get('title').reset();
     this.recruitmentForm.get('description').setValue('');
     this.recruitmentForm.get('skill').reset();
     this.recruitmentForm.get('categoryId').reset();
-    this.recruitmentForm.get('offerfrom').reset();
-    this.recruitmentForm.get('offerto').reset();
+    this.recruitmentForm.get('offerFrom').reset();
+    this.recruitmentForm.get('offerTo').reset();
     this.recruitmentForm.get('requestJob').setValue('');
     this.recruitmentForm.get('benefit').setValue('');
     this.recruitmentForm.get('endow').setValue('');

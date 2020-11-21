@@ -18,9 +18,9 @@
           </div>
           <div class="col-md-7">
             <i class="icon-search4 icon-s"></i>
-            <input type="text" class="input-search" placeholder="Từ khóa tìm kiếm ứng với họ tên, số điện thoại, kỹ năng, vị trí ứng tuyển,...">
+            <input type="text" class="input-search" [(ngModel)]="keyword" (keyup.enter)="search()" placeholder="Từ khóa tìm kiếm ứng với họ tên, số điện thoại, kỹ năng, vị trí ứng tuyển,...">
           </div>
-          <button class="col-md-1 btn-s" mat-flat-button color="warn">
+          <button class="col-md-1 btn-s" (click)="search()" mat-flat-button color="warn">
             Tìm kiếm
           </button>  
           <div class="col-md-2" style="padding: 0;">
@@ -59,10 +59,19 @@
             <ng-container matColumnDef="timeEnd">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Thời gian kết thúc </th>
               <td mat-cell *matCellDef="let row"> {{row.timeEnd | date: 'dd/MM/yyyy'}} </td>
-            </ng-container>
+            </ng-container>      
             <ng-container matColumnDef="quatity">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
               <td mat-cell *matCellDef="let row"> {{row.quatity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+              <td mat-cell *matCellDef="let row">
+                <div [ngSwitch]="row.status">
+                  <ng-template [ngSwitchCase]=0><span style="cursor: pointer;" class="label bg-success">Đang đăng</span></ng-template>
+                  <ng-template [ngSwitchCase]=1><span style="cursor: pointer;" class="label bg-danger">Đang chờ</span></ng-template>
+                </div>
+              </td>
             </ng-container>
             <ng-container matColumnDef="options">
               <th mat-header-cell *matHeaderCellDef style="width:1%;text-align: center;padding-right: 0px;line-height: 1px;">#</th>

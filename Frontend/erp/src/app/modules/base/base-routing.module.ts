@@ -33,7 +33,8 @@ const routes: Routes = [
         path: 'cadidate',
         canActivate:[AuthenticationGuard],
         canActivateChild:[AuthenticationGuard],
-        loadChildren: () => import('../base/cadidate/cadidate.module').then(m => m.CadidateModule)
+        loadChildren: () => import('../base/cadidate/cadidate.module').then(m => m.CadidateModule),
+        pathMatch: 'full'
       },
       {
         path: 'common',
@@ -46,6 +47,14 @@ const routes: Routes = [
         canActivate:[AuthenticationGuard],
         canActivateChild:[AuthenticationGuard],
         loadChildren: () => import('../base/recruitment/recruitment.module').then(m => m.RecruitmentModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'cadidate/detail/:id',
+        canActivate:[AuthenticationGuard],
+        canActivateChild:[AuthenticationGuard],
+        loadChildren: () => import('../base/cadidate/detail/detail.module').then(m => m.DetailModule),
+        pathMatch: 'full'
       },
       {
         path: '**',
