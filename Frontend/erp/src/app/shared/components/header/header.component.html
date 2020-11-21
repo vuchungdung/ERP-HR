@@ -28,7 +28,7 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item><i class="icon-user-check"></i> Thông tin tài khoản</button>
       <button mat-menu-item><i class="icon-cog5"></i> Đổi mật khẩu</button>
-      <button mat-menu-item><i class="icon-switch2"></i> Đăng xuất</button>
+      <button mat-menu-item (click)="logOut()"><i class="icon-switch2"></i> Đăng xuất</button>
     </mat-menu>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { FormStatus } from 'src/app/core/enums/form-status.enum';
+import { MatTableDataSource } from '@angular/material/table';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { PagingModel } from 'src/app/core/models/paging.model';
 import { ResponseModel } from 'src/app/core/models/response.model';
@@ -14,79 +13,51 @@ import { TagService } from './tag.service';
   styleUrls: ['./tag.component.css']
 })
 
-
 export class TagComponent implements OnInit {
 
-  public paging = new PagingModel();
-  public searchText = '';
+  @ViewChild(FormComponent) form : FormComponent;
 
-  //public isLoad: boolean;
+  public paging = new PagingModel;
+  public searchText = '';
   public displayedColumns: string[] = ['name', 'content','options'];
-  public dataSource : any;
+  public dataSource = new MatTableDataSource();
 
   constructor(
-    private dialog: MatDialog,
     private tagService: TagService,
-    private toastr: NotificationService) {}
+    private notify: NotificationService) {}
 
   
   ngOnInit(): void {
     this.getList();
   }
 
-  
+  isReloadTable($event){
+    if($event == true){
+      this.getList();
+    }
+  }
 
   getList(){
     return this.tagService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
-        this.dataSource = res.result.items;
+        this.dataSource.data = res.result.items;
         this.paging.length = res.result.totalItems;
       }
     })
   }
 
-  insertTag() {
-    var isCheck = false;
-    const dialogRef = this.dialog.open(FormComponent);
-    dialogRef.componentInstance.action = FormStatus.Insert;
-    dialogRef.componentInstance.isReLoadTag.subscribe(data=>{
-      isCheck = data;
-    })
-    dialogRef.afterClosed().subscribe(result =>{
-      if(result==true){
-        if(isCheck == true){
-          this.toastr.showSuccess("Thêm mới thành công","Thông báo");
-          this.getList();
-        }
-        else{
-          this.toastr.showWarning("Thêm mới thất bại","Thông báo");
-        }
-      }
-    })
+  openInsertForm() {
+    this.form.openFormInsert();
   }
 
-  updateTag(id:number){
-    var isCheck = false;
-    const dialogRef = this.dialog.open(FormComponent);
-    dialogRef.componentInstance.id = id;
-    dialogRef.componentInstance.action = FormStatus.Update;
-    dialogRef.componentInstance.isReLoadTag.subscribe((data)=>{
-      isCheck = data;
-    })
-    dialogRef.afterClosed().subscribe(result =>{
-      if(result==true){
-        if(isCheck == true){
-          this.toastr.showSuccess("Cập nhật thành công","Thông báo");
-          this.getList();
-        }
-        else{
-          this.toastr.showWarning("Cập nhật thất bại","Thông báo");
-        }
-      }
-      
-    })
+  openUpdateForm(id:number){
+    this.form.openFormUpdate(id);
   }
-  deleteTag(id:number){
+  deleteItem(id:number){
 
+  }
+
+  onPageChange($event){
+    
   }
 }

@@ -152,21 +152,19 @@ export class FormComponent implements OnInit {
   }
 
   initialForm(){
-    if(this.action == FormStatus.Insert){
-      this.recruitmentForm.get('id').setValue(0);
-      this.recruitmentForm.get('title').reset();
-      this.recruitmentForm.get('description').setValue('');
-      this.recruitmentForm.get('skill').reset();
-      this.recruitmentForm.get('categoryId').reset();
-      this.recruitmentForm.get('offerfrom').reset();
-      this.recruitmentForm.get('offerto').reset();
-      this.recruitmentForm.get('requestJob').setValue('');
-      this.recruitmentForm.get('benefit').setValue('');
-      this.recruitmentForm.get('endow').setValue('');
-      this.recruitmentForm.get('timeEnd').reset();
-      this.recruitmentForm.get('timeStart').reset();
-      this.recruitmentForm.get('quatity').reset();
-    }
+    this.recruitmentForm.get('id').setValue(0);
+    this.recruitmentForm.get('title').reset();
+    this.recruitmentForm.get('description').setValue('');
+    this.recruitmentForm.get('skill').reset();
+    this.recruitmentForm.get('categoryId').reset();
+    this.recruitmentForm.get('offerfrom').reset();
+    this.recruitmentForm.get('offerto').reset();
+    this.recruitmentForm.get('requestJob').setValue('');
+    this.recruitmentForm.get('benefit').setValue('');
+    this.recruitmentForm.get('endow').setValue('');
+    this.recruitmentForm.get('timeEnd').reset();
+    this.recruitmentForm.get('timeStart').reset();
+    this.recruitmentForm.get('quatity').reset();   
   }
 
   getItem(id:number){

@@ -77,6 +77,7 @@ export class FormComponent implements OnInit {
   }
 
   openUpdateForm(id:number){
+    debugger;
     this.status = true;
     this.action = FormStatus.Update;
     this.isReLoadTable.emit(true);
@@ -84,9 +85,8 @@ export class FormComponent implements OnInit {
   }
 
   onBack(){
-    this.status = false;
     this.isReLoadTable.emit(true);
-    this.showForm();
+    this.status = false;
   }
 
   initialForm(){

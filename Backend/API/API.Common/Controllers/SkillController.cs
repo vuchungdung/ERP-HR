@@ -21,7 +21,7 @@ namespace API.Common.Controllers
         [HttpGet]
         [Authorize]
         [Route("item")]
-        public async Task<ResponseModel> Item([FromQuery] int id)
+        public async Task<ResponseModel> Item([FromQuery] string id)
         {
             var response = await _skillService.Item(id);
             return response;

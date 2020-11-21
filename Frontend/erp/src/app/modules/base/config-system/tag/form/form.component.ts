@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { Tag } from '../tag.model';
 import { TagService } from '../tag.service';
 
@@ -18,66 +19,74 @@ export class FormComponent implements OnInit {
   
   public tagForm: FormGroup;
   public item: Tag;
-  public id: number;
   public action: FormStatus;
+  public status : boolean = false;
 
   constructor(
     private fb:FormBuilder,
     private tagService: TagService,
-    private dialogRef: MatDialogRef<FormComponent>) { }
+    private notify: NotificationService) { }
 
   ngOnInit(): void {
     this.tagForm = this.fb.group({
       id:[0,Validators.required],
       name:['',Validators.required],
       content:['',Validators.required],
-      color:['',Validators.required]
+      color:['bg-success',Validators.required]
     })
     this.initTagForm();
   }
-
-  getColorLabel($event){
-    let _class = $event.toElement.className;
-    var arr = _class.split(' ');
-    this.tagForm.get('color').setValue(arr[0]);
-  }
   
   initTagForm(){
-    const action = this.dialogRef.componentInstance.action;
-    if(action == FormStatus.Insert){
-      this.tagForm.get('name').reset();
-      this.tagForm.get('content').reset();
-      this.tagForm.get('color').reset();
-    }
-    else if(action == FormStatus.Update){
-      const id = this.dialogRef.componentInstance.id;
-      this.tagForm.get('id').setValue(id);
-      this.getItem(id);
-    }
+    this.tagForm.get('content').reset();
+    this.tagForm.get('name').reset();
+  }
+
+  openFormInsert(){
+    this.action = FormStatus.Insert;
+    this.status = true;
+    this.initTagForm();
+  }
+
+  openFormUpdate(id : number){
+    this.action = FormStatus.Update;
+    this.status = true;
+    this.initTagForm();
+    this.getItem(id);
+  }
+
+  showForm(){
+    return this.status;
+  }
+
+  onBack(){
+    this.status = false;
   }
 
   saveForm(){
-    const action = this.dialogRef.componentInstance.action;
     if(this.tagForm.invalid){
       return;
     }
-    if(action == FormStatus.Insert){
+    if(this.action == FormStatus.Insert){
       this.tagService.insert(this.tagForm.getRawValue()).subscribe((res: ResponseModel)=>{
         if(res.status == ResponseStatus.success){
+          this.initTagForm();
           this.isReLoadTag.emit(true);
+          this.notify.showSuccess("Thêm mới thành công!","Thông báo");
         }
         else{
-          console.log("Error Insert");
+          this.notify.showWarning("Thêm mới thất bại!","Thông báo");
         }
       });
     }
-    else if(action == FormStatus.Update){
+    else if(this.action == FormStatus.Update){
       this.tagService.update(this.tagForm.getRawValue()).subscribe((res:ResponseModel)=>{
         if(res.status == ResponseStatus.success){
           this.isReLoadTag.emit(true);
+          this.notify.showSuccess("Cập nhật thành công!","Thông báo");
         }
         else{
-          console.log("Error Update");
+          this.notify.showWarning("Cập nhật thất bại!","Thông báo");
         }
       });
     }    
@@ -94,6 +103,5 @@ export class FormComponent implements OnInit {
   private setDataToForm(data: Tag) {
     this.tagForm.get('name').setValue(data.name);
     this.tagForm.get('content').setValue(data.content);
-    this.tagForm.get('color').setValue(data.color);
   }
 }

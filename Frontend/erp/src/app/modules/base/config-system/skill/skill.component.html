@@ -15,7 +15,7 @@
     <div class="panel panel-flat">
       <div class="container-fluid">
         <div class="table-responsive">
-          <table mat-table [dataSource]="dataSource" style="width:100%">
+          <table mat-table [dataSource]="dataSource" style="width:100%;margin-bottom: 8px;">
     
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 90%;"><span style="font-weight: 500;">Công nghệ</span> </th>
@@ -25,7 +25,7 @@
             <ng-container matColumnDef="options">
               <th mat-header-cell *matHeaderCellDef style="font-weight: 600;font-size: 14px; color: black;width: 10%;"> <span style="font-weight: 500;">Nghiệp vụ</span> </th>
               <td mat-cell *matCellDef="let element">
-                <mat-icon (click)="openUpdateForm(element.id)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
+                <mat-icon (click)="openUpdateForm(element.skillId)" style="color:green; padding-right: 40px;cursor: pointer;">create</mat-icon>
                 <mat-icon style="color: red;cursor: pointer;">delete</mat-icon>
               </td>
             </ng-container>  
@@ -33,6 +33,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+          <app-paginator [paging]="paging" (pageEventChange)="onPageChange($event)">
+          </app-paginator>
         </div>
       </div>
     </div>

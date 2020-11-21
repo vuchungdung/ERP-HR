@@ -9,8 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormComponent } from './form/form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderInterceptor } from 'src/app/core/interceptors/header.interceptor';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const route : Routes = [
   {
@@ -30,6 +29,7 @@ const route : Routes = [
     MatButtonModule,
     MatDialogModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule
   ],
   providers:[
