@@ -88,7 +88,7 @@
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
                     <mat-select class="form-input" formControlName="categoryId" style="height: 36px; line-height: 36px;">
                       <mat-option>None</mat-option>
-                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
+                      <mat-option *ngFor="let option of listCategorys" [value]=option.categoryId>{{option.name}}</mat-option>
                     </mat-select>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ sử dụng</label>
                     <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
                       <mat-option>None</mat-option>
-                      <mat-option *ngFor="let option of listSkills" value={{option.skillId}}>{{option.name}}</mat-option>
+                      <mat-option *ngFor="let option of listSkills" [value]=option.skillId>{{option.name}}</mat-option>
                     </mat-select>
                   </div>
                   <div class="col-lg-6">
