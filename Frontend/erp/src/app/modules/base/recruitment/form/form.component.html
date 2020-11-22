@@ -1,6 +1,6 @@
 <div class="page-container" style="padding: 10px 20px;" [class.opened]="showForm()">
   <div class="row">
-    <form novalidate [formGroup]="recruitmentForm">
+    <form novalidate [formGroup]="recruitmentForm" (submit)="saveFormRecruit()">
       <div class="panel panel-flat">
         <div class="panel-body">
           <div style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:10px">
@@ -29,7 +29,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ yêu cầu</label>
-                    <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
+                    <mat-select class="form-input" [ngModel]="selectedMulti" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
                       <mat-option [value]=0>None</mat-option>
                       <mat-option *ngFor="let option of listSkills" [value]=option.skillId>{{option.name}}</mat-option>
                     </mat-select>
@@ -109,10 +109,10 @@
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between">
-            <button mat-raised-button style="margin-right: 5px;" (click)="onBack()" class="btn-interview" color="primary">
+            <a mat-raised-button style="margin-right: 5px;" (click)="onBack()" class="btn-interview" color="primary">
               <i class="icon-arrow-left13"></i>Quay lại
-            </button>
-            <button mat-raised-button style="margin-right: 5px;" (click)="saveFormRecruit()" class="btn-interview" color="primary">
+            </a>
+            <button type="submit" mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               Lưu tin tuyển dụng<i class="icon-arrow-right14"></i>   
             </button>
           </div>

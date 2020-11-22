@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { FormGroupDirective } from '@angular/forms';
 import { FormStatus } from 'src/app/core/enums/form-status.enum';
+import { JobStatus } from 'src/app/core/enums/job-status.enum';
+import { JobType } from 'src/app/core/enums/job-type.enum';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
@@ -25,6 +27,7 @@ export class FormComponent implements OnInit {
   public listSkills : any[];
   public listCategorys : any[];
   public recruitment : Recruitment;
+  public selectedMulti : string[];
 
 
   constructor(
@@ -50,8 +53,8 @@ export class FormComponent implements OnInit {
       timeEnd:['',Validators.required],
       timeStart:['',Validators.required],
       quatity:['',Validators.required],
-      status:[1,Validators.required],
-      type:[1,Validators.required]
+      status:[JobStatus.Opened,Validators.required],
+      type:[JobType.FullTime,Validators.required]
     });
     this.action = FormStatus.Unknow;
     this.dropdownSkill();
@@ -87,7 +90,6 @@ export class FormComponent implements OnInit {
         if(res.status == ResponseStatus.success){        
           this.action == FormStatus.Insert;
           this.notify.showSuccess("Cập nhật thành công","Thông báo");
-          this.initialForm();
         }
         else{
           this.notify.showWarning("Cập nhật thất bại","Thông báo");
@@ -166,25 +168,24 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('timeEnd').reset();
     this.recruitmentForm.get('timeStart').reset();
     this.recruitmentForm.get('quatity').reset();   
-    this.recruitmentForm.get('status').setValue(0);
-    this.recruitmentForm.get('type').setValue(0);
+    this.recruitmentForm.get('status').setValue(JobStatus.Opened);
+    this.recruitmentForm.get('type').setValue(JobType.FullTime);
   }
 
   getItem(id:number){
     this.recService.item(id).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
         this.recruitment = res.result;
-        console.log(this.recruitment);
         this.setDataForm(this.recruitment);
       }
     })
   }
 
   setDataForm(data:Recruitment){
+    this.selectedMulti = data.skill.split(',');
     this.recruitmentForm.get('jobId').setValue(data.jobId);
     this.recruitmentForm.get('title').setValue(data.title);
     this.recruitmentForm.get('description').setValue(data.description);
-    this.recruitmentForm.get('skill').setValue(data.skill);
     this.recruitmentForm.get('categoryId').setValue(data.categoryId);
     this.recruitmentForm.get('offerFrom').setValue(data.offerFrom);
     this.recruitmentForm.get('offerTo').setValue(data.offerTo);
@@ -196,5 +197,6 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('quatity').setValue(data.quatity);
     this.recruitmentForm.get('status').setValue(data.status);
     this.recruitmentForm.get('type').setValue(data.type);
+    this.recruitmentForm.get('skill').setValue(data.skill);
   }
 }

@@ -1,3 +1,6 @@
+import { JobStatus } from 'src/app/core/enums/job-status.enum';
+import { JobType } from 'src/app/core/enums/job-type.enum';
+
 export interface Recruitment{
   jobId:number,
   title:string,
@@ -13,6 +16,6 @@ export interface Recruitment{
   timeEnd:Date,
   timeStart:Date,
   quatity:number,
-  status:number,
-  type:number
+  status:JobStatus,
+  type:JobType
 }

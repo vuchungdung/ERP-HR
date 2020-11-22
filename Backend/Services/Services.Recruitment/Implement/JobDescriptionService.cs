@@ -110,7 +110,7 @@ namespace Services.Recruitment.Implement
                 md.Title = model.Title;
                 md.Description = model.Description;
                 md.Endow = model.Endow;
-                md.SkillId = model.Skill;
+                md.SkillId = model.Skill.Substring(0, model.Skill.Length - 1);
                 md.CategoryId = model.CategoryId;
                 md.OfferFrom = model.OfferFrom;
                 md.OfferTo = model.OfferTo;
@@ -158,6 +158,7 @@ namespace Services.Recruitment.Implement
                 model.TimeStart = md.TimeStart;
                 model.Benefit = md.Benefit;
                 model.Quatity = md.Quatity;
+                model.Skill = md.SkillId;
                 model.RequestJob = md.RequestJob;
 
                 response.Result = model;
@@ -180,7 +181,7 @@ namespace Services.Recruitment.Implement
                 md.Title = model.Title;
                 md.Description = model.Description;
                 md.Endow = model.Endow;
-                md.SkillId = model.Skill;
+                md.SkillId = model.Skill.Substring(0, model.Skill.Length - 1);
                 md.CategoryId = model.CategoryId;
                 md.OfferFrom = model.OfferFrom;
                 md.OfferTo = model.OfferTo;
@@ -192,6 +193,7 @@ namespace Services.Recruitment.Implement
                 md.Quatity = model.Quatity;
                 md.Status = model.Status;
                 md.UpdateDate = DateTime.Now;
+                md.Type = model.Type;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 _context.JobDescriptionRepository.Update(md);
