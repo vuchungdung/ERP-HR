@@ -28,7 +28,7 @@ export class RecruitmentComponent implements OnInit {
                                          'category','offerto',
                                          'offerfrom',
                                          'timeEnd',
-                                         'timeStart','quatity','status','options'];
+                                         'timeStart','quatity','status','type','options'];
   public paging = new PagingModel();
   public keyword = '';
   public currentPageSize = this.paging.pageSize;

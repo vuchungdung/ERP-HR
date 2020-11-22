@@ -40,5 +40,7 @@ namespace Services.Recruitment.ViewModel
         public JobStatus Status { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public Core.CommonModel.Enum.Type Type { get; set; }
     }
 }

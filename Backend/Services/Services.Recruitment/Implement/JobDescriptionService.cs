@@ -69,7 +69,9 @@ namespace Services.Recruitment.Implement
                                 Skill = j.SkillId,
                                 CategoryName = c.Name,
                                 OfferFrom = j.OfferFrom,
-                                OfferTo = j.OfferTo
+                                OfferTo = j.OfferTo,
+                                Status =  j.Status,
+                                Type = j.Type
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))

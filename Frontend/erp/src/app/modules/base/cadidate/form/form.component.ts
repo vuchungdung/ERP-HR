@@ -70,7 +70,7 @@ export class FormComponent implements OnInit {
       providerId:['',[Validators.required,AppValidator.number]],
       skill:['',Validators.required],
       applyDate:['',[Validators.required]],
-      experience:['',Validators.required],
+      experience:['',Validators.required]
     });
     this.dropdownSkill();
     this.dropdownProvider();

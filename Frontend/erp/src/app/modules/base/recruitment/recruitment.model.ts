@@ -3,7 +3,7 @@ export interface Recruitment{
   title:string,
   description:string,
   skill:string,
-  category:string,
+  categoryId:number,
   offerFrom:number,
   offerTo:number,
   requestJob:string,
@@ -12,5 +12,7 @@ export interface Recruitment{
   createDte:Date,
   timeEnd:Date,
   timeStart:Date,
-  quatity:number
+  quatity:number,
+  status:number,
+  type:number
 }

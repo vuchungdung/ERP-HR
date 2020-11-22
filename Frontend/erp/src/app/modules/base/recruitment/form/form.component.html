@@ -9,15 +9,29 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="lb-input"><i class="icon-arrow-small-right"></i>Tiêu đề tin tuyển dụng</label>
-                <input type="text" class="form-input" formControlName="title" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                <div class="row">
+                  <div class="col-md-8">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Tiêu đề tin tuyển dụng</label>
+                    <input type="text" class="form-input" formControlName="title" placeholder="Nhập tiêu đề tin tuyển dụng" />
+                  </div>
+                  <div class="col-md-4">
+                    <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời giờ</label>
+                    <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
+                      <mat-radio-group formControlName="type">
+                        <mat-radio-button [value]=0>Full Time</mat-radio-button>
+                        <mat-radio-button style="margin-left:20px" [value]=1>Part Time</mat-radio-button>
+                      </mat-radio-group>
+                    </div>   
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Công nghệ yêu cầu</label>
                     <mat-select class="form-input" formControlName="skill" style="height: 36px; line-height: 36px;" multiple>
-                      <mat-option *ngFor="let option of listSkills" value={{option.skillId}}>{{option.name}}</mat-option>
+                      <mat-option [value]=0>None</mat-option>
+                      <mat-option *ngFor="let option of listSkills" [value]=option.skillId>{{option.name}}</mat-option>
                     </mat-select>
                   </div>
                   <div class="col-md-3">
@@ -70,8 +84,8 @@
                   <div class="col-lg-4">
                     <label class="lb-input"><i class="icon-arrow-small-right"></i>Mảng công việc</label>
                     <mat-select class="form-input" formControlName="categoryId" style="height: 36px; line-height: 36px;">
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let option of listCategorys" value={{option.categoryId}}>{{option.name}}</mat-option>
+                      <mat-option [value]=0>None</mat-option>
+                      <mat-option *ngFor="let option of listCategorys" [value]=option.categoryId>{{option.name}}</mat-option>
                     </mat-select>
                   </div>
                   <div class="col-lg-4">

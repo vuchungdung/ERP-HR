@@ -50,7 +50,8 @@ export class FormComponent implements OnInit {
       timeEnd:['',Validators.required],
       timeStart:['',Validators.required],
       quatity:['',Validators.required],
-      status:[0,Validators.required]
+      status:[1,Validators.required],
+      type:[1,Validators.required]
     });
     this.action = FormStatus.Unknow;
     this.dropdownSkill();
@@ -155,8 +156,8 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('jobId').setValue(0);
     this.recruitmentForm.get('title').reset();
     this.recruitmentForm.get('description').setValue('');
-    this.recruitmentForm.get('skill').reset();
-    this.recruitmentForm.get('categoryId').reset();
+    this.recruitmentForm.get('skill').setValue(0);
+    this.recruitmentForm.get('categoryId').setValue(0);
     this.recruitmentForm.get('offerFrom').reset();
     this.recruitmentForm.get('offerTo').reset();
     this.recruitmentForm.get('requestJob').setValue('');
@@ -165,6 +166,8 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('timeEnd').reset();
     this.recruitmentForm.get('timeStart').reset();
     this.recruitmentForm.get('quatity').reset();   
+    this.recruitmentForm.get('status').setValue(0);
+    this.recruitmentForm.get('type').setValue(0);
   }
 
   getItem(id:number){
@@ -182,7 +185,7 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('title').setValue(data.title);
     this.recruitmentForm.get('description').setValue(data.description);
     this.recruitmentForm.get('skill').setValue(data.skill);
-    this.recruitmentForm.get('categoryId').setValue(data.category);
+    this.recruitmentForm.get('categoryId').setValue(data.categoryId);
     this.recruitmentForm.get('offerFrom').setValue(data.offerFrom);
     this.recruitmentForm.get('offerTo').setValue(data.offerTo);
     this.recruitmentForm.get('requestJob').setValue(data.requestJob);
@@ -191,5 +194,7 @@ export class FormComponent implements OnInit {
     this.recruitmentForm.get('timeEnd').setValue(data.timeEnd);
     this.recruitmentForm.get('timeStart').setValue(data.timeStart);
     this.recruitmentForm.get('quatity').setValue(data.quatity);
+    this.recruitmentForm.get('status').setValue(data.status);
+    this.recruitmentForm.get('type').setValue(data.type);
   }
 }
