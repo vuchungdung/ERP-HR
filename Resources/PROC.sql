@@ -28,6 +28,7 @@ CREATE PROC SP_JOBDESCRIPTION_GET_PAGING
 AS 
 	BEGIN
 		SELECT JOB.Title,
+			JOB.JobId,
 			JOB.Description,
 			JOB.Endow,
 			JOB.Benefit,
@@ -74,6 +75,7 @@ CREATE PROC SP_JOBDESCRIPTION_GET_ALL
 AS 
 	BEGIN
 		SELECT JOB.Title,
+			JOB.JobId,
 			JOB.Description,
 			JOB.Endow,
 			JOB.Benefit,
@@ -101,6 +103,7 @@ CREATE PROC SP_JOBDESCRIPTION_GET_ALL_NEW
 AS 
 	BEGIN
 		SELECT TOP(8) JOB.Title,
+			JOB.JobId,
 			JOB.Description,
 			JOB.Endow,
 			JOB.Benefit,
@@ -130,6 +133,7 @@ CREATE PROC SP_JOBDESCRIPTION_GET_DETAIL
 AS 
 	BEGIN
 		SELECT JOB.Title,
+			JOB.JobId,
 			JOB.Description,
 			JOB.Endow,
 			JOB.Benefit,

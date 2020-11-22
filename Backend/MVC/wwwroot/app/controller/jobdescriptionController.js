@@ -24,7 +24,9 @@
             })
         };
 
+        $scope.getDetail = function () {
 
+        }
 
         $scope.searchJob = function () {
             $scope.getPaging($scope.page);        

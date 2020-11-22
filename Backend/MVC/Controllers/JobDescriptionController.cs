@@ -67,7 +67,7 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Item(int id)
+        public IActionResult Item([FromRoute]int id)
         {
             try
             {
