@@ -87,7 +87,7 @@ namespace APIGateway
             services.AddScoped<IERPUnitOfWork, ERPUnitOfWork>();
 
             services.AddScoped<IJwtTokenSecurityService, JwtTokenSecurityService>();
-
+            services.AddScoped<ISequenceService, SequenceService>();
             services.AddDirectoryBrowser();
 
             services.AddCommonServices(Configuration);

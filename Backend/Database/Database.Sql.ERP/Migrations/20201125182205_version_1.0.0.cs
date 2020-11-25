@@ -3,13 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Sql.ERP.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class version_100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence<int>(
-                name: "DBSequence");
-
             migrationBuilder.CreateTable(
                 name: "CadidateApplyHistories",
                 columns: table => new
@@ -36,54 +33,40 @@ namespace Database.Sql.ERP.Migrations
                 name: "Cadidates",
                 columns: table => new
                 {
-                    CadidateId = table.Column<int>(nullable: false, defaultValueSql: "NEXT VALUE FOR DBSequence"),
+                    CadidateId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateBy = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(250)", nullable: false),
-                    Phone = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Dob = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Email = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    Phone = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Dob = table.Column<DateTime>(nullable: true),
+                    Gender = table.Column<int>(nullable: true),
                     Degree = table.Column<string>(type: "nvarchar(20)", nullable: true),
                     University = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Major = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    ApplyDate = table.Column<DateTime>(nullable: false),
+                    ApplyDate = table.Column<DateTime>(nullable: true),
                     Experience = table.Column<string>(nullable: true),
                     FaceBook = table.Column<string>(nullable: true),
                     Zalo = table.Column<string>(nullable: true),
                     Skype = table.Column<string>(nullable: true),
                     LinkIn = table.Column<string>(nullable: true),
-                    Rating = table.Column<int>(nullable: false),
-                    ProviderId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    Skill = table.Column<string>(nullable: false),
-                    JobId = table.Column<int>(nullable: false),
-                    TagId = table.Column<int>(nullable: false)
+                    Rating = table.Column<int>(nullable: true),
+                    ProviderId = table.Column<int>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: true),
+                    Skill = table.Column<string>(nullable: true),
+                    JobId = table.Column<int>(nullable: true),
+                    TagId = table.Column<int>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cadidates", x => x.CadidateId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CadidateUsers",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(80)", nullable: false),
-                    Password = table.Column<string>(type: "varchar(120)", nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    CadidateId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CadidateUsers", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,15 +240,20 @@ namespace Database.Sql.ERP.Migrations
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    PlanId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Description = table.Column<string>(nullable: false),
+                    RequestJob = table.Column<string>(nullable: false),
+                    Benefit = table.Column<string>(nullable: false),
                     Endow = table.Column<string>(nullable: false),
                     SkillId = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     OfferFrom = table.Column<int>(nullable: false),
                     OfferTo = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false),
+                    TimeStart = table.Column<DateTime>(nullable: false),
+                    TimeEnd = table.Column<DateTime>(nullable: false),
+                    Quatity = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -329,28 +317,6 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecruitmentPlans",
-                columns: table => new
-                {
-                    PlanId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateBy = table.Column<int>(type: "int", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    UpdateBy = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Quatity = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    Note = table.Column<string>(nullable: true),
-                    TimeStart = table.Column<DateTime>(nullable: false),
-                    TimeEnd = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RecruitmentPlans", x => x.PlanId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -373,8 +339,7 @@ namespace Database.Sql.ERP.Migrations
                 name: "Skills",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SkillId = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CreateBy = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
@@ -459,9 +424,6 @@ namespace Database.Sql.ERP.Migrations
                 name: "Cadidates");
 
             migrationBuilder.DropTable(
-                name: "CadidateUsers");
-
-            migrationBuilder.DropTable(
                 name: "CommandInFunctions");
 
             migrationBuilder.DropTable(
@@ -498,9 +460,6 @@ namespace Database.Sql.ERP.Migrations
                 name: "Providers");
 
             migrationBuilder.DropTable(
-                name: "RecruitmentPlans");
-
-            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
@@ -514,9 +473,6 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropSequence(
-                name: "DBSequence");
         }
     }
 }

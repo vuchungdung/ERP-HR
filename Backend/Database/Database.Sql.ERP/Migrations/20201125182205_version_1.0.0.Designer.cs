@@ -10,16 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20201119030058_version_1.0.3")]
-    partial class version_103
+    [Migration("20201125182205_version_1.0.0")]
+    partial class version_100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("Relational:Sequence:.DBSequence", "'DBSequence', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.Cadidate", b =>
@@ -27,16 +26,15 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("CadidateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR DBSequence");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime>("ApplyDate")
+                    b.Property<DateTime?>("ApplyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
@@ -51,11 +49,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Dob")
+                    b.Property<DateTime?>("Dob")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(200)");
 
                     b.Property<string>("Experience")
@@ -64,10 +61,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
+                    b.Property<int?>("JobId")
                         .HasColumnType("int");
 
                     b.Property<string>("LinkIn")
@@ -77,27 +74,27 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int>("ProviderId")
+                    b.Property<int?>("ProviderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Skill")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skype")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TagId")
+                    b.Property<int?>("TagId")
                         .HasColumnType("int");
 
                     b.Property<string>("University")
@@ -108,6 +105,9 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zalo")
                         .HasColumnType("nvarchar(max)");
@@ -159,29 +159,6 @@ namespace Database.Sql.ERP.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CadidateApplyHistories");
-                });
-
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.CadidateUser", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CadidateId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(120)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(80)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("CadidateUsers");
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Common.File", b =>

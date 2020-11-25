@@ -28,12 +28,6 @@ namespace Database.Sql.ERP
 
             builder.Entity<CommandInFunction>()
                        .HasKey(c => new { c.CommandId, c.FunctionId });
-
-            builder.HasSequence<int>("DBSequence")
-                              .StartsAt(1).IncrementsBy(1);
-            builder.Entity<Cadidate>()
-               .Property(x => x.CadidateId)
-               .HasDefaultValueSql("NEXT VALUE FOR DBSequence");
         }
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }
         public DbSet<Cadidate> Cadidates { get; set; }
