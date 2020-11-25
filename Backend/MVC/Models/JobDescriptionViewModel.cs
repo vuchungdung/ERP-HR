@@ -15,7 +15,6 @@ namespace MVC.Models
         public int OfferTo { get; set; }
         public string RequestJob { get; set; }
         public JobStatus Status { get; set; }
-        public string Name { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public DateTime CreateDate { get; set; }

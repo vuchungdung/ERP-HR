@@ -7,6 +7,7 @@
         $scope.getAllSkill = function () {
             ajaxService.get('/Skill/GetAll', null, function (res) {
                 $scope.listSkill = res.data;
+                console.log($scope.listSkill);
             }, function (err) {
                 console.log(err);
             })

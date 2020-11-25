@@ -14,27 +14,21 @@ namespace Database.Sql.ERP.Entities.Cadidate
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CadidateId { get; set; }
 
-        [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; }
 
-        [Required]
         [Column(TypeName = "varchar(200)")]
         public string Email { get; set; }
 
-        [Required]
         [Column(TypeName = "nvarchar(250)")]
         public string Address { get; set; }
 
-        [Required]
         [Column(TypeName = "varchar(20)")]
         public string Phone { get; set; }
 
-        [Required]
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
-        [Required]
-        public int Gender { get; set; }
+        public int? Gender { get; set; }
 
         [Column(TypeName = "nvarchar(20)")]
         public string Degree { get; set; }
@@ -45,7 +39,7 @@ namespace Database.Sql.ERP.Entities.Cadidate
         [Column(TypeName = "nvarchar(100)")]
         public string Major { get; set; }
 
-        public DateTime ApplyDate { get; set; }
+        public DateTime? ApplyDate { get; set; }
 
         public string Experience { get; set; }
 
@@ -57,19 +51,20 @@ namespace Database.Sql.ERP.Entities.Cadidate
 
         public string LinkIn { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
-        [Required]
-        public int ProviderId { get; set; }
+        public int? ProviderId { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
-        [Required]
         public string Skill { get; set; }
 
-        public int JobId { get; set; }
+        public int? JobId { get; set; }
 
-        public int TagId { get; set; }
+        public int? TagId { get; set; }
+
+        public string Username { get; set; }
+
+        public string Password { get; set; }
     }
 }

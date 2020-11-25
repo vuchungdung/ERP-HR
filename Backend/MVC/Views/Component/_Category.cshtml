@@ -3,12 +3,12 @@
         <div class="row cat_search">
             <div class="col-lg-9 col-md-12">
                 <div class="single_input">
-                    <input type="text" placeholder="Công việc tìm kiếm">
+                    <input type="text" ng-model="keyword" placeholder="Công việc tìm kiếm">
                 </div>
             </div>
             <div class="col-lg-3 col-md-12">
                 <div class="job_btn">
-                    <a href="/JobDescription/Search/" class="boxed-btn3">Tìm kiếm</a>
+                    <a href="/JobDescription/Items?keyword={{keyword}}" class="boxed-btn3">Tìm kiếm</a>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="popular_search d-flex align-items-center">
                     <span>Công nghệ:</span>
                     <ul ng-repeat="item in listSkill">
-                        <li><a href="">{{item.name}}</a></li>
+                        <li><a href="/JobDescription/Items?keyword={{item.skillId}}">{{item.name}}</a></li>
                     </ul>
                 </div>
             </div>

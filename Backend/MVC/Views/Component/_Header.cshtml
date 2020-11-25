@@ -32,12 +32,12 @@
                                 }
                                 else
                                 {
-                                    var session = JsonConvert.DeserializeObject<CadidateUserViewModel>(Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION));
-                                    if (session.UserName != null)
+                                    var session = JsonConvert.DeserializeObject<CadidateViewModel>(Context.Session.GetString(MVC.Common.CommonSession.USER_SESSION));
+                                    if (session.Username != null)
                                     {
                                         <div class="dropdown" style="margin-left:70px">
                                             <a class="btn dropdown-toggle" style="width:171px;background-color:#00D363;color:white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
-                                                @session.UserName
+                                                @session.Username
                                             </a>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

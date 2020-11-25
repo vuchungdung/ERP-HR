@@ -19,9 +19,9 @@ namespace Services.Cadidates.ViewModel
 
         public string Phone { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
-        public int Gender { get; set; }
+        public int? Gender { get; set; }
 
         public string Degree { get; set; }
 
@@ -29,7 +29,7 @@ namespace Services.Cadidates.ViewModel
 
         public string Major { get; set; }
 
-        public DateTime ApplyDate { get; set; }
+        public DateTime? ApplyDate { get; set; }
 
         public string Experience { get; set; }
 
@@ -41,17 +41,17 @@ namespace Services.Cadidates.ViewModel
 
         public string LinkIn { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
-        public int ProviderId { get; set; }
+        public int? ProviderId { get; set; }
         public string Provider { get; set; }
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string Category { get; set; }
         public string Skill { get; set; }
         public string Img { get; set; }
-        public int JobId { get; set; }
+        public int? JobId { get; set; }
 
-        public int TagId { get; set; }
+        public int? TagId { get; set; }
 
         public List<IFormFile> Files { get; set; }
 
@@ -68,9 +68,9 @@ namespace Services.Cadidates.ViewModel
 
         public string Phone { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
-        public int Gender { get; set; }
+        public int? Gender { get; set; }
 
         public string Degree { get; set; }
 
@@ -78,11 +78,11 @@ namespace Services.Cadidates.ViewModel
 
         public string Major { get; set; }
 
-        public DateTime ApplyDate { get; set; }
+        public DateTime? ApplyDate { get; set; }
 
         public string Experience { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
         public string Provider { get; set; }
 
@@ -92,6 +92,6 @@ namespace Services.Cadidates.ViewModel
 
         public string Img { get; set; }
 
-        public int TagId { get; set; }
+        public int? TagId { get; set; }
     }
 }

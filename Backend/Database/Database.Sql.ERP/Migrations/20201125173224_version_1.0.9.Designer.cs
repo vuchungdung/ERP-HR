@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20201125173224_version_1.0.9")]
+    partial class version_109
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +32,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime?>("ApplyDate")
+                    b.Property<DateTime>("ApplyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
@@ -48,7 +50,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("Dob")
+                    b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -60,10 +62,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Gender")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JobId")
+                    b.Property<int>("JobId")
                         .HasColumnType("int");
 
                     b.Property<string>("LinkIn")
@@ -81,10 +83,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("ProviderId")
+                    b.Property<int>("ProviderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Rating")
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Skill")
@@ -93,7 +95,7 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Skype")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TagId")
+                    b.Property<int>("TagId")
                         .HasColumnType("int");
 
                     b.Property<string>("University")

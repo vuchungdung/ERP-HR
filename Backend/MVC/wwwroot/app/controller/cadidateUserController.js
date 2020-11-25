@@ -17,7 +17,7 @@
             }, function (err) {
                 console.log(err);
             });
-        }
+        };
 
         $scope.login = function () {
             ajaxService.post('/CadidateUser/Login', $scope.user, function (res) {

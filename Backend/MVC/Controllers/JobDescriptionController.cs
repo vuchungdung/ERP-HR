@@ -15,19 +15,11 @@ namespace MVC.Controllers
             _jobDescriptionService = jobDescriptionService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Search()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult GetAllPaging([FromBody]PageViewModel model)
         {
+            model.Categoryid = Convert.ToInt32(TempData["categoryId"]);
+            model.Keyword = TempData["keyword"].ToString();
             try
             {
                 var response = _jobDescriptionService.GetJobPaging(model);
@@ -47,11 +39,12 @@ namespace MVC.Controllers
                 var response = _jobDescriptionService.GetAll();
                 return Json(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
+
         [HttpGet]
         public IActionResult GetAllNew()
         {
@@ -66,9 +59,9 @@ namespace MVC.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult Item([FromRoute]int id)
+        public IActionResult Item()
         {
+            int id = Convert.ToInt32(TempData["JobId"]);
             try
             {
                 var response = _jobDescriptionService.GetDetail(id);
@@ -80,9 +73,25 @@ namespace MVC.Controllers
             }
         }
 
-        public IActionResult Item()
+        public IActionResult Item(int id)
         {
+            TempData["JobId"] = id;
             return View();
         }
+
+        public IActionResult Items(string keyword, int categoryId = 0)
+        {
+            if (!String.IsNullOrEmpty(keyword))
+            {
+                TempData["keyword"] = keyword;
+            }
+            else
+            {
+                TempData["keyword"] = "";
+
+            }
+            TempData["categoryId"] = categoryId;
+            return View();
+        }       
     }
 }

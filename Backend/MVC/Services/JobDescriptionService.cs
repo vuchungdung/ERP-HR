@@ -54,10 +54,9 @@ namespace MVC.Services
                 if (!String.IsNullOrEmpty(model.Keyword))
                 {
                     listItems = listItems.Where(x => x.Title.ToLower().Contains(model.Keyword.ToLower())
-                                            ||x.SkillId.ToLower().Contains(model.Keyword.ToLower())
-                                            ||x.Name.ToLower().Contains(model.Keyword.ToLower())).ToList();
+                                            ||x.SkillId.ToLower().Contains(model.Keyword.ToLower())).ToList();
                 }
-                if(model.Categoryid != null)
+                if(model.Categoryid != 0)
                 {
                     listItems = listItems.Where(x => x.CategoryId == model.Categoryid).ToList();
                 }
@@ -89,5 +88,7 @@ namespace MVC.Services
                 throw ex;
             }
         }
+
+        
     }
 }
