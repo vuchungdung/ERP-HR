@@ -24,7 +24,22 @@ namespace MVC.Services
 
         public bool Regrister(RegisterViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_CADIDATE_REGRISTER", "@CREATEDATE",DateTime.Now,"@DELETED",false, "@USERNAME", model.Username, "@PASSWORD", model.Password);
+                if(response != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MVC.Interfaces
     public class CategoryService : ICategoryService
     {
         private readonly IDatabaseHelper _helper;
-
+        
         public CategoryService(IDatabaseHelper helper)
         {
             _helper = helper;

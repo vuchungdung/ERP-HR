@@ -1,103 +1,65 @@
-﻿<!doctype html>
-<html class="no-js" lang="zxx">
+﻿<!DOCTYPE html>
+<html lang="en">
 
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/job-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Nov 2020 15:54:14 GMT -->
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job Board</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Jobber - Job Board HTML5 Template" />
+    <meta name="author" content="potenzaglobalsolutions.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jobber - Job Board HTML5 Template</title>
 
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="~/img/download.png">
-    <!-- Place favicon.ico in the root directory -->
-    <!-- CSS here -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/themify-icons.css">
-    <link rel="stylesheet" href="~/css/nice-select.css">
-    <link rel="stylesheet" href="~/css/flaticon.css">
-    <link rel="stylesheet" href="~/css/gijgo.css">
-    <link rel="stylesheet" href="~/css/jquery-ui.css">
-    <link rel="stylesheet" href="~/css/animate.min.css">
-    <link rel="stylesheet" href="~/css/slicknav.css">
-    <link rel="stylesheet" href="~/css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    <!--angular js here-->
-    <script src="~/assests/angular/angular.min.js"></script>
-    <script src="//code.angularjs.org/snapshot/angular-sanitize.js"></script>
-    <script src="~/assests/libs/dirPagination.js"></script>
+    <!-- Favicon -->
+    <link href="~/images/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+    <link rel="stylesheet" href="~/css/font-awesome/all.min.css" />
+    <link rel="stylesheet" href="~/css/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.min.css" />
+
+    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+    <link rel="stylesheet" href="~/css/select2/select2.css" />
+
+    <!-- Template Style -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
 </head>
-
-<body ng-app="erp">
+<body>
 
     <partial name="/Views/Component/_Header.cshtml" />
 
-    @RenderBody()
+    <partial name="/Views/Component/_Search.cshtml" />
+
+    @RenderBody();
 
     <partial name="/Views/Component/_Footer.cshtml" />
 
-    <!-- JS here -->
-    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/isotope.pkgd.min.js"></script>
-    <script src="~/js/ajax-form.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/js/scrollIt.js"></script>
-    <script src="~/js/jquery.scrollUp.min.js"></script>
-    <script src="~/js/wow.min.js"></script>
-    <script src="~/js/nice-select.min.js"></script>
-    <script src="~/js/jquery.slicknav.min.js"></script>
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/plugins.js"></script>
-    <script src="~/js/gijgo.min.js"></script>
-    <script src="~/js/range.js"></script>
+    <div id="back-to-top" class="back-to-top">
+        <i class="fas fa-angle-up"></i>
+    </div>
 
-    <!--contact js-->
-    <script src="~/js/contact.js"></script>
-    <script src="~/js/jquery.ajaxchimp.min.js"></script>
-    <script src="~/js/jquery.form.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/mail-script.js"></script>
-    <script src="~/js/main.js"></script>
-    <script src="~/assests/libs/pnotify.min.js"></script>
+    <partial name="/Views/Component/_Modal.cshtml" />
 
-    <!--angular js here-->
-    <script src="~/app/app.js"></script>
-    <script src="~/app/shared/dateFilter.js"></script>
-    <script src="~/app/shared/ajaxService.js"></script>
-    <script src="~/app/controller/jobdescriptionController.js"></script>
-    <script src="~/app/controller/skillController.js"></script>
-    <script src="~/app/controller/cadidateUserController.js"></script>
-    <script src="~/app/controller/categoryController.js"></script>
-    <script src="~/app/controller/bradcamController.js"></script>
-    <script src="~/js/main.js"></script>
-    <script src="~/app/controller/sliderController.js"></script>
-    <script src="~/app/controller/homeController.js"></script>
-    <script src="~/app/shared/typeFilter.js"></script>
+    <!--=================================
+    Signin Modal Popup -->
+    <!--=================================
+    Javascript -->
+    <!-- JS Global Compulsory (Do not remove)-->
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/popper/popper.min.js"></script>
+    <script src="~/js/bootstrap/bootstrap.min.js"></script>
 
+    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+    <script src="~/js/select2/select2.full.js"></script>
 
-    <script>
-        $(function () {
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: 24600,
-                values: [750, 24600],
-                slide: function (event, ui) {
-                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1] + "/ Year");
-                }
-            });
-            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-                " - $" + $("#slider-range").slider("values", 1) + "/ Year");
-        });
-    </script>
+    <!-- Template Scripts (Do not remove)-->
+    <script src="~/js/custom.js"></script>
+
 </body>
+
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/job-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Nov 2020 15:54:14 GMT -->
 </html>

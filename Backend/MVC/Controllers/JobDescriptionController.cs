@@ -59,7 +59,7 @@ namespace MVC.Controllers
             }
         }
 
-        public IActionResult Item()
+        public JsonResult Item()
         {
             int id = Convert.ToInt32(TempData["JobId"]);
             try
@@ -72,8 +72,8 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-
-        public IActionResult Item(int id)
+        [HttpGet]
+        public IActionResult Item([FromQuery]int id)
         {
             TempData["JobId"] = id;
             return View();

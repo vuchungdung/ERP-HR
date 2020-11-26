@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/dashboard-candidates.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Nov 2020 15:54:41 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Jobber - Job Board HTML5 Template" />
+    <meta name="author" content="potenzaglobalsolutions.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jobber - Job Board HTML5 Template</title>
+
+    <!-- Favicon -->
+    <link href="~/images/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+    <link rel="stylesheet" href="~/css/font-awesome/all.min.css" />
+    <link rel="stylesheet" href="~/css/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.min.css" />
+
+    <!-- map -->
+    <link rel="stylesheet" href="~/css/apexcharts/apexcharts.css" />
+
+    <!-- Template Style -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+</head>
+
+<body>
+
+    <partial name="/Views/Component/_Header.cshtml" />
+
+
+    <partial name="/Views/Component/_User.cshtml" />
+
+
+    <partial name="/Views/Component/_Menu.cshtml" />
+
+
+    @RenderBody();
+
+
+    <partial name="/Views/Component/_Footer.cshtml" />
+
+
+    <div id="back-to-top" class="back-to-top">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    <partial name="/Views/Component/_Modal.cshtml" />
+
+    <!-- JS Global Compulsory (Do not remove)-->
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/popper/popper.min.js"></script>
+    <script src="~/js/bootstrap/bootstrap.min.js"></script>
+
+
+    <!-- map -->
+    <script src="~/js/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Template Scripts (Do not remove)-->
+    <script src="~/js/custom.js"></script>
+
+    <script>
+        var options = {
+            chart: {
+                height: 350,
+                type: 'area',
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            series: [{
+                name: 'series1',
+                data: [31, 40, 28, 51, 42, 109, 100]
+            }, {
+                name: 'series2',
+                data: [11, 32, 45, 32, 34, 52, 41]
+            }],
+            colors: ['#ff8a00', '#001935'],
+
+            xaxis: {
+                type: 'datetime',
+                categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
+            }
+        }
+
+        var chart = new ApexCharts(
+            document.querySelector("#chart"),
+            options
+        );
+
+        chart.render();
+    </script>
+
+</body>
+</html>
