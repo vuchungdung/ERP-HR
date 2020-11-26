@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace MVC.Services.Interfaces
 {
-    public interface ICadaidateService
+    public interface ICadidateService
     {
-        
+        bool Regrister(RegisterViewModel model);
+
+        bool Login(LoginViewModel model);
     }
 }

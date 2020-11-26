@@ -39,6 +39,7 @@ export class FormComponent implements OnInit {
   public listCategorys: any[];
   public listProviders: any[];
   public action : FormStatus = FormStatus.Unknow;
+  public urlImg : string;
 
   constructor(
     private fb: FormBuilder,
@@ -96,31 +97,30 @@ export class FormComponent implements OnInit {
           }
           else if(this.resFile.result.fileType != ".pdf"){
             this.img = this.resFile.result.dbPath;
+            this.urlImg = `https://localhost:44379/${this.img}`;
           }
         }
       }
     );
   }
   initCadidateForm(){
-    if(this.action == FormStatus.Insert){
-      this.cadidateForm.get('cadidateId').setValue(0);
-      this.cadidateForm.get('name').reset();
-      this.cadidateForm.get('dob').reset();
-      this.cadidateForm.get('email').reset();
-      this.cadidateForm.get('address').reset();
-      this.cadidateForm.get('degree').reset();
-      this.cadidateForm.get('phone').reset();
-      this.cadidateForm.get('skill').reset();
-      this.cadidateForm.get('providerId').reset();
-      this.cadidateForm.get('applyDate').reset();
-      this.cadidateForm.get('categoryId').reset();
-      this.cadidateForm.get('experience').reset();
-      this.cadidateForm.get('university').reset();
-      this.cadidateForm.get('major').reset();
-      this.cadidateForm.get('experience').reset();
-    }
-    else if(this.action == FormStatus.Update){
-    }
+    this.cadidateForm.get('cadidateId').setValue(0);
+    this.cadidateForm.get('name').reset();
+    this.cadidateForm.get('dob').reset();
+    this.cadidateForm.get('email').reset();
+    this.cadidateForm.get('address').reset();
+    this.cadidateForm.get('degree').reset();
+    this.cadidateForm.get('phone').reset();
+    this.cadidateForm.get('skill').reset();
+    this.cadidateForm.get('providerId').reset();
+    this.cadidateForm.get('applyDate').reset();
+    this.cadidateForm.get('categoryId').reset();
+    this.cadidateForm.get('experience').reset();
+    this.cadidateForm.get('university').reset();
+    this.cadidateForm.get('major').reset();
+    this.cadidateForm.get('experience').reset();
+    this.urlImg = undefined;
+    this.img = undefined;
   }
 
   saveForm(){
@@ -140,7 +140,7 @@ export class FormComponent implements OnInit {
           this.isReloadTable.emit(true);
           this.notify.showSuccess("Thêm mới thành công!","Thông báo");
           this.action = FormStatus.Insert;
-          this.initCadidateForm();
+          this.initCadidateForm();         
         }
       })
     }
@@ -159,14 +159,16 @@ export class FormComponent implements OnInit {
   }
 
   createImgPath(){
-    return `https://localhost:44379/${this.img}`;
+    var url = this.urlImg;
+    console.log(url);
+    return url;
   }
 
   ToFormData(formValue: any) {
     const formData = new FormData();
     for (const key of Object.keys(formValue)) {
       let value = formValue[key];
-      if(key === "dob" || key ==="applydate"){
+      if(key === "dob" || key ==="applyDate"){
         const month = value.getMonth()+1;
         const day = value.getDate();
         const year = value.getFullYear();
