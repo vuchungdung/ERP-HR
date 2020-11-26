@@ -39,7 +39,6 @@ export class FormComponent implements OnInit {
   public listCategorys: any[];
   public listProviders: any[];
   public action : FormStatus = FormStatus.Unknow;
-  public urlImg : string;
 
   constructor(
     private fb: FormBuilder,
@@ -97,7 +96,6 @@ export class FormComponent implements OnInit {
           }
           else if(this.resFile.result.fileType != ".pdf"){
             this.img = this.resFile.result.dbPath;
-            this.urlImg = `https://localhost:44379/${this.img}`;
           }
         }
       }
@@ -119,8 +117,6 @@ export class FormComponent implements OnInit {
     this.cadidateForm.get('university').reset();
     this.cadidateForm.get('major').reset();
     this.cadidateForm.get('experience').reset();
-    this.urlImg = undefined;
-    this.img = undefined;
   }
 
   saveForm(){
@@ -159,9 +155,7 @@ export class FormComponent implements OnInit {
   }
 
   createImgPath(){
-    var url = this.urlImg;
-    console.log(url);
-    return url;
+    return `https://localhost:44379/${this.img}`;
   }
 
   ToFormData(formValue: any) {

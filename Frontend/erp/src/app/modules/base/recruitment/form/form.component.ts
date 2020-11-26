@@ -106,7 +106,6 @@ export class FormComponent implements OnInit {
   OpenFormUpdate(id:number){
     this.action = FormStatus.Update;
     this.isShow.emit(false);
-    this.initialForm();
     this.getItem(id);
   }
 
