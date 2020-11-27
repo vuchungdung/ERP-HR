@@ -14,7 +14,7 @@
                 <img *ngIf="img" [src]="createImgPath()" style="width:47.5%; height:81%;position: absolute;top: 24px;left: 50px;border-radius: 50%;">
               </div>
               <div class="icon-edit">
-                <i class="icon-pencil icon-p"></i>
+                <i class="icon-pencil icon-p" (change)="uploadFile($event.target.files)"></i>
               </div>
             </div>
             <div class="col-lg-5" style="margin-left: -20px;">

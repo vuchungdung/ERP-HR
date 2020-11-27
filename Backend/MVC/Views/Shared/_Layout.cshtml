@@ -26,9 +26,12 @@
 
     <!-- Template Style -->
     <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/assests/angular/angular.min.js"></script>
+    <script src="~/assests/libs/angular-sanitize.js"></script>
+    <script src="~/assests/libs/dirPagination.js"></script>
 
 </head>
-<body>
+<body ng-app="erp">
 
     <partial name="/Views/Component/_Header.cshtml" />
 
@@ -58,6 +61,17 @@
 
     <!-- Template Scripts (Do not remove)-->
     <script src="~/js/custom.js"></script>
+    <script src="~/app/app.js"></script>
+    <script src="~/app/shared/ajaxService.js"></script>
+    <script src="~/app/shared/dateFilter.js"></script>
+    <script src="~/app/shared/typeFilter.js"></script>
+    <script src="~/app/controller/sliderController.js"></script>
+    <script src="~/app/controller/SkillController.js"></script>
+    <script src="~/app/controller/homeController.js"></script>
+    <script src="~/app/controller/jobdescriptionController.js"></script>
+    <script src="~/app/controller/categoryController.js"></script>
+    <script src="~/app/controller/cadidateController.js"></script>
+    <script src="~/app/controller/bradcamController.js"></script>
 
 </body>
 

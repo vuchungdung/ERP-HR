@@ -11,5 +11,9 @@ namespace MVC.Services.Interfaces
         bool Regrister(RegisterViewModel model);
 
         bool Login(LoginViewModel model);
+
+        bool CreateProfile(CadidateViewModel model);
+
+        bool Apply(FileViewModel model);
     }
 }

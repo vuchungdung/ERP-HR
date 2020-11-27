@@ -19,6 +19,7 @@
             ajaxService.post('/JobDescription/GetAllPaging', config.params, function (res) {
                 $scope.listPagingJob = res.data.listItems;
                 $scope.totalRecords = res.data.totalRecords;
+                console.log($scope.listPagingJob);
             }, function (err) {
                 console.log(err);
             })

@@ -13,6 +13,7 @@ namespace MVC.Models
         public string SkillId { get; set; }
         public int OfferFrom { get; set; }
         public int OfferTo { get; set; }
+        public int Quatity { get; set; }
         public string RequestJob { get; set; }
         public JobStatus Status { get; set; }
         public DateTime TimeStart { get; set; }

@@ -52,6 +52,8 @@ namespace Database.Sql.ERP.Entities.Recruitment
         [Required]
         public int Quatity { get; set; }
 
+        public string Image { get; set; }
+
         public Core.CommonModel.Enum.Type Type { get; set; }
     }
 }
