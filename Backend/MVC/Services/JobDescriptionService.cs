@@ -67,7 +67,8 @@ namespace MVC.Services
                 var pagination = new PageResult<JobDescriptionViewModel>()
                 {
                     ListItems = listItems,
-                    TotalRecords = dt.ConvertTo<JobDescriptionViewModel>().ToList().Count()
+                    TotalRecords = dt.ConvertTo<JobDescriptionViewModel>().ToList().Count(),
+                    PageCount = listItems.Count()
                 };
                 return pagination;
             }
@@ -89,6 +90,17 @@ namespace MVC.Services
             }
         }
 
-        
+        public List<JobDescriptionViewModel> GetSimilar(int categoryId)
+        {
+            try
+            {
+                var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_SIMILAR", "@CATEGORIID", categoryId);
+                return dt.ConvertTo<JobDescriptionViewModel>().Skip(0).Take(3).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

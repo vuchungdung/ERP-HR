@@ -18,11 +18,30 @@ namespace MVC.Controllers
         [HttpPost]
         public IActionResult GetAllPaging([FromBody]PageViewModel model)
         {
-            model.Categoryid = Convert.ToInt32(TempData["categoryId"]);
-            model.Keyword = TempData["keyword"].ToString();
+            
+            if(TempData["keyword"] != null && TempData["categoryId"]!= null)
+            {
+                model.Keyword = TempData["keyword"].ToString();
+                model.Categoryid = Convert.ToInt32(TempData["categoryId"]);
+            }
+            model.Categoryid = 0;
             try
             {
                 var response = _jobDescriptionService.GetJobPaging(model);
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public JsonResult SimilarJob()
+        {
+            int categoriId = Convert.ToInt32(TempData["similarId"]);
+            try
+            {
+                var response = _jobDescriptionService.GetSimilar(categoriId);
                 return Json(response);
             }
             catch(Exception ex)
@@ -59,12 +78,13 @@ namespace MVC.Controllers
             }
         }
 
-        public JsonResult Item()
+        public JsonResult Detail()
         {
             int id = Convert.ToInt32(TempData["JobId"]);
             try
             {
                 var response = _jobDescriptionService.GetDetail(id);
+                TempData["similarId"] = response.CategoryId;
                 return Json(response);
             }
             catch(Exception ex)
@@ -72,7 +92,6 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-        [HttpGet]
         public IActionResult Item([FromQuery]int id)
         {
             TempData["JobId"] = id;

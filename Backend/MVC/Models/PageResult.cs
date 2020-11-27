@@ -9,5 +9,7 @@ namespace MVC.Models
     {
         public List<T> ListItems { get; set; }
         public int TotalRecords { get; set; }
+
+        public int PageCount { get; set; }
     }
 }

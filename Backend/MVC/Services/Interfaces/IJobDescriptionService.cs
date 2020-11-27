@@ -15,5 +15,7 @@ namespace MVC.Services.Interfaces
         List<JobDescriptionViewModel> GetAllNew();
 
         JobDescriptionViewModel GetDetail(int id);
+
+        List<JobDescriptionViewModel> GetSimilar(int categoryId);
     }
 }

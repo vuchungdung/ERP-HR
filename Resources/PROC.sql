@@ -75,6 +75,24 @@ AS
 	END;
 GO
 
+CREATE PROC SP_JOBDESCRIPTION_GET_SIMILAR
+@CATEGORIID INT
+AS 
+	BEGIN
+		SELECT JOB.Title,
+			JOB.JobId,
+			JOB.Quatity,
+			JOB.Type
+		FROM DBO.JobDescriptions AS JOB,
+			DBO.JobCategories AS CAT
+			WHERE 
+				JOB.CategoryId = CAT.CategoryId AND
+				JOB.Deleted = 0 AND
+				CAT.CategoryId = @CATEGORIID
+	END;
+GO
+
+
 CREATE PROC SP_JOBDESCRIPTION_GET_ALL_NEW
 AS 
 	BEGIN
@@ -105,7 +123,7 @@ AS
 GO
 
 CREATE PROC SP_JOBDESCRIPTION_GET_DETAIL
-@ID INT = 0
+@ID INT
 AS 
 	BEGIN
 		SELECT JOB.Title,
@@ -130,6 +148,7 @@ AS
 			WHERE 
 				JOB.CategoryId = CAT.CategoryId AND
 				JOB.Deleted = 0
+				AND JOB.JobId = @ID
 			ORDER BY JOB.CreateDate DESC
 	END;
 GO
@@ -195,4 +214,4 @@ AS
 	END;
 GO
 
-exec SP_JOBDESCRIPTION_GET_DETAIL
+exec SP_JOBDESCRIPTION_GET_SIMILAR 2

@@ -12,7 +12,7 @@
                 right-sidebar -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <h6 class="mb-0">Hiển thị 1-10 của <span class="text-primary">{{totalRecords}} Công việc</span></h6>
+                        <h6 class="mb-0">Hiển thị 1-{{pageCount}} của <span class="text-primary">{{totalRecords}} Công việc</span></h6>
                     </div>
                 </div>
                 <div class="job-filter mb-4 d-sm-flex align-items-center">
@@ -139,10 +139,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-4" ng-repeat="item in listPagingJob">
+                    <div class="col-md-6 col-lg-4" dir-paginate="item in listPagingJob|itemsPerPage:pageSize" total-items="totalRecords">
                         <div class="job-list job-grid">
                             <div class="job-list-logo">
-                                <img class="img-fluid" src="~/images/svg/01.svg" alt="">
+                                <img class="img-fluid" src="~/images/svg/03.svg" alt="">
                             </div>
                             <div class="job-list-details">
                                 <div class="job-list-info">
@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="job-list-option">
                                         <ul class="list-unstyled">
-                                            <li><span>Số lượng </span> <a href="">{{item.quatity}} Lập trình viên</a> </li>
+                                            <li style="margin-right:15px"><span>Số lượng </span> <a style="padding:0px;font-size:13px;font-weight:400" href="">{{item.quatity}} Lập trình viên</a> </li>
                                             <li>
                                                 <div class="d-flex">
                                                     <i class="font-xll text-primary align-self-center flaticon-debit-card"></i>
@@ -161,26 +161,27 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li><a class="freelance" style="line-height:46px;padding-left:18px" href="#"><i class="fas fa-suitcase pr-1"></i>{{item.Type|typeFilter}}</a></li>
+                                            <li><a class="freelance" style="line-height:46px;padding-left:18px" href="#"><i class="fas fa-suitcase pr-1"></i>{{item.type|typeFilter}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="job-list-favourite-time"> <a class="job-list-favourite order-2" href="#"><i class="fas fa-heart"></i></a> <span class="job-list-time order-1"><i class="far fa-clock pr-1"></i>1M ago</span> </div>
+                            <div class="job-list-favourite-time"> <a class="job-list-favourite order-2" style="padding:0px" href="#"><i class="fas fa-heart"></i></a> <span class="job-list-time order-1"><i class="far fa-clock pr-1"></i>1M ago</span> </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 text-center mt-4">
-                        <ul class="pagination justify-content-center mb-0">
-                            <li class="page-item disabled"> <span class="page-link b-radius-none">Prev</span> </li>
-                            <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">25</a></li>
-                            <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-                        </ul>
+                        <style>
+                            a {
+                                padding: 0px 20px;
+                            }
+                        </style>
+                        <div ng-if="listPagingJob.length == pageSize">
+                            <dir-pagination-controls max-size="pageSize" direction-links="true" boundary-links="true"
+                                                     on-page-change="getPaging(newPageNumber)">
+                            </dir-pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>

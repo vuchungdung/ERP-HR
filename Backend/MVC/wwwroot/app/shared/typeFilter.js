@@ -1,7 +1,7 @@
 ﻿(function(app) {
     app.filter('typeFilter', function () {
         return function (input) {
-            if (input == 1) {
+            if (input == 0) {
                 return 'Full Time'
             }
             else {
