@@ -214,4 +214,13 @@ AS
 	END;
 GO
 
-exec SP_JOBDESCRIPTION_GET_SIMILAR 2
+
+CREATE PROC SP_GET_CADIDATE_USERNAME
+(@USERNAME NVARCHAR(MAX))
+AS
+	BEGIN
+		SELECT Cadidates.*,Files.FileName FROM DBO.Cadidates,DBO.Files WHERE Cadidates.Username = @USERNAME AND Cadidates.CadidateId = Files.CadidateId AND Files.FileType !='.pdf'
+	END;
+GO
+
+exec SP_GET_CADIDATE_USERNAME 'vuchungdung'

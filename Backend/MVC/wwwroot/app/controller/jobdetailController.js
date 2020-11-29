@@ -23,6 +23,15 @@
             });
         }
         $scope.getDetail();
-        
+        $scope.apply = function () {
+            ajaxService.get('/Cadidate/Authen', null, function (res) {
+                if (res.data == false) {
+                    $scope.modal = "modal";
+                    $scope.data_target = "#exampleModalCenter";                             
+                }
+            }, function (err) {
+
+            });
+        }
     }
 })(angular.module('erp'));

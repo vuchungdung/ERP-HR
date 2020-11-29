@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\CadidateUser\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\app\app.js" />
     <None Include="wwwroot\app\controller\jobdescriptionController.js" />
     <None Include="wwwroot\assests\angular\angular-csp.css" />

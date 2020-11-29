@@ -15,5 +15,7 @@ namespace MVC.Services.Interfaces
         bool CreateProfile(CadidateViewModel model);
 
         bool Apply(FileViewModel model);
+
+        CadidateViewModel GetByUsername(string username);
     }
 }

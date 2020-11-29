@@ -1,10 +1,10 @@
 ﻿(function (app) {
 
-    app.controller('cadidateUserController', cadidateUserController);
+    app.controller('cadidateController', cadidateController);
 
-    cadidateUserController.$inject = ['$scope','ajaxService'];
+    cadidateController.$inject = ['$scope','ajaxService'];
 
-    function cadidateUserController($scope, ajaxService) {
+    function cadidateController($scope, ajaxService) {
 
         $scope.user = {
             Username: "",
@@ -12,6 +12,9 @@
         };
 
         $scope.register = function () {
+
+            alert("Hello");
+
             ajaxService.post('/Cadidate/Register', $scope.user, function (res) {
                 if (res.data == true) {
                     
@@ -20,9 +23,8 @@
                     
                     
                 }
-            }, function (err) {
-                    
-                   
+            }, function (err) {                    
+                console.log(err);
             });
         };
 
@@ -30,6 +32,8 @@
             ajaxService.post('/Cadidate/Login', $scope.user, function (res) {
                 if (res.data == true) {
                     window.location.reload();
+                }
+                else {
 
                 }
             }, function (err) {

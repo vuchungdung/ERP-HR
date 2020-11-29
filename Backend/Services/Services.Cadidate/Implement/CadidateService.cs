@@ -223,9 +223,6 @@ namespace Services.Cadidates.Implement
                     Skill = md.Skill,
                     JobId = md.JobId,
                     TagId = md.TagId,
-                    FaceBook = md.FaceBook,
-                    Zalo = md.Zalo,
-                    LinkIn = md.LinkIn,
                     Dob = md.Dob,
                 };
 

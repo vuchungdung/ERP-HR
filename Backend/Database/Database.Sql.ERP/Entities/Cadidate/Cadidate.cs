@@ -43,13 +43,13 @@ namespace Database.Sql.ERP.Entities.Cadidate
 
         public string Experience { get; set; }
 
-        public string FaceBook { get; set; }
+        //public string FaceBook { get; set; }
 
-        public string Zalo { get; set; }
+        //public string Zalo { get; set; }
 
         public string Skype { get; set; }
 
-        public string LinkIn { get; set; }
+        //public string LinkIn { get; set; }
 
         public int? Rating { get; set; }
 

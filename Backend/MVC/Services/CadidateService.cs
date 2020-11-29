@@ -57,6 +57,19 @@ namespace MVC.Services
             }
         }
 
+        public CadidateViewModel GetByUsername(string username)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_GET_CADIDATE_USERNAME", "@USERNAME", username);
+                return response.ConvertTo<CadidateViewModel>().ToList().ElementAt(0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool Login(LoginViewModel model)
         {
             try
