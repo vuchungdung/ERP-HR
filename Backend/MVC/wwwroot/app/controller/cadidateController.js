@@ -40,6 +40,14 @@
                 console.log(err);
             });
         }
+
+        $scope.logOut = function () {
+            ajaxService.get('/Cadidate/LogOut', null, function (res) {
+                if (res.data == true) {
+                    window.location.reload();
+                }
+            })
+        }
     }
 
 })(angular.module('erp'));

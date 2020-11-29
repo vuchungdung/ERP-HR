@@ -83,5 +83,10 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
+        public JsonResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return Json(true);
+        }
     }
 }

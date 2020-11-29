@@ -27,7 +27,11 @@
             ajaxService.get('/Cadidate/Authen', null, function (res) {
                 if (res.data == false) {
                     $scope.modal = "modal";
-                    $scope.data_target = "#exampleModalCenter";                             
+                    $scope.data_target = "#exampleModalCenter";
+                }
+                else {                
+                    $scope.modal = "modal";
+                    $scope.data_target = "#formModalCenter";
                 }
             }, function (err) {
 
