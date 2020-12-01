@@ -19,10 +19,24 @@
                                                 <h4>Thông tin cơ bản</h4>
                                             </div>
                                             <div class="cover-photo-contact">
-                                                <div class="upload-file">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input">
-                                                        <label class="custom-file-label">Chọn CV ứng tuyển</label>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="upload-file">
+                                                            <div class="custom-file">
+                                                                <input type="file" onchange="angular.element(this).scope().getFile(this)" class="custom-file-input">
+                                                                <label class="custom-file-label">Chọn ảnh đại diện</label>
+                                                                <p ng-if="img != ''">Đã xong <a href="" class="btn btn-sm btn-danger" ng-click="remove()">X</a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="upload-file">
+                                                            <div class="custom-file">
+                                                                <input type="file" onchange="angular.element(this).scope().getFile(this)" class="custom-file-input">
+                                                                <label class="custom-file-label">Chọn CV ứng tuyển</label>
+                                                                <p ng-if="pdf != ''">Đã xong <a href="" ng-click="remove()">X</a></p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,7 +120,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <a class="btn btn-md btn-primary" href="#">Nộp hồ sơ</a>
+                                        <a class="btn btn-md btn-primary" ng-click="postCadidate()">Nộp hồ sơ</a>
                                     </div>
                                 </div>
                             </div>

@@ -99,6 +99,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.Sql.ERP\Database.Sql.ERP.csproj" />
+    <ProjectReference Include="..\Services\Services.Common\Services.Common.csproj" />
   </ItemGroup>
 
 </Project>
