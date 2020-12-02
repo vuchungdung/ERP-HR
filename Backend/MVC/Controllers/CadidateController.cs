@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Common;
 using MVC.Models;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
@@ -51,7 +52,6 @@ namespace MVC.Controllers
                     var user = _cadidateService.GetByUsername(model.Username);
                     var userSession = new UserSession();
                     userSession.Username = user.Username;
-                    userSession.Image = user.FileName;
                     userSession.Id = user.CadidateId;
                     var session = JsonConvert.SerializeObject(userSession);
 
@@ -87,6 +87,26 @@ namespace MVC.Controllers
         {
             HttpContext.Session.Clear();
             return Json(true);
+        }
+        public JsonResult UpdateProfile(CadidateViewModel model)
+        {
+            
+            try
+            {
+                var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                model.CadidateId = user.Id;
+                var response = _cadidateService.CreateProfile(model);
+                if(response == true)
+                {
+                    return Json(true);
+                }
+                return Json(false);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

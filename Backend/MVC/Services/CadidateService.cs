@@ -41,7 +41,20 @@ namespace MVC.Services
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("");
+                var response = _helper.ExecuteSProcedure("SP_CADIDATE_UPDATE",
+                                                            "@CADIDATEID",model.CadidateId,
+                                                            "@NAME",model.Name,
+                                                            "@EMAIL",model.Email,
+                                                            "@ADDRESS",model.Address,
+                                                            "@PHONE",model.Phone,
+                                                            "@DOB",model.Dob, 
+                                                            "@GENDER",model.Gender, 
+                                                            "@DEGREE",model.Degree, 
+                                                            "@APPLYDATE",model.ApplyDate, 
+                                                            "@MAJOR",model.Major,
+                                                            "@UNIVERSITY",model.University, 
+                                                            "@SKYPE",model.Skype,
+                                                            "@EXPERIENCE",model.Experience);
                 if(response != null)
                 {
                     return true;

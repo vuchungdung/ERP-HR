@@ -14,8 +14,6 @@ namespace MVC.Models
 
         public string Username { get; set; }
 
-        public string FileName { get; set; }
-
         public string Name { get; set; }
 
         public string Email { get; set; }
@@ -38,17 +36,7 @@ namespace MVC.Models
 
         public string Experience { get; set; }
 
-        //public string FaceBook { get; set; }
-
-        //public string Zalo { get; set; }
-
         public string Skype { get; set; }
-
-        //public string LinkIn { get; set; }
-
-        public int? CategoryId { get; set; }
-
-        public string Skill { get; set; }
 
     }
 }

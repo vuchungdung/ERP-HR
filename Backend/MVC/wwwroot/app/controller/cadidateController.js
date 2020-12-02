@@ -53,23 +53,37 @@
 
         $scope.img = '';
         $scope.pdf = '';
+
+        $scope.cadidate = {};
+
         $scope.postCadidate = function () {
-            console.log($scope.cadidate.img);
-            console.log($scope.cadidate.pdf);
+            var formData = new FormData();
+            for (var key in $scope.cadidate) {
+                formData.append(key, item[key]);
+            }
+            $scope.listFile.forEach(file => {
+                formData.append('files', file);
+            });
+
+            ajaxService.post('/')
         }
 
-        $scope.remove = function () {
-            $scope.img = '';
-            $scope.pdf = '';
-            alert("Gì cơ")
+        $scope.removeImg = function () {
+            $scope.img = '';           
         }
+
+        $scope.removePdf = function () {
+            $scope.pdf = '';
+        }
+
+        $scope.listFile = [];
 
         $scope.getFile = function (element) {
             var file = element.files[0];
             if (typeof (file) == 'undefined') {
-                alert("Gì đấy")
             }
             else {
+                $scope.listFile.push(file);
                 var formData = new FormData();
                 formData.append('file', file);
                 $http({
