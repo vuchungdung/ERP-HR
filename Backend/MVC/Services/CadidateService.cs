@@ -50,7 +50,7 @@ namespace MVC.Services
                                                             "@DOB",model.Dob, 
                                                             "@GENDER",model.Gender, 
                                                             "@DEGREE",model.Degree, 
-                                                            "@APPLYDATE",model.ApplyDate, 
+                                                            "@APPLYDATE",DateTime.Now, 
                                                             "@MAJOR",model.Major,
                                                             "@UNIVERSITY",model.University, 
                                                             "@SKYPE",model.Skype,

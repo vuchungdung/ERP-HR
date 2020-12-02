@@ -8,6 +8,7 @@
         $scope.getDetail = function () {
             ajaxService.get('/JobDescription/Detail', null, function (res) {
                 $scope.jobdetail = res.data;
+                console.log($scope.jobdetail);
                 $scope.getSimilar();
             }, function (err) {
                 console.log(err);
@@ -23,8 +24,9 @@
             });
         }
         $scope.getDetail();
-        $scope.apply = function () {
-            ajaxService.get('/Cadidate/Authen', null, function (res) {
+        $scope.apply = function (id) {
+            $scope.id = id;
+            ajaxService.post('/Cadidate/Authen', $scope.id, function (res) {
                 if (res.data == false) {
                     $scope.modal = "modal";
                     $scope.data_target = "#exampleModalCenter";

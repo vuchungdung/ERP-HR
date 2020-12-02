@@ -167,12 +167,13 @@ CREATE PROC SP_CADIDATE_UPDATE
 @MAJOR NVARCHAR(100),
 @UNIVERSITY NVARCHAR(100),
 @SKYPE NVARCHAR(MAX),
-@EXPERIENCE NVARCHAR(MAX)
+@EXPERIENCE NVARCHAR(MAX),
+@JOBID INT
 )
 AS
 	BEGIN
 		UPDATE DBO.Cadidates SET Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER,Degree = @DEGREE,ApplyDate = @APPLYDATE,
-		Major = @MAJOR,University = @UNIVERSITY,Skype = @SKYPE,Experience = @EXPERIENCE WHERE CadidateId = @CADIDATEID
+		Major = @MAJOR,University = @UNIVERSITY,Skype = @SKYPE,Experience = @EXPERIENCE, JobId = @JOBID WHERE CadidateId = @CADIDATEID
 	END;
 GO
 
@@ -223,8 +224,8 @@ CREATE PROC SP_GET_CADIDATE_USERNAME
 (@USERNAME NVARCHAR(MAX))
 AS
 	BEGIN
-		SELECT Cadidates.*,Files.FileName FROM DBO.Cadidates,DBO.Files WHERE Cadidates.Username = @USERNAME AND Cadidates.CadidateId = Files.CadidateId AND Files.FileType !='.pdf'
+		SELECT Cadidates.CadidateId,Cadidates.Username FROM DBO.Cadidates WHERE Cadidates.Username = @USERNAME
 	END;
 GO
 
-exec SP_GET_CADIDATE_USERNAME 'vuchungdung'
+exec SP_GET_CADIDATE_USERNAME 'nguyenvanchien'

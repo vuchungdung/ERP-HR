@@ -8,6 +8,7 @@
         $scope.page = 1;
         $scope.pageSize = 9;
         $scope.curPage = 0;
+        $scope.pageCount = 0;
         $scope.getPaging = function (page) {
             $scope.curPage = page;
             var config = {

@@ -57,16 +57,26 @@
         $scope.cadidate = {};
 
         $scope.postCadidate = function () {
+            console.log($scope.cadidate);
             var formData = new FormData();
             for (var key in $scope.cadidate) {
-                formData.append(key, item[key]);
+                formData.append(key, $scope.cadidate[key]);
             }
             $scope.listFile.forEach(file => {
                 formData.append('files', file);
             });
 
-            ajaxService.post('/')
+            $http({
+                method: 'POST',
+                url: '/Cadidate/UpdateProfile',
+                headers: {
+                    'Content-Type': undefined },
+                data: formData
+            }).then(function (res) {
+
+            });
         }
+        
 
         $scope.removeImg = function () {
             $scope.img = '';           

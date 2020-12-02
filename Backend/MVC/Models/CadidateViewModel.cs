@@ -32,11 +32,12 @@ namespace MVC.Models
 
         public string Major { get; set; }
 
-        public DateTime? ApplyDate { get; set; }
-
         public string Experience { get; set; }
 
         public string Skype { get; set; }
 
+        public int JobId { get;set; }
+
+        public List<IFormFile> Files { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +10,18 @@ using MVC.Common;
 using MVC.Models;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
+using Services.Common.ViewModel;
 
 namespace MVC.Controllers
 {
     public class CadidateController : Controller
     {
         private readonly ICadidateService _cadidateService;
-
-        public CadidateController(ICadidateService cadidateService)
+        private readonly IFileService _fileService;
+        public CadidateController(ICadidateService cadidateService,IFileService fileService)
         {
             _cadidateService = cadidateService;
+            _fileService = fileService;
         }
 
         public IActionResult Index()
@@ -42,7 +46,7 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-        public JsonResult Login([FromBody] LoginViewModel model)
+        public JsonResult Login([FromBody]LoginViewModel model)
         {
             try
             {
@@ -64,8 +68,10 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-        public JsonResult Authen()
+        [HttpPost]
+        public JsonResult Authen([FromBody]int id)
         {
+            TempData["JobId"] = id;
             try
             {
                 string user = Convert.ToString(HttpContext.Session.GetString(Common.CommonSession.USER_SESSION));
@@ -88,7 +94,8 @@ namespace MVC.Controllers
             HttpContext.Session.Clear();
             return Json(true);
         }
-        public JsonResult UpdateProfile(CadidateViewModel model)
+
+        public IActionResult UpdateProfile(CadidateViewModel model)
         {
             
             try
@@ -96,12 +103,50 @@ namespace MVC.Controllers
                 var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
                 var user = JsonConvert.DeserializeObject<UserSession>(session);
                 model.CadidateId = user.Id;
+                model.JobId = Convert.ToInt32(TempData["JobId"]);
                 var response = _cadidateService.CreateProfile(model);
                 if(response == true)
                 {
+                    foreach (var item in model.Files)
+                    {
+                        FileViewModel file = new FileViewModel();
+                        var _file = Request.Form.Files[0];
+                        var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
+                        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                        if (_file.Length > 0)
+                        {
+                            var fileName = ContentDispositionHeaderValue.Parse(_file.ContentDisposition).FileName.Trim('"');
+                            var fullPath = Path.Combine(pathToSave, fileName);
+                            var dbPath = Path.Combine(folderName, fileName);
+                            var fileSize = _file.Length / 1024;
+                            var fileType = Path.GetExtension(fileName);
+
+                            file.CadidateId = user.Id;
+                            file.FileName = fileName;
+                            file.FilePath = fullPath;
+                            file.FileSize = Convert.ToInt32(fileSize);
+                            file.FileType = fileType;
+                        }
+                        _fileService.Create(file);
+                    }
                     return Json(true);
                 }
                 return Json(false);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IActionResult GetCadidate()
+        {
+            try
+            {
+                var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                var username = user.Username;
+                var response = _cadidateService.GetByUsername(username);
+                return Json(response);
             }
             catch(Exception ex)
             {

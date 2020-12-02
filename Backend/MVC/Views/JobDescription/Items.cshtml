@@ -27,100 +27,33 @@
                         <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
                             <h6 class="mb-3">Mảng công việc</h6>
                             <div class="widget-content">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="dateposted1">
-                                            <label class="custom-control-label" for="dateposted1">Back End</label>
+                                <div class="row" ng-controller="categoryController">
+                                    <div class="col-lg-6" ng-repeat="item in listCategory">
+                                        <div class="custom-control">
+                                            <a href="/JobDescription/Items?categoryId={{item.categoryId}}">{{item.name}}</a>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="dateposted1">
-                                            <label class="custom-control-label" for="dateposted1">Back End</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="dateposted1">
-                                            <label class="custom-control-label" for="dateposted1">Back End</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="dateposted1">
-                                            <label class="custom-control-label" for="dateposted1">Back End</label>
-                                        </div>
-                                    </div>
+                                    </div>                             
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 mb-4 mb-lg-0">
                             <h6 class="mb-3">Công nghệ sử dụng</h6>
                             <div class="widget-content">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="specialism1">
-                                            <label class="custom-control-label" for="specialism1">Angular</label>
+                                <div class="row" ng-controller="skillController">
+                                    <div class="col-lg-3" ng-repeat="item in listSkill">
+                                        <div class="custom-control">
+                                            <a href="/JobDescription/Items?keyword={{item.skillId}}">{{item.name}}</a>    
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-6 mb-4 mb-sm-0">
-                            <h6 class="mb-3">Thời giờ làm</h6>
+                            <h6 class="mb-3">Xem thêm</h6>
                             <div class="widget">
                                 <div class="widget-content">
-                                    <div class="custom-control custom-checkbox fulltime-job">
-                                        <input type="checkbox" class="custom-control-input" id="jobtype1">
-                                        <label class="custom-control-label" for="jobtype1">Full Time</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox parttime-job">
-                                        <input type="checkbox" class="custom-control-input" id="jobtype2">
-                                        <label class="custom-control-label" for="jobtype2">Part-Time</label>
+                                    <div class="custom-control">
+                                        <a href="/JobDescription/Items">Xem tất cả</a>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +99,7 @@
                                 padding: 0px 20px;
                             }
                         </style>
-                        <div ng-if="pageCount = 9">
+                        <div>
                             <dir-pagination-controls max-size="pageSize" direction-links="true" boundary-links="true"
                                                      on-page-change="getPaging(newPageNumber)">
                             </dir-pagination-controls>

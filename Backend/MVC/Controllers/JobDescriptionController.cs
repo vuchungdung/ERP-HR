@@ -24,7 +24,10 @@ namespace MVC.Controllers
                 model.Keyword = TempData["keyword"].ToString();
                 model.Categoryid = Convert.ToInt32(TempData["categoryId"]);
             }
-            model.Categoryid = 0;
+            else
+            {
+                model.Categoryid = 0;
+            }
             try
             {
                 var response = _jobDescriptionService.GetJobPaging(model);

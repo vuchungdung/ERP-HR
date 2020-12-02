@@ -50,7 +50,7 @@ namespace MVC.Services
             try
             {
                 var dt = _helper.ExecuteSProcedure("SP_JOBDESCRIPTION_GET_PAGING");
-                var listItems = dt.ConvertTo<JobDescriptionViewModel>().Skip((model.PageIndex - 1) * model.Pagesize).Take(model.Pagesize).ToList();
+                var listItems = dt.ConvertTo<JobDescriptionViewModel>().ToList();
                 if (!String.IsNullOrEmpty(model.Keyword))
                 {
                     listItems = listItems.Where(x => x.Title.ToLower().Contains(model.Keyword.ToLower())
@@ -64,11 +64,12 @@ namespace MVC.Services
                 {
                     listItems = listItems.Where(x => x.Type == model.Type).ToList();
                 }
+                var result = listItems.Skip((model.PageIndex - 1) * model.Pagesize).Take(model.Pagesize).ToList();
                 var pagination = new PageResult<JobDescriptionViewModel>()
                 {
-                    ListItems = listItems,
-                    TotalRecords = dt.ConvertTo<JobDescriptionViewModel>().ToList().Count(),
-                    PageCount = listItems.Count()
+                    ListItems = result,
+                    TotalRecords = listItems.Count(),
+                    PageCount = (result.Count() == model.Pagesize) ? model.Pagesize : result.Count()
                 };
                 return pagination;
             }
