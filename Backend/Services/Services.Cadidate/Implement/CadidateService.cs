@@ -200,28 +200,32 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = await _context.CadidateRepository.FirstOrDefaultAsync(x => x.CadidateId == id);
+                //Cadidate md = await _context.CadidateRepository.FirstOrDefaultAsync(x => x.CadidateId == id);
 
-                CadidateViewModel model = new CadidateViewModel()
-                {
-                    Name = md.Name,
-                    Email = md.Email,
-                    Address = md.Address,
-                    Phone = md.Phone,
-                    Gender = md.Gender,
-                    Degree = md.Degree,
-                    University = md.University,
-                    Major = md.Major,
-                    ApplyDate = md.ApplyDate,
-                    Experience = md.Experience,
-                    Rating = md.Rating,
-                    ProviderId = md.ProviderId,
-                    CategoryId = md.CategoryId,
-                    Skill = md.Skill,
-                    JobId = md.JobId,
-                    TagId = md.TagId,
-                    Dob = md.Dob,
-                };
+                var query = from c in _context.CadidateRepository.Query()
+                            join j in _context.JobDescriptionRepository.Query()
+                            on c.JobId equals j.JobId
+                            where c.CadidateId == id
+                            select new ListCadidateViewModel()
+                            {
+                                CadidateId = c.CadidateId,
+                                Name = c.Name,
+                                Email = c.Email,
+                                Address = c.Address,
+                                Phone = c.Phone,
+                                Gender = c.Gender,
+                                Degree = c.Degree,
+                                University = c.University,
+                                Major = c.Major,
+                                ApplyDate = c.ApplyDate,
+                                Experience = c.Experience,
+                                JobId = c.JobId,
+                                Dob = c.Dob,
+                                Skype = c.Skype,
+                                JobName = j.Title
+                            };
+
+                var model = await query.ToListAsync();
 
                 response.Result = model;
                 response.Status = ResponseStatus.Success;

@@ -41,6 +41,10 @@ namespace Services.System.Implement
                     response.Status = ResponseStatus.Success;
                     response.Result = token;
                 }
+                else
+                {
+                    response.Status = ResponseStatus.Error;
+                }
             }
             catch(Exception ex)
             {

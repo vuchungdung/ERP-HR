@@ -26,5 +26,7 @@ namespace Services.Interview.ViewModel
         public string Note { get; set; }
 
         public bool SendMail { get; set; }
+
+        public string Email { get; set; }
     }
 }

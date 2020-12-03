@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Cadidate;
 using API.Common;
+using API.Interview;
 using API.Recruitment;
 using API.System;
+using Core.EmailSender;
 using Core.Services;
 using Core.Services.InterfaceService;
 using Core.Utility;
@@ -73,6 +75,19 @@ namespace APIGateway
                 };
             });
 
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+
+
             services.AddMvc();
 
             services.Configure<FormOptions>(o =>
@@ -94,6 +109,7 @@ namespace APIGateway
             services.AddSystemServices(Configuration);
             services.AddRecruitmentServices(Configuration);
             services.AddCadidateServices(Configuration);
+            services.AddInterviewServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

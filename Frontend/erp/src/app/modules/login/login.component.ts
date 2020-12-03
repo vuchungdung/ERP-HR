@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     }
     this.authen.login(this.loginForm.value).subscribe(
       (response: ResponseModel)=>{
+        console.log(response);
         if(response.status == ResponseStatus.success){
           this.isLoading = false;
           localStorage.setItem('token',JSON.stringify(response.result));

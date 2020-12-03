@@ -4,17 +4,16 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="page-container" style="padding: 10px 36px;">
-            <div class="row">
+            <div class="row" *ngFor="let item of items">
               <div style="display: flex;padding-top: 6px;">
-                <div class="img" style="flex: 1;">
-                  
+                <div class="img" style="flex: 1;">           
                 </div>
                 <div class="info" style="flex: 5;">
-                  <p>Vũ Chung Dũng</p>
-                  <p>Ứng tuyển ngày 12/3/2020</p>
+                  <p>{{item.name}}</p>
+                  <p>Ứng tuyển ngày {{item.applyDate|date: 'dd/MM/yyyy'}}</p>
                 </div>
                 <div class="option" style="flex: 2;">
-                  <button type="button" class="btn btn-success"><i class="p-l-12 icon-calendar"></i>Đặt lịch</button>
+                  <button type="button" (click)="insertDate(item.email,item.cadidateId,item.jobId)" class="btn btn-success"><i class="p-l-12 icon-calendar"></i>Đặt lịch</button>
                 </div>
               </div>
               <h5 style="font-weight: 600;color: #aa88aa;">VỊ TRÍ ỨNG TUYỂN</h5>
@@ -39,7 +38,7 @@
                       padding-right: 18px;
                     }
                   </style>
-                  <li style="list-style: none;" ><span class="p-l-12">:</span>Back End Developer</li>
+                  <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.jobName}}</li>
                 </ul>
               </div>
               <h5 style="font-weight: 600;color: #aa88aa;">THÔNG TIN CÁ NHÂN</h5>
@@ -69,12 +68,12 @@
                         padding-right: 18px;
                       }
                     </style>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>0987654321</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>vuchungdunghlym@gmail.com</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>Hưng Yên</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>20-02-2000</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>Nam</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>vuchungdungg</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.phone}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.email}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.address}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.dob|date: 'dd/MM/yyyy'}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.gender}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.skype}}</li>
                   </ul>
                 </div>
               <h5 style="font-weight: 600;color: #aa88aa;">HỌC VẤN CÔNG VIỆC</h5>
@@ -88,9 +87,9 @@
                       padding-right: 18px;
                     }
                   </style>
-                  <li style="list-style: none;" ><i class="p-l-12 icon-primitive-square"></i>Trình độ đào tạo</li>
-                  <li style="list-style: none;" ><i class="p-l-12 icon-primitive-square"></i>Nơi đào tạo</li>
-                  <li style="list-style: none;" ><i class="p-l-12 icon-primitive-square"></i>Chuyên ngành</li>
+                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Trình độ</li>
+                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Nơi đào tạo</li>
+                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Chuyên ngành</li>
                 </ul>
                 <ul>
                   <style>
@@ -100,10 +99,10 @@
                     .p-l-12{
                       padding-right: 18px;
                     }
-                  </style>
-                  <li style="list-style: none;" ><span class="p-l-12">:</span>Đại học</li>
-                  <li style="list-style: none;" ><span class="p-l-12">:</span>ĐH SPKT Hưng Yên</li>
-                  <li style="list-style: none;" ><span class="p-l-12">:</span>Hưng Yên</li>
+                  </style>      
+                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.degree}}</li>
+                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.university}}</li>
+                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.major}}</li>
                 </ul>
               </div>
             </div>
@@ -113,22 +112,22 @@
           <div class="page-container" style="padding: 0px;padding-right: 10px;">
             <mat-tab-group>
               <mat-tab label="Hồ sơ ứng viên">
-                <div class="page-container right" style="padding: 212px 20px;">
+                <div class="page-container right" style="padding: 242px 20px;">
                   <app-detail-info></app-detail-info>
                 </div>
               </mat-tab>
               <mat-tab label="Lịch sử làm việc">
-                <div class="page-container right" style="padding: 212px 20px;"> 
+                <div class="page-container right" style="padding: 242px 20px;"> 
                   <app-detail-apply-history></app-detail-apply-history>
                 </div>
               </mat-tab>
               <mat-tab label="Email">
-                <div class="page-container right" style="padding: 212px 20px;">
+                <div class="page-container right" style="padding: 242px 20px;">
                   <app-detail-email></app-detail-email>
                 </div>
               </mat-tab>
               <mat-tab label="Kết quả phỏng vấn">
-                <div class="page-container right" style="padding: 212px 20px;">
+                <div class="page-container right" style="padding: 242px 20px;">
                   <app-detail-interview-result></app-detail-interview-result>
                 </div>
               </mat-tab>

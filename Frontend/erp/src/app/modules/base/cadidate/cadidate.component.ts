@@ -84,7 +84,6 @@ export class CadidateComponent implements OnInit {
 
   openFormDetail(row : Cadidate){
     this.router.navigate(['/manager/cadidate/detail/'+row.cadidateId]);
-    console.log(row);
     this.status = false;
   }
 

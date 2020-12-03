@@ -93,5 +93,11 @@ namespace Services.Cadidates.ViewModel
         public string Img { get; set; }
 
         public int? TagId { get; set; }
+
+        public int? JobId { get; set; }
+
+        public string Skype { get; set; }
+
+        public string JobName { get; set; }
     }
 }

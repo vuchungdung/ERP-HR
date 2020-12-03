@@ -23,6 +23,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { CadidateDetailService } from './detail.service';
+import { FormComponent } from './form/form.component';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
+import { ApiService } from 'src/app/core/services/api.service';
+import { InterviewService } from '../../interview/interview.service';
 
 const routes = [
   {
@@ -40,7 +45,7 @@ const routes = [
     DetailCvComponent, 
     DetailApplyHistoryComponent, 
     DetailEmailComponent, 
-    DetailInterviewResultComponent
+    DetailInterviewResultComponent, FormComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +66,13 @@ const routes = [
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    MatInputModule,
+    MatInputModule
+  ],
+  providers:[
+    CadidateDetailService,
+    NotificationService,
+    ApiService,
+    InterviewService
   ]
 })
 export class DetailModule { }

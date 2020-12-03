@@ -1,0 +1,47 @@
+<div style="padding-top: 10px;width: 500px;">
+  <h3 style="margin-bottom: 0px;">Đặt lịch ứng tuyển</h3>
+  <mat-dialog-content style="width: 100%;padding-left: 12px;">
+    <form [formGroup]="interviewForm" (submit)="saveForm()">
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời gian bắt đầu</label>
+          <input matInput formControlName="timeDate" class="form-input form-date" placeholder="mm/DD/yyyy" [matDatepicker]="picker2">
+          <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker2">
+            <mat-icon matDatepickerToggleIcon>today</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </div>
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Bắt đầu</label>
+        <input type="time" class="form-input" formControlName="timeStart" placeholder="Thời gian" />
+      </div>
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Thời lượng</label>
+        <input type="number" class="form-input" formControlName="time" placeholder="Thời gian" />
+      </div>
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Địa điểm phỏng vấn</label>
+        <input type="text" class="form-input" formControlName="address" placeholder="Địa điểm phỏng vấn" />
+      </div>
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Trạng thái</label>
+        <div style="width:100%;height:34px;line-height:34px;padding-top:2px">
+          <mat-radio-group formControlName="recruitType">
+            <mat-radio-button [value]=0>Phỏng vấn trực tiếp</mat-radio-button>
+            <mat-radio-button style="margin-left:20px" [value]=1>Phỏng vấn Online</mat-radio-button>
+          </mat-radio-group>
+        </div> 
+      </div>
+      <div class="form-group">
+        <label class="lb-input"><i class="icon-arrow-small-right"></i>Ghi chú thêm</label>
+        <input type="text" class="form-input" formControlName="note" placeholder="Ghi chú thêm" />
+      </div>
+      <div class="form-group">
+        <mat-checkbox class="example-margin" formControlName="sendMail" [(ngModel)]="checked">Gửi Mail</mat-checkbox>
+      </div>
+      <div class="form-group" style="text-align: right;margin-top: 20px; margin-bottom: 0px;">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Lưu lại</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>
