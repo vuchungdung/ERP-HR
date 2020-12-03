@@ -25,7 +25,7 @@ export class CadidateComponent implements OnInit {
   public paging = new PagingModel();
   public searchText = '';
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','degree','experience','category','source','status','tag','options'];
+  public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','degree','experience','major','source','status','tag','options'];
   public selection = new SelectionModel<Cadidate>(true, []);
   public status:boolean = true;
   public action : FormStatus = FormStatus.Unknow;

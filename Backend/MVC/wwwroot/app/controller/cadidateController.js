@@ -2,9 +2,9 @@
 
     app.controller('cadidateController', cadidateController);
 
-    cadidateController.$inject = ['$scope', 'ajaxService','$http'];
+    cadidateController.$inject = ['$scope', 'ajaxService', '$http','notificationService'];
 
-    function cadidateController($scope, ajaxService, $http) {
+    function cadidateController($scope, ajaxService, $http, notificationService) {
 
         $scope.user = {
             Username: "",
@@ -17,11 +17,10 @@
 
             ajaxService.post('/Cadidate/Register', $scope.user, function (res) {
                 if (res.data == true) {
-                    
+                    notificationService.displaySuccess('Tài khoản đăng ký thành công!');
                 }
                 else {
-                    
-                    
+                    notificationService.displayError('Tài khoản đăng ký thất bại!');
                 }
             }, function (err) {                    
                 console.log(err);
@@ -31,10 +30,11 @@
         $scope.login = function () {
             ajaxService.post('/Cadidate/Login', $scope.user, function (res) {
                 if (res.data == true) {
-                    window.location.reload();
+                    notificationService.displaySuccess('Tài khoản đăng nhập thành công!');
+                    window.location.reload();                 
                 }
                 else {
-
+                    notificationService.displayError('Tài khoản đăng nhập thất bại!');
                 }
             }, function (err) {
                 console.log(err);
@@ -73,7 +73,12 @@
                     'Content-Type': undefined },
                 data: formData
             }).then(function (res) {
-
+                if (res.data == true) {
+                    notificationService.displaySuccess('Bạn đã ứng tuyển thành công!');
+                }
+                else {
+                    notificationService.displayError('Bạn đã ứng tuyển thất bại!');
+                }
             });
         }
         

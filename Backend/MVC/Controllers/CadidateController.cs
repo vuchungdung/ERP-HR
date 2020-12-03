@@ -110,15 +110,14 @@ namespace MVC.Controllers
                     foreach (var item in model.Files)
                     {
                         FileViewModel file = new FileViewModel();
-                        var _file = Request.Form.Files[0];
                         var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
                         var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                        if (_file.Length > 0)
+                        if (item.Length > 0)
                         {
-                            var fileName = ContentDispositionHeaderValue.Parse(_file.ContentDisposition).FileName.Trim('"');
+                            var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
                             var fullPath = Path.Combine(pathToSave, fileName);
                             var dbPath = Path.Combine(folderName, fileName);
-                            var fileSize = _file.Length / 1024;
+                            var fileSize = item.Length / 1024;
                             var fileType = Path.GetExtension(fileName);
 
                             file.CadidateId = user.Id;

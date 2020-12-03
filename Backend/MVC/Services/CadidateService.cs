@@ -54,7 +54,8 @@ namespace MVC.Services
                                                             "@MAJOR",model.Major,
                                                             "@UNIVERSITY",model.University, 
                                                             "@SKYPE",model.Skype,
-                                                            "@EXPERIENCE",model.Experience);
+                                                            "@EXPERIENCE",model.Experience,
+                                                            "@JOBID",model.JobId);
                 if(response != null)
                 {
                     return true;
@@ -88,7 +89,8 @@ namespace MVC.Services
             try
             {
                 var response = _helper.ExecuteSProcedure("SP_CADIDATE_LOGIN", "@USERNAME", model.Username, "@PASSWORD", model.Password);
-                if (response != null)
+                var result = response.ConvertTo<LoginViewModel>().ToList();
+                if (result.Count != 0)
                 {
                     return true;
                 }

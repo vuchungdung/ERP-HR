@@ -85,8 +85,6 @@ namespace Services.Cadidates.Implement
                 var query = from m in _context.CadidateRepository.Query()
                             join p in _context.ProviderRepository.Query()
                             on m.ProviderId equals p.ProviderId
-                            join c in _context.JobCategoryRepository.Query()
-                            on m.CategoryId equals c.CategoryId
                             join f in _context.FileCVRepository.Query()
                             on m.CadidateId equals f.CadidateId
                             where !m.Deleted && f.FileType != ".pdf"
@@ -107,7 +105,6 @@ namespace Services.Cadidates.Implement
                                 Rating = m.Rating,
                                 Skill = m.Skill,
                                 Provider = p.Name,
-                                Category = c.Name,
                                 Dob = m.Dob,
                                 Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
                             };

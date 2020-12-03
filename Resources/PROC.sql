@@ -1,6 +1,14 @@
 USE [ERP-Recruiting]
 GO
 
+CREATE PROC SP_CADIDATE_GET_DETAIL
+@ID INT 
+AS
+	BEGIN
+		SELECT C.Name,C.Email,C.Dob,C.Phone,C.Address,C.Gender,C.Degree,C.Major,C.University,C.Skype,c.Experience  FROM DBO.Cadidates AS C WHERE C.CadidateId = @ID;
+	END;
+GO
+
 CREATE PROC SP_JOBDESCRIPTION_GET_PAGING
 AS 
 	BEGIN
@@ -168,12 +176,13 @@ CREATE PROC SP_CADIDATE_UPDATE
 @UNIVERSITY NVARCHAR(100),
 @SKYPE NVARCHAR(MAX),
 @EXPERIENCE NVARCHAR(MAX),
-@JOBID INT
+@JOBID INT,
+@PROVIDERID INT = 9
 )
 AS
 	BEGIN
 		UPDATE DBO.Cadidates SET Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER,Degree = @DEGREE,ApplyDate = @APPLYDATE,
-		Major = @MAJOR,University = @UNIVERSITY,Skype = @SKYPE,Experience = @EXPERIENCE, JobId = @JOBID WHERE CadidateId = @CADIDATEID
+		Major = @MAJOR,University = @UNIVERSITY,Skype = @SKYPE,Experience = @EXPERIENCE, JobId = @JOBID, ProviderId = @PROVIDERID WHERE CadidateId = @CADIDATEID
 	END;
 GO
 

@@ -83,7 +83,7 @@ namespace MVC.Controllers
 
         public JsonResult Detail()
         {
-            int id = Convert.ToInt32(TempData["JobId"]);
+            int id = Convert.ToInt32(TempData["jobId"]);
             try
             {
                 var response = _jobDescriptionService.GetDetail(id);
@@ -97,7 +97,7 @@ namespace MVC.Controllers
         }
         public IActionResult Item([FromQuery]int id)
         {
-            TempData["JobId"] = id;
+            TempData["jobId"] = id;
             return View();
         }
 
