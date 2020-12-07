@@ -77,6 +77,7 @@ export class RecruitmentComponent implements OnInit {
   deleteItem(id:number){
     this.recService.delete(id).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
+        this.getList();
         this.notify.showSuccess("Xóa thành công!","Thông báo");
       }
       else{
