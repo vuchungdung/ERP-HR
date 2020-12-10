@@ -58,7 +58,7 @@ namespace Services.Recruitment.Implement
                             join c in _context.JobCategoryRepository.Query()
                             on j.CategoryId equals c.CategoryId
                             where !j.Deleted
-                            orderby j.CreateDate
+                            orderby j.CreateDate descending
                             select new JobDescriptionViewModel()
                             {
                                 JobId = j.JobId,
@@ -85,7 +85,7 @@ namespace Services.Recruitment.Implement
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                                                 .Take(filter.Paging.PageSize)
-                                                .ToListAsync()                         
+                                                .ToListAsync()                                             
                                                 .ConfigureAwait(true);
 
                 listItems.TotalItems = await query.CountAsync();
@@ -160,7 +160,6 @@ namespace Services.Recruitment.Implement
                 model.Quatity = md.Quatity;
                 model.Skill = md.SkillId;
                 model.RequestJob = md.RequestJob;
-
                 response.Result = model;
                 response.Status = ResponseStatus.Success;
             }

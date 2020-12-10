@@ -25,11 +25,14 @@ namespace API.Interview.Controller
         [Authorize]
         public async Task<ResponseModel> Insert([FromForm] InterviewDateViewModel model)
         {
-            var message = new Message(
+            if(model.SendMail == true)
+            {
+                var message = new Message(
                 new string[] { model.Email },
                 "Thư mời phỏng vấn",
-                "Chúc mừng bạn đã nhận được thư mời phỏng vấn. Ngày "+model.TimeDate.Day+" tại "+model.Address+".Mong bạn có mặt đúng hẹn! Chúng tôi xin trân thành cảm ơn.", null);
-            _emailSender.SendEmail(message);
+                "Chúc mừng bạn đã nhận được thư mời phỏng vấn. Ngày " + model.TimeDate.Date + " tại " + model.Address + ".Mong bạn có mặt đúng hẹn! Chúng tôi xin trân thành cảm ơn.", null);
+                _emailSender.SendEmail(message);
+            }
             var response = await _interviewDateService.Insert(model);
             return response;
         }

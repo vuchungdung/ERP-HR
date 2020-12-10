@@ -88,7 +88,7 @@ namespace Services.Cadidates.Implement
                             join f in _context.FileCVRepository.Query()
                             on m.CadidateId equals f.CadidateId
                             where !m.Deleted && f.FileType != ".pdf"
-                            orderby m.Name
+                            orderby m.CreateDate descending
                             select new ListCadidateViewModel()
                             {
                                 CadidateId = m.CadidateId,
@@ -105,6 +105,7 @@ namespace Services.Cadidates.Implement
                                 Rating = m.Rating,
                                 Skill = m.Skill,
                                 Provider = p.Name,
+                                CreatedDate = m.CreateDate,
                                 Dob = m.Dob,
                                 Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
                             };

@@ -99,5 +99,7 @@ namespace Services.Cadidates.ViewModel
         public string Skype { get; set; }
 
         public string JobName { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

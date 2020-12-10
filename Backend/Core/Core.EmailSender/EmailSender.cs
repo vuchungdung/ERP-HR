@@ -29,7 +29,7 @@ namespace Core.EmailSender
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
-            var bodyBuilder = new BodyBuilder { HtmlBody = string.Format("<h5 style='color:black;'>{0}</h5>", message.Content) };
+            var bodyBuilder = new BodyBuilder { HtmlBody = string.Format("<h4 style='color:black;'>{0}</h4>", message.Content) };
 
             if (message.Attachments != null && message.Attachments.Any())
             {
