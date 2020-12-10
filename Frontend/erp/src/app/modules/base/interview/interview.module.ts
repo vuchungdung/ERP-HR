@@ -10,9 +10,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DateComponent } from './date/date.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { FormComponent } from './form/form.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
 
 const routes = [
   {
@@ -22,8 +24,13 @@ const routes = [
   }
 ]
 
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin
+]);
+
 @NgModule({
-  declarations: [InterviewComponent, DateComponent],
+  declarations: [InterviewComponent, FormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -35,7 +42,8 @@ const routes = [
     MatMenuModule,
     MatIconModule,
     MatDialogModule,
-    SharedModule
+    SharedModule,
+    FullCalendarModule
   ]
 })
 export class InterviewModule { }
