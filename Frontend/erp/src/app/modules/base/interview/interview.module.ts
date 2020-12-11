@@ -14,6 +14,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormComponent } from './form/form.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
 
 const routes = [
@@ -26,6 +28,8 @@ const routes = [
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
   interactionPlugin
 ]);
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
+import { CalendarOptions, EventInput } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-interview',
@@ -8,22 +8,31 @@ import { CalendarOptions } from '@fullcalendar/angular';
 })
 export class InterviewComponent implements OnInit {
 
-  constructor() {}
-
-  ngOnInit(): void {
-    
+  constructor() {   
   }
 
-  
+  ngOnInit(): void {   
+  }
+
+  public dataSource : EventInput[] = this.getList();
+
+  getList(){
+    return [
+      { title: 'Phỏng vấn ứng viên Vũ Chung Dũng', date: '2020-12-10' },
+      { title: 'Phỏng vấn ứng viên Nguyễn Thị Hòa', date: '2020-12-10' }
+    ];
+  }
 
   calendarOptions: CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     initialView: 'dayGridMonth',
     dateClick : this.handleDateClick.bind(this),
     eventClick : this.handleEventClick.bind(this),
-    events: [
-      { title: 'Phỏng vấn ứng viên Vũ Chung Dũng', date: '2020-12-10' },
-      { title: 'Phỏng vấn ứng viên Nguyễn Thị Hòa', date: '2020-12-10' }
-    ]
+    events : this.dataSource
   }
 
   handleDateClick(arg) {
