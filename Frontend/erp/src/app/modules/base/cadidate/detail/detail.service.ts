@@ -13,10 +13,15 @@ export class CadidateDetailService{
   constructor(private api: ApiService){}
 
   url={
-    item: '/cadidate/cadidate/item'
+    item: '/cadidate/cadidate/item',
+    pdfFile: '/common/file/item'
   }
 
   item(id:number):Observable<ResponseModel>{
     return this.api.item(`${environment.apiUrl}${this.url.item}`,id);
+  }
+  
+  pdfFile(id:number):Observable<ResponseModel>{
+    return this.api.item(`${environment.apiUrl}${this.url.pdfFile}`,id);
   }
 }

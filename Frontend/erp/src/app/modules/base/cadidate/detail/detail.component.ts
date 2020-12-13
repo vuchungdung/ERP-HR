@@ -1,10 +1,11 @@
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
+import { DetailCvComponent } from './detail-cv/detail-cv.component';
 import { CadidateDetailService } from './detail.service';
 import { FormComponent } from './form/form.component';
 
@@ -16,6 +17,7 @@ import { FormComponent } from './form/form.component';
 export class DetailComponent implements OnInit {
 
   public items : any;
+  @ViewChild(DetailCvComponent) form : DetailCvComponent;
 
   constructor(
     private route : ActivatedRoute,
@@ -25,15 +27,31 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItem();
+    this.getDetailCv();
+  }
+
+  getId(){
+    var id = 0;
+    this.route.params.subscribe(param =>{id = param['id']});
+    return id;
   }
 
   getItem(){
-    var id = 0;
-    this.route.params.subscribe(param =>{id = param['id']});
+    var id = this.getId();
     this.detailService.item(id).subscribe((res:ResponseModel) =>{
       if(res.status == ResponseStatus.success){
         this.items = res.result;
         console.log(this.items);
+      }
+    })
+  }
+
+  getDetailCv(){
+    var id = this.getId();
+    this.detailService.pdfFile(id).subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        console.log(res.result.filePath);
+        this.form.getPath(res.result.filePath);
       }
     })
   }
@@ -46,9 +64,6 @@ export class DetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){
         this.notify.showSuccess("Đặt lịch ứng tuyển thành công!","Thông báo");
-      }
-      else{
-        this.notify.showWarning("Đặt lịch ứng tuyển thất bại!","Thông báo");
       }
     })
   }

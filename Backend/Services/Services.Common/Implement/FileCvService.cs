@@ -1,17 +1,18 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
 using Database.Sql.ERP;
-using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Services.Common.Interfaces;
 using Services.Common.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using File = Database.Sql.ERP.Entities.Common.File;
 
 namespace Services.Common.Implement
 {
@@ -104,12 +105,12 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                File md = await _context.FileCVRepository.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
+                File md = await _context.FileCVRepository.FirstOrDefaultAsync(x => x.CadidateId == id && !x.Deleted && x.FileType == ".pdf");
 
                 FileCvViewModel model = new FileCvViewModel();
 
                 model.FileName = md.FileName;
-                model.FilePath = md.FilePath;
+                model.FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), md.FilePath);
                 model.CadidateId = md.CadidateId;
 
                 response.Result = model;

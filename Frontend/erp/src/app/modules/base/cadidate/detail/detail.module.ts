@@ -28,6 +28,7 @@ import { FormComponent } from './form/form.component';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { ApiService } from 'src/app/core/services/api.service';
 import { InterviewService } from '../../interview/interview.service';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const routes = [
   {
@@ -66,7 +67,8 @@ const routes = [
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    PdfViewerModule
   ],
   providers:[
     CadidateDetailService,

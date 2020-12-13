@@ -201,12 +201,12 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                //Cadidate md = await _context.CadidateRepository.FirstOrDefaultAsync(x => x.CadidateId == id);
-
                 var query = from c in _context.CadidateRepository.Query()
                             join j in _context.JobDescriptionRepository.Query()
                             on c.JobId equals j.JobId
-                            where c.CadidateId == id
+                            join f in _context.FileCVRepository.Query()
+                            on c.CadidateId equals f.CadidateId
+                            where c.CadidateId == id && f.FileType != ".pdf"
                             select new ListCadidateViewModel()
                             {
                                 CadidateId = c.CadidateId,
@@ -223,7 +223,8 @@ namespace Services.Cadidates.Implement
                                 JobId = c.JobId,
                                 Dob = c.Dob,
                                 Skype = c.Skype,
-                                JobName = j.Title
+                                JobName = j.Title,
+                                FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FilePath)
                             };
 
                 var model = await query.ToListAsync();

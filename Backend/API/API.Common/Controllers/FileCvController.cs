@@ -65,5 +65,12 @@ namespace API.Common.Controllers
             }
             return response;
         }
+        [HttpGet]
+        [Route("item")]
+        public async Task<ResponseModel> Item([FromQuery]int id)
+        {
+            var response = await _fileCvService.Item(id);
+            return response;
+        }
     }
 }

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailCvComponent implements OnInit {
 
+  public src : any;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getPath(filepath: string){
+    this.src = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   }
 
 }

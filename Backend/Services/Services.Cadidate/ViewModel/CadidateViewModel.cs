@@ -101,5 +101,7 @@ namespace Services.Cadidates.ViewModel
         public string JobName { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public string FilePath { get; set; }
     }
 }
