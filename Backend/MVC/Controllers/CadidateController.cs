@@ -24,6 +24,7 @@ namespace MVC.Controllers
             _fileService = fileService;
         }
 
+        [TypeFilter(typeof(AuthenController))]
         public IActionResult Index()
         {
             return View();
@@ -57,6 +58,7 @@ namespace MVC.Controllers
                     var userSession = new UserSession();
                     userSession.Username = user.Username;
                     userSession.Id = user.CadidateId;
+                    userSession.JobId = user.JobId;
                     var session = JsonConvert.SerializeObject(userSession);
 
                     HttpContext.Session.SetString(Common.CommonSession.USER_SESSION, session);

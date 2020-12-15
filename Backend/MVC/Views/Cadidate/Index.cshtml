@@ -1,8 +1,26 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Cadidate.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<partial name="/Views/Component/_Header.cshtml" />
+
+<div class="header-inner bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-6">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="/Views/Component/_Menu.cshtml" />
 
 <section>
     <div class="container">
@@ -13,7 +31,7 @@
                         <h4>Thông tin cơ bản</h4>
                     </div>
                     <div class="cover-photo-contact">
-                        
+
                     </div>
                     <form>
                         <div class="form-row">
@@ -62,11 +80,11 @@
                                 <label>Nơi đào tạo</label>
                                 <input type="text" ng-model="cadidate.University" class="form-control" value="$33,000">
                             </div>
-                            <div class="form-group mb-0 col-md-12">
+                            <div class="form-group mb-0 col-md-6">
                                 <label>Chuyên ngành</label>
                                 <input type="text" ng-model="cadidate.Major" class="form-control" value="$33,000">
                             </div>
-                            <div class="form-group mb-0 col-md-12">
+                            <div class="form-group mb-0 col-md-6">
                                 <label>Số năm kinh nghiệm</label>
                                 <input type="text" ng-model="cadidate.Experience" class="form-control" value="$33,000">
                             </div>
@@ -100,4 +118,5 @@
         </div>
     </div>
 </section>
+
 

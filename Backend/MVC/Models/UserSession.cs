@@ -10,6 +10,6 @@ namespace MVC.Models
     {
         public string Username { get; set; }
         public int Id { get; set; }
-        public string Image { get; set; }
+        public int JobId { get; set; }
     }
 }

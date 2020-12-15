@@ -17,13 +17,6 @@ namespace MVC.Controllers
             if (context.Exception != null)
             {
                 context.ExceptionHandled = true;
-                context.Result = new RedirectToRouteResult
-                   (
-                   new RouteValueDictionary(new
-                   {
-                       action = "Error",
-                       controller = "Cadidate"
-                   }));
             }
         }
 
@@ -31,12 +24,12 @@ namespace MVC.Controllers
         {
             string user = Convert.ToString(context.HttpContext.Session.GetString(Common.CommonSession.USER_SESSION));
 
-            if (!string.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(user))
             {
                 context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
-                    action = "Error",
-                    controller = "Cadidate"
+                    action = "Index",
+                    controller = "Home"
                 }));
             }
         }

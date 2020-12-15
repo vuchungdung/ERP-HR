@@ -4,7 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="space-ptb">
+<partial name="/Views/Component/_Header.cshtml" />
+
+<partial name="/Views/Component/_Search.cshtml" />
+
+<section class="space-ptb" style="margin-bottom:36px">
     <div class="container" ng-controller="jobdescriptionController">
         <div class="row">
             <div class="col-md-12">
@@ -32,7 +36,7 @@
                                         <div class="custom-control">
                                             <a href="/JobDescription/Items?categoryId={{item.categoryId}}">{{item.name}}</a>
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +46,7 @@
                                 <div class="row" ng-controller="skillController">
                                     <div class="col-lg-3" ng-repeat="item in listSkill">
                                         <div class="custom-control">
-                                            <a href="/JobDescription/Items?keyword={{item.skillId}}">{{item.name}}</a>    
+                                            <a href="/JobDescription/Items?keyword={{item.skillId}}">{{item.name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +77,7 @@
                                     </div>
                                     <div class="job-list-option">
                                         <ul class="list-unstyled">
-                                            <li style="margin-right:15px"><span>Số lượng </span> <a style="padding:0px;font-size:13px;font-weight:400"  href="">{{item.quatity}} Lập trình viên</a> </li>
+                                            <li style="margin-right:15px"><span>Số lượng </span> <a style="padding:0px;font-size:13px;font-weight:400" href="">{{item.quatity}} Lập trình viên</a> </li>
                                             <li>
                                                 <div class="d-flex">
                                                     <i class="font-xll text-primary align-self-center flaticon-debit-card"></i>
@@ -110,3 +114,12 @@
         </div>
     </div>
 </section>
+
+<partial name="/Views/Component/_Footer.cshtml" />
+
+<div id="back-to-top" class="back-to-top">
+    <i class="fas fa-angle-up"></i>
+</div>
+
+<partial name="/Views/Component/_Modal.cshtml" />
+<partial name="/Views/Component/_Form.cshtml" />

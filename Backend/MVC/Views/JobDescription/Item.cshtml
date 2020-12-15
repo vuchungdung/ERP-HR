@@ -1,10 +1,14 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http;
+@using MVC.Common;
+@using Newtonsoft.Json;
 @{
     ViewData["Title"] = "Item";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<partial name="/Views/Component/_Header.cshtml" />
 
-<section class="space-ptb" ng-controller="jobdetailController">
+<partial name="/Views/Component/_Search.cshtml" />
+<section class="space-ptb" style="margin-bottom:36px" ng-controller="jobdetailController">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -112,7 +116,26 @@
             <div class="col-lg-4">
                 <div class="sidebar mb-0">
                     <div class="widget">
-                        <a class="btn btn-primary btn-block" style="color:white" data-toggle="{{modal}}" data-target="{{data_target}}" ng-click="apply(jobdetail.jobId)"><i class="far fa-paper-plane"></i>Ứng tuyển ngay</a>
+                        @{ var session = Convert.ToString(Context.Session.GetString(CommonSession.USER_SESSION));
+                            if (session == null)
+                            {
+                                <a class="btn btn-primary btn-block" style="color:white" data-toggle="{{modal}}" data-target="{{data_target}}" ng-click="apply(jobdetail.jobId)"><i class="far fa-paper-plane"></i>Ứng tuyển ngay</a>
+                            }
+                            else
+                            {
+                                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                                {
+                                    if (user.JobId == 0)
+                                    {
+                                        <a class="btn btn-primary btn-block" style="color:white" data-toggle="{{modal}}" data-target="{{data_target}}" ng-click="apply(jobdetail.jobId)"><i class="far fa-paper-plane"></i>Ứng tuyển ngay</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary btn-block" style="color:white"><i class="far fa-paper-plane"></i>Không thể ứng tuyển</a>
+                                    }
+                                }
+                            }
+                        }
                     </div>
                     <div class="widget">
                         <div class="widget-title">
@@ -147,3 +170,11 @@
     </div>
 </section>
 
+<partial name="/Views/Component/_Footer.cshtml" />
+
+<div id="back-to-top" class="back-to-top">
+    <i class="fas fa-angle-up"></i>
+</div>
+
+<partial name="/Views/Component/_Modal.cshtml" />
+<partial name="/Views/Component/_Form.cshtml" />
