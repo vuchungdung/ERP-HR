@@ -19,7 +19,7 @@ namespace Core.Services
             _configuration = configuration;
         }
 
-        public async Task<int> GetCadidateNewId()
+        public async Task<int> GetCandidateNewId()
         {
             using (SqlConnection conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
@@ -28,7 +28,7 @@ namespace Core.Services
                     await conn.OpenAsync();
                 }
 
-                var result = await conn.ExecuteScalarAsync<int>(@"SELECT MAX(Cadidates.CadidateId) FROM DBO.Cadidates", null, null, 120, CommandType.Text);
+                var result = await conn.ExecuteScalarAsync<int>(@"SELECT MAX(Candidates.CandidateId) FROM DBO.Candidates", null, null, 120, CommandType.Text);
                 return result;
             }
         }

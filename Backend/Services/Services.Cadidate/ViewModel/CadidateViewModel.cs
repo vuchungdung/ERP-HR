@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Cadidates.ViewModel
+namespace Services.Candidates.ViewModel
 {
-    public class CadidateViewModel
+    public class CandidateViewModel
     {
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
 
         public string Name { get; set; }
 
@@ -56,9 +56,9 @@ namespace Services.Cadidates.ViewModel
         public List<IFormFile> Files { get; set; }
 
     }
-    public class ListCadidateViewModel
+    public class ListCandidateViewModel
     {
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
 
         public string Name { get; set; }
 

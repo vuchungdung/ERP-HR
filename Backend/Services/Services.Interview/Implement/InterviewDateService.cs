@@ -62,7 +62,6 @@ namespace Services.Interview.Implement
                             orderby i.TimeDate
                             select new InterviewDateViewModel()
                             {
-                                CadidateId = i.CadidateId,
                                 DateId = i.DateId,
                                 TimeDate = i.TimeDate,
                                 TimeStart = i.TimeStart,
@@ -71,7 +70,6 @@ namespace Services.Interview.Implement
                                 Time = i.Time,
                                 JodId = i.JodId,
                                 Note = i.Note,
-                                SendMail = i.SendMail
                             };
 
                 if (!string.IsNullOrEmpty(filter.Text))
@@ -106,7 +104,6 @@ namespace Services.Interview.Implement
             {
                 InterviewDate md = new InterviewDate();
 
-                md.CadidateId = model.CadidateId;
                 md.Address = model.Address;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = 1;
@@ -141,7 +138,6 @@ namespace Services.Interview.Implement
                 InterviewDate model = new InterviewDate();
 
                 model.DateId = md.DateId;
-                model.CadidateId = md.CadidateId;
                 model.Address = md.Address;
                 model.CreateDate = DateTime.Now;
                 model.JodId = md.JodId;

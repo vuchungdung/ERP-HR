@@ -2,15 +2,15 @@
 using Core.Services.InterfaceService;
 using Database.Sql.ERP.Entities.Common;
 using Microsoft.AspNetCore.Http;
-using Services.Cadidates.ViewModel;
+using Services.Candidates.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Cadidates.Interfaces
+namespace Services.Candidates.Interfaces
 {
-    public interface ICadidateService : IBaseInterfaceService<CadidateViewModel>
+    public interface ICandidateService : IBaseInterfaceService<CandidateViewModel>
     {
         Task<ResponseModel> DropdownSelection();
         Task<ResponseModel> ApplyToJob(int id);

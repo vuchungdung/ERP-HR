@@ -5,17 +5,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Database.Sql.ERP.Entities.Cadidate
+namespace Database.Sql.ERP.Entities.Candidate
 {
-    [Table("CadidateApplyHistories")]
-    public class CadidateApplyHistory : BaseEntity
+    [Table("WorkHistories")]
+    public class WorkHistory : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
+
+        public string Position { get; set; }
 
         [Required]
         public DateTime TimeStart { get; set; }

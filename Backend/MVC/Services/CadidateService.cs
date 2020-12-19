@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MVC.Services
 {
-    public class CadidateService : ICadidateService
+    public class CandidateService : ICandidateService
     {
         private readonly IDatabaseHelper _helper;
 
-        public CadidateService(IDatabaseHelper helper)
+        public CandidateService(IDatabaseHelper helper)
         {
             _helper = helper;
         }
@@ -21,7 +21,7 @@ namespace MVC.Services
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_FILE_CREATE", "@CREATEDATE", DateTime.Now, "@DELETED", false, "@FILENAME",model.FileName, "@FILEPATH",model.FilePath, "@FILETYPE",model.FileType, "@FILESIZE",model.FileSize,"@CADIDATEID",model.CadidateId);
+                var response = _helper.ExecuteSProcedure("SP_FILE_CREATE", "@CREATEDATE", DateTime.Now, "@DELETED", false, "@FILENAME",model.FileName, "@FILEPATH",model.FilePath, "@FILETYPE",model.FileType, "@FILESIZE",model.FileSize,"@CANDIDATEID",model.CandidateId);
                 if(response != null)
                 {
                     return true;
@@ -37,25 +37,24 @@ namespace MVC.Services
             }
         }
 
-        public bool CreateProfile(CadidateViewModel model)
+        public bool CreateProfile(CandidateViewModel model)
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_CADIDATE_UPDATE",
-                                                            "@CADIDATEID",model.CadidateId,
+                var response = _helper.ExecuteSProcedure("SP_CANDIDATE_UPDATE",
+                                                            "@CANDIDATEID",model.CandidateId,
                                                             "@NAME",model.Name,
                                                             "@EMAIL",model.Email,
                                                             "@ADDRESS",model.Address,
                                                             "@PHONE",model.Phone,
                                                             "@DOB",model.Dob, 
-                                                            "@GENDER",model.Gender, 
-                                                            "@DEGREE",model.Degree, 
+                                                            "@GENDER",model.Gender,
                                                             "@APPLYDATE",DateTime.Now, 
-                                                            "@MAJOR",model.Major,
-                                                            "@UNIVERSITY",model.University, 
                                                             "@SKYPE",model.Skype,
-                                                            "@EXPERIENCE",model.Experience,
-                                                            "@JOBID",model.JobId);
+                                                            "@JOBID",model.JobId,
+                                                            "@zalo",model.Zalo,
+                                                            "@Facebook",model.Facebook,
+                                                            "@Linkid",model.LinkId);
                 if(response != null)
                 {
                     return true;
@@ -71,12 +70,12 @@ namespace MVC.Services
             }
         }
 
-        public CadidateViewModel GetByUsername(string username)
+        public CandidateViewModel GetByUsername(string username)
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_GET_CADIDATE_USERNAME", "@USERNAME", username);
-                return response.ConvertTo<CadidateViewModel>().ToList().ElementAt(0);
+                var response = _helper.ExecuteSProcedure("SP_GET_CANDIDATE_USERNAME", "@USERNAME", username);
+                return response.ConvertTo<CandidateViewModel>().ToList().ElementAt(0);
             }
             catch (Exception ex)
             {
@@ -88,7 +87,7 @@ namespace MVC.Services
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_CADIDATE_LOGIN", "@USERNAME", model.Username, "@PASSWORD", model.Password);
+                var response = _helper.ExecuteSProcedure("SP_CANDIDATE_LOGIN", "@USERNAME", model.Username, "@PASSWORD", model.Password);
                 var result = response.ConvertTo<LoginViewModel>().ToList();
                 if (result.Count != 0)
                 {
@@ -109,7 +108,7 @@ namespace MVC.Services
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_CADIDATE_REGRISTER", "@CREATEDATE",DateTime.Now,"@DELETED",false, "@USERNAME", model.Username, "@PASSWORD", model.Password);
+                var response = _helper.ExecuteSProcedure("SP_CANDIDATE_REGRISTER", "@CREATEDATE",DateTime.Now,"@DELETED",false, "@USERNAME", model.Username, "@PASSWORD", model.Password);
                 if(response != null)
                 {
                     return true;

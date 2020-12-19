@@ -30,6 +30,6 @@ namespace Database.Sql.ERP.Entities.Common
         public int FileSize { get; set; }
 
         [Required]
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
     }
 }

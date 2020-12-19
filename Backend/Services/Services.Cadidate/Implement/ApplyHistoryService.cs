@@ -1,18 +1,18 @@
 ﻿using Core.CommonModel;
 using Core.CommonModel.Enum;
 using Database.Sql.ERP;
-using Database.Sql.ERP.Entities.Cadidate;
+using Database.Sql.ERP.Entities.Candidate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Services.Cadidates.Interfaces;
-using Services.Cadidates.ViewModel;
+using Services.Candidates.Interfaces;
+using Services.Candidates.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Services.Cadidates.Implement
+namespace Services.Candidates.Implement
 {
     public class ApplyHistoryService : IApplyHistoryService
     {
@@ -30,7 +30,7 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                CadidateApplyHistory md = _context.CadidateApplyHistoryRepository.FirstOrDefault(x => x.Id == id && !x.Deleted);
+                WorkHistory md = _context.CandidateApplyHistoryRepository.FirstOrDefault(x => x.Id == id && !x.Deleted);
 
                 if(md == null)
                 {
@@ -41,7 +41,7 @@ namespace Services.Cadidates.Implement
                 md.UpdateBy = 1;
                 md.UpdateDate = DateTime.Now;
 
-                _context.CadidateApplyHistoryRepository.Update(md);
+                _context.CandidateApplyHistoryRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }
@@ -58,13 +58,13 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from a in _context.CadidateApplyHistoryRepository.Query()
-                            where !a.Deleted && a.CadidateId == userId
+                var query = from a in _context.CandidateApplyHistoryRepository.Query()
+                            where !a.Deleted && a.CandidateId == userId
                             orderby a.TimeStart
                             select new ApplyHistoryViewModel()
                             {
                                 Id = a.Id,
-                                CadidateId = a.CadidateId,
+                                CandidateId = a.CandidateId,
                                 TimeStart = a.TimeStart,
                                 TimeEnd = a.TimeEnd,
                                 Company = a.Company,
@@ -98,9 +98,9 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                CadidateApplyHistory md = new CadidateApplyHistory();
+                WorkHistory md = new WorkHistory();
 
-                md.CadidateId = model.CadidateId;
+                md.CandidateId = model.CandidateId;
                 md.Company = model.Company;
                 md.Description = model.Description;
                 md.TimeStart = model.TimeStart;
@@ -109,7 +109,7 @@ namespace Services.Cadidates.Implement
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = 1;
 
-                await _context.CadidateApplyHistoryRepository.AddAsync(md);
+                await _context.CandidateApplyHistoryRepository.AddAsync(md);
 
                 await _context.SaveChangesAsync();
             }
@@ -125,12 +125,12 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                CadidateApplyHistory md = await _context.CadidateApplyHistoryRepository.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
+                WorkHistory md = await _context.CandidateApplyHistoryRepository.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
 
                 ApplyHistoryViewModel model = new ApplyHistoryViewModel()
                 {
                     Id = md.Id,
-                    CadidateId = md.CadidateId,
+                    CandidateId = md.CandidateId,
                     Company = md.Company,
                     TimeStart = md.TimeStart,
                     TimeEnd = md.TimeEnd,
@@ -152,7 +152,7 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                CadidateApplyHistory md = _context.CadidateApplyHistoryRepository.FirstOrDefault(x => x.Id == model.Id);
+                WorkHistory md = _context.CandidateApplyHistoryRepository.FirstOrDefault(x => x.Id == model.Id);
 
                 md.Company = model.Company;
                 md.TimeStart = model.TimeStart;
@@ -161,7 +161,7 @@ namespace Services.Cadidates.Implement
                 md.UpdateBy = 1;
                 md.UpdateDate = DateTime.Now;
 
-                _context.CadidateApplyHistoryRepository.Update(md);
+                _context.CandidateApplyHistoryRepository.Update(md);
 
                 await _context.SaveChangesAsync();
             }

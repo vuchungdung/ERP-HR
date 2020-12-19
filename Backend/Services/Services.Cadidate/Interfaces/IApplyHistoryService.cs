@@ -1,10 +1,10 @@
 ﻿using Core.Services.InterfaceService;
-using Services.Cadidates.ViewModel;
+using Services.Candidates.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Cadidates.Interfaces
+namespace Services.Candidates.Interfaces
 {
     public interface IApplyHistoryService : IBaseInterfaceService<ApplyHistoryViewModel>
     {

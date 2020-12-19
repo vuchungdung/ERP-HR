@@ -8,7 +8,7 @@ namespace Database.Sql.ERP.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CadidateApplyHistories",
+                name: "Awards",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -18,22 +18,23 @@ namespace Database.Sql.ERP.Migrations
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    CadidateId = table.Column<int>(nullable: false),
-                    TimeStart = table.Column<DateTime>(nullable: false),
-                    TimeEnd = table.Column<DateTime>(nullable: false),
-                    Company = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", nullable: false)
+                    CandidateId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Institute = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    From = table.Column<int>(nullable: false),
+                    To = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CadidateApplyHistories", x => x.Id);
+                    table.PrimaryKey("PK_Awards", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cadidates",
+                name: "Candidates",
                 columns: table => new
                 {
-                    CadidateId = table.Column<int>(nullable: false)
+                    CandidateId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreateBy = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -46,27 +47,24 @@ namespace Database.Sql.ERP.Migrations
                     Phone = table.Column<string>(type: "varchar(20)", nullable: true),
                     Dob = table.Column<DateTime>(nullable: true),
                     Gender = table.Column<int>(nullable: true),
-                    Degree = table.Column<string>(type: "nvarchar(20)", nullable: true),
-                    University = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Major = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     ApplyDate = table.Column<DateTime>(nullable: true),
-                    Experience = table.Column<string>(nullable: true),
                     FaceBook = table.Column<string>(nullable: true),
                     Zalo = table.Column<string>(nullable: true),
                     Skype = table.Column<string>(nullable: true),
                     LinkIn = table.Column<string>(nullable: true),
-                    Rating = table.Column<int>(nullable: true),
                     ProviderId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true),
                     Skill = table.Column<string>(nullable: true),
                     JobId = table.Column<int>(nullable: true),
                     TagId = table.Column<int>(nullable: true),
+                    InterviewId = table.Column<int>(nullable: true),
                     Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    ProcessId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cadidates", x => x.CadidateId);
+                    table.PrimaryKey("PK_Candidates", x => x.CandidateId);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,6 +102,28 @@ namespace Database.Sql.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Educations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateBy = table.Column<int>(type: "int", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UpdateBy = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    CandidateId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Institute = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Year = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Files",
                 columns: table => new
                 {
@@ -118,7 +138,7 @@ namespace Database.Sql.ERP.Migrations
                     FilePath = table.Column<string>(maxLength: 200, nullable: false),
                     FileType = table.Column<string>(maxLength: 100, nullable: false),
                     FileSize = table.Column<int>(nullable: false),
-                    CadidateId = table.Column<int>(nullable: false)
+                    CandidateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,7 +177,6 @@ namespace Database.Sql.ERP.Migrations
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    CadidateId = table.Column<int>(nullable: false),
                     TimeDate = table.Column<DateTime>(nullable: false),
                     TimeStart = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -165,28 +184,11 @@ namespace Database.Sql.ERP.Migrations
                     Time = table.Column<int>(nullable: false),
                     JodId = table.Column<int>(nullable: false),
                     Note = table.Column<string>(nullable: true),
-                    SendMail = table.Column<bool>(nullable: false)
+                    Quatity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InterviewDates", x => x.DateId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InterviewProcess",
-                columns: table => new
-                {
-                    CadidateId = table.Column<int>(nullable: false),
-                    ProcessId = table.Column<int>(nullable: false),
-                    CreateBy = table.Column<int>(type: "int", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    UpdateBy = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InterviewProcess", x => new { x.CadidateId, x.ProcessId });
                 });
 
             migrationBuilder.CreateTable(
@@ -200,7 +202,7 @@ namespace Database.Sql.ERP.Migrations
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdateBy = table.Column<int>(type: "int", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    CadidateId = table.Column<int>(nullable: false),
+                    CandidateId = table.Column<int>(nullable: false),
                     DateType = table.Column<int>(nullable: false),
                     Note = table.Column<string>(nullable: true),
                     Result = table.Column<int>(nullable: false)
@@ -253,6 +255,7 @@ namespace Database.Sql.ERP.Migrations
                     TimeStart = table.Column<DateTime>(nullable: false),
                     TimeEnd = table.Column<DateTime>(nullable: false),
                     Quatity = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -413,21 +416,46 @@ namespace Database.Sql.ERP.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "WorkHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateBy = table.Column<int>(type: "int", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UpdateBy = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    CandidateId = table.Column<int>(nullable: false),
+                    TimeStart = table.Column<DateTime>(nullable: false),
+                    TimeEnd = table.Column<DateTime>(nullable: false),
+                    Company = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkHistories", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CadidateApplyHistories");
+                name: "Awards");
 
             migrationBuilder.DropTable(
-                name: "Cadidates");
+                name: "Candidates");
 
             migrationBuilder.DropTable(
                 name: "CommandInFunctions");
 
             migrationBuilder.DropTable(
                 name: "Commands");
+
+            migrationBuilder.DropTable(
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Files");
@@ -437,9 +465,6 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "InterviewDates");
-
-            migrationBuilder.DropTable(
-                name: "InterviewProcess");
 
             migrationBuilder.DropTable(
                 name: "InterviewResults");
@@ -473,6 +498,9 @@ namespace Database.Sql.ERP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "WorkHistories");
         }
     }
 }

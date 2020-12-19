@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Database.Sql.ERP
 {
-    public interface IERPUnitOfWork : ICadidateUnitOfWork,ICommonUnitOfWork,IInterviewUnitOfWork,IRecruitmentUnitOfWork,ISystemUnitOfWork,IGenericUnitOfWork
+    public interface IERPUnitOfWork : ICandidateUnitOfWork,ICommonUnitOfWork,IInterviewUnitOfWork,IRecruitmentUnitOfWork,ISystemUnitOfWork,IGenericUnitOfWork
     {
     }
 }

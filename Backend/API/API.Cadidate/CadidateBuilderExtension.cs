@@ -1,15 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Services.Cadidates.Implement;
-using Services.Cadidates.Interfaces;
+using Services.Candidates.Implement;
+using Services.Candidates.Interfaces;
 
-namespace API.Cadidate
+namespace API.Candidate
 {
-    public static class CadidateBuilderExtension
+    public static class CandidateBuilderExtension
     {
-        public static IServiceCollection AddCadidateServices(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddCandidateServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<ICadidateService, CadidateService>();
+            services.AddScoped<ICandidateService, CandidateService>();
             return services;
         }
     }

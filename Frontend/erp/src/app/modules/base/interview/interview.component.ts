@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/angular';
+import { NotificationService } from 'src/app/shared/services/toastr.service';
+import { InterviewService } from './interview.service';
 
 @Component({
   selector: 'app-interview',
@@ -8,7 +10,10 @@ import { CalendarOptions, EventInput } from '@fullcalendar/angular';
 })
 export class InterviewComponent implements OnInit {
 
-  constructor() {   
+  constructor(
+    private interviewService : InterviewService,
+    private notify : NotificationService,
+  ) {
   }
 
   ngOnInit(): void {   
@@ -18,8 +23,8 @@ export class InterviewComponent implements OnInit {
 
   getList(){
     return [
-      { title: 'Phỏng vấn ứng viên Vũ Chung Dũng', date: '2020-12-10' },
-      { title: 'Phỏng vấn ứng viên Nguyễn Thị Hòa', date: '2020-12-10' }
+      { title: 'Phỏng vấn ứng viên Vũ Chung Dũng', date: '2020-12-17', },
+      { title: 'Phỏng vấn ứng viên Nguyễn Thị Hòa', date: '2020-12-17' }
     ];
   }
 

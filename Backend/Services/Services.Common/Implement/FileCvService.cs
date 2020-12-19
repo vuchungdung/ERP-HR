@@ -57,8 +57,8 @@ namespace Services.Common.Implement
             try
             {
                 var query = from f in _context.FileCVRepository.Query()
-                            join c in _context.CadidateRepository.Query()
-                            on f.CadidateId equals c.CadidateId
+                            join c in _context.CandidateRepository.Query()
+                            on f.CandidateId equals c.CandidateId
                             where !f.Deleted && !c.Deleted
                             orderby c.Name
                             select new FileCvViewModel()
@@ -105,13 +105,13 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                File md = await _context.FileCVRepository.FirstOrDefaultAsync(x => x.CadidateId == id && !x.Deleted && x.FileType == ".pdf");
+                File md = await _context.FileCVRepository.FirstOrDefaultAsync(x => x.CandidateId == id && !x.Deleted && x.FileType == ".pdf");
 
                 FileCvViewModel model = new FileCvViewModel();
 
                 model.FileName = md.FileName;
                 model.FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), md.FilePath);
-                model.CadidateId = md.CadidateId;
+                model.CandidateId = md.CandidateId;
 
                 response.Result = model;
                 response.Status = ResponseStatus.Success;

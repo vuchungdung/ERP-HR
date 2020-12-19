@@ -16,11 +16,11 @@ export class CadidateService{
   constructor(private api: ApiService){}
 
   url={
-    insert: '/cadidate/cadidate/insert',
-    update: '/cadidate/cadidate/update',
-    getlist: '/cadidate/cadidate/get-list',
-    delete: '/cadidate/cadidate/delete',
-    item: '/cadidate/cadidate/item',
+    insert: '/candidate/candidate/insert',
+    update: '/candidate/candidate/update',
+    getlist: '/candidate/candidate/get-list',
+    delete: '/candidate/candidate/delete',
+    item: '/candidate/candidate/item',
     dropdown: '/common/skill/drop-down'
   }
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    [Migration("20201125182205_version_1.0.0")]
+    [Migration("20201219161636_version_1.0.0")]
     partial class version_100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,54 @@ namespace Database.Sql.ERP.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.Cadidate", b =>
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Candidate.Award", b =>
                 {
-                    b.Property<int>("CadidateId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CandidateId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("From")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Institute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("To")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Awards");
+                });
+
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Candidate.Candidate", b =>
+                {
+                    b.Property<int>("CandidateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -43,9 +88,6 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Degree")
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
@@ -55,13 +97,13 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("Experience")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InterviewId")
                         .HasColumnType("int");
 
                     b.Property<int?>("JobId")
@@ -69,9 +111,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<string>("LinkIn")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Major")
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(100)");
@@ -82,10 +121,10 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("ProviderId")
+                    b.Property<int?>("ProcessId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Rating")
+                    b.Property<int?>("ProviderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Skill")
@@ -96,9 +135,6 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<int?>("TagId")
                         .HasColumnType("int");
-
-                    b.Property<string>("University")
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
@@ -112,19 +148,61 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Zalo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CadidateId");
+                    b.HasKey("CandidateId");
 
-                    b.ToTable("Cadidates");
+                    b.ToTable("Candidates");
                 });
 
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Cadidate.CadidateApplyHistory", b =>
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Candidate.Education", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CadidateId")
+                    b.Property<int>("CandidateId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Institute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UpdateBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Educations");
+                });
+
+            modelBuilder.Entity("Database.Sql.ERP.Entities.Candidate.WorkHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
                     b.Property<string>("Company")
@@ -158,7 +236,7 @@ namespace Database.Sql.ERP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CadidateApplyHistories");
+                    b.ToTable("WorkHistories");
                 });
 
             modelBuilder.Entity("Database.Sql.ERP.Entities.Common.File", b =>
@@ -168,7 +246,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CadidateId")
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
@@ -391,9 +469,6 @@ namespace Database.Sql.ERP.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("CadidateId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CreateBy")
                         .HasColumnType("int");
 
@@ -409,11 +484,11 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecruitType")
+                    b.Property<int>("Quatity")
                         .HasColumnType("int");
 
-                    b.Property<bool>("SendMail")
-                        .HasColumnType("bit");
+                    b.Property<int>("RecruitType")
+                        .HasColumnType("int");
 
                     b.Property<int>("Time")
                         .HasColumnType("int");
@@ -435,34 +510,6 @@ namespace Database.Sql.ERP.Migrations
                     b.ToTable("InterviewDates");
                 });
 
-            modelBuilder.Entity("Database.Sql.ERP.Entities.Interview.InterviewProcess", b =>
-                {
-                    b.Property<int>("CadidateId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProcessId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("UpdateBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("CadidateId", "ProcessId");
-
-                    b.ToTable("InterviewProcess");
-                });
-
             modelBuilder.Entity("Database.Sql.ERP.Entities.Interview.InterviewResult", b =>
                 {
                     b.Property<int>("ResultId")
@@ -470,7 +517,7 @@ namespace Database.Sql.ERP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CadidateId")
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreateBy")
@@ -531,6 +578,9 @@ namespace Database.Sql.ERP.Migrations
 
                     b.Property<string>("Endow")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OfferFrom")

@@ -19,6 +19,6 @@ namespace MVC.Models
 
         public DateTime CreateDate { get; set; }
 
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
     }
 }

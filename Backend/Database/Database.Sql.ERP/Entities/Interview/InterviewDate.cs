@@ -16,9 +16,6 @@ namespace Database.Sql.ERP.Entities.Interview
         public int DateId { get; set; }
 
         [Required]
-        public int CadidateId { get; set; }
-
-        [Required]
         public DateTime TimeDate { get; set; }
 
         [Required]
@@ -39,6 +36,6 @@ namespace Database.Sql.ERP.Entities.Interview
 
         public string Note { get; set; }
 
-        public bool SendMail { get; set; }
+        public int Quatity { get; set; }
     }
 }

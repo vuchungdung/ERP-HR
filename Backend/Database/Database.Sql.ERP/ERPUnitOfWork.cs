@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess;
 using Core.DataAccess.Sql;
-using Database.Sql.ERP.Entities.Cadidate;
+using Database.Sql.ERP.Entities.Candidate;
 using Database.Sql.ERP.Entities.Common;
 using Database.Sql.ERP.Entities.Interview;
 using Database.Sql.ERP.Entities.Recruitment;
@@ -20,20 +20,20 @@ namespace Database.Sql.ERP
         private IDbContextTransaction _transaction;
 
 
-        private ITableGenericRepository<Cadidate> _cadidateRepository;
-        public ITableGenericRepository<Cadidate> CadidateRepository
+        private ITableGenericRepository<Candidate> _cadidateRepository;
+        public ITableGenericRepository<Candidate> CandidateRepository
         {
             get
             {
-                return _cadidateRepository = _cadidateRepository ?? new TableGenericRepository<Cadidate>(_context);
+                return _cadidateRepository = _cadidateRepository ?? new TableGenericRepository<Candidate>(_context);
             }
         }
-        private ITableGenericRepository<CadidateApplyHistory> _cadidateApplyHistoryRepository;
-        public ITableGenericRepository<CadidateApplyHistory> CadidateApplyHistoryRepository
+        private ITableGenericRepository<WorkHistory> _cadidateApplyHistoryRepository;
+        public ITableGenericRepository<WorkHistory> CandidateApplyHistoryRepository
         {
             get
             {
-                return _cadidateApplyHistoryRepository = _cadidateApplyHistoryRepository ?? new TableGenericRepository<CadidateApplyHistory>(_context);
+                return _cadidateApplyHistoryRepository = _cadidateApplyHistoryRepository ?? new TableGenericRepository<WorkHistory>(_context);
             }
         }
 
@@ -82,14 +82,7 @@ namespace Database.Sql.ERP
             }
         }
 
-        private ITableGenericRepository<InterviewProcess> _interviewProcessRepository;
-        public ITableGenericRepository<InterviewProcess> InterviewProcessRepository
-        {
-            get
-            {
-                return _interviewProcessRepository = _interviewProcessRepository ?? new TableGenericRepository<InterviewProcess>(_context);
-            }
-        }
+        
         private ITableGenericRepository<InterviewResult> _interviewResultRepository;
         public ITableGenericRepository<InterviewResult> InterviewResultRepository 
         {

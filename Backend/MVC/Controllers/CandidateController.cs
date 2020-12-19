@@ -14,11 +14,11 @@ using Services.Common.ViewModel;
 
 namespace MVC.Controllers
 {
-    public class CadidateController : Controller
+    public class CandidateController : Controller
     {
-        private readonly ICadidateService _cadidateService;
+        private readonly ICandidateService _cadidateService;
         private readonly IFileService _fileService;
-        public CadidateController(ICadidateService cadidateService,IFileService fileService)
+        public CandidateController(ICandidateService cadidateService,IFileService fileService)
         {
             _cadidateService = cadidateService;
             _fileService = fileService;
@@ -57,7 +57,7 @@ namespace MVC.Controllers
                     var user = _cadidateService.GetByUsername(model.Username);
                     var userSession = new UserSession();
                     userSession.Username = user.Username;
-                    userSession.Id = user.CadidateId;
+                    userSession.Id = user.CandidateId;
                     userSession.JobId = user.JobId;
                     var session = JsonConvert.SerializeObject(userSession);
 
@@ -97,14 +97,14 @@ namespace MVC.Controllers
             return Json(true);
         }
 
-        public IActionResult UpdateProfile(CadidateViewModel model)
+        public IActionResult UpdateProfile(CandidateViewModel model)
         {
             
             try
             {
                 var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
                 var user = JsonConvert.DeserializeObject<UserSession>(session);
-                model.CadidateId = user.Id;
+                model.CandidateId = user.Id;
                 model.JobId = Convert.ToInt32(TempData["JobId"]);
                 var response = _cadidateService.CreateProfile(model);
                 if(response == true)
@@ -122,7 +122,7 @@ namespace MVC.Controllers
                             var fileSize = item.Length / 1024;
                             var fileType = Path.GetExtension(fileName);
 
-                            file.CadidateId = user.Id;
+                            file.CandidateId = user.Id;
                             file.FileName = fileName;
                             file.FilePath = fullPath;
                             file.FileSize = Convert.ToInt32(fileSize);
@@ -139,7 +139,7 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-        public IActionResult GetCadidate()
+        public IActionResult GetCandidate()
         {
             try
             {
@@ -153,6 +153,14 @@ namespace MVC.Controllers
             {
                 throw ex;
             }
+        }
+        public IActionResult Preview()
+        {
+            return View();
+        }
+        public IActionResult Info()
+        {
+            return View();
         }
     }
 }

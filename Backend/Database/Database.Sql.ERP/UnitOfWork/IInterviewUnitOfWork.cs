@@ -10,7 +10,6 @@ namespace Database.Sql.ERP.UnitOfWork
     public interface IInterviewUnitOfWork
     {
         ITableGenericRepository<InterviewDate> InterviewDateRepository { get; }
-        ITableGenericRepository<InterviewProcess> InterviewProcessRepository { get; }
         ITableGenericRepository<InterviewResult> InterviewResultRepository { get; }
         ITableGenericRepository<Process> ProcessRepository { get; }
 

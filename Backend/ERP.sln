@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Common", "API\API.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Interview", "API\API.Interview\API.Interview.csproj", "{67ABEEA4-4A21-43D6-80EA-99CF5FF374AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Cadidate", "API\API.Cadidate\API.Cadidate.csproj", "{225D8DE5-C30B-4E21-BE32-523149B211E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Candidate", "API\API.Cadidate\API.Candidate.csproj", "{225D8DE5-C30B-4E21-BE32-523149B211E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Recruitment", "API\API.Recruitment\API.Recruitment.csproj", "{C89B8E9F-DE6F-4753-B224-758EE220A1DF}"
 EndProject
@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Cadidates", "Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{98E874C1-5743-4688-9BAA-458AA8EF409B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.EmailSender", "Core\Core.EmailSender\Core.EmailSender.csproj", "{5C3615B3-E4B9-4092-9FDE-7BA727A1B8B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.EmailSender", "Core\Core.EmailSender\Core.EmailSender.csproj", "{5C3615B3-E4B9-4092-9FDE-7BA727A1B8B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

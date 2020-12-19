@@ -15,7 +15,7 @@
 
             alert("Hello");
 
-            ajaxService.post('/Cadidate/Register', $scope.user, function (res) {
+            ajaxService.post('/Candidate/Register', $scope.user, function (res) {
                 if (res.data == true) {
                     notificationService.displaySuccess('Tài khoản đăng ký thành công!');
                 }
@@ -28,7 +28,7 @@
         };
 
         $scope.login = function () {
-            ajaxService.post('/Cadidate/Login', $scope.user, function (res) {
+            ajaxService.post('/Candidate/Login', $scope.user, function (res) {
                 if (res.data == true) {
                     notificationService.displaySuccess('Tài khoản đăng nhập thành công!');
                     window.location.reload();                 
@@ -42,7 +42,7 @@
         }
 
         $scope.logOut = function () {
-            ajaxService.get('/Cadidate/LogOut', null, function (res) {
+            ajaxService.get('/Candidate/LogOut', null, function (res) {
                 if (res.data == true) {
                     window.location.reload();
                 }
@@ -56,7 +56,7 @@
 
         $scope.cadidate = {};
 
-        $scope.postCadidate = function () {
+        $scope.postCandidate = function () {
             console.log($scope.cadidate);
             var formData = new FormData();
             for (var key in $scope.cadidate) {
@@ -68,7 +68,7 @@
 
             $http({
                 method: 'POST',
-                url: '/Cadidate/UpdateProfile',
+                url: '/Candidate/UpdateProfile',
                 headers: {
                     'Content-Type': undefined },
                 data: formData

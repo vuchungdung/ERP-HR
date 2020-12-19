@@ -7,6 +7,6 @@ namespace Core.Services.InterfaceService
 {
     public interface ISequenceService
     {
-        Task<int> GetCadidateNewId();
+        Task<int> GetCandidateNewId();
     }
 }

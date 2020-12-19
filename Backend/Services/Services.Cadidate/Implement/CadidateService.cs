@@ -2,11 +2,11 @@
 using Core.CommonModel.Enum;
 using Core.Services.InterfaceService;
 using Database.Sql.ERP;
-using Database.Sql.ERP.Entities.Cadidate;
+using Database.Sql.ERP.Entities.Candidate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Services.Cadidates.Interfaces;
-using Services.Cadidates.ViewModel;
+using Services.Candidates.Interfaces;
+using Services.Candidates.ViewModel;
 using Services.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,16 +16,16 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Services.Cadidates.Implement
+namespace Services.Candidates.Implement
 {
-    public partial class CadidateService : ICadidateService
+    public partial class CandidateService : ICandidateService
     {
         private IERPUnitOfWork _context;
         private IHttpContextAccessor _httpContext;
         private ISequenceService _sequenceService;
         private ISkillService _skillService;
 
-        public CadidateService(IERPUnitOfWork context,
+        public CandidateService(IERPUnitOfWork context,
             IHttpContextAccessor httpContext,
             ISequenceService sequenceService,
             ISkillService skillService)
@@ -51,13 +51,13 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
+                Candidate md = _context.CandidateRepository.FirstOrDefault(x => x.CandidateId == id && !x.Deleted);
 
                 md.Deleted = true;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = 1;
 
-                _context.CadidateRepository.Update(md);
+                _context.CandidateRepository.Update(md);
 
                 await _context.SaveChangesAsync();
 
@@ -82,27 +82,22 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.CadidateRepository.Query()
+                var query = from m in _context.CandidateRepository.Query()
                             join p in _context.ProviderRepository.Query()
                             on m.ProviderId equals p.ProviderId
                             join f in _context.FileCVRepository.Query()
-                            on m.CadidateId equals f.CadidateId
+                            on m.CandidateId equals f.CandidateId
                             where !m.Deleted && f.FileType != ".pdf"
                             orderby m.CreateDate descending
-                            select new ListCadidateViewModel()
+                            select new ListCandidateViewModel()
                             {
-                                CadidateId = m.CadidateId,
+                                CandidateId = m.CandidateId,
                                 Name = m.Name,
                                 Email = m.Email,
                                 Address = m.Address,
                                 Phone = m.Phone,
                                 Gender = m.Gender,
-                                Degree = m.Degree,
-                                University = m.University,
-                                Major = m.Major,
                                 ApplyDate = m.ApplyDate,
-                                Experience = m.Experience,
-                                Rating = m.Rating,
                                 Skill = m.Skill,
                                 Provider = p.Name,
                                 CreatedDate = m.CreateDate,
@@ -118,7 +113,7 @@ namespace Services.Cadidates.Implement
                                         || x.Degree.ToLower().Contains(filter.Text.ToLower())
                                         );
                 }
-                BaseListModel<ListCadidateViewModel> listItems = new BaseListModel<ListCadidateViewModel>();
+                BaseListModel<ListCandidateViewModel> listItems = new BaseListModel<ListCandidateViewModel>();
 
                 listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
                                        .Take(filter.Paging.PageSize)
@@ -136,38 +131,34 @@ namespace Services.Cadidates.Implement
             return response;
         }
 
-        public async Task<ResponseModel> Insert(CadidateViewModel model)
+        public async Task<ResponseModel> Insert(CandidateViewModel model)
         {
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = new Cadidate();
+                Candidate md = new Candidate();
                 md.Name = model.Name;
                 md.Email = model.Email;
                 md.Address = model.Address;
                 md.Dob = model.Dob;
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
-                md.Degree = model.Degree;
-                md.University = model.University;
-                md.Major = model.Major;
                 md.ApplyDate = model.ApplyDate;
-                md.Experience = model.Experience;
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
                 md.Skill = model.Skill;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _context.CadidateRepository.AddAsync(md);
+                await _context.CandidateRepository.AddAsync(md);
                 await _context.SaveChangesAsync();
 
-                var cadidateId = await _sequenceService.GetCadidateNewId();
+                var cadidateId = await _sequenceService.GetCandidateNewId();
 
                 foreach (var item in model.Files)
                 {
                     Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
-                    f.CadidateId = cadidateId;
+                    f.CandidateId = cadidateId;
                     f.Deleted = false;
                     f.FileName = item.FileName;
                     var folderName = Path.Combine("wwwroot/cadidate-cv");
@@ -176,7 +167,7 @@ namespace Services.Cadidates.Implement
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var fileSize = item.Length / 1024;
                     var fileType = Path.GetExtension(fileName);
-                    f.CadidateId = Convert.ToInt32(await _sequenceService.GetCadidateNewId());
+                    f.CandidateId = Convert.ToInt32(await _sequenceService.GetCandidateNewId());
                     f.FileName = fileName;
                     f.FilePath = fullPath;
                     f.FileSize = Convert.ToInt32(fileSize);
@@ -201,25 +192,21 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from c in _context.CadidateRepository.Query()
+                var query = from c in _context.CandidateRepository.Query()
                             join j in _context.JobDescriptionRepository.Query()
                             on c.JobId equals j.JobId
                             join f in _context.FileCVRepository.Query()
-                            on c.CadidateId equals f.CadidateId
-                            where c.CadidateId == id && f.FileType != ".pdf"
-                            select new ListCadidateViewModel()
+                            on c.CandidateId equals f.CandidateId
+                            where c.CandidateId == id && f.FileType != ".pdf"
+                            select new ListCandidateViewModel()
                             {
-                                CadidateId = c.CadidateId,
+                                CandidateId = c.CandidateId,
                                 Name = c.Name,
                                 Email = c.Email,
                                 Address = c.Address,
                                 Phone = c.Phone,
                                 Gender = c.Gender,
-                                Degree = c.Degree,
-                                University = c.University,
-                                Major = c.Major,
                                 ApplyDate = c.ApplyDate,
-                                Experience = c.Experience,
                                 JobId = c.JobId,
                                 Dob = c.Dob,
                                 Skype = c.Skype,
@@ -244,13 +231,13 @@ namespace Services.Cadidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Cadidate md = _context.CadidateRepository.FirstOrDefault(x => x.CadidateId == id && !x.Deleted);
+                Candidate md = _context.CandidateRepository.FirstOrDefault(x => x.CandidateId == id && !x.Deleted);
 
                 md.TagId = tagId;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                _context.CadidateRepository.Update(md);
+                _context.CandidateRepository.Update(md);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -260,7 +247,7 @@ namespace Services.Cadidates.Implement
             return response;
         }
 
-        public Task<ResponseModel> Update(CadidateViewModel model)
+        public Task<ResponseModel> Update(CandidateViewModel model)
         {
             throw new NotImplementedException();
         }

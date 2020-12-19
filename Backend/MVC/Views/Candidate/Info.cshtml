@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="/Views/Component/_Header.cshtml" />
+
+<div class="header-inner bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="candidates-user-info">
+                    <div class="jobber-user-info">
+                        <div class="profile-avatar">
+                            <img class="img-fluid " src="~/images/avatar/04.jpg" alt="">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <div class="profile-avatar-info ml-4">
+                            <h3>Felica Queen</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="/Views/Component/_Menu.cshtml" />
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="section-title-02">
+                    
+                </div>
+            </div>
+            <div class="col-12">
+                <partial name="/Views/Component/_Info.cshtml" />
+                <partial name="/Views/Component/_Social.cshtml" />
+                <a class="btn btn-md btn-primary" href="#">Lưu hồ sơ</a>
+            </div>
+        </div>
+    </div>
+</section>

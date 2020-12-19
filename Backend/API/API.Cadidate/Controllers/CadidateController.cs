@@ -1,19 +1,19 @@
 ﻿using Core.CommonModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Cadidates.Interfaces;
-using Services.Cadidates.ViewModel;
+using Services.Candidates.Interfaces;
+using Services.Candidates.ViewModel;
 using System.Threading.Tasks;
 
-namespace API.Cadidate.Controllers
+namespace API.Candidate.Controllers
 {
-    [Route("/api/cadidate/cadidate")]
+    [Route("/api/candidate/candidate")]
     [ApiController]
-    public class CadidateController : ControllerBase
+    public class CandidateController : ControllerBase
     {
-        private readonly ICadidateService _cadidateService;
+        private readonly ICandidateService _cadidateService;
 
-        public CadidateController(ICadidateService cadidateService)
+        public CandidateController(ICandidateService cadidateService)
         {
             _cadidateService = cadidateService;
         }
@@ -21,7 +21,7 @@ namespace API.Cadidate.Controllers
         [HttpPost]
         [Route("insert")]
         [Authorize]
-        public async Task<ResponseModel> Insert([FromForm] CadidateViewModel model)
+        public async Task<ResponseModel> Insert([FromForm] CandidateViewModel model)
         {
             var response = await _cadidateService.Insert(model);
             return response;
@@ -48,7 +48,7 @@ namespace API.Cadidate.Controllers
         [HttpPut]
         [Route("update")]
         [Authorize]
-        public async Task<ResponseModel> Update([FromBody] CadidateViewModel model)
+        public async Task<ResponseModel> Update([FromBody] CandidateViewModel model)
         {
             var response = await _cadidateService.Update(model);
             return response;

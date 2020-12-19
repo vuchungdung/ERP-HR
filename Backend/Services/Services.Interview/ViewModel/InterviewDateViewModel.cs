@@ -9,7 +9,7 @@ namespace Services.Interview.ViewModel
     {
         public int DateId { get; set; }
 
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
 
         public DateTime TimeDate { get; set; }
 

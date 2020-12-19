@@ -26,7 +26,7 @@
         $scope.getDetail();
         $scope.apply = function (id) {
             $scope.id = id;
-            ajaxService.post('/Cadidate/Authen', $scope.id, function (res) {
+            ajaxService.post('/Candidate/Authen', $scope.id, function (res) {
                 if (res.data == false) {
                     $scope.modal = "modal";
                     $scope.data_target = "#exampleModalCenter";

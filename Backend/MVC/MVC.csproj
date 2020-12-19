@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -163,8 +163,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.CommonModel\Core.CommonModel.csproj" />
+    <ProjectReference Include="..\Core\Core.DataAccess\Core.DataAccess.csproj" />
+    <ProjectReference Include="..\Core\Core.EmailSender\Core.EmailSender.csproj" />
+    <ProjectReference Include="..\Core\Core.Services\Core.Services.csproj" />
+    <ProjectReference Include="..\Core\Core.Utility\Core.Utility.csproj" />
     <ProjectReference Include="..\Database\Database.Sql.ERP\Database.Sql.ERP.csproj" />
-    <ProjectReference Include="..\Services\Services.Cadidate\Services.Cadidates.csproj" />
     <ProjectReference Include="..\Services\Services.Common\Services.Common.csproj" />
   </ItemGroup>
 

@@ -20,7 +20,7 @@ namespace Services.Common.ViewModel
 
         public DateTime CreateDate { get; set; }
 
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
         public string DbPath { get; set; }
     }
 }

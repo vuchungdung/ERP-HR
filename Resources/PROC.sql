@@ -1,11 +1,16 @@
 USE [ERP-Recruiting]
 GO
 
-CREATE PROC SP_CADIDATE_GET_DETAIL
+CREATE PROC SP_CANDIDATE_GET_DETAIL
 @ID INT 
 AS
 	BEGIN
-		SELECT C.Name,C.Email,C.Dob,C.Phone,C.Address,C.Gender,C.Degree,C.Major,C.University,C.Skype,c.Experience  FROM DBO.Cadidates AS C WHERE C.CadidateId = @ID;
+		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook
+		,e.Title,e.Institute,e.Id,e.Description,e.Year
+		,a.Title,a.Institute,a.Id,a.Description,a._From,a._To
+		,w.Position,w.Company,w.Id,w.Description,w.TimeStart,w.TimeEnd
+		FROM DBO.Candidates AS c,DBO.Educations AS e,dbo.Awards as a,dbo.WorkHistories as w
+		WHERE c.CandidateId = @ID and c.CandidateId = e.CandidateId and a.CandidateId = c.CandidateId and w.CandidateId = c.CandidateId
 	END;
 GO
 
@@ -161,32 +166,31 @@ AS
 	END;
 GO
 
-CREATE PROC SP_CADIDATE_UPDATE
+CREATE PROC SP_CANDIDATE_UPDATE
 (
-@CADIDATEID INT,
+@CANDIDATEID INT,
 @NAME NVARCHAR(100),
 @EMAIL VARCHAR(200),
 @ADDRESS NVARCHAR(250),
 @PHONE NVARCHAR(20),
 @DOB DATETIME,
 @GENDER INT,
-@DEGREE NVARCHAR(20),
 @APPLYDATE DATETIME,
-@MAJOR NVARCHAR(100),
-@UNIVERSITY NVARCHAR(100),
+@Facebook nvarchar(max),
 @SKYPE NVARCHAR(MAX),
-@EXPERIENCE NVARCHAR(MAX),
+@Linkin nvarchar(max),
+@zalo nvarchar(max),
 @JOBID INT,
 @PROVIDERID INT = 9
 )
 AS
 	BEGIN
-		UPDATE DBO.Cadidates SET Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER,Degree = @DEGREE,ApplyDate = @APPLYDATE,
-		Major = @MAJOR,University = @UNIVERSITY,Skype = @SKYPE,Experience = @EXPERIENCE, JobId = @JOBID, ProviderId = @PROVIDERID WHERE CadidateId = @CADIDATEID
+		UPDATE DBO.Candidates SET Skype = @SKYPE, Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER, JobId = @JOBID, ProviderId = @PROVIDERID,Zalo = @zalo,LinkIn = @Linkin,FaceBook = @Facebook
+		WHERE CandidateId = @CANDIDATEID
 	END;
 GO
 
-CREATE PROC SP_CADIDATE_REGRISTER
+CREATE PROC SP_CANDIDATE_REGRISTER
 (
 @CREATEDATE DATETIME = GETDATE,
 @DELETED BIT,
@@ -196,19 +200,19 @@ CREATE PROC SP_CADIDATE_REGRISTER
 )
 AS
 	BEGIN
-		INSERT DBO.Cadidates(CreateDate,Deleted,Username,Password,JobId)
+		INSERT DBO.Candidates(CreateDate,Deleted,Username,Password,JobId)
 		VALUES (@CREATEDATE,@DELETED,@USERNAME,@PASSWORD,@JOBID)
 	END;
 GO
 
-CREATE PROC SP_CADIDATE_LOGIN
+CREATE PROC SP_CANDIDATE_LOGIN
 (
 @USERNAME NVARCHAR(MAX),
 @PASSWORD NVARCHAR(MAX)
 )
 AS
 	BEGIN
-		SELECT Cadidates.CadidateId, Cadidates.Username FROM DBO.Cadidates WHERE Cadidates.Username = @USERNAME AND Cadidates.Password = @PASSWORD
+		SELECT c.CandidateId, c.Username FROM DBO.Candidates as c WHERE c.Username = @USERNAME AND c.Password = @PASSWORD
 	END;
 GO
 
@@ -220,21 +224,171 @@ CREATE PROC SP_FILE_CREATE
 @FILEPATH NVARCHAR(200),
 @FILETYPE NVARCHAR(100),
 @FILESIZE INT,
-@CADIDATEID INT
+@CANDIDATEID INT
 )
 AS
 	BEGIN
-		INSERT DBO.Files(CreateDate,Deleted,FileName,FilePath,FileType,FileSize,CadidateId)
-		VALUES (@CREATEDATE,@DELETED,@FILENAME,@FILEPATH,@FILETYPE,@FILESIZE,@CADIDATEID)
+		INSERT DBO.Files(CreateDate,Deleted,FileName,FilePath,FileType,FileSize,CandidateId)
+		VALUES (@CREATEDATE,@DELETED,@FILENAME,@FILEPATH,@FILETYPE,@FILESIZE,@CANDIDATEID)
 	END;
 GO
 
 
-CREATE PROC SP_GET_CADIDATE_USERNAME
+CREATE PROC SP_GET_CANDIDATE_USERNAME
 (@USERNAME NVARCHAR(MAX))
 AS
 	BEGIN
-		SELECT Cadidates.CadidateId,Cadidates.Username,Cadidates.JobId FROM DBO.Cadidates WHERE Cadidates.Username = @USERNAME
+		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook
+		,e.Title,e.Institute,e.Id,e.Description,e.Year
+		,a.Title,a.Institute,a.Id,a.Description,a._From,a._To
+		,w.Position,w.Company,w.Id,w.Description,w.TimeStart,w.TimeEnd
+		FROM DBO.Candidates AS c,DBO.Educations AS e,dbo.Awards as a,dbo.WorkHistories as w
+		WHERE c.Username = @USERNAME and c.CandidateId = e.CandidateId and a.CandidateId = c.CandidateId and w.CandidateId = c.CandidateId
 	END;
 GO
 
+
+
+
+CREATE PROC SP_UPDATE_AWARD
+(@id int,
+@updateby int,
+@delete bit,
+@candidateid int,
+@title nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@_from int,
+@_to int,
+@updatedate datetime = Getdate
+)
+AS
+	BEGIN
+		UPDATE DBO.Awards SET UpdateBy = @updateby, CandidateId = @candidateid,Deleted = @delete,UpdateDate = @updatedate,Title = @title,Institute = @institute,Description = @description,_From = @_from,_To=@_to
+		WHERE Id = @id
+	END;
+GO
+
+CREATE PROC SP_DELETE_AWARD
+(@id int)
+AS
+	BEGIN
+		Delete DBO.Awards
+		WHERE Id = @id
+	END;
+GO
+
+CREATE PROC SP_UPDATE_EDUCATION
+(@id int,
+@updateby int,
+@delete bit,
+@candidateid int,
+@title nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@year int,
+@updatedate datetime = Getdate
+)
+AS
+	BEGIN
+		UPDATE DBO.Educations SET UpdateBy = @updateby, CandidateId = @candidateid,Deleted = @delete,UpdateDate = @updatedate,Title = @title,Institute = @institute,Description = @description,Year = @year
+		WHERE Id = @id
+	END;
+GO
+
+CREATE PROC SP_DELETE_EDUCATION
+(@id int)
+AS
+	BEGIN
+		Delete DBO.Educations
+		WHERE Id = @id
+	END;
+GO
+
+
+
+
+
+CREATE PROC SP_UPDATE_WORK
+(@id int,
+@updateby int,
+@delete bit,
+@candidateid int,
+@position nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@timestart datetime,
+@updatedate datetime = Getdate,
+@company nvarchar(max),
+@timeend datetime
+)
+AS
+	BEGIN
+		UPDATE DBO.WorkHistories SET UpdateBy = @updateby, CandidateId = @candidateid,Deleted = @delete,UpdateDate = @updatedate,Position = @position,Company = @company,Description = @description,TimeStart = @timestart,TimeEnd = @timeend
+		WHERE Id = @id
+	END;
+GO
+
+CREATE PROC SP_DELETE_WORK
+(@id int)
+AS
+	BEGIN
+		Delete DBO.WorkHistories
+		WHERE Id = @id
+	END;
+GO
+
+
+create proc SP_CREATE_AWARD
+(@createby int,
+@delete bit = 0,
+@candidateid int,
+@title nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@_from int,
+@_to int,
+@createdate datetime = Getdate
+)
+as
+	begin
+		insert dbo.Awards(CandidateId,Deleted,CreateDate,CreateBy,Title,Description,_From,_To,Institute)
+		values(@candidateid,@delete,@createdate,@createby,@title,@description,@_from,@_to,@institute)
+	end
+go
+
+create proc SP_CREATE_EDUCATION
+(@createby int,
+@delete bit = 0,
+@candidateid int,
+@title nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@year int,
+@createdate datetime = Getdate
+)
+as
+	begin
+		insert dbo.Educations(CandidateId,Deleted,CreateDate,CreateBy,Title,Description,Year,Institute)
+		values(@candidateid,@delete,@createdate,@createby,@title,@description,@year,@institute)
+	end
+go
+
+CREATE PROC SP_CREATE_WORK
+(@createby int,
+@delete bit = 0,
+@candidateid int,
+@position nvarchar(max),
+@institute nvarchar(max),
+@description nvarchar(max),
+@timestart datetime,
+@createdate datetime = Getdate,
+@company nvarchar(max),
+@timeend datetime
+)
+AS
+	BEGIN
+		insert dbo.WorkHistories(CandidateId,Deleted,CreateDate,CreateBy,Position,Company,Description,TimeEnd,TimeStart)
+		values(@candidateid,@delete,@createdate,@createby,@position,@company,@description,@timeend,@timestart)
+	END;
+GO

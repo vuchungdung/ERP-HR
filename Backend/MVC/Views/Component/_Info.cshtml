@@ -1,0 +1,45 @@
+﻿<div class="user-dashboard-info-box">
+    <div class="section-title-02 mb-4">
+        <h4>Thông tin cơ bản</h4>
+    </div>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Họ và tên</label>
+                <input type="text" ng-model="cadidate.Name" class="form-control" value="Felica Queen">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Email</label>
+                <input type="email" ng-model="cadidate.Email" class="form-control" value="felicaqueen@gmail.com">
+            </div>
+            <div class="form-group col-md-6 datetimepickers">
+                <label>Ngày sinh</label>
+                <div class="input-group date" id="datetimepicker-01" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" ng-model="cadidate.Dob" value="08/11/1999" data-target="#datetimepicker-01">
+                    <div class="input-group-append" data-target="#datetimepicker-01" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Số điện thoại</label>
+                <input type="text" ng-model="cadidate.Phone" class="form-control" value="+(123) 345-6789">
+            </div>
+            <div class="form-group col-md-6">
+                <label class="d-block mb-3">Giới tính</label>
+                <div class="custom-control custom-radio d-inline">
+                    <input type="radio" id="customRadio1" ng-model="cadidate.Gender" value="0" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Nam</label>
+                </div>
+                <div class="custom-control custom-radio d-inline ml-3">
+                    <input type="radio" id="customRadio2" ng-model="cadidate.Gender" value="1" name="customRadio" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label" for="customRadio2">Nữ</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Địa chỉ</label>
+                <input type="text" ng-model="cadidate.Address" class="form-control" value="General Insurance">
+            </div>
+        </div>
+    </form>
+</div>

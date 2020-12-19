@@ -44,7 +44,7 @@ namespace API.Common.Controllers
                     var fileSize = file.Length / 1024;
                     var fileType = Path.GetExtension(fileName);
 
-                    model.CadidateId = Convert.ToInt32(await _sequenceService.GetCadidateNewId());
+                    model.CandidateId = Convert.ToInt32(await _sequenceService.GetCandidateNewId());
                     model.FileName = fileName;
                     model.FilePath = fullPath;
                     model.FileSize = Convert.ToInt32(fileSize);

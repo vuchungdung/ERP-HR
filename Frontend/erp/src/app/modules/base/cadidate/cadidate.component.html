@@ -6,30 +6,32 @@
         <div>
           <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH ỨNG VIÊN</h4>
         </div>
-        <div class="options">
+        <div class="options" style="display: flex;height: 28px;">
+          <h3 style="padding-right: 8px;">Tìm kiếm nâng cao</h3>
+          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
+            <mat-option>None</mat-option>
+            <mat-option>Công việc</mat-option>
+          </mat-select>
+          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
+            <mat-option>None</mat-option>
+            <mat-option>Trình độ</mat-option>
+          </mat-select>
+          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
+            <mat-option>None</mat-option>
+            <mat-option>Kỹ năng</mat-option>
+          </mat-select>
+          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
+            <mat-option>None</mat-option>
+            <mat-option>Kinh nghiệm</mat-option>
+          </mat-select>
+          <button mat-raised-button (click)="insertCadidate()" style="margin-right: 5px;" class="btn-interview" color="primary">
+            <i class="icon-user-plus icon"></i>Thêm ứng viên mới
+          </button>
           <ng-container>
-            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
-              <i class="icon-envelop5 icon"></i>Gửi email
-            </button>
-            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
-              <i class="icon-price-tag2 icon"></i>Gắn thẻ
-            </button>
             <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-bin icon"></i>Xóa ứng viên
             </button>
           </ng-container>
-          <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
-            <i class="icon-pie-chart2 icon"></i>Biểu đồ ứng viên
-          </button>
-          <button mat-raised-button (click)="insertCadidate()" style="margin-right: 5px;" class="btn-interview" color="primary">
-            <i class="icon-user-plus icon"></i>Thêm ứng viên mới
-          </button>
-          <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
-            <i class="icon-folder-download2 icon"></i>In danh sách
-          </button>
-          <button mat-raised-button class="btn-interview" color="primary">
-            <i class="icon-plus2 icon"></i>Upload thông minh
-          </button>
         </div>
       </div>
       <div class="panel-heading content-header" style="padding-top:0px; padding-bottom:10px;">

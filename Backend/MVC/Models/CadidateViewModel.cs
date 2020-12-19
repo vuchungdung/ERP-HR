@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MVC.Models
 {
-    public class CadidateViewModel
+    public class CandidateViewModel
     {
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
 
         public string Password { get; set; }
 
@@ -26,18 +26,16 @@ namespace MVC.Models
 
         public int? Gender { get; set; }
 
-        public string Degree { get; set; }
-
-        public string University { get; set; }
-
-        public string Major { get; set; }
-
-        public string Experience { get; set; }
+        public List<Awards> Awards { get; set; }
+        public List<Education> Educations { get; set; }
+        public List<WorkHistory> WorkHistories { get; set; }
 
         public string Skype { get; set; }
 
         public int JobId { get;set; }
-
+        public string Zalo { get; set; }
+        public string LinkId { get; set; }
+        public string Facebook { get; set; }
         public List<IFormFile> Files { get; set; }
     }
 }

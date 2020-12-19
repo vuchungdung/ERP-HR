@@ -15,7 +15,7 @@ namespace Database.Sql.ERP.Entities.Interview
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ResultId { get; set; }
         [Required]
-        public int CadidateId { get; set; }
+        public int CandidateId { get; set; }
 
         [Required]
         public DateType DateType { get; set; }

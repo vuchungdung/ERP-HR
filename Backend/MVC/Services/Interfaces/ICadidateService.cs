@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MVC.Services.Interfaces
 {
-    public interface ICadidateService
+    public interface ICandidateService
     {
         bool Regrister(RegisterViewModel model);
 
         bool Login(LoginViewModel model);
 
-        bool CreateProfile(CadidateViewModel model);
+        bool CreateProfile(CandidateViewModel model);
 
         bool Apply(FileViewModel model);
 
-        CadidateViewModel GetByUsername(string username);
+        CandidateViewModel GetByUsername(string username);
     }
 }

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Services.Candidates.ViewModel
+namespace MVC.Models
 {
-    public class ApplyHistoryViewModel
+    public class WorkHistory
     {
         public int Id { get; set; }
 
         public int CandidateId { get; set; }
+
+        public string Position { get; set; }
 
         public DateTime TimeStart { get; set; }
 

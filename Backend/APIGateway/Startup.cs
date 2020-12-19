@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using API.Cadidate;
+using API.Candidate;
 using API.Common;
 using API.Interview;
 using API.Recruitment;
@@ -108,7 +108,7 @@ namespace APIGateway
             services.AddCommonServices(Configuration);
             services.AddSystemServices(Configuration);
             services.AddRecruitmentServices(Configuration);
-            services.AddCadidateServices(Configuration);
+            services.AddCandidateServices(Configuration);
             services.AddInterviewServices(Configuration);
         }
 
@@ -127,8 +127,8 @@ namespace APIGateway
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/cadidate-cv")),
-                RequestPath = new PathString("/wwwroot/cadidate-cv")
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/candidate-cv")),
+                RequestPath = new PathString("/wwwroot/candidate-cv")
             });
 
             app.UseCors("CorsPolicy");

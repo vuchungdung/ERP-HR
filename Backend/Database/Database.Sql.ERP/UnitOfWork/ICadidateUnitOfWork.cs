@@ -1,15 +1,15 @@
 ﻿using Core.DataAccess;
-using Database.Sql.ERP.Entities.Cadidate;
+using Database.Sql.ERP.Entities.Candidate;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Database.Sql.ERP.UnitOfWork
 {
-    public interface ICadidateUnitOfWork
+    public interface ICandidateUnitOfWork
     {
-        ITableGenericRepository<Cadidate> CadidateRepository { get; }
-        ITableGenericRepository<CadidateApplyHistory> CadidateApplyHistoryRepository { get; }
+        ITableGenericRepository<Candidate> CandidateRepository { get; }
+        ITableGenericRepository<WorkHistory> CandidateApplyHistoryRepository { get; }
 
     }
 }
