@@ -36,6 +36,10 @@ namespace Database.Sql.ERP.Entities.Interview
 
         public string Note { get; set; }
 
-        public int Quatity { get; set; }
+        [Required]
+        public int CandidateId { get; set; }
+
+        [Required]
+        public int EmployeeId { get; set; }
     }
 }

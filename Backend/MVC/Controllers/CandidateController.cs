@@ -59,6 +59,8 @@ namespace MVC.Controllers
                     userSession.Username = user.Username;
                     userSession.Id = user.CandidateId;
                     userSession.JobId = user.JobId;
+                    userSession.FileName = user.FileName;
+                    userSession.FilePath = user.FilePath;
                     var session = JsonConvert.SerializeObject(userSession);
 
                     HttpContext.Session.SetString(Common.CommonSession.USER_SESSION, session);
@@ -105,34 +107,22 @@ namespace MVC.Controllers
                 var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
                 var user = JsonConvert.DeserializeObject<UserSession>(session);
                 model.CandidateId = user.Id;
-                model.JobId = Convert.ToInt32(TempData["JobId"]);
-                var response = _cadidateService.CreateProfile(model);
-                if(response == true)
+                model.JobId = Convert.ToInt32(TempData["JobId"]);               
+                foreach (var item in model.Files)
                 {
-                    foreach (var item in model.Files)
+                    var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    if (item.Length > 0)
                     {
-                        FileViewModel file = new FileViewModel();
-                        var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
-                        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                        if (item.Length > 0)
-                        {
-                            var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                            var fullPath = Path.Combine(pathToSave, fileName);
-                            var dbPath = Path.Combine(folderName, fileName);
-                            var fileSize = item.Length / 1024;
-                            var fileType = Path.GetExtension(fileName);
-
-                            file.CandidateId = user.Id;
-                            file.FileName = fileName;
-                            file.FilePath = fullPath;
-                            file.FileSize = Convert.ToInt32(fileSize);
-                            file.FileType = fileType;
-                        }
-                        _fileService.Create(file);
+                        var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                        var dbPath = Path.Combine(folderName, fileName);
+                        model.FileName = fileName;
+                        model.FilePath = dbPath;
                     }
-                    return Json(true);
+                    
                 }
-                return Json(false);
+                var response = _cadidateService.CreateProfile(model);
+                return Json(response);
             }
             catch(Exception ex)
             {

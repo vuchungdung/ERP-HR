@@ -57,5 +57,8 @@ namespace Database.Sql.ERP.Entities.Candidate
         public string Password { get; set; }
 
         public int? ProcessId { get; set; }
+
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     }
 }

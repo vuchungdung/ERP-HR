@@ -1,19 +1,6 @@
 USE [ERP-Recruiting]
 GO
 
-CREATE PROC SP_CANDIDATE_GET_DETAIL
-@ID INT 
-AS
-	BEGIN
-		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook
-		,e.Title,e.Institute,e.Id,e.Description,e.Year
-		,a.Title,a.Institute,a.Id,a.Description,a._From,a._To
-		,w.Position,w.Company,w.Id,w.Description,w.TimeStart,w.TimeEnd
-		FROM DBO.Candidates AS c,DBO.Educations AS e,dbo.Awards as a,dbo.WorkHistories as w
-		WHERE c.CandidateId = @ID and c.CandidateId = e.CandidateId and a.CandidateId = c.CandidateId and w.CandidateId = c.CandidateId
-	END;
-GO
-
 CREATE PROC SP_JOBDESCRIPTION_GET_PAGING
 AS 
 	BEGIN
@@ -212,7 +199,7 @@ CREATE PROC SP_CANDIDATE_LOGIN
 )
 AS
 	BEGIN
-		SELECT c.CandidateId, c.Username FROM DBO.Candidates as c WHERE c.Username = @USERNAME AND c.Password = @PASSWORD
+		SELECT c.CandidateId, c.Username from DBO.Candidates as c WHERE c.Username = @USERNAME AND c.Password = @PASSWORD
 	END;
 GO
 
@@ -234,18 +221,7 @@ AS
 GO
 
 
-CREATE PROC SP_GET_CANDIDATE_USERNAME
-(@USERNAME NVARCHAR(MAX))
-AS
-	BEGIN
-		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook
-		,e.Title,e.Institute,e.Id,e.Description,e.Year
-		,a.Title,a.Institute,a.Id,a.Description,a._From,a._To
-		,w.Position,w.Company,w.Id,w.Description,w.TimeStart,w.TimeEnd
-		FROM DBO.Candidates AS c,DBO.Educations AS e,dbo.Awards as a,dbo.WorkHistories as w
-		WHERE c.Username = @USERNAME and c.CandidateId = e.CandidateId and a.CandidateId = c.CandidateId and w.CandidateId = c.CandidateId
-	END;
-GO
+
 
 
 
@@ -379,7 +355,6 @@ CREATE PROC SP_CREATE_WORK
 @delete bit = 0,
 @candidateid int,
 @position nvarchar(max),
-@institute nvarchar(max),
 @description nvarchar(max),
 @timestart datetime,
 @createdate datetime = Getdate,
@@ -392,3 +367,56 @@ AS
 		values(@candidateid,@delete,@createdate,@createby,@position,@company,@description,@timeend,@timestart)
 	END;
 GO
+
+CREATE PROC SP_GET_WORK
+(@candidateid int)
+AS
+	BEGIN
+		select w.Company,w.Description,w.TimeEnd,w.TimeStart,w.Position
+		from dbo.WorkHistories as w where w.CandidateId = @candidateid
+	END;
+GO
+
+CREATE PROC SP_GET_EDUCATION
+(@candidateid int)
+AS
+	BEGIN
+		select w.Title,w.Institute,w.Description,w.Year
+		from dbo.Educations as w where w.CandidateId = @candidateid
+	END;
+GO
+
+CREATE PROC SP_GET_AWARD
+(@candidateid int)
+AS
+	BEGIN
+		select w.Title,w.Institute,w.Description,w._From,w._To
+		from dbo.Awards as w where w.CandidateId = @candidateid
+	END;
+GO
+
+drop proc SP_GET_CANDIDATE_USERNAME
+
+exec SP_GET_CANDIDATE_USERNAME 'minhminh'
+
+CREATE PROC SP_CANDIDATE_GET_DETAIL
+@ID INT 
+AS
+	BEGIN
+		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook,c.FileName,c.FilePath
+		FROM DBO.Candidates AS c
+		WHERE c.CandidateId = @ID
+	END;
+GO
+
+CREATE PROC SP_GET_CANDIDATE_USERNAME
+(@USERNAME NVARCHAR(MAX))
+AS
+	BEGIN
+		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook,c.FileName,c.FilePath,c.CandidateId,c.Username,c.JobId
+		FROM DBO.Candidates AS c
+		WHERE c.Username = @USERNAME
+	END;
+GO
+
+select * from dbo.Candidates

@@ -11,5 +11,7 @@ namespace MVC.Models
         public string Username { get; set; }
         public int Id { get; set; }
         public int JobId { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     }
 }

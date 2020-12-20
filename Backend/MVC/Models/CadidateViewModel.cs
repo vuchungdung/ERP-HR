@@ -26,9 +26,9 @@ namespace MVC.Models
 
         public int? Gender { get; set; }
 
-        public List<Awards> Awards { get; set; }
-        public List<Education> Educations { get; set; }
-        public List<WorkHistory> WorkHistories { get; set; }
+        public List<AwardsViewModel> Awards { get; set; }
+        public List<EducationViewModel> Educations { get; set; }
+        public List<WorkHistoryViewModel> WorkHistories { get; set; }
 
         public string Skype { get; set; }
 
@@ -36,6 +36,8 @@ namespace MVC.Models
         public string Zalo { get; set; }
         public string LinkId { get; set; }
         public string Facebook { get; set; }
+        public string FilePath { get; set; }
+        public string FileName{ get; set; }
         public List<IFormFile> Files { get; set; }
     }
 }
