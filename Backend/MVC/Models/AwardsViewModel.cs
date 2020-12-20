@@ -12,8 +12,8 @@ namespace MVC.Models
         public string Title { get; set; }
         public string Institute { get; set; }
         public string Description { get; set; }
-        public int _From { get; set; }
-        public int _To { get; set; }
+        public DateTime _From { get; set; }
+        public DateTime _To { get; set; }
         public int? CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }

@@ -39,6 +39,9 @@ namespace MVC
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IWorkHistoryService, WorkHistoryService>();
+            services.AddScoped<IAwardService, AwardService>();
 
         }
 

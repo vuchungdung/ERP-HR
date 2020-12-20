@@ -59,8 +59,8 @@ namespace MVC.Controllers
                     userSession.Username = user.Username;
                     userSession.Id = user.CandidateId;
                     userSession.JobId = user.JobId;
-                    userSession.FileName = user.FileName;
-                    userSession.FilePath = user.FilePath;
+                    userSession.FileName = user.FileName.ToString();
+                    userSession.FilePath = user.FilePath.ToString();
                     var session = JsonConvert.SerializeObject(userSession);
 
                     HttpContext.Session.SetString(Common.CommonSession.USER_SESSION, session);
@@ -72,27 +72,7 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-        [HttpPost]
-        public JsonResult Authen([FromBody]int id)
-        {
-            TempData["JobId"] = id;
-            try
-            {
-                string user = Convert.ToString(HttpContext.Session.GetString(Common.CommonSession.USER_SESSION));
-                if(user != null)
-                {
-                    return Json(true);
-                }
-                else
-                {
-                    return Json(false);
-                }
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+
         public JsonResult LogOut()
         {
             HttpContext.Session.Clear();

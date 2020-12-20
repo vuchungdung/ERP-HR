@@ -1,56 +1,85 @@
-﻿<div class="user-dashboard-info-box">
+﻿<div class="user-dashboard-info-box" ng-controller="educationController">
     <div class="dashboard-resume-title d-flex align-items-center">
         <div class="section-title-02 mb-sm-0">
-            <h4 class="mb-0">Education</h4>
+            <h4 class="mb-0">Trình độ học vấn</h4>
         </div>
-        <a class="btn btn-md ml-sm-auto btn-primary" data-toggle="collapse" href="#dateposted" role="button" aria-expanded="false" aria-controls="dateposted">Add Education</a>
+        <a class="btn btn-md ml-sm-auto btn-primary" data-toggle="collapse" href="#dateposted" role="button" aria-expanded="false" aria-controls="dateposted">Thêm thông tin</a>
     </div>
     <div class="collapse show" id="dateposted">
         <div class="bg-light p-3 mt-4">
-            <form class="form-row">
+            <form class="form-row" ng-submit="create()">
                 <div class="form-group col-md-12">
-                    <label>Title</label>
-                    <input type="text" class="form-control" value="">
+                    <label>Trình độ</label>
+                    <input type="text" class="form-control" ng-model="education.Title" value="">
                 </div>
-                <div class="form-group col-md-6 select-border">
-                    <label>Year</label>
-                    <select class="form-control basic-select">
-                        <option value="value 01" selected="selected">2020</option>
-                        <option value="value 02">2008</option>
-                        <option value="value 03">2009</option>
-                        <option value="value 04">2010</option>
-                        <option value="value 05">2011</option>
-                        <option value="value 06">2012</option>
-                        <option value="value 07">2013</option>
-                        <option value="value 08">2014</option>
-                        <option value="value 09">2015</option>
-                        <option value="value 10">2016</option>
-                        <option value="value 11">2017</option>
-                        <option value="value 12">2018</option>
-                        <option value="value 13">2019</option>
-                        <option value="value 14">2020</option>
-                        <option value="value 15">2021</option>
-                        <option value="value 16">2022</option>
-                        <option value="value 17">2023</option>
-                        <option value="value 18">2024</option>
-                        <option value="value 19">2025</option>
-                        <option value="value 20">2026</option>
-                        <option value="value 21">2027</option>
-                        <option value="value 22">2028</option>
-                        <option value="value 23">2029</option>
-                        <option value="value 14">2030</option>
+                <div class="form-group col-md-3 select-border">
+                    <label>Từ năm</label>
+                    <select ng-model="education._From" class="form-control basic-select">
+                        <option value=2020 selected="selected">2020</option>
+                        <option value=2008>2008</option>
+                        <option value=2009>2009</option>
+                        <option value=2010>2010</option>
+                        <option value=2011>2011</option>
+                        <option value=2012>2012</option>
+                        <option value=2013>2013</option>
+                        <option value=2014>2014</option>
+                        <option value=2015>2015</option>
+                        <option value=2016>2016</option>
+                        <option value=2017>2017</option>
+                        <option value=2018>2018</option>
+                        <option value=2019>2019</option>
+                        <option value=2020>2020</option>
+                        <option value=2021>2021</option>
+                        <option value=2022>2022</option>
+                        <option value=2023>2023</option>
+                        <option value=2024>2024</option>
+                        <option value=2025>2025</option>
+                        <option value=2026>2026</option>
+                        <option value=2027>2027</option>
+                        <option value=2028>2028</option>
+                        <option value=2029>2029</option>
+                        <option value=2030>2030</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3 select-border">
+                    <label>Đến năm</label>
+                    <select ng-model="education._To" class="form-control basic-select">
+                        <option value=2020 selected="selected">2020</option>
+                        <option value=2008>2008</option>
+                        <option value=2009>2009</option>
+                        <option value=2010>2010</option>
+                        <option value=2011>2011</option>
+                        <option value=2012>2012</option>
+                        <option value=2013>2013</option>
+                        <option value=2014>2014</option>
+                        <option value=2015>2015</option>
+                        <option value=2016>2016</option>
+                        <option value=2017>2017</option>
+                        <option value=2018>2018</option>
+                        <option value=2019>2019</option>
+                        <option value=2020>2020</option>
+                        <option value=2021>2021</option>
+                        <option value=2022>2022</option>
+                        <option value=2023>2023</option>
+                        <option value=2024>2024</option>
+                        <option value=2025>2025</option>
+                        <option value=2026>2026</option>
+                        <option value=2027>2027</option>
+                        <option value=2028>2028</option>
+                        <option value=2029>2029</option>
+                        <option value=2030>2030</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Institute</label>
-                    <input type="text" class="form-control" value="">
+                    <label>Nơi đào tạo</label>
+                    <input ng-model="education.Institute" type="text" class="form-control" value="">
                 </div>
                 <div class="form-group col-md-12">
-                    <label>Description</label>
-                    <textarea class="form-control" rows="4"></textarea>
+                    <label>Mô tả thêm</label>
+                    <textarea ng-model="education.Description" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group col-md-12 mb-0">
-                    <a class="btn btn-md btn-primary" href="#">Add</a>
+                    <button type="submit" class="btn btn-md btn-primary">Thêm</button>
                 </div>
             </form>
         </div>
@@ -59,7 +88,7 @@
         <div class="jobber-timeline-icon">
             <i class="fas fa-graduation-cap"></i>
         </div>
-        <div class="jobber-timeline-item">
+        <div class="jobber-timeline-item" ng-repeat="item in educations">
             <div class="jobber-timeline-cricle">
                 <i class="far fa-circle"></i>
             </div>
@@ -71,12 +100,12 @@
                             <li><a href="#"><i class="far fa-trash-alt text-danger"></i></a></li>
                         </ul>
                     </div>
-                    <span class="jobber-timeline-time">2018 - Pres</span>
-                    <h6 class="mb-2">Masters in Software Engineering</h6>
-                    <span>- Engineering University</span>
-                    <p class="mt-2">This is the beginning of creating the life that you want to live. Know what the future holds for you as a result of the choice you can make today.</p>
+                    <span class="jobber-timeline-time">{{item._From}} - {{item._To}}</span>
+                    <h6 class="mb-2">{{item.title}}</h6>
+                    <span>- {{item.institute}}</span>
+                    <p class="mt-2">{{item.description}}.</p>
                 </div>
-                <div class="collapse show" id="dateposted-02">
+                <div class="collapse" id="dateposted-02">
                     <div class="bg-light p-3">
                         <form class="form-row collapse show" id="dateposted-01">
                             <div class="form-group col-md-12">
@@ -127,75 +156,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="jobber-timeline-item mb-0">
-            <div class="jobber-timeline-cricle">
-                <i class="far fa-circle"></i>
-            </div>
-            <div class="jobber-timeline-info">
-                <div class="dashboard-timeline-info">
-                    <div class="dashboard-timeline-edit">
-                        <ul class="list-unstyled d-flex">
-                            <li><a class="text-right" data-toggle="collapse" href="#dateposted-03" role="button" aria-expanded="false" aria-controls="dateposted"> <i class="fas fa-pencil-alt text-info mr-2"></i> </a></li>
-                            <li><a href="#"><i class="far fa-trash-alt text-danger"></i></a></li>
-                        </ul>
-                    </div>
-                    <span class="jobber-timeline-time">2014 - 2018</span>
-                    <h6 class="mb-2">Diploma in Graphics Design</h6>
-                    <span>- Graphic Arts Institute</span>
-                    <p class="mt-2">Have some fun and hypnotize yourself to be your very own “Ghost of Christmas future” and see what the future holds for you.</p>
-                </div>
-                <div class="collapse" id="dateposted-03">
-                    <div class="bg-light p-3">
-                        <form class="form-row collapse show" id="dateposted-04">
-                            <div class="form-group col-md-12">
-                                <label>Title</label>
-                                <input type="text" class="form-control" value="Diploma in Graphics Design">
-                            </div>
-                            <div class="form-group col-md-6 select-border">
-                                <label>Year</label>
-                                <select class="form-control basic-select">
-                                    <option value="value 01" selected="selected">2020</option>
-                                    <option value="value 02">2008</option>
-                                    <option value="value 03">2009</option>
-                                    <option value="value 04">2010</option>
-                                    <option value="value 05">2011</option>
-                                    <option value="value 06">2012</option>
-                                    <option value="value 07">2013</option>
-                                    <option value="value 08">2014</option>
-                                    <option value="value 09">2015</option>
-                                    <option value="value 10">2016</option>
-                                    <option value="value 11">2017</option>
-                                    <option value="value 12">2018</option>
-                                    <option value="value 13">2019</option>
-                                    <option value="value 14">2020</option>
-                                    <option value="value 15">2021</option>
-                                    <option value="value 16">2022</option>
-                                    <option value="value 17">2023</option>
-                                    <option value="value 18">2024</option>
-                                    <option value="value 19">2025</option>
-                                    <option value="value 20">2026</option>
-                                    <option value="value 21">2027</option>
-                                    <option value="value 22">2028</option>
-                                    <option value="value 23">2029</option>
-                                    <option value="value 14">2030</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Institute</label>
-                                <input type="text" class="form-control" value="Graphic Arts Institute">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Description</label>
-                                <textarea class="form-control" rows="4" placeholder="Have some fun and hypnotize yourself to be your very own “Ghost of Christmas future” and see what the future holds for you."></textarea>
-                            </div>
-                            <div class="form-group col-md-12 mb-0">
-                                <a class="btn btn-md btn-primary" href="#">Update</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>      
     </div>
 </div>

@@ -27,7 +27,8 @@ namespace MVC.Services
                                                            "@description", model.Description,
                                                            "@position", model.Position,
                                                            "@timeend", model.TimeEnd,
-                                                           "@timestart", model.TimeStart);
+                                                           "@timestart", model.TimeStart,
+                                                           "@createdate",DateTime.Now);
                 if (response != null)
                 {
                     return true;

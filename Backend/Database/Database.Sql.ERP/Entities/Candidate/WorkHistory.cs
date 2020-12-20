@@ -19,9 +19,11 @@ namespace Database.Sql.ERP.Entities.Candidate
 
         public string Position { get; set; }
 
+        [Column(TypeName = "datetime")]
         [Required]
         public DateTime TimeStart { get; set; }
 
+        [Column(TypeName = "datetime")]
         [Required]
         public DateTime TimeEnd { get; set; }
 

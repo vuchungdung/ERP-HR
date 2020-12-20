@@ -12,9 +12,6 @@
         };
 
         $scope.register = function () {
-
-            alert("Hello");
-
             ajaxService.post('/Candidate/Register', $scope.user, function (res) {
                 if (res.data == true) {
                     notificationService.displaySuccess('Tài khoản đăng ký thành công!');

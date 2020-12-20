@@ -177,20 +177,6 @@ AS
 	END;
 GO
 
-CREATE PROC SP_CANDIDATE_REGRISTER
-(
-@CREATEDATE DATETIME = GETDATE,
-@DELETED BIT,
-@USERNAME NVARCHAR(MAX),
-@PASSWORD NVARCHAR(MAX),
-@JOBID INT = 0
-)
-AS
-	BEGIN
-		INSERT DBO.Candidates(CreateDate,Deleted,Username,Password,JobId)
-		VALUES (@CREATEDATE,@DELETED,@USERNAME,@PASSWORD,@JOBID)
-	END;
-GO
 
 CREATE PROC SP_CANDIDATE_LOGIN
 (
@@ -234,9 +220,9 @@ CREATE PROC SP_UPDATE_AWARD
 @title nvarchar(max),
 @institute nvarchar(max),
 @description nvarchar(max),
-@_from int,
-@_to int,
-@updatedate datetime = Getdate
+@_from datetime,
+@_to datetime,
+@updatedate datetime
 )
 AS
 	BEGIN
@@ -262,12 +248,13 @@ CREATE PROC SP_UPDATE_EDUCATION
 @title nvarchar(max),
 @institute nvarchar(max),
 @description nvarchar(max),
-@year int,
-@updatedate datetime = Getdate
+@_from int,
+@_to int,
+@updatedate datetime
 )
 AS
 	BEGIN
-		UPDATE DBO.Educations SET UpdateBy = @updateby, CandidateId = @candidateid,Deleted = @delete,UpdateDate = @updatedate,Title = @title,Institute = @institute,Description = @description,Year = @year
+		UPDATE DBO.Educations SET UpdateBy = @updateby, CandidateId = @candidateid,Deleted = @delete,UpdateDate = @updatedate,Title = @title,Institute = @institute,Description = @description,_From = @_from,_To=@_to
 		WHERE Id = @id
 	END;
 GO
@@ -294,7 +281,7 @@ CREATE PROC SP_UPDATE_WORK
 @institute nvarchar(max),
 @description nvarchar(max),
 @timestart datetime,
-@updatedate datetime = Getdate,
+@updatedate datetime,
 @company nvarchar(max),
 @timeend datetime
 )
@@ -322,9 +309,9 @@ create proc SP_CREATE_AWARD
 @title nvarchar(max),
 @institute nvarchar(max),
 @description nvarchar(max),
-@_from int,
-@_to int,
-@createdate datetime = Getdate
+@_from datetime,
+@_to datetime,
+@createdate datetime
 )
 as
 	begin
@@ -340,13 +327,14 @@ create proc SP_CREATE_EDUCATION
 @title nvarchar(max),
 @institute nvarchar(max),
 @description nvarchar(max),
-@year int,
-@createdate datetime = Getdate
+@_from int,
+@_to int,
+@createdate datetime
 )
 as
 	begin
-		insert dbo.Educations(CandidateId,Deleted,CreateDate,CreateBy,Title,Description,Year,Institute)
-		values(@candidateid,@delete,@createdate,@createby,@title,@description,@year,@institute)
+		insert dbo.Educations(CandidateId,Deleted,CreateDate,CreateBy,Title,Description,_From,_To,Institute)
+		values(@candidateid,@delete,@createdate,@createby,@title,@description,@_from,@_to,@institute)
 	end
 go
 
@@ -357,7 +345,7 @@ CREATE PROC SP_CREATE_WORK
 @position nvarchar(max),
 @description nvarchar(max),
 @timestart datetime,
-@createdate datetime = Getdate,
+@createdate datetime,
 @company nvarchar(max),
 @timeend datetime
 )
@@ -381,7 +369,7 @@ CREATE PROC SP_GET_EDUCATION
 (@candidateid int)
 AS
 	BEGIN
-		select w.Title,w.Institute,w.Description,w.Year
+		select w.Title,w.Institute,w.Description,w._From,w._To
 		from dbo.Educations as w where w.CandidateId = @candidateid
 	END;
 GO
@@ -395,9 +383,24 @@ AS
 	END;
 GO
 
-drop proc SP_GET_CANDIDATE_USERNAME
 
-exec SP_GET_CANDIDATE_USERNAME 'minhminh'
+CREATE PROC SP_CANDIDATE_REGRISTER
+(
+@CREATEDATE DATETIME = GETDATE,
+@DELETED BIT,
+@USERNAME NVARCHAR(MAX),
+@PASSWORD NVARCHAR(MAX),
+@JOBID INT = 0,
+@FileName nvarchar(max) = '',
+@FilePath nvarchar(max) = ''
+)
+AS
+	BEGIN
+		INSERT DBO.Candidates(CreateDate,Deleted,Username,Password,JobId,FileName,FilePath)
+		VALUES (@CREATEDATE,@DELETED,@USERNAME,@PASSWORD,@JOBID,@FileName,@FilePath)
+	END;
+GO
+
 
 CREATE PROC SP_CANDIDATE_GET_DETAIL
 @ID INT 
@@ -413,7 +416,7 @@ CREATE PROC SP_GET_CANDIDATE_USERNAME
 (@USERNAME NVARCHAR(MAX))
 AS
 	BEGIN
-		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook,c.FileName,c.FilePath,c.CandidateId,c.Username,c.JobId
+		SELECT c.Username,c.JobId,c.FileName,c.FilePath,c.CandidateId
 		FROM DBO.Candidates AS c
 		WHERE c.Username = @USERNAME
 	END;

@@ -27,7 +27,9 @@ namespace MVC.Services
                                                            "@title", model.Title,
                                                            "@description", model.Description,
                                                            "@institute", model.Institute,
-                                                           "@year", model.Year);
+                                                           "@_from", model._From,
+                                                           "@_to",model._To,
+                                                           "@createdate",DateTime.Now);
                 if (response != null)
                 {
                     return true;
