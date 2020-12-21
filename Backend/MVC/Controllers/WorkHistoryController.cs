@@ -25,7 +25,7 @@ namespace MVC.Controllers
             return View();
         }
 
-        public IActionResult Create([FromBody] WorkHistoryViewModel model)
+        public IActionResult Create(WorkHistoryViewModel model)
         {
             var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
             try

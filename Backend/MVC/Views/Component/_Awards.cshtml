@@ -12,31 +12,31 @@
                     <label>Tiêu đề</label>
                     <input type="text" ng-model="award.Title" class="form-control" value="">
                 </div>
-                <div class="form-group col-md-6">
-                    <label>Địa điểm</label>
-                    <input type="text" ng-model="award.Institute" class="form-control" value="">
-                </div>
                 <div class="form-group col-md-3 select-border">
                     <label>Từ</label>
-                    <div class="input-group date" id="datetimepicker-05" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-05">
-                        <div class="input-group-append" data-target="#datetimepicker-05" data-toggle="datetimepicker">
+                    <div class="input-group date" id="datetimepicker-03" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" ng-model="award._From" value="08/11/1999" data-target="#datetimepicker-03">
+                        <div class="input-group-append" data-target="#datetimepicker-03" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-md-3 select-border">
                     <label>Đến</label>
-                    <div class="input-group date" id="datetimepicker-06" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-06">
-                        <div class="input-group-append" data-target="#datetimepicker-06" data-toggle="datetimepicker">
+                    <div class="input-group date" id="datetimepicker-04" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" ng-model="award._To" value="08/11/1999" data-target="#datetimepicker-04">
+                        <div class="input-group-append" data-target="#datetimepicker-04" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-md-6">
+                    <label>Địa điểm</label>
+                    <input type="text" ng-model="award.Institute" class="form-control" value="">
+                </div>
                 <div class="form-group col-md-12">
                     <label>Mô tả</label>
-                    <textarea class="form-control" rows="4"></textarea>
+                    <textarea ng-model="award.Description" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group col-md-12 mb-0">
                     <button type="submit" class="btn btn-md btn-primary">Thêm</button>

@@ -1,13 +1,15 @@
 ﻿(function (app) {
     app.controller('workhistoryController', workhistoryController);
 
-    workhistoryController.$inject = ['$scope', 'ajaxService'];
+    workhistoryController.$inject = ['$scope', 'ajaxService','notificationService','$http'];
 
-    function workhistoryController($scope, ajaxService) {
+    function workhistoryController($scope, ajaxService, notificationService, $http) {
 
         $scope.workhistory = {};
 
         $scope.create = function () {
+            debugger
+            console.log($scope.workhistory);
             var formData = new FormData();
             for (var key in $scope.workhistory) {
                 formData.append(key, $scope.workhistory[key]);

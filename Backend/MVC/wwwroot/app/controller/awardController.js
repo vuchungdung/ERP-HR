@@ -8,6 +8,8 @@
         $scope.award = {};
 
         $scope.create = function () {
+            debugger
+            console.log($scope.award);
             var formData = new FormData();
             for (var key in $scope.award) {
                 formData.append(key, $scope.award[key]);
