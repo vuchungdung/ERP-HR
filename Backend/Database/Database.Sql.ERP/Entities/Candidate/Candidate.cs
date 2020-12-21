@@ -30,23 +30,17 @@ namespace Database.Sql.ERP.Entities.Candidate
 
         public int? Gender { get; set; }
 
-        public DateTime? ApplyDate { get; set; }
-
-        public string FaceBook { get; set; }
+        public string Facebook { get; set; }
 
         public string Zalo { get; set; }
 
         public string Skype { get; set; }
 
-        public string LinkIn { get; set; }
+        public string LinkedIn { get; set; }
 
         public int? ProviderId { get; set; }
 
         public int? CategoryId { get; set; }
-
-        public string Skill { get; set; }
-
-        public int? JobId { get; set; }
 
         public int? TagId { get; set; }
 

@@ -1,0 +1,37 @@
+﻿
+@using Microsoft.AspNetCore.Http;
+@using MVC.Common;
+@using Newtonsoft.Json;
+
+
+<div class="header-inner bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="candidates-user-info">
+                    <div class="jobber-user-info">
+                        @{ var session = Convert.ToString(Context.Session.GetString(CommonSession.USER_SESSION));
+                            if (session == null)
+                            {
+                            }
+                            else
+                            {
+                                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                                {
+                                    <div class="profile-avatar">
+                                        <img class="img-fluid " src="~/images/avatar/@user.FileName" alt="">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </div>
+                                    <div class="profile-avatar-info ml-4">
+                                        <h3>@user.Username</h3>
+                                    </div>
+
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

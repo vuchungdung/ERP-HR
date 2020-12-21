@@ -47,10 +47,6 @@
         }
 
 
-
-        $scope.img = '';
-        $scope.pdf = '';
-
         $scope.cadidate = {};
 
         $scope.postCandidate = function () {
@@ -59,9 +55,6 @@
             for (var key in $scope.cadidate) {
                 formData.append(key, $scope.cadidate[key]);
             }
-            $scope.listFile.forEach(file => {
-                formData.append('files', file);
-            });
 
             $http({
                 method: 'POST',
@@ -71,24 +64,26 @@
                 data: formData
             }).then(function (res) {
                 if (res.data == true) {
+                    $scope.award = angular.copy({});
                     notificationService.displaySuccess('Bạn đã ứng tuyển thành công!');
+                    $scope.getDetail();
                 }
                 else {
                     notificationService.displayError('Bạn đã ứng tuyển thất bại!');
                 }
             });
         }
-        
 
-        $scope.removeImg = function () {
-            $scope.img = '';           
+        $scope.getDetail = function () {
+            ajaxService.get('/Candidate/GetCandidate', null, function (res) {
+                if (res.data != null) {
+                    $scope.cadidate = res.data;
+                    console.log($scope.cadidate);
+                }
+            })
         }
 
-        $scope.removePdf = function () {
-            $scope.pdf = '';
-        }
-
-        $scope.listFile = [];
+        $scope.getDetail();
 
         $scope.getFile = function (element) {
             var file = element.files[0];

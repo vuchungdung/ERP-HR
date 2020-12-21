@@ -162,17 +162,15 @@ CREATE PROC SP_CANDIDATE_UPDATE
 @PHONE NVARCHAR(20),
 @DOB DATETIME,
 @GENDER INT,
-@APPLYDATE DATETIME,
 @Facebook nvarchar(max),
 @SKYPE NVARCHAR(MAX),
 @Linkin nvarchar(max),
 @zalo nvarchar(max),
-@JOBID INT,
 @PROVIDERID INT = 9
 )
 AS
 	BEGIN
-		UPDATE DBO.Candidates SET Skype = @SKYPE, Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER, JobId = @JOBID, ProviderId = @PROVIDERID,Zalo = @zalo,LinkIn = @Linkin,FaceBook = @Facebook
+		UPDATE DBO.Candidates SET Skype = @SKYPE, Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER, ProviderId = @PROVIDERID,Zalo = @zalo,LinkIn = @Linkin,FaceBook = @Facebook
 		WHERE CandidateId = @CANDIDATEID
 	END;
 GO
@@ -390,14 +388,13 @@ CREATE PROC SP_CANDIDATE_REGRISTER
 @DELETED BIT,
 @USERNAME NVARCHAR(MAX),
 @PASSWORD NVARCHAR(MAX),
-@JOBID INT = 0,
-@FileName nvarchar(max) = '',
+@FileName nvarchar(max) = '08.jpg',
 @FilePath nvarchar(max) = ''
 )
 AS
 	BEGIN
-		INSERT DBO.Candidates(CreateDate,Deleted,Username,Password,JobId,FileName,FilePath)
-		VALUES (@CREATEDATE,@DELETED,@USERNAME,@PASSWORD,@JOBID,@FileName,@FilePath)
+		INSERT DBO.Candidates(CreateDate,Deleted,Username,Password,FileName,FilePath)
+		VALUES (@CREATEDATE,@DELETED,@USERNAME,@PASSWORD,@FileName,@FilePath)
 	END;
 GO
 
@@ -406,7 +403,7 @@ CREATE PROC SP_CANDIDATE_GET_DETAIL
 @ID INT 
 AS
 	BEGIN
-		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Skill,c.Zalo,c.LinkIn,c.FaceBook,c.FileName,c.FilePath
+		SELECT c.Name,c.Email,c.Gender,c.Dob,c.Address,c.Phone,c.Skype,c.Zalo,c.LinkedIn,c.Facebook,c.FileName,c.FilePath
 		FROM DBO.Candidates AS c
 		WHERE c.CandidateId = @ID
 	END;
@@ -416,10 +413,12 @@ CREATE PROC SP_GET_CANDIDATE_USERNAME
 (@USERNAME NVARCHAR(MAX))
 AS
 	BEGIN
-		SELECT c.Username,c.JobId,c.FileName,c.FilePath,c.CandidateId
+		SELECT c.Username,c.FileName,c.FilePath,c.CandidateId
 		FROM DBO.Candidates AS c
 		WHERE c.Username = @USERNAME
 	END;
 GO
 
-select * from dbo.Candidates
+
+
+exec SP_CANDIDATE_GET_DETAIL 1

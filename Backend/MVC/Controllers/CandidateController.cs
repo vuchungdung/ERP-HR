@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Aspose.Pdf;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Common;
@@ -87,20 +89,6 @@ namespace MVC.Controllers
                 var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
                 var user = JsonConvert.DeserializeObject<UserSession>(session);
                 model.CandidateId = user.Id;
-                model.JobId = Convert.ToInt32(TempData["JobId"]);               
-                foreach (var item in model.Files)
-                {
-                    var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
-                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                    if (item.Length > 0)
-                    {
-                        var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                        var dbPath = Path.Combine(folderName, fileName);
-                        model.FileName = fileName;
-                        model.FilePath = dbPath;
-                    }
-                    
-                }
                 var response = _cadidateService.CreateProfile(model);
                 return Json(response);
             }
@@ -114,10 +102,17 @@ namespace MVC.Controllers
             try
             {
                 var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
-                var user = JsonConvert.DeserializeObject<UserSession>(session);
-                var username = user.Username;
-                var response = _cadidateService.GetByUsername(username);
-                return Json(response);
+                if(session == null)
+                {
+                    return Json(null);
+                }
+                else
+                {
+                    var user = JsonConvert.DeserializeObject<UserSession>(session);
+                    var username = user.Id;
+                    var response = _cadidateService.GetDetail(username);
+                    return Json(response);
+                }
             }
             catch(Exception ex)
             {
@@ -131,6 +126,32 @@ namespace MVC.Controllers
         public IActionResult Info()
         {
             return View();
+        }
+
+        public IActionResult GenPDF()
+        {
+            WebRequest req = WebRequest.Create(@"https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html");
+            // Get web page into stream
+            using (Stream stream = req.GetResponse().GetResponseStream())
+            {
+                // Initialize HTML load options
+                HtmlLoadOptions htmloptions = new HtmlLoadOptions("https://docs.oracle.com/");
+                // Load stream into Document object
+                Document pdfDocument = new Document(stream, htmloptions);
+                // Save output as PDF format
+                pdfDocument.Save("HTML-to-PDF.pdf");
+            }
+            return View();
+        }
+        [HttpGet("download")]
+        public IActionResult GetBlobDownload([FromQuery] string link)
+        {
+            var net = new System.Net.WebClient();
+            var data = net.DownloadData(link);
+            var content = new System.IO.MemoryStream(data);
+            var contentType = "APPLICATION/octet-stream";
+            var fileName = "something.bin";
+            return File(content, contentType, fileName);
         }
     }
 }

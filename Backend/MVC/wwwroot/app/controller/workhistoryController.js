@@ -7,8 +7,7 @@
 
         $scope.workhistory = {};
 
-        $scope.create = function () {
-            debugger
+        $scope.create = function () {            
             console.log($scope.workhistory);
             var formData = new FormData();
             for (var key in $scope.workhistory) {

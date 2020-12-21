@@ -17,5 +17,7 @@ namespace MVC.Services.Interfaces
         bool Apply(FileViewModel model);
 
         CandidateViewModel GetByUsername(string username);
+        CandidateViewModel GetDetail(int id);
+
     }
 }

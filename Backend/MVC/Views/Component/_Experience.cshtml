@@ -1,7 +1,7 @@
 ﻿<div class="user-dashboard-info-box" ng-controller="workhistoryController">
     <div class="dashboard-resume-title d-flex align-items-center">
         <div class="section-title-02 mb-sm-0">
-            <h4 class="mb-0">Quá trình làm việc</h4>
+            <h4 class="mb-0">Kinh nghiệm làm việc</h4>
         </div>
         <a class="btn btn-md ml-sm-auto btn-primary" data-toggle="collapse" href="#dateposted-05" role="button" aria-expanded="false" aria-controls="dateposted">Add Experience</a>
     </div>
@@ -9,15 +9,15 @@
         <div class="bg-light p-3 mt-4">
             <form class="form-row" ng-submit="create()">
                 <div class="form-group col-md-12">
-                    <label>Title</label>
-                    <input type="text" class="form-control" value="">
+                    <label>Vị trí</label>
+                    <input type="text" ng-model="workhistory.Position" class="form-control" value="">
                 </div>
-                <div class="form-group col-md-12">
-                    <label>Company name</label>
-                    <input type="text" class="form-control" value="">
+                <div class="form-group col-md-6">
+                    <label>Tên công ty</label>
+                    <input type="text" ng-model="workhistory.Company" class="form-control" value="">
                 </div>
-                <div class="form-group col-md-6 select-border">
-                    <label>From</label>
+                <div class="form-group col-md-3 select-border">
+                    <label>Từ</label>
                     <div class="input-group date" id="datetimepicker-01" data-target-input="nearest">
                         <input type="text" ng-model="workhistory.TimeStart" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-01">
                         <div class="input-group-append" data-target="#datetimepicker-01" data-toggle="datetimepicker">
@@ -25,8 +25,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6 select-border">
-                    <label>Two</label>
+                <div class="form-group col-md-3 select-border">
+                    <label>Đến</label>
                     <div class="input-group date" id="datetimepicker-02" data-target-input="nearest">
                         <input type="text" ng-model="workhistory.TimeEnd" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-02">
                         <div class="input-group-append" data-target="#datetimepicker-02" data-toggle="datetimepicker">
@@ -35,8 +35,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12">
-                    <label>Description</label>
-                    <textarea class="form-control" rows="4"></textarea>
+                    <label>Mô tả thêm</label>
+                    <textarea ng-model="workhistory.Description" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group col-md-12 mb-0">
                     <button type="submit" class="btn btn-md btn-primary">Thêm</button>
@@ -52,7 +52,7 @@
             <div class="jobber-timeline-cricle">
                 <i class="far fa-circle"></i>
             </div>
-            <div class="jobber-timeline-info">
+            <div class="jobber-timeline-info" ng-repeat="item in workhistories">
                 <div class="dashboard-timeline-info">
                     <div class="dashboard-timeline-edit">
                         <ul class="list-unstyled d-flex">
@@ -60,10 +60,10 @@
                             <li><a href="#"><i class="far fa-trash-alt text-danger"></i></a></li>
                         </ul>
                     </div>
-                    <span class="jobber-timeline-time">2020-6-01 to 2020-6-01</span>
-                    <h6 class="mb-2">Web Designer</h6>
-                    <span>- Inwave Studio</span>
-                    <p class="mt-2">One of the main areas that I work on with my clients is shedding these non-supportive beliefs and replacing them with beliefs that will help them to accomplish their desires.</p>
+                    <span class="jobber-timeline-time">{{item.timeStart | date:"dd/MM/yyyy"}} đến {{item.timeEnd | date:"dd/MM/yyyy"}}</span>
+                    <h6 class="mb-2">{{item.position}}</h6>
+                    <span>- {{item.company}}</span>
+                    <p class="mt-2">{{item.description}}.</p>
                 </div>
                 <div class="collapse" id="dateposted-06">
                     <div class="bg-light p-3">

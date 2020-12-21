@@ -97,8 +97,6 @@ namespace Services.Candidates.Implement
                                 Address = m.Address,
                                 Phone = m.Phone,
                                 Gender = m.Gender,
-                                ApplyDate = m.ApplyDate,
-                                Skill = m.Skill,
                                 Provider = p.Name,
                                 CreatedDate = m.CreateDate,
                                 Dob = m.Dob,
@@ -143,10 +141,8 @@ namespace Services.Candidates.Implement
                 md.Dob = model.Dob;
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
-                md.ApplyDate = model.ApplyDate;
                 md.ProviderId = model.ProviderId;
                 md.CategoryId = model.CategoryId;
-                md.Skill = model.Skill;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -192,31 +188,31 @@ namespace Services.Candidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from c in _context.CandidateRepository.Query()
-                            join j in _context.JobDescriptionRepository.Query()
-                            on c.JobId equals j.JobId
-                            join f in _context.FileCVRepository.Query()
-                            on c.CandidateId equals f.CandidateId
-                            where c.CandidateId == id && f.FileType != ".pdf"
-                            select new ListCandidateViewModel()
-                            {
-                                CandidateId = c.CandidateId,
-                                Name = c.Name,
-                                Email = c.Email,
-                                Address = c.Address,
-                                Phone = c.Phone,
-                                Gender = c.Gender,
-                                ApplyDate = c.ApplyDate,
-                                JobId = c.JobId,
-                                Dob = c.Dob,
-                                Skype = c.Skype,
-                                JobName = j.Title,
-                                FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FilePath)
-                            };
+                //var query = from c in _context.CandidateRepository.Query()
+                //            join j in _context.JobDescriptionRepository.Query()
+                //            on c.JobId equals j.JobId
+                //            join f in _context.FileCVRepository.Query()
+                //            on c.CandidateId equals f.CandidateId
+                //            where c.CandidateId == id && f.FileType != ".pdf"
+                //            select new ListCandidateViewModel()
+                //            {
+                //                CandidateId = c.CandidateId,
+                //                Name = c.Name,
+                //                Email = c.Email,
+                //                Address = c.Address,
+                //                Phone = c.Phone,
+                //                Gender = c.Gender,
+                //                ApplyDate = c.ApplyDate,
+                //                JobId = c.JobId,
+                //                Dob = c.Dob,
+                //                Skype = c.Skype,
+                //                JobName = j.Title,
+                //                FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FilePath)
+                //            };
 
-                var model = await query.ToListAsync();
+                //var model = await query.ToListAsync();
 
-                response.Result = model;
+                //response.Result = model;
                 response.Status = ResponseStatus.Success;
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿<div class="user-dashboard-info-box">
+﻿<div class="user-dashboard-info-box" ng-controller="awardController">
     <div class="dashboard-resume-title d-flex align-items-center">
         <div class="section-title-02 mb-sm-0">
             <h4 class="mb-0">Dự án nổi bật</h4>
@@ -12,27 +12,27 @@
                     <label>Tiêu đề</label>
                     <input type="text" ng-model="award.Title" class="form-control" value="">
                 </div>
+                <div class="form-group col-md-6">
+                    <label>Địa điểm</label>
+                    <input type="text" ng-model="award.Institute" class="form-control" value="">
+                </div>
                 <div class="form-group col-md-3 select-border">
                     <label>Từ</label>
-                    <div class="input-group date" id="datetimepicker-03" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" ng-model="award._From" value="08/11/1999" data-target="#datetimepicker-03">
-                        <div class="input-group-append" data-target="#datetimepicker-03" data-toggle="datetimepicker">
+                    <div class="input-group date" id="datetimepicker-05" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" ng-model="award._From" value="08/11/1999" data-target="#datetimepicker-05">
+                        <div class="input-group-append" data-target="#datetimepicker-05" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-md-3 select-border">
                     <label>Đến</label>
-                    <div class="input-group date" id="datetimepicker-04" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" ng-model="award._To" value="08/11/1999" data-target="#datetimepicker-04">
-                        <div class="input-group-append" data-target="#datetimepicker-04" data-toggle="datetimepicker">
+                    <div class="input-group date" id="datetimepicker-06" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" ng-model="award._To" value="08/11/1999" data-target="#datetimepicker-06">
+                        <div class="input-group-append" data-target="#datetimepicker-06" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Địa điểm</label>
-                    <input type="text" ng-model="award.Institute" class="form-control" value="">
                 </div>
                 <div class="form-group col-md-12">
                     <label>Mô tả</label>
@@ -48,7 +48,7 @@
         <div class="jobber-timeline-icon">
             <i class="fas fa-trophy"></i>
         </div>
-        <div class="jobber-timeline-item">
+        <div class="jobber-timeline-item" ng-repeat="item in awards">
             <div class="jobber-timeline-cricle">
                 <i class="far fa-circle"></i>
             </div>
@@ -60,10 +60,10 @@
                             <li><a href="#"><i class="far fa-trash-alt text-danger"></i></a></li>
                         </ul>
                     </div>
-                    <span class="jobber-timeline-time">2008 - 2012</span>
-                    <h6 class="mb-2">Perfect Attendance Programs</h6>
-                    <span>- Engineering High School</span>
-                    <p class="mt-2">Having clarity of purpose and a clear picture of what you desire, is probably the single most important factor in achievement. Why is Clarity so important?</p>
+                    <span class="jobber-timeline-time">{{item._From | date:"dd/MM/yyyy"}} đến {{item._To | date:"dd/MM/yyyy"}}</span>
+                    <h6 class="mb-2">{{item.title}}</h6>
+                    <span>- {{item.institute}}</span>
+                    <p class="mt-2">{{item.description}}.</p>
                 </div>
                 <div class="collapse" id="dateposted-16">
                     <div class="bg-light p-3">
@@ -78,18 +78,18 @@
                             </div>
                             <div class="form-group col-md-6 select-border">
                                 <label>From</label>
-                                <div class="input-group date" id="datetimepicker-05" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-05">
-                                    <div class="input-group-append" data-target="#datetimepicker-05" data-toggle="datetimepicker">
+                                <div class="input-group date" id="datetimepicker-07" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-07">
+                                    <div class="input-group-append" data-target="#datetimepicker-07" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6 select-border">
                                 <label>Two</label>
-                                <div class="input-group date" id="datetimepicker-06" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-06">
-                                    <div class="input-group-append" data-target="#datetimepicker-06" data-toggle="datetimepicker">
+                                <div class="input-group date" id="datetimepicker-08" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" value="08/11/1999" data-target="#datetimepicker-08">
+                                    <div class="input-group-append" data-target="#datetimepicker-08" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                     </div>
                                 </div>

@@ -48,13 +48,11 @@ namespace MVC.Services
                                                             "@ADDRESS",model.Address,
                                                             "@PHONE",model.Phone,
                                                             "@DOB",model.Dob, 
-                                                            "@GENDER",model.Gender,
-                                                            "@APPLYDATE",DateTime.Now, 
+                                                            "@GENDER",model.Gender,                                                           
                                                             "@SKYPE",model.Skype,
-                                                            "@JOBID",model.JobId,
                                                             "@zalo",model.Zalo,
                                                             "@Facebook",model.Facebook,
-                                                            "@Linkid",model.LinkId);
+                                                            "@Linkin",model.LinkedIn);
                 if(response != null)
                 {
                     return true;
@@ -117,6 +115,19 @@ namespace MVC.Services
                 {
                     return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public CandidateViewModel GetDetail(int id)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_CANDIDATE_GET_DETAIL", "@ID", id);
+                return response.ConvertTo<CandidateViewModel>().ToList().ElementAt(0);
             }
             catch (Exception ex)
             {
