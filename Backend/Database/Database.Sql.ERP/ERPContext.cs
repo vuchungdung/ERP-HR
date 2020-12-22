@@ -50,6 +50,7 @@ namespace Database.Sql.ERP
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Apply> Applies { get; set; }
 
+        public DbSet<InterviewProcess> InterviewProcesses { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
     }

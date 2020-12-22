@@ -21,7 +21,14 @@ namespace MVC.Services
         {
             try
             {
-                var response = _helper.ExecuteSProcedure("SP_FILE_CREATE", "@CREATEDATE",DateTime.Now, "@DELETED",false, "@FILENAME",model.FileName, "@FILEPATH",model.FilePath, "@FILETYPE",model.FileType, "@FILESIZE",model.FileSize, "@CADIDATEID",model.CandidateId);
+                var response = _helper.ExecuteSProcedure("SP_FILE_CREATE", 
+                    "@CREATEDATE",DateTime.Now,
+                    "@DELETED",false, 
+                    "@FILENAME",model.FileName, 
+                    "@FILEPATH",model.FilePath, 
+                    "@FILETYPE",model.FileType, 
+                    "@FILESIZE",model.FileSize, 
+                    "@CANDIDATEID",model.CandidateId);
                 if(response != null)
                 {
                     return true;

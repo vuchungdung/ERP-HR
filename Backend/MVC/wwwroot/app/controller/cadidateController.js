@@ -64,12 +64,12 @@
                 data: formData
             }).then(function (res) {
                 if (res.data == true) {
-                    $scope.award = angular.copy({});
-                    notificationService.displaySuccess('Bạn đã ứng tuyển thành công!');
+                    $scope.cadidate = angular.copy({});
+                    notificationService.displaySuccess('Bạn đã lưu thành công!');
                     $scope.getDetail();
                 }
                 else {
-                    notificationService.displayError('Bạn đã ứng tuyển thất bại!');
+                    notificationService.displayError('Bạn đã lưu thất bại!');
                 }
             });
         }
@@ -85,29 +85,29 @@
 
         $scope.getDetail();
 
-        $scope.getFile = function (element) {
-            var file = element.files[0];
-            if (typeof (file) == 'undefined') {
-            }
-            else {
-                $scope.listFile.push(file);
-                var formData = new FormData();
-                formData.append('file', file);
-                $http({
-                    url: '/File/UpLoad',
-                    method: 'POST',
-                    data: formData,
-                    headers: { 'Content-Type': undefined }
-                }).then(function (res) {
-                    if (res.data.fileType == ".jpg") {
-                        $scope.img = res.data.fileName;
-                    }
-                    else {
-                        $scope.pdf = res.data.fileName;
-                    }
-                })
-            }
-        };
+        //$scope.getFile = function (element) {
+        //    var file = element.files[0];
+        //    if (typeof (file) == 'undefined') {
+        //    }
+        //    else {
+        //        $scope.listFile.push(file);
+        //        var formData = new FormData();
+        //        formData.append('file', file);
+        //        $http({
+        //            url: '/File/UpLoad',
+        //            method: 'POST',
+        //            data: formData,
+        //            headers: { 'Content-Type': undefined }
+        //        }).then(function (res) {
+        //            if (res.data.fileType == ".jpg") {
+        //                $scope.img = res.data.fileName;
+        //            }
+        //            else {
+        //                $scope.pdf = res.data.fileName;
+        //            }
+        //        })
+        //    }
+        //};
     }
 
 })(angular.module('erp'));

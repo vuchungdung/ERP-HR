@@ -12,7 +12,6 @@ using MVC.Common;
 using MVC.Models;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
-using Services.Common.ViewModel;
 
 namespace MVC.Controllers
 {
@@ -60,7 +59,6 @@ namespace MVC.Controllers
                     var userSession = new UserSession();
                     userSession.Username = user.Username;
                     userSession.Id = user.CandidateId;
-                    userSession.JobId = user.JobId;
                     userSession.FileName = user.FileName.ToString();
                     userSession.FilePath = user.FilePath.ToString();
                     var session = JsonConvert.SerializeObject(userSession);
@@ -81,6 +79,27 @@ namespace MVC.Controllers
             return Json(true);
         }
 
+        [HttpPost]
+        public JsonResult Authen([FromBody] int id)
+        {
+            TempData["JobId"] = id;
+            try
+            {
+                string user = Convert.ToString(HttpContext.Session.GetString(Common.CommonSession.USER_SESSION));
+                if (user != null)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public IActionResult UpdateProfile(CandidateViewModel model)
         {
             
@@ -152,6 +171,53 @@ namespace MVC.Controllers
             var contentType = "APPLICATION/octet-stream";
             var fileName = "something.bin";
             return File(content, contentType, fileName);
+        }
+
+        public IActionResult Apply(ApplyViewModel model)
+        {
+            try
+            {
+                var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                model.CandidateId = user.Id;
+                model.JobId = Convert.ToInt32(TempData["JobId"].ToString());
+                model.CreateBy = user.Id;
+                var response = _cadidateService.Apply(model);
+                if(response == true)
+                {
+                    user.JobId = model.JobId;
+                    var s = JsonConvert.SerializeObject(user);
+                    HttpContext.Session.SetString(Common.CommonSession.USER_SESSION, s);
+                    FileViewModel f = new FileViewModel();
+                    var file = model.File;
+                    var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/candidate-cv");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                    if (file.Length > 0)
+                    {
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        var fullPath = Path.Combine(pathToSave, fileName);
+                        var dbPath = Path.Combine(folderName, fileName);
+                        var fileSize = file.Length / 1024;
+                        var fileType = Path.GetExtension(fileName);
+
+                        f.FileName = fileName;
+                        f.FilePath = fullPath;
+                        f.FileSize = Convert.ToInt32(fileSize);
+                        f.FileType = fileType;
+                        f.CandidateId = user.Id;
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                        _fileService.Create(f);
+                    }
+                }
+                return Json(true);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

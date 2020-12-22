@@ -142,7 +142,7 @@ namespace Services.Candidates.Implement
                 md.Phone = model.Phone;
                 md.Gender = model.Gender;
                 md.ProviderId = model.ProviderId;
-                md.CategoryId = model.CategoryId;
+                //md.CategoryId = model.CategoryId;
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -229,7 +229,7 @@ namespace Services.Candidates.Implement
             {
                 Candidate md = _context.CandidateRepository.FirstOrDefault(x => x.CandidateId == id && !x.Deleted);
 
-                md.TagId = tagId;
+                //md.TagId = tagId;
                 md.UpdateDate = DateTime.Now;
                 md.UpdateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

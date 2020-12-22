@@ -9,8 +9,6 @@ namespace Services.Interview.ViewModel
     {
         public string Name { get; set; }
 
-        public DateType DateType { get; set; }
-
         public string Note { get; set; }
 
         public Result Result { get; set; }

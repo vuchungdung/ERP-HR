@@ -14,8 +14,8 @@ namespace MVC.Services.Interfaces
 
         bool CreateProfile(CandidateViewModel model);
 
-        bool Apply(FileViewModel model);
-
+        bool AddFile(FileViewModel model);
+        bool Apply(ApplyViewModel model);
         CandidateViewModel GetByUsername(string username);
         CandidateViewModel GetDetail(int id);
 

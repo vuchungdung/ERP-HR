@@ -17,7 +17,7 @@ namespace MVC.Services
             _helper = helper;
         }
 
-        public bool Apply(FileViewModel model)
+        public bool AddFile(FileViewModel model)
         {
             try
             {
@@ -130,6 +130,31 @@ namespace MVC.Services
                 return response.ConvertTo<CandidateViewModel>().ToList().ElementAt(0);
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool Apply(ApplyViewModel model)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_APPLY_CREATE",
+                                                         "@createby", model.CreateBy,
+                                                         "@createdate", DateTime.Now,
+                                                         "@candidateid", model.CandidateId,
+                                                         "@jobid", model.JobId,
+                                                         "@applydate", DateTime.Now);
+                if(response != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

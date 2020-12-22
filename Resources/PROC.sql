@@ -189,7 +189,7 @@ GO
 
 CREATE PROC SP_FILE_CREATE
 (
-@CREATEDATE DATETIME = GETDATE,
+@CREATEDATE DATETIME,
 @DELETED BIT,
 @FILENAME NVARCHAR(200),
 @FILEPATH NVARCHAR(200),
@@ -422,3 +422,18 @@ GO
 
 
 exec SP_CANDIDATE_GET_DETAIL 1
+go
+
+CREATE PROC SP_APPLY_CREATE
+(@createby int,
+@createdate datetime,
+@delete int = 0,
+@candidateid int,
+@jobid int,
+@applydate datetime)
+AS
+	BEGIN
+		insert dbo.Applies(CreateBy,CreateDate,Deleted,CandidateId,JobId,ApplyDate)
+		values (@createby,@createdate,@delete,@candidateid,@jobid,@applydate)
+	END;
+GO

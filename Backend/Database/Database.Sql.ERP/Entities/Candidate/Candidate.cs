@@ -40,17 +40,17 @@ namespace Database.Sql.ERP.Entities.Candidate
 
         public int? ProviderId { get; set; }
 
-        public int? CategoryId { get; set; }
+        //public int? CategoryId { get; set; }
 
-        public int? TagId { get; set; }
+        //public int? TagId { get; set; }
 
-        public int? InterviewId { get; set; }
+        //public int? InterviewId { get; set; }
 
         public string Username { get; set; }
 
         public string Password { get; set; }
 
-        public int? ProcessId { get; set; }
+        //public int? ProcessId { get; set; }
 
         public string FileName { get; set; }
         public string FilePath { get; set; }
