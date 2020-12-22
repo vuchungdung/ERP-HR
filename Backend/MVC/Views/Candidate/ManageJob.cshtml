@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "ManageJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="/Views/Component/_Header.cshtml" />
+
+<partial name="/Views/Component/_User.cshtml" />
+
+
+<partial name="/Views/Component/_Menu.cshtml" />
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="user-dashboard-info-box mb-0">
+                    <div class="row mb-4">                    
+                    </div>
+                    <div class="user-dashboard-table table-responsive">
+                        <table class="table table-bordered" ng-controller="managejobController">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th scope="col">Họ và tên</th>
+                                    <th scope="col">Tin ứng tuyển</th>
+                                    <th scope="col">Ngày ứng tuyển</th>
+                                    <th scope="col">Vòng ứng tuyển</th>
+                                    <th scope="col">Kết quả</th>
+                                    <th scope="col">Ngày có kết quả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in manages">
+                                    <th scope="row">
+                                        {{item.name}}
+                                    </th>
+                                    <td>{{item.title}}</td>
+                                    <td>{{item.applyDate|date:"dd/MM/yyyy"}}</td>
+                                    <td>
+                                        {{item.p_Name}}
+                                    </td>
+                                    <td ng-if="item.result == null">
+                                        (Chờ)
+                                    </td>
+                                    <td ng-if="item.result != null">
+                                        {{item.result}}
+                                    </td>
+                                    <td ng-if="item.createDate == null">
+                                        (Chờ)
+                                    </td>
+                                    <td ng-if="item.createDate != null">
+                                        {{item.createDate}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

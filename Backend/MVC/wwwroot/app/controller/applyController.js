@@ -18,13 +18,14 @@
                 if (res.data == true) {
                     $scope.award = angular.copy({});
                     notificationService.displaySuccess('Bạn đã ứng tuyển thành công!');
-                    window.location.reload();
+                    window.location.href = "/Candidate/ManageJob";
                 }
                 else {
                     notificationService.displayError('Bạn đã ứng tuyển thất bại!');
                 }
             });
         }
+
 
         $scope.getFile = function (element) {
             var file = element.files[0];

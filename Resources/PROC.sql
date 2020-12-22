@@ -164,13 +164,13 @@ CREATE PROC SP_CANDIDATE_UPDATE
 @GENDER INT,
 @Facebook nvarchar(max),
 @SKYPE NVARCHAR(MAX),
-@Linkin nvarchar(max),
+@Linkedin nvarchar(max),
 @zalo nvarchar(max),
 @PROVIDERID INT = 9
 )
 AS
 	BEGIN
-		UPDATE DBO.Candidates SET Skype = @SKYPE, Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER, ProviderId = @PROVIDERID,Zalo = @zalo,LinkIn = @Linkin,FaceBook = @Facebook
+		UPDATE DBO.Candidates SET Skype = @SKYPE, Name = @NAME,Email = @EMAIL,Address = @ADDRESS,Phone = @PHONE,Dob = @DOB,Gender = @GENDER, ProviderId = @PROVIDERID,Zalo = @zalo,LinkedIn = @Linkedin,FaceBook = @Facebook
 		WHERE CandidateId = @CANDIDATEID
 	END;
 GO
@@ -437,3 +437,41 @@ AS
 		values (@createby,@createdate,@delete,@candidateid,@jobid,@applydate)
 	END;
 GO
+
+select c.Name,j.Title,a.ApplyDate,p.Name,j.JobId
+from dbo.Applies as a, dbo.Candidates as c, dbo.JobDescriptions as j, dbo.InterviewProcesses as i,dbo.Process as p
+where a.CandidateId = c.CandidateId and a.JobId = j.JobId and c.CandidateId = i.CandidateId and i.ProcessId = p.ProcessId
+
+select Process.Name from dbo.Process
+go
+
+create proc SP_GET_INTERVIEW
+(@ID int)
+AS
+	BEGIN
+		select c.Name,c.CandidateId,j.Title,a.ApplyDate,p.Name as p_Name,j.JobId,ir.Result,ir.CreateDate
+		from dbo.Candidates as c join Applies as a on c.CandidateId = a.CandidateId
+		join dbo.JobDescriptions as j on a.JobId = j.JobId
+		join dbo.InterviewProcesses as i on c.CandidateId = i.CandidateId
+		join dbo.Process as p on i.ProcessId = p.ProcessId
+		left join dbo.InterviewResults as ir on i.Id = ir.InterviewProcessId where c.CandidateId = @ID
+	END;
+GO
+
+
+exec SP_GET_INTERVIEW 2
+go
+
+create proc SP_INTERVIEW_P_CREATE
+(@candidateid int,
+@processid int,
+@createby int,
+@createdate datetime,
+@delete bit = 0)
+as
+	begin
+		insert dbo.InterviewProcesses(CandidateId,ProcessId,CreateBy,CreateDate,Deleted)
+		values(@candidateid,@processid,@createby,@createdate,@delete)
+	end;
+go
+

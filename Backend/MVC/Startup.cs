@@ -42,7 +42,7 @@ namespace MVC
             services.AddScoped<IEducationService, EducationService>();
             services.AddScoped<IWorkHistoryService, WorkHistoryService>();
             services.AddScoped<IAwardService, AwardService>();
-
+            services.AddScoped<IInterviewProcessService, InterviewProcessService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

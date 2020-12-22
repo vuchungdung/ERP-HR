@@ -52,7 +52,7 @@ namespace MVC.Services
                                                             "@SKYPE",model.Skype,
                                                             "@zalo",model.Zalo,
                                                             "@Facebook",model.Facebook,
-                                                            "@Linkin",model.LinkedIn);
+                                                            "@Linkedin", model.LinkedIn);
                 if(response != null)
                 {
                     return true;
@@ -97,6 +97,19 @@ namespace MVC.Services
                 }
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ManageJobViewModel> Get(int Id)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_GET_INTERVIEW", "ID", Id);
+                return response.ConvertTo<ManageJobViewModel>().ToList();
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

@@ -3,7 +3,7 @@
         <div class="section-title-02 mb-sm-0">
             <h4 class="mb-0">Kinh nghiệm làm việc</h4>
         </div>
-        <a class="btn btn-md ml-sm-auto btn-primary" data-toggle="collapse" href="#dateposted-05" role="button" aria-expanded="false" aria-controls="dateposted">Add Experience</a>
+        <a class="btn btn-md ml-sm-auto btn-primary" data-toggle="collapse" href="#dateposted-05" role="button" aria-expanded="false" aria-controls="dateposted">Thêm thông tin</a>
     </div>
     <div class="collapse show" id="dateposted-05">
         <div class="bg-light p-3 mt-4">
@@ -48,11 +48,11 @@
         <div class="jobber-timeline-icon">
             <i class="fas fa-briefcase"></i>
         </div>
-        <div class="jobber-timeline-item">
+        <div class="jobber-timeline-item" ng-repeat="item in workhistories">
             <div class="jobber-timeline-cricle">
                 <i class="far fa-circle"></i>
             </div>
-            <div class="jobber-timeline-info" ng-repeat="item in workhistories">
+            <div class="jobber-timeline-info">
                 <div class="dashboard-timeline-info">
                     <div class="dashboard-timeline-edit">
                         <ul class="list-unstyled d-flex">

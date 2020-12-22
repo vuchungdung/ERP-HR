@@ -9,6 +9,7 @@ namespace MVC.Services.Interfaces
     public interface ICandidateService
     {
         bool Regrister(RegisterViewModel model);
+        List<ManageJobViewModel> Get(int Id);
 
         bool Login(LoginViewModel model);
 

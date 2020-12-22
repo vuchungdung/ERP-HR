@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Aspose.Pdf;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Common;
@@ -19,16 +20,40 @@ namespace MVC.Controllers
     {
         private readonly ICandidateService _cadidateService;
         private readonly IFileService _fileService;
-        public CandidateController(ICandidateService cadidateService,IFileService fileService)
+        private readonly IInterviewProcessService _interviewProcessService;
+        public CandidateController(ICandidateService cadidateService,IFileService fileService, IInterviewProcessService interviewProcessService)
         {
             _cadidateService = cadidateService;
             _fileService = fileService;
+            _interviewProcessService = interviewProcessService;
         }
 
         [TypeFilter(typeof(AuthenController))]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [TypeFilter(typeof(AuthenController))]
+        public IActionResult ManageJob()
+        {
+            return View();
+        }
+
+        [TypeFilter(typeof(AuthenController))]
+        public IActionResult GetApplyJob()
+        {
+            try
+            {
+                var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                var response = _cadidateService.Get(user.Id);
+                return Json(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IActionResult Error()
@@ -59,6 +84,14 @@ namespace MVC.Controllers
                     var userSession = new UserSession();
                     userSession.Username = user.Username;
                     userSession.Id = user.CandidateId;
+                    if(_cadidateService.Get(user.CandidateId).Count > 0)
+                    {
+                        userSession.JobId = _cadidateService.Get(user.CandidateId).ElementAt(0).JobId;
+                    }
+                    else
+                    {
+                        userSession.JobId = 0;
+                    }
                     userSession.FileName = user.FileName.ToString();
                     userSession.FilePath = user.FilePath.ToString();
                     var session = JsonConvert.SerializeObject(userSession);
@@ -116,6 +149,8 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
+
+        [TypeFilter(typeof(AuthenController))]
         public IActionResult GetCandidate()
         {
             try
@@ -147,32 +182,34 @@ namespace MVC.Controllers
             return View();
         }
 
-        public IActionResult GenPDF()
+        //public IActionResult GenPDF()
+        //{
+        //    WebRequest req = WebRequest.Create(@"https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html");
+        //    using (Stream stream = req.GetResponse().GetResponseStream())
+        //    {
+        //        HtmlLoadOptions htmloptions = new HtmlLoadOptions("https://docs.oracle.com/");
+        //        Document pdfDocument = new Document(stream, htmloptions);
+        //        pdfDocument.Save("HTML-to-PDF.pdf");
+        //    }
+        //    return View();
+        //}
+        public IActionResult Download()
         {
             WebRequest req = WebRequest.Create(@"https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html");
-            // Get web page into stream
             using (Stream stream = req.GetResponse().GetResponseStream())
             {
-                // Initialize HTML load options
                 HtmlLoadOptions htmloptions = new HtmlLoadOptions("https://docs.oracle.com/");
-                // Load stream into Document object
                 Document pdfDocument = new Document(stream, htmloptions);
-                // Save output as PDF format
                 pdfDocument.Save("HTML-to-PDF.pdf");
+                var data = System.IO.File.ReadAllBytes("HTML-to-PDF.pdf");
+                var content = new System.IO.MemoryStream(data);
+                var contentType = "application/pdf";
+                var fileName = "ho-so-ung-vien.pdf";
+                return File(content, contentType, fileName);              
             }
-            return View();
-        }
-        [HttpGet("download")]
-        public IActionResult GetBlobDownload([FromQuery] string link)
-        {
-            var net = new System.Net.WebClient();
-            var data = net.DownloadData(link);
-            var content = new System.IO.MemoryStream(data);
-            var contentType = "APPLICATION/octet-stream";
-            var fileName = "something.bin";
-            return File(content, contentType, fileName);
         }
 
+        [TypeFilter(typeof(AuthenController))]
         public IActionResult Apply(ApplyViewModel model)
         {
             try
@@ -211,6 +248,11 @@ namespace MVC.Controllers
                         }
                         _fileService.Create(f);
                     }
+                    InterviewProcessViewModel i = new InterviewProcessViewModel();
+                    i.CandidateId = user.Id;
+                    i.CreateBy = user.Id;
+                    i.ProcessId = 1;
+                    _interviewProcessService.Create(i);
                 }
                 return Json(true);
             }
