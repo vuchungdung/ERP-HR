@@ -9,5 +9,10 @@ namespace Database.Sql.ERP.UnitOfWork
     public interface IRecruitmentUnitOfWork
     {
         ITableGenericRepository<JobDescription> JobDescriptionRepository { get; }
+
+        ITableGenericRepository<Apply> ApplyRepository { get; }
+
+        ITableGenericRepository<Employee> EmployeeRepository { get; }
+
     }
 }

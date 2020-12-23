@@ -84,10 +84,16 @@ namespace Services.Candidates.Implement
             {
                 var query = from m in _context.CandidateRepository.Query()
                             join p in _context.ProviderRepository.Query()
-                            on m.ProviderId equals p.ProviderId
-                            join f in _context.FileCVRepository.Query()
-                            on m.CandidateId equals f.CandidateId
-                            where !m.Deleted && f.FileType != ".pdf"
+                            on m.ProviderId equals p.ProviderId          
+                            join a in _context.ApplyRepository.Query()
+                            on m.CandidateId equals a.CandidateId
+                            join j in _context.JobDescriptionRepository.Query()
+                            on a.JobId equals j.JobId
+                            join ip in _context.InterviewProcessRepository.Query()
+                            on m.CandidateId equals ip.CandidateId
+                            join ps in _context.ProcessRepository.Query()
+                            on ip.ProcessId equals ps.ProcessId
+                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted
                             orderby m.CreateDate descending
                             select new ListCandidateViewModel()
                             {
@@ -98,9 +104,11 @@ namespace Services.Candidates.Implement
                                 Phone = m.Phone,
                                 Gender = m.Gender,
                                 Provider = p.Name,
+                                JobName = j.Title,
+                                ProcessName = ps.Name,
                                 CreatedDate = m.CreateDate,
                                 Dob = m.Dob,
-                                Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
+                                Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), m.FileName)
                             };
                 if (!string.IsNullOrEmpty(filter.Text))
                 {
@@ -108,7 +116,6 @@ namespace Services.Candidates.Implement
                                         || x.Email.ToLower().Contains(filter.Text.ToLower())
                                         || x.Address.ToLower().Contains(filter.Text.ToLower())
                                         || x.Phone.ToLower().Contains(filter.Text.ToLower())
-                                        || x.Degree.ToLower().Contains(filter.Text.ToLower())
                                         );
                 }
                 BaseListModel<ListCandidateViewModel> listItems = new BaseListModel<ListCandidateViewModel>();
@@ -132,54 +139,53 @@ namespace Services.Candidates.Implement
         public async Task<ResponseModel> Insert(CandidateViewModel model)
         {
             ResponseModel response = new ResponseModel();
-            try
-            {
-                Candidate md = new Candidate();
-                md.Name = model.Name;
-                md.Email = model.Email;
-                md.Address = model.Address;
-                md.Dob = model.Dob;
-                md.Phone = model.Phone;
-                md.Gender = model.Gender;
-                md.ProviderId = model.ProviderId;
-                //md.CategoryId = model.CategoryId;
-                md.CreateDate = DateTime.Now;
-                md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            //try
+            //{
+            //    Candidate md = new Candidate();
+            //    md.Name = model.Name;
+            //    md.Email = model.Email;
+            //    md.Address = model.Address;
+            //    md.Dob = model.Dob;
+            //    md.Phone = model.Phone;
+            //    md.Gender = model.Gender;
+            //    md.ProviderId = model.ProviderId;
+            //    md.CreateDate = DateTime.Now;
+            //    md.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _context.CandidateRepository.AddAsync(md);
-                await _context.SaveChangesAsync();
+            //    await _context.CandidateRepository.AddAsync(md);
+            //    await _context.SaveChangesAsync();
 
-                var cadidateId = await _sequenceService.GetCandidateNewId();
+            //    var cadidateId = await _sequenceService.GetCandidateNewId();
 
-                foreach (var item in model.Files)
-                {
-                    Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
-                    f.CandidateId = cadidateId;
-                    f.Deleted = false;
-                    f.FileName = item.FileName;
-                    var folderName = Path.Combine("wwwroot/cadidate-cv");
-                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                    var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var fileSize = item.Length / 1024;
-                    var fileType = Path.GetExtension(fileName);
-                    f.CandidateId = Convert.ToInt32(await _sequenceService.GetCandidateNewId());
-                    f.FileName = fileName;
-                    f.FilePath = fullPath;
-                    f.FileSize = Convert.ToInt32(fileSize);
-                    f.FileType = fileType;
-                    f.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                    f.CreateDate = DateTime.Now;
-                    _context.FileCVRepository.Add(f);
-                    _context.SaveChanges();
-                }
+            //    foreach (var item in model.Files)
+            //    {
+            //        Database.Sql.ERP.Entities.Common.File f = new Database.Sql.ERP.Entities.Common.File();
+            //        f.CandidateId = cadidateId;
+            //        f.Deleted = false;
+            //        f.FileName = item.FileName;
+            //        var folderName = Path.Combine("wwwroot/cadidate-cv");
+            //        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            //        var fileName = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+            //        var fullPath = Path.Combine(pathToSave, fileName);
+            //        var fileSize = item.Length / 1024;
+            //        var fileType = Path.GetExtension(fileName);
+            //        f.CandidateId = Convert.ToInt32(await _sequenceService.GetCandidateNewId());
+            //        f.FileName = fileName;
+            //        f.FilePath = fullPath;
+            //        f.FileSize = Convert.ToInt32(fileSize);
+            //        f.FileType = fileType;
+            //        f.CreateBy = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            //        f.CreateDate = DateTime.Now;
+            //        _context.FileCVRepository.Add(f);
+            //        _context.SaveChanges();
+            //    }
 
-                response.Status = ResponseStatus.Success;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //    response.Status = ResponseStatus.Success;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
             return response;
         }
 
@@ -188,31 +194,44 @@ namespace Services.Candidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                //var query = from c in _context.CandidateRepository.Query()
-                //            join j in _context.JobDescriptionRepository.Query()
-                //            on c.JobId equals j.JobId
-                //            join f in _context.FileCVRepository.Query()
-                //            on c.CandidateId equals f.CandidateId
-                //            where c.CandidateId == id && f.FileType != ".pdf"
-                //            select new ListCandidateViewModel()
-                //            {
-                //                CandidateId = c.CandidateId,
-                //                Name = c.Name,
-                //                Email = c.Email,
-                //                Address = c.Address,
-                //                Phone = c.Phone,
-                //                Gender = c.Gender,
-                //                ApplyDate = c.ApplyDate,
-                //                JobId = c.JobId,
-                //                Dob = c.Dob,
-                //                Skype = c.Skype,
-                //                JobName = j.Title,
-                //                FilePath = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FilePath)
-                //            };
+                var query = from m in _context.CandidateRepository.Query()
+                            join p in _context.ProviderRepository.Query()
+                            on m.ProviderId equals p.ProviderId
+                            join a in _context.ApplyRepository.Query()
+                            on m.CandidateId equals a.CandidateId
+                            join j in _context.JobDescriptionRepository.Query()
+                            on a.JobId equals j.JobId
+                            join ip in _context.InterviewProcessRepository.Query()
+                            on m.CandidateId equals ip.CandidateId
+                            join ps in _context.ProcessRepository.Query()
+                            on ip.ProcessId equals ps.ProcessId
+                            join f in _context.FileCVRepository.Query()
+                            on m.CandidateId equals f.CandidateId
+                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted && m.CandidateId == id
+                            select new CandidateViewModel()
+                            {
+                                CandidateId = m.CandidateId,
+                                Name = m.Name,
+                                Email = m.Email,
+                                Address = m.Address,
+                                Phone = m.Phone,
+                                Gender = m.Gender,
+                                Facebook = m.Facebook,
+                                Zalo = m.Zalo,
+                                LinkedIn = m.LinkedIn,
+                                Skype = m.Skype,
+                                Provider = p.Name,
+                                JobName = j.Title,
+                                ProcessName = ps.Name,
+                                CreatedDate = m.CreateDate,
+                                Dob = m.Dob,
+                                Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), m.FileName),
+                                PdfName = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), f.FileName)
+                            };
 
-                //var model = await query.ToListAsync();
+                var model = await query.ToListAsync();
 
-                //response.Result = model;
+                response.Result = model;
                 response.Status = ResponseStatus.Success;
             }
             catch (Exception ex)

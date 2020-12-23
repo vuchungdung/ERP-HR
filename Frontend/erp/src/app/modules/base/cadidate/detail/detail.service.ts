@@ -13,7 +13,7 @@ export class CadidateDetailService{
   constructor(private api: ApiService){}
 
   url={
-    item: '/cadidate/cadidate/item',
+    item: '/candidate/candidate/item',
     pdfFile: '/common/file/item'
   }
 

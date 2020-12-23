@@ -127,8 +127,8 @@ namespace APIGateway
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/candidate-cv")),
-                RequestPath = new PathString("/wwwroot/candidate-cv")
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/cadidate-cv")),
+                RequestPath = new PathString("/wwwroot/cadidate-cv")
             });
 
             app.UseCors("CorsPolicy");

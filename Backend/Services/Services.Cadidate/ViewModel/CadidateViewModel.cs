@@ -23,37 +23,27 @@ namespace Services.Candidates.ViewModel
 
         public int? Gender { get; set; }
 
-        public string Degree { get; set; }
+        public string Provider { get; set; }
 
-        public string University { get; set; }
+        public string Img { get; set; }
 
-        public string Major { get; set; }
+        public string JobName { get; set; }
 
-        public DateTime? ApplyDate { get; set; }
+        public string ProcessName { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        public string Experience { get; set; }
+        public string FilePath { get; set; }
 
-        //public string FaceBook { get; set; }
+        public string PdfName { get; set; }
 
-        //public string Zalo { get; set; }
+        public string Facebook { get; set; }
+
+        public string Zalo { get; set; }
 
         public string Skype { get; set; }
 
-        //public string LinkIn { get; set; }
-
-        public int? Rating { get; set; }
-
-        public int? ProviderId { get; set; }
-        public string Provider { get; set; }
-        public int? CategoryId { get; set; }
-        public string Category { get; set; }
-        public string Skill { get; set; }
-        public string Img { get; set; }
-        public int? JobId { get; set; }
-
-        public int? TagId { get; set; }
-
-        public List<IFormFile> Files { get; set; }
+        public string LinkedIn { get; set; }
+       
 
     }
     public class ListCandidateViewModel
@@ -70,38 +60,21 @@ namespace Services.Candidates.ViewModel
 
         public DateTime? Dob { get; set; }
 
-        public int? Gender { get; set; }
-
-        public string Degree { get; set; }
-
-        public string University { get; set; }
-
-        public string Major { get; set; }
-
-        public DateTime? ApplyDate { get; set; }
-
-        public string Experience { get; set; }
-
-        public int? Rating { get; set; }
+        public int? Gender { get; set; }        
 
         public string Provider { get; set; }
 
         public string Category { get; set; }
 
-        public string Skill { get; set; }
-
         public string Img { get; set; }
-
-        public int? TagId { get; set; }
-
-        public int? JobId { get; set; }
-
-        public string Skype { get; set; }
 
         public string JobName { get; set; }
 
+        public string ProcessName { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public string FilePath { get; set; }
+
+        public string PdfName { get; set; }
     }
 }

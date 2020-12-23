@@ -25,7 +25,7 @@ export class CadidateComponent implements OnInit {
   public paging = new PagingModel();
   public searchText = '';
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','degree','experience','major','source','status','tag','options'];
+  public displayedColumns: string[] = ['img', 'name', 'address', 'email', 'phone','source','job','status','options'];
   public selection = new SelectionModel<Cadidate>(true, []);
   public status:boolean = true;
   public action : FormStatus = FormStatus.Unknow;
@@ -68,6 +68,7 @@ export class CadidateComponent implements OnInit {
     this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
       if(res.status === ResponseStatus.success){
         this.dataSource.data = res.result.items;
+        console.log(res.result.items);
         this.paging.length = res.result.totalItems;
       }
     })
@@ -83,7 +84,7 @@ export class CadidateComponent implements OnInit {
   }
 
   openFormDetail(row : Cadidate){
-    this.router.navigate(['/manager/cadidate/detail/'+row.cadidateId]);
+    this.router.navigate(['/manager/cadidate/detail/'+row.candidateId]);
     this.status = false;
   }
 

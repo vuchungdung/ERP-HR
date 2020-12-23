@@ -16,8 +16,9 @@ import { FormComponent } from './form/form.component';
 })
 export class DetailComponent implements OnInit {
 
-  public items : any;
   @ViewChild(DetailCvComponent) form : DetailCvComponent;
+
+  public items : any;
 
   constructor(
     private route : ActivatedRoute,

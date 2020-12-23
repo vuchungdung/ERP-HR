@@ -23,10 +23,7 @@
           <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
             <mat-option>None</mat-option>
             <mat-option>Kinh nghiệm</mat-option>
-          </mat-select>
-          <button mat-raised-button (click)="insertCadidate()" style="margin-right: 5px;" class="btn-interview" color="primary">
-            <i class="icon-user-plus icon"></i>Thêm ứng viên mới
-          </button>
+          </mat-select>          
           <ng-container>
             <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-bin icon"></i>Xóa ứng viên
@@ -73,31 +70,19 @@
             <ng-container matColumnDef="phone">
               <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
               <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-            </ng-container>
-            <ng-container matColumnDef="degree">
-              <th mat-header-cell *matHeaderCellDef>Trình độ</th>
-              <td mat-cell *matCellDef="let element"> {{element.degree}} </td>
-            </ng-container>
-            <ng-container matColumnDef="experience">
-              <th mat-header-cell *matHeaderCellDef>Kinh nghiệm</th>
-              <td mat-cell *matCellDef="let element"> {{element.experience}} </td>
-            </ng-container>
-            <ng-container matColumnDef="major">
-              <th mat-header-cell *matHeaderCellDef>Chuyên ngành</th>
-              <td mat-cell *matCellDef="let element"> {{element.major}} </td>
-            </ng-container>
+            </ng-container>            
             <ng-container matColumnDef="source">
               <th mat-header-cell *matHeaderCellDef>Nguồn</th>
               <td mat-cell *matCellDef="let element"> {{element.provider}} </td>
             </ng-container>
+            <ng-container matColumnDef="job">
+              <th mat-header-cell *matHeaderCellDef>Tin ứng tuyển</th>
+              <td mat-cell *matCellDef="let element"> {{element.jobName}} </td>
+            </ng-container>  
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
-              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-            </ng-container>
-            <ng-container matColumnDef="tag">
-              <th mat-header-cell *matHeaderCellDef>Gắn thẻ</th>
-              <td mat-cell *matCellDef="let element"> {{element.tag}} </td>
-            </ng-container>
+              <td mat-cell *matCellDef="let element"> {{element.processName}} </td>
+            </ng-container>          
             <ng-container matColumnDef="options">
               <th mat-header-cell *matHeaderCellDef style="width:1%;text-align: center;padding-right: 0px;line-height: 1px;">#</th>
               <td mat-cell *matCellDef="let element" style="padding-right: 0px;">

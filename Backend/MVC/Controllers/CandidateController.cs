@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
+using System.Text;
 using Aspose.Pdf;
-using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using MVC.Common;
 using MVC.Models;
 using MVC.Services.Interfaces;
@@ -21,11 +23,16 @@ namespace MVC.Controllers
         private readonly ICandidateService _cadidateService;
         private readonly IFileService _fileService;
         private readonly IInterviewProcessService _interviewProcessService;
-        public CandidateController(ICandidateService cadidateService,IFileService fileService, IInterviewProcessService interviewProcessService)
+        private ICompositeViewEngine _viewEngine;
+        public CandidateController(ICandidateService cadidateService
+            ,IFileService fileService
+            , IInterviewProcessService interviewProcessService
+            ,ICompositeViewEngine viewEngine)
         {
             _cadidateService = cadidateService;
             _fileService = fileService;
             _interviewProcessService = interviewProcessService;
+            _viewEngine = viewEngine;
         }
 
         [TypeFilter(typeof(AuthenController))]
@@ -182,31 +189,21 @@ namespace MVC.Controllers
             return View();
         }
 
-        //public IActionResult GenPDF()
-        //{
-        //    WebRequest req = WebRequest.Create(@"https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html");
-        //    using (Stream stream = req.GetResponse().GetResponseStream())
-        //    {
-        //        HtmlLoadOptions htmloptions = new HtmlLoadOptions("https://docs.oracle.com/");
-        //        Document pdfDocument = new Document(stream, htmloptions);
-        //        pdfDocument.Save("HTML-to-PDF.pdf");
-        //    }
-        //    return View();
-        //}
         public IActionResult Download()
         {
-            WebRequest req = WebRequest.Create(@"https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html");
-            using (Stream stream = req.GetResponse().GetResponseStream())
-            {
-                HtmlLoadOptions htmloptions = new HtmlLoadOptions("https://docs.oracle.com/");
-                Document pdfDocument = new Document(stream, htmloptions);
-                pdfDocument.Save("HTML-to-PDF.pdf");
-                var data = System.IO.File.ReadAllBytes("HTML-to-PDF.pdf");
-                var content = new System.IO.MemoryStream(data);
-                var contentType = "application/pdf";
-                var fileName = "ho-so-ung-vien.pdf";
-                return File(content, contentType, fileName);              
-            }
+            var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+            var user = JsonConvert.DeserializeObject<UserSession>(session);
+            ErrorViewModel model = new ErrorViewModel();
+            var HtmlContent = RenderRazorViewToString("Preview", model);
+            HtmlLoadOptions htmloptions = new HtmlLoadOptions("");
+            Document doc = new Document(new MemoryStream(Encoding.UTF8.GetBytes(HtmlContent)), htmloptions);
+            var filename = user.Username + ".pdf";
+            doc.Save(filename);
+            var data = System.IO.File.ReadAllBytes(filename);
+            var content = new System.IO.MemoryStream(data);
+            var contentType = "application/pdf";
+            var fileName = "ho-so-ung-vien.pdf";
+            return File(content, contentType, fileName);
         }
 
         [TypeFilter(typeof(AuthenController))]
@@ -259,6 +256,33 @@ namespace MVC.Controllers
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.ActionDescriptor.ActionName;
+
+            ViewData.Model = model;
+
+            using (var writer = new StringWriter())
+            {
+                ViewEngineResult viewResult =
+                    _viewEngine.FindView(ControllerContext, viewName, false);
+
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+
+                viewResult.View.RenderAsync(viewContext);
+
+                return writer.GetStringBuilder().ToString();
             }
         }
     }

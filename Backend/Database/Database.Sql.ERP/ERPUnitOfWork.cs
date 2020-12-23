@@ -181,6 +181,58 @@ namespace Database.Sql.ERP
             }
         }
 
+        private ITableGenericRepository<WorkHistory> _workHistoryRepository;
+        public ITableGenericRepository<WorkHistory> WorkHistoryRepository
+        {
+            get
+            {
+                return _workHistoryRepository = _workHistoryRepository ?? new TableGenericRepository<WorkHistory>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Education> _educationRepository;
+        public ITableGenericRepository<Education> EducationRepository
+        {
+            get
+            {
+                return _educationRepository = _educationRepository ?? new TableGenericRepository<Education>(_context);
+            }
+        }
+        private ITableGenericRepository<Award> _awardRepository;
+        public ITableGenericRepository<Award> AwardRepository
+        {
+            get
+            {
+                return _awardRepository = _awardRepository ?? new TableGenericRepository<Award>(_context);
+            }
+        }
+        private ITableGenericRepository<Apply> _applyRepository;
+        public ITableGenericRepository<Apply> ApplyRepository
+        {
+            get
+            {
+                return _applyRepository = _applyRepository ?? new TableGenericRepository<Apply>(_context);
+            }
+        }
+
+        private ITableGenericRepository<Employee> _employeeRepository;
+        public ITableGenericRepository<Employee> EmployeeRepository
+        {
+            get
+            {
+                return _employeeRepository = _employeeRepository ?? new TableGenericRepository<Employee>(_context);
+            }
+        }
+
+        public ITableGenericRepository<InterviewProcess> _interviewProcessRepository;
+        public ITableGenericRepository<InterviewProcess> InterviewProcessRepository
+        {
+            get
+            {
+                return _interviewProcessRepository = _interviewProcessRepository ?? new TableGenericRepository<InterviewProcess>(_context);
+            }
+        }
+
         public ERPUnitOfWork(ERPContext context)
         {
             _context = context;

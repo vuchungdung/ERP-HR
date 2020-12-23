@@ -12,6 +12,7 @@ namespace Database.Sql.ERP.UnitOfWork
         ITableGenericRepository<InterviewDate> InterviewDateRepository { get; }
         ITableGenericRepository<InterviewResult> InterviewResultRepository { get; }
         ITableGenericRepository<Process> ProcessRepository { get; }
+        ITableGenericRepository<InterviewProcess> InterviewProcessRepository { get; }
 
     }
 }

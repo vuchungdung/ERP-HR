@@ -12,10 +12,12 @@ export class DetailCvComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   getPath(filepath: string){
-    this.src = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+    debugger
+    this.src = filepath;
   }
 
 }

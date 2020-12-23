@@ -23,13 +23,7 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\candidate-cv\" />
-  </ItemGroup>
-
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\API\API.Cadidate\API.Candidate.csproj" />
+    <ProjectReference Include="..\API\API.Cadidate\API.Cadidate.csproj" />
     <ProjectReference Include="..\API\API.Common\API.Common.csproj" />
     <ProjectReference Include="..\API\API.Interview\API.Interview.csproj" />
     <ProjectReference Include="..\API\API.Recruitment\API.Recruitment.csproj" />

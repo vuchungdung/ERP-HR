@@ -1,5 +1,5 @@
 export interface Cadidate {
-  cadidateId : number,
+  candidateId : number,
   name : string,
   email : string,
   address : string,

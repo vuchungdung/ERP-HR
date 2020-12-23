@@ -9,7 +9,12 @@ namespace Database.Sql.ERP.UnitOfWork
     public interface ICandidateUnitOfWork
     {
         ITableGenericRepository<Candidate> CandidateRepository { get; }
-        ITableGenericRepository<WorkHistory> CandidateApplyHistoryRepository { get; }
+        ITableGenericRepository<WorkHistory> WorkHistoryRepository { get; }
+
+        ITableGenericRepository<Education> EducationRepository { get; }
+
+        ITableGenericRepository<Award> AwardRepository { get; }
+
 
     }
 }

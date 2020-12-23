@@ -50,6 +50,13 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'employee',
+        canActivate:[AuthenticationGuard],
+        canActivateChild:[AuthenticationGuard],
+        loadChildren: () => import('../base/employee/employee.module').then(m => m.EmployeeModule),
+        pathMatch: 'full'
+      },
+      {
         path: 'cadidate/detail/:id',
         canActivate:[AuthenticationGuard],
         canActivateChild:[AuthenticationGuard],

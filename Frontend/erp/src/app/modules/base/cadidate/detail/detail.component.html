@@ -6,7 +6,8 @@
           <div class="page-container" style="padding: 10px 36px;">
             <div class="row" *ngFor="let item of items">
               <div style="display: flex;padding-top: 6px;">
-                <div class="img" style="flex: 1;">           
+                <div class="img" style="flex: 1;">    
+                  <img src="https://localhost:44379/{{item.img}}" style="width:56px;height:56px;padding: 2px;border-radius: 50%;" />       
                 </div>
                 <div class="info" style="flex: 5;">
                   <p>{{item.name}}</p>
@@ -57,7 +58,6 @@
                     <li style="list-style: none;" ><i class="p-l-12 icon-office"></i>Địa chỉ</li>
                     <li style="list-style: none;" ><i class="p-l-12 icon-calendar"></i>Ngày sinh</li>
                     <li style="list-style: none;" ><i class="p-l-12 icon-man-woman"></i>Giới tính</li>
-                    <li style="list-style: none;" ><i class="p-l-12 icon-skype"></i>Skype</li>
                   </ul>
                   <ul>
                     <style>
@@ -73,10 +73,9 @@
                     <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.address}}</li>
                     <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.dob|date: 'dd/MM/yyyy'}}</li>
                     <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.gender}}</li>
-                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.skype}}</li>
                   </ul>
                 </div>
-              <h5 style="font-weight: 600;color: #aa88aa;">HỌC VẤN CÔNG VIỆC</h5>
+              <h5 style="font-weight: 600;color: #aa88aa;">MẠNG XÃ HỘI</h5>
               <div style="display:flex">
                 <ul>
                   <style>
@@ -87,9 +86,10 @@
                       padding-right: 18px;
                     }
                   </style>
-                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Trình độ</li>
-                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Nơi đào tạo</li>
-                  <li style="list-style: none;" ><span class="p-l-12 icon-primitive-square">:</span>Chuyên ngành</li>
+                  <li style="list-style: none;" ><i class="p-l-12 icon-skype"></i>Skype</li>
+                  <li style="list-style: none;" ><i class="p-l-12 icon-facebook2"></i>Facebook</li>
+                  <li style="list-style: none;" ><i class="p-l-12 icon-linkedin"></i>LinkedIn</li>
+                  <li style="list-style: none;" ><i class="p-l-12 icon-blogger"></i>Zalo</li>
                 </ul>
                 <ul>
                   <style>
@@ -100,9 +100,10 @@
                       padding-right: 18px;
                     }
                   </style>      
-                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.degree}}</li>
-                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.university}}</li>
-                  <li style="list-style: none;" ><i class="p-l-12"></i>{{item.major}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.skype}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.facebook}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.linkedIn}}</li>
+                    <li style="list-style: none;" ><span class="p-l-12">:</span>{{item.zalo}}</li>
                 </ul>
               </div>
             </div>
@@ -118,17 +119,22 @@
               </mat-tab>
               <mat-tab label="Lịch sử làm việc">
                 <div class="page-container right"> 
-                  <app-detail-apply-history></app-detail-apply-history>
                 </div>
               </mat-tab>
-              <mat-tab label="Email">
+              <mat-tab label="Dự án nổi bật">
                 <div class="page-container right">
-                  <app-detail-email></app-detail-email>
+                </div>
+              </mat-tab>
+              <mat-tab label="Trình độ đào tạo">
+                <div class="page-container right">
+                </div>
+              </mat-tab>
+              <mat-tab label="Quá trình ứng tuyển">
+                <div class="page-container right">
                 </div>
               </mat-tab>
               <mat-tab label="Kết quả phỏng vấn">
                 <div class="page-container right">
-                  <app-detail-interview-result></app-detail-interview-result>
                 </div>
               </mat-tab>
             </mat-tab-group>

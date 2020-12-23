@@ -25,6 +25,7 @@ namespace Database.Sql.ERP.Entities.Recruitment
         [Column(TypeName = "varchar(20)")]
         public string Phone { get; set; }
 
+        [Column(TypeName="datetime")]
         public DateTime? Dob { get; set; }
 
         public int? Gender { get; set; }

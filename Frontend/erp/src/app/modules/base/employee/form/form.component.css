@@ -1,0 +1,38 @@
+.form-input{
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  height: 36px;
+  border-radius: 4px;
+  padding: 0px 12px;
+}
+.form-input::placeholder {
+  color: #a1758b;
+  font-weight: 300;
+  font-size: 13px;
+}
+.lb-input{
+  margin-bottom: 0px;
+  font-weight: 500;
+  font-size: 13px;
+}
+.page-container.opened{
+  display: block;
+}
+.page-container{
+  display: none;
+}
+
+.btn-interview{
+  font-size: 12px;
+  height: 28px;
+  line-height: 28px;
+}
+.icon-date{
+  position: absolute;
+  top: 18px;
+  right: 0px;
+  margin-right:8px;
+}
+.form-date{
+  position: relative;
+}

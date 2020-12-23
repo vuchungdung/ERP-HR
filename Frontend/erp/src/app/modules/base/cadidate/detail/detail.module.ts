@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetailComponent } from './detail.component';
-import { FormDetailComponent } from './form-detail/form-detail.component';
-import { DetailInfoComponent } from './detail-info/detail-info.component';
-import { DetailCvComponent } from './detail-cv/detail-cv.component';
-import { DetailApplyHistoryComponent } from './detail-apply-history/detail-apply-history.component';
-import { DetailEmailComponent } from './detail-email/detail-email.component';
 import { DetailInterviewResultComponent } from './detail-interview-result/detail-interview-result.component';
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -29,6 +24,11 @@ import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { ApiService } from 'src/app/core/services/api.service';
 import { InterviewService } from '../../interview/interview.service';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DetailAwardComponent } from './detail-award/detail-award.component';
+import { DetailEducationComponent } from './detail-education/detail-education.component';
+import { DetailWorkhistoryComponent } from './detail-workhistory/detail-workhistory.component';
+import { DetailProcessComponent } from './detail-process/detail-process.component';
+import { DetailCvComponent } from './detail-cv/detail-cv.component';
 
 const routes = [
   {
@@ -40,13 +40,8 @@ const routes = [
 
 @NgModule({
   declarations: [
-    DetailComponent, 
-    FormDetailComponent, 
-    DetailInfoComponent, 
-    DetailCvComponent, 
-    DetailApplyHistoryComponent, 
-    DetailEmailComponent, 
-    DetailInterviewResultComponent, FormComponent
+    DetailComponent,
+    DetailInterviewResultComponent, FormComponent, DetailAwardComponent, DetailEducationComponent, DetailWorkhistoryComponent, DetailProcessComponent, DetailCvComponent
   ],
   imports: [
     CommonModule,

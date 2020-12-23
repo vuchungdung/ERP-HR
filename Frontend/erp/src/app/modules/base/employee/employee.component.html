@@ -1,0 +1,108 @@
+<app-form (isShow)="changeStatus($event)"></app-form>
+<div class="page-container" style="padding: 10px 20px;" [class.opened]="showTable()">
+  <div class="row">
+    <div class="panel panel-flat" style="margin-bottom:10px">
+      <div class="panel-heading content-header" style="padding-top:10px; padding-bottom:10px">
+        <div>
+          <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH NHÂN VIÊN</h4>
+        </div>
+        <div class="options">
+          <button mat-raised-button style="margin-right: 5px;" (click)="OnInsertClick()" class="btn-interview" color="primary">
+            <i class="icon-user-plus icon"></i>Thêm nhân viên mới
+          </button>
+          <!-- <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
+            <i class="icon-pie-chart2 icon"></i>Biểu đồ nhân viên
+          </button> -->
+          <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
+            <i class="icon-bin icon"></i>Xóa nhiều tin
+          </button>
+          <!-- <button mat-raised-button class="btn-interview" color="primary">
+            <i class="icon-plus2 icon"></i>Upload thông minh
+          </button> -->
+        </div>
+      </div>
+      <div class="panel-heading content-header" style="padding-top:0px; padding-bottom:10px;">
+        <div class="row" style="width:100%; margin-left: 6px;">
+          <div class="col-md-2" style="padding: 0;">
+          </div>
+          <div class="col-md-7">
+            <i class="icon-search4 icon-s"></i>
+            <input type="text" class="input-search" [(ngModel)]="keyword" (keyup.enter)="search()" placeholder="Từ khóa tìm kiếm ứng với họ tên, số điện thoại, kỹ năng, vị trí ứng tuyển,...">
+          </div>
+          <button class="col-md-1 btn-s" (click)="search()" mat-flat-button color="warn">
+            Tìm kiếm
+          </button>  
+          <div class="col-md-2" style="padding: 0;">
+          </div>        
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-flat">
+      <div class="container-fluid">
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="img">
+              <th mat-header-cell *matHeaderCellDef>Hình ảnh</th>
+              <td mat-cell *matCellDef="let element"><img src="https://localhost:44379/{{element.img}}" style="width:40px;height:40px;padding: 2px;border-radius: 50%;" /></td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+              <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
+              <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
+              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="dob">
+              <th mat-header-cell *matHeaderCellDef>Ngày sinh</th>
+              <td mat-cell *matCellDef="let element"> {{element.dob | date: 'dd/MM/yyyy'}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>Vị trí công việc</th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Thời giờ </th>
+              <td mat-cell *matCellDef="let row">
+                <div [ngSwitch]="row.type">
+                  <ng-template [ngSwitchCase]=0><span style="cursor: pointer;" class="label bg-success">Full Time</span></ng-template>
+                  <ng-template [ngSwitchCase]=1><span style="cursor: pointer;" class="label bg-danger">Part Time</span></ng-template>
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="options">
+              <th mat-header-cell *matHeaderCellDef style="width:1%;text-align: center;padding-right: 0px;line-height: 1px;">#</th>
+              <td mat-cell *matCellDef="let row" style="padding-right: 0px;">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="deleteItem(row.jobId)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Xóa dữ liệu</span>
+                  </button>
+                  <button mat-menu-item (click)="updateItem(row.jobId)">
+                    <mat-icon>edit</mat-icon>
+                    <span>Cập nhật</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <app-paginator [paging]="paging" (pageEventChange)="onPageChange($event)">
+          </app-paginator>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div>
