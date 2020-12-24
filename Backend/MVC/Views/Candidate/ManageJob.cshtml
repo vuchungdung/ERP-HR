@@ -40,17 +40,17 @@
                                     <td>
                                         {{item.p_Name}}
                                     </td>
-                                    <td ng-if="item.result == null">
+                                    <td ng-if="item.result == 0">
                                         (Chờ)
                                     </td>
-                                    <td ng-if="item.result != null">
-                                        {{item.result}}
+                                    <td ng-if="item.result != 0">
+                                        {{item.result | processFilter:item.result}}
                                     </td>
-                                    <td ng-if="item.createDate == null">
+                                    <td ng-if="item.resultDate == null">
                                         (Chờ)
                                     </td>
-                                    <td ng-if="item.createDate != null">
-                                        {{item.createDate}}
+                                    <td ng-if="item.resultDate != null">
+                                        {{item.resultDate|date:"dd/MM/yyyy"}}
                                     </td>
                                 </tr>
                             </tbody>

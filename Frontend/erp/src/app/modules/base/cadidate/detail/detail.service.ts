@@ -14,7 +14,8 @@ export class CadidateDetailService{
 
   url={
     item: '/candidate/candidate/item',
-    pdfFile: '/common/file/item'
+    pdfFile: '/common/file/item',
+    
   }
 
   item(id:number):Observable<ResponseModel>{
@@ -24,4 +25,6 @@ export class CadidateDetailService{
   pdfFile(id:number):Observable<ResponseModel>{
     return this.api.item(`${environment.apiUrl}${this.url.pdfFile}`,id);
   }
+
+  
 }

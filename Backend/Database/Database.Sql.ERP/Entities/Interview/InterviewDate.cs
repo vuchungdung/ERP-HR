@@ -16,10 +16,8 @@ namespace Database.Sql.ERP.Entities.Interview
         public int DateId { get; set; }
 
         [Required]
+        [Column(TypeName ="datetime")]
         public DateTime TimeDate { get; set; }
-
-        [Required]
-        public DateTime TimeStart { get; set; }
 
         [Required]
         [Column(TypeName ="nvarchar(100)")]

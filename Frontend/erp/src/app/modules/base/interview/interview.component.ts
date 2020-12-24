@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/angular';
+import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
+import { ResponseModel } from 'src/app/core/models/response.model';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { InterviewService } from './interview.service';
-
+declare var $: any;
 @Component({
   selector: 'app-interview',
   templateUrl: './interview.component.html',
@@ -16,16 +18,11 @@ export class InterviewComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {   
-  }
+  public dataSource : any;
+  
 
-  public dataSource : EventInput[] = this.getList();
+  ngOnInit(): void {  
 
-  getList(){
-    return [
-      { title: 'Phỏng vấn ứng viên Vũ Chung Dũng', date: '2020-12-17', },
-      { title: 'Phỏng vấn ứng viên Nguyễn Thị Hòa', date: '2020-12-17' }
-    ];
   }
 
   calendarOptions: CalendarOptions = {
@@ -37,7 +34,7 @@ export class InterviewComponent implements OnInit {
     initialView: 'dayGridMonth',
     dateClick : this.handleDateClick.bind(this),
     eventClick : this.handleEventClick.bind(this),
-    events : this.dataSource
+    events : 'https://localhost:44379/api/interview/interviewdate/get-date'
   }
 
   handleDateClick(arg) {

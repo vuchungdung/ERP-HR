@@ -23,16 +23,14 @@ namespace MVC.Controllers
         private readonly ICandidateService _cadidateService;
         private readonly IFileService _fileService;
         private readonly IInterviewProcessService _interviewProcessService;
-        private ICompositeViewEngine _viewEngine;
         public CandidateController(ICandidateService cadidateService
             ,IFileService fileService
             , IInterviewProcessService interviewProcessService
-            ,ICompositeViewEngine viewEngine)
+            )
         {
             _cadidateService = cadidateService;
             _fileService = fileService;
             _interviewProcessService = interviewProcessService;
-            _viewEngine = viewEngine;
         }
 
         [TypeFilter(typeof(AuthenController))]
@@ -189,22 +187,6 @@ namespace MVC.Controllers
             return View();
         }
 
-        public IActionResult Download()
-        {
-            var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
-            var user = JsonConvert.DeserializeObject<UserSession>(session);
-            ErrorViewModel model = new ErrorViewModel();
-            var HtmlContent = RenderRazorViewToString("Preview", model);
-            HtmlLoadOptions htmloptions = new HtmlLoadOptions("");
-            Document doc = new Document(new MemoryStream(Encoding.UTF8.GetBytes(HtmlContent)), htmloptions);
-            var filename = user.Username + ".pdf";
-            doc.Save(filename);
-            var data = System.IO.File.ReadAllBytes(filename);
-            var content = new System.IO.MemoryStream(data);
-            var contentType = "application/pdf";
-            var fileName = "ho-so-ung-vien.pdf";
-            return File(content, contentType, fileName);
-        }
 
         [TypeFilter(typeof(AuthenController))]
         public IActionResult Apply(ApplyViewModel model)
@@ -259,31 +241,5 @@ namespace MVC.Controllers
             }
         }
 
-        public string RenderRazorViewToString(string viewName, object model)
-        {
-            if (string.IsNullOrEmpty(viewName))
-                viewName = ControllerContext.ActionDescriptor.ActionName;
-
-            ViewData.Model = model;
-
-            using (var writer = new StringWriter())
-            {
-                ViewEngineResult viewResult =
-                    _viewEngine.FindView(ControllerContext, viewName, false);
-
-                ViewContext viewContext = new ViewContext(
-                    ControllerContext,
-                    viewResult.View,
-                    ViewData,
-                    TempData,
-                    writer,
-                    new HtmlHelperOptions()
-                );
-
-                viewResult.View.RenderAsync(viewContext);
-
-                return writer.GetStringBuilder().ToString();
-            }
-        }
     }
 }

@@ -17,6 +17,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
+import { InterviewService } from './interview.service';
 
 const routes = [
   {
@@ -48,6 +49,9 @@ FullCalendarModule.registerPlugins([
     MatDialogModule,
     SharedModule,
     FullCalendarModule
+  ],
+  providers:[
+    InterviewService
   ]
 })
 export class InterviewModule { }

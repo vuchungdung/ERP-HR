@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interview.Interfaces;
 using Services.Interview.ViewModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 namespace API.Interview.Controller
 {
@@ -37,12 +38,11 @@ namespace API.Interview.Controller
             return response;
         }
 
-        [HttpPost]
-        [Route("get-list")]
-        [Authorize]
-        public async Task<ResponseModel> GetList([FromBody] FilterModel model)
+        [HttpGet]
+        [Route("get-date")]
+        public List<ListDate> GetDate()
         {
-            var response = await _interviewDateService.GetList(model);
+            var response = _interviewDateService.GetDate();
             return response;
         }
     }

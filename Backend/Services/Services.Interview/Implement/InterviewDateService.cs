@@ -52,49 +52,40 @@ namespace Services.Interview.Implement
             return response;
         }
 
-        public async Task<ResponseModel> GetList(FilterModel filter)
+        public List<ListDate> GetDate()
         {
-            ResponseModel response = new ResponseModel();
             try
             {
                 var query = from i in _context.InterviewDateRepository.Query()
-                            where !i.Deleted
+                            join j in _context.EmployeeRepository.Query()
+                            on i.EmployeeId equals j.Id
+                            join c in _context.CandidateRepository.Query()
+                            on i.CandidateId equals c.CandidateId
+                            where !i.Deleted && !j.Deleted && !c.Deleted
                             orderby i.TimeDate
-                            select new InterviewDateViewModel()
+                            select new ListDate()
                             {
                                 DateId = i.DateId,
-                                TimeDate = i.TimeDate,
-                                TimeStart = i.TimeStart,
-                                Address = i.Address,
-                                RecruitType = i.RecruitType,
-                                Time = i.Time,
-                                JodId = i.JodId,
-                                Note = i.Note,
+                                Title = j.Name+" với "+c.Name,
+                                Date = i.TimeDate
                             };
 
-                if (!string.IsNullOrEmpty(filter.Text))
-                {
-                    query = query.Where(x => x.TimeDate == Convert.ToDateTime(filter.Text));
-                }
 
-                BaseListModel<InterviewDateViewModel> listItems = new BaseListModel<InterviewDateViewModel>();
 
-                listItems.Items = await query.Skip((filter.Paging.PageIndex - 1) * filter.Paging.PageSize)
-                    .Take(filter.Paging.PageSize)
-                    .ToListAsync()
-                    .ConfigureAwait(true);
+                var listItems = query.ToList();
 
-                listItems.TotalItems = await query.CountAsync();
-
-                response.Result = listItems;
-                response.Status = ResponseStatus.Success;
+                return listItems;
 
             }
             catch(Exception ex)
             {
                 throw ex;
             }
-            return response;
+        }
+
+        public Task<ResponseModel> GetList(FilterModel filter)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel> Insert(InterviewDateViewModel model)
@@ -108,10 +99,11 @@ namespace Services.Interview.Implement
                 md.CreateDate = DateTime.Now;
                 md.CreateBy = 1;
                 md.Deleted = false;
+                md.CandidateId = model.CandidateId;
+                md.EmployeeId = model.EmployeeId;
                 md.JodId = model.JodId;
                 md.Time = md.Time;
                 md.RecruitType = model.RecruitType;
-                md.TimeStart = model.TimeStart;
                 md.TimeDate = model.TimeDate;
                 md.Note = model.Note;
 
@@ -135,15 +127,15 @@ namespace Services.Interview.Implement
             {
                 InterviewDate md = await _context.InterviewDateRepository.FirstOrDefaultAsync(x => x.DateId == id && !x.Deleted);
 
-                InterviewDate model = new InterviewDate();
+                InterviewDateViewModel model = new InterviewDateViewModel();
 
                 model.DateId = md.DateId;
                 model.Address = md.Address;
-                model.CreateDate = DateTime.Now;
+                model.CandidateId = md.CandidateId;
+                model.EmployeeId = md.EmployeeId;
                 model.JodId = md.JodId;
                 model.Time = md.Time;
                 model.RecruitType = md.RecruitType;
-                model.TimeStart = md.TimeStart;
                 model.TimeDate = md.TimeDate;
                 model.Note = md.Note;
 

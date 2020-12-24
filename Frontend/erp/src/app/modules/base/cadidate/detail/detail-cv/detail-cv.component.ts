@@ -17,7 +17,8 @@ export class DetailCvComponent implements OnInit {
 
   getPath(filepath: string){
     debugger
-    this.src = filepath;
+    console.log("https://localhost:44379/wwwroot/cadidate-cv/"+filepath);
+    this.src = "https://localhost:44379/wwwroot/cadidate-cv/"+filepath;
   }
 
 }

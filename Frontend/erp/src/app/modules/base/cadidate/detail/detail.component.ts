@@ -51,8 +51,8 @@ export class DetailComponent implements OnInit {
     var id = this.getId();
     this.detailService.pdfFile(id).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
-        console.log(res.result.filePath);
-        this.form.getPath(res.result.filePath);
+        console.log(res.result.fileName);
+        this.form.getPath(res.result.fileName);
       }
     })
   }

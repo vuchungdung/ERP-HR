@@ -13,8 +13,6 @@ namespace Services.Interview.ViewModel
 
         public DateTime TimeDate { get; set; }
 
-        public DateTime TimeStart { get; set; }
-
         public string Address { get; set; }
 
         public RecruitType RecruitType { get; set; }
@@ -28,5 +26,17 @@ namespace Services.Interview.ViewModel
         public bool SendMail { get; set; }
 
         public string Email { get; set; }
+
+        public int EmployeeId { get; set; }
+
+        public string Employeename { get; set; }
+    }
+    public class ListDate
+    {
+        public string Title { get; set; }
+
+        public int DateId { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

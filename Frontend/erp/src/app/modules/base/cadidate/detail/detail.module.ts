@@ -29,6 +29,8 @@ import { DetailEducationComponent } from './detail-education/detail-education.co
 import { DetailWorkhistoryComponent } from './detail-workhistory/detail-workhistory.component';
 import { DetailProcessComponent } from './detail-process/detail-process.component';
 import { DetailCvComponent } from './detail-cv/detail-cv.component';
+import { EmployeeService } from '../../employee/employee.service';
+
 
 const routes = [
   {
@@ -63,13 +65,14 @@ const routes = [
     MatDatepickerModule,
     MatRadioModule,
     MatInputModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers:[
     CadidateDetailService,
     NotificationService,
     ApiService,
-    InterviewService
+    InterviewService,
+    EmployeeService
   ]
 })
 export class DetailModule { }

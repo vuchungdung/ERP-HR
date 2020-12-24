@@ -20,6 +20,7 @@ export class EmployeeService{
     getlist: '/recruitment/employee/get-list',
     delete: '/recruitment/employee/delete',
     item: '/recruitment/employee/item',
+    dropdown: '/recruitment/employee/drop-down'
   }
 
   insert(model: FormData):Observable<ResponseModel>{
@@ -44,5 +45,8 @@ export class EmployeeService{
   }
   delete(id:number){
     return this.api.delete(`${environment.apiUrl}${this.url.delete}`,id);
+  }
+  dropdown():Observable<ResponseModel>{
+    return this.api.dropDown(`${environment.apiUrl}${this.url.dropdown}`);
   }
 }

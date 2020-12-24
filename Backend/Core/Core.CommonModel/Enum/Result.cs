@@ -6,7 +6,7 @@ namespace Core.CommonModel.Enum
 {
     public enum Result
     {
-        Pass,
+        Pass = 1,
         Fail     
     }
 }

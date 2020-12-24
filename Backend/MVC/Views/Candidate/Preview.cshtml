@@ -7,12 +7,20 @@
     ViewData["Title"] = "Preview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<section>
+    <button type="submit" class="btn btn-warning" onclick="download()">Tải xuống CV của bạn</button>
+    <script>
+        function download() {
+            const elm = document.getElementById('pdf-cv');
+            html2pdf().from(elm).save();
+        }
+    </script>
+</section>
 <section class="space-ptb">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <div class="row">
+                <div class="row" id="pdf-cv">
                     <div class="col-lg-5">
                         <div class="resume-base bg-light user-dashboard-info-box">
                             @{ var session = Convert.ToString(Context.Session.GetString(CommonSession.USER_SESSION));
@@ -78,7 +86,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-7" style="padding-top:30px">
                         <div class="resume-experience pl-0">
                             <div class="timeline-box" ng-controller="educationController">
                                 <h5 class="resume-experience-title">Trình độ học vấn:</h5>

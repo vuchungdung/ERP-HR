@@ -12,7 +12,7 @@ namespace MVC.Models
         public DateTime ApplyDate { get; set; }
         public string p_Name { get; set; }
         public int JobId { get; set; }
-        public int? Result { get; set; } = null;
-        public DateTime? CreateDate { get; set; } = null;
+        public int? Result { get; set; }
+        public DateTime? ResultDate { get; set; }
     }
 }

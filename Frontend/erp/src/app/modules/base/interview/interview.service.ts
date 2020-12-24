@@ -15,18 +15,14 @@ export class InterviewService{
 
   url = {
     insert: '/interview/interviewdate/insert',
-    getlist: '/interview/interviewdate/get-list',
+    getdate: '/interview/interviewdate/get-date',
   }
 
   insert(model: FormData):Observable<ResponseModel>{
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
 
-  getList(paging: PagingModel,searchText:string):Observable<ResponseModel>{
-    const filter = new FilterModel();
-    filter.text = searchText;
-    filter.paging.pageIndex = paging.pageIndex;
-    filter.paging.pageSize = paging.pageSize;
-    return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
+  dropdown():Observable<ResponseModel>{
+    return this.api.dropDown(`${environment.apiUrl}${this.url.getdate}`);
   }
 }

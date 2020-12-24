@@ -93,7 +93,7 @@ namespace Services.Candidates.Implement
                             on m.CandidateId equals ip.CandidateId
                             join ps in _context.ProcessRepository.Query()
                             on ip.ProcessId equals ps.ProcessId
-                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted
+                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted && ip.Result == 0
                             orderby m.CreateDate descending
                             select new ListCandidateViewModel()
                             {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ResponseStatus } from 'src/app/core/enums/response-status.enum';
 import { ResponseModel } from 'src/app/core/models/response.model';
+import { EmployeeService } from '../../../employee/employee.service';
 import { InterviewService } from '../../../interview/interview.service';
 
 @Component({
@@ -17,8 +18,10 @@ export class FormComponent implements OnInit {
   public email : string;
   public cadidateId : number;
   public jobId : number;
+  public listEmployee : any;
   constructor(
     private interviewService: InterviewService,
+    private employeeSer : EmployeeService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormComponent>) { }
 
@@ -34,8 +37,10 @@ export class FormComponent implements OnInit {
       jobId : [0,Validators.required],
       note : ['',Validators.required],
       sendMail :['',Validators.required],
-      email: ['',Validators.required]
+      email: ['',Validators.required],
+      employeeid: [0,Validators.required]
     });
+    this.getDropdown();
   }
 
   saveForm(){
@@ -72,5 +77,13 @@ export class FormComponent implements OnInit {
       formData.append(key, value);
     }
     return formData;
+  }
+
+  getDropdown(){
+    this.employeeSer.dropdown().subscribe((res:ResponseModel)=>{
+      if(res.status == ResponseStatus.success){
+        this.listEmployee = res.result;
+      }
+    })
   }
 }
