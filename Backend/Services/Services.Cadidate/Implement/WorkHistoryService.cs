@@ -54,12 +54,11 @@ namespace Services.Candidates.Implement
 
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
-            int userId = Convert.ToInt32(_httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier));
             ResponseModel response = new ResponseModel();
             try
             {
                 var query = from a in _context.WorkHistoryRepository.Query()
-                            where !a.Deleted && a.CandidateId == userId
+                            where !a.Deleted && a.CandidateId == Convert.ToInt32(filter.CandidateId)
                             orderby a.TimeStart
                             select new WorkHistoryViewModel()
                             {

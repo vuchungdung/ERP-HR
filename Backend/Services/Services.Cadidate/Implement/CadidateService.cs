@@ -102,6 +102,7 @@ namespace Services.Candidates.Implement
                                 Email = m.Email,
                                 Address = m.Address,
                                 Phone = m.Phone,
+                                JobId = j.JobId,
                                 Gender = m.Gender,
                                 Provider = p.Name,
                                 JobName = j.Title,
@@ -194,20 +195,14 @@ namespace Services.Candidates.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                var query = from m in _context.CandidateRepository.Query()
-                            join p in _context.ProviderRepository.Query()
-                            on m.ProviderId equals p.ProviderId
+                var query = from m in _context.CandidateRepository.Query()                 
                             join a in _context.ApplyRepository.Query()
                             on m.CandidateId equals a.CandidateId
                             join j in _context.JobDescriptionRepository.Query()
-                            on a.JobId equals j.JobId
-                            join ip in _context.InterviewProcessRepository.Query()
-                            on m.CandidateId equals ip.CandidateId
-                            join ps in _context.ProcessRepository.Query()
-                            on ip.ProcessId equals ps.ProcessId
+                            on a.JobId equals j.JobId                            
                             join f in _context.FileCVRepository.Query()
                             on m.CandidateId equals f.CandidateId
-                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted && m.CandidateId == id
+                            where !m.Deleted && !a.Deleted && !j.Deleted && m.CandidateId == id
                             select new CandidateViewModel()
                             {
                                 CandidateId = m.CandidateId,
@@ -220,9 +215,7 @@ namespace Services.Candidates.Implement
                                 Zalo = m.Zalo,
                                 LinkedIn = m.LinkedIn,
                                 Skype = m.Skype,
-                                Provider = p.Name,
                                 JobName = j.Title,
-                                ProcessName = ps.Name,
                                 CreatedDate = m.CreateDate,
                                 Dob = m.Dob,
                                 Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), m.FileName),

@@ -76,5 +76,7 @@ namespace Services.Candidates.ViewModel
         public string FilePath { get; set; }
 
         public string PdfName { get; set; }
+
+        public int JobId { get; set; }
     }
 }

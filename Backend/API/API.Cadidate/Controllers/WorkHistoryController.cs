@@ -1,4 +1,5 @@
 ﻿using Core.CommonModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Candidates.Interfaces;
 using System;
@@ -19,6 +20,9 @@ namespace API.Candidate.Controllers
             _workHistoryService = workHistoryService;
         }
 
+        [HttpPost]
+        [Route("get-list")]
+        [Authorize]
         public async Task<ResponseModel> GetList(FilterModel model)
         {
             var response = await _workHistoryService.GetList(model);

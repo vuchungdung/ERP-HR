@@ -114,27 +114,27 @@
             <mat-tab-group>
               <mat-tab label="Hồ sơ ứng viên">
                 <div class="page-container right" style="padding: 0px;">
-                  <app-detail-cv></app-detail-cv>
                 </div>
               </mat-tab>
               <mat-tab label="Lịch sử làm việc">
-                <div class="page-container right"> 
+                <div class="page-container right" style="padding: 10px 20px"> 
+                  <app-detail-workhistory [candidateId]="getId()"></app-detail-workhistory>
                 </div>
               </mat-tab>
               <mat-tab label="Dự án nổi bật">
-                <div class="page-container right">
+                <div class="page-container right" style="padding: 10px 20px"> 
                 </div>
               </mat-tab>
               <mat-tab label="Trình độ đào tạo">
-                <div class="page-container right">
+                <div class="page-container right" style="padding: 10px 20px"> 
                 </div>
               </mat-tab>
               <mat-tab label="Quá trình ứng tuyển">
-                <div class="page-container right">
+                <div class="page-container right" style="padding: 10px 20px"> 
                 </div>
               </mat-tab>
               <mat-tab label="Kết quả phỏng vấn">
-                <div class="page-container right">
+                <div class="page-container right" style="padding: 10px 20px"> 
                 </div>
               </mat-tab>
             </mat-tab-group>

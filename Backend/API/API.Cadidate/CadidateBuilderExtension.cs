@@ -10,6 +10,8 @@ namespace API.Candidate
         public static IServiceCollection AddCandidateServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IWorkHistoryService, WorkHistoryService>();
+
             return services;
         }
     }

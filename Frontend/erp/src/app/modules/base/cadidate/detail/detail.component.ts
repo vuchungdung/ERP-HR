@@ -19,7 +19,6 @@ export class DetailComponent implements OnInit {
   @ViewChild(DetailCvComponent) form : DetailCvComponent;
 
   public items : any;
-
   constructor(
     private route : ActivatedRoute,
     private detailService : CadidateDetailService,
@@ -28,7 +27,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItem();
-    this.getDetailCv();
+    //this.getDetailCv();
   }
 
   getId(){
@@ -57,10 +56,10 @@ export class DetailComponent implements OnInit {
     })
   }
 
-  insertDate(email:string, cadidateId:number,jobId: number){
+  insertDate(email:string, candidateId:number,jobId: number){
     const dialogRef = this.dialog.open(FormComponent);
     dialogRef.componentInstance.email = email;
-    dialogRef.componentInstance.cadidateId = cadidateId;
+    dialogRef.componentInstance.candidateId = candidateId;
     dialogRef.componentInstance.jobId = jobId;
     dialogRef.afterClosed().subscribe(result=>{
       if(result == true){

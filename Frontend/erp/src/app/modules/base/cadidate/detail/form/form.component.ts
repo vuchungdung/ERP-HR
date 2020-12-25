@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   public interviewForm : FormGroup;
   public checked = false;
   public email : string;
-  public cadidateId : number;
+  public candidateId : number;
   public jobId : number;
   public listEmployee : any;
   constructor(
@@ -30,7 +30,6 @@ export class FormComponent implements OnInit {
       dateId:[0,Validators.required],
       cadidateId :[0,Validators.required],
       timeDate : ['',Validators.required],
-      timeStart :['',Validators.required],
       address :['',Validators.required],
       recruitType : ['',Validators.required],
       time : ['',Validators.required],
@@ -45,10 +44,10 @@ export class FormComponent implements OnInit {
 
   saveForm(){
     debugger
-    var id = this.dialogRef.componentInstance.cadidateId;
+    var id = this.dialogRef.componentInstance.candidateId;
     var mail = this.dialogRef.componentInstance.email;
     var jobid = this.dialogRef.componentInstance.jobId;
-    this.interviewForm.get('cadidateId').setValue(id);
+    this.interviewForm.get('candidateId').setValue(id);
     this.interviewForm.get('email').setValue(mail);
     this.interviewForm.get('jobId').setValue(jobid);
     var formValue = this.interviewForm.getRawValue();
@@ -67,13 +66,6 @@ export class FormComponent implements OnInit {
     const formData = new FormData();
     for (const key of Object.keys(formValue)) {
       let value = formValue[key];
-      if(key ==="timeDate"){
-        const month = value.getMonth()+1;
-        const day = value.getDate();
-        const year = value.getFullYear();
-        value = `${month}-${day}-${year}`;
-        console.log(value);
-      }
       formData.append(key, value);
     }
     return formData;

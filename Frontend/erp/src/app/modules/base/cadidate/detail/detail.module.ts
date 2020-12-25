@@ -30,6 +30,8 @@ import { DetailWorkhistoryComponent } from './detail-workhistory/detail-workhist
 import { DetailProcessComponent } from './detail-process/detail-process.component';
 import { DetailCvComponent } from './detail-cv/detail-cv.component';
 import { EmployeeService } from '../../employee/employee.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { WorkHistoryService } from './detail-workhistory/detail-workhistory.service';
 
 
 const routes = [
@@ -66,13 +68,15 @@ const routes = [
     MatRadioModule,
     MatInputModule,
     PdfViewerModule,
+    SharedModule
   ],
   providers:[
     CadidateDetailService,
     NotificationService,
     ApiService,
     InterviewService,
-    EmployeeService
+    EmployeeService,
+    WorkHistoryService
   ]
 })
 export class DetailModule { }
