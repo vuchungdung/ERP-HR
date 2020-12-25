@@ -48,9 +48,31 @@ namespace Services.Common.Implement
             return response;
         }
 
-        public Task<ResponseModel> DropdowmSelection()
+        public async Task<ResponseModel> DropdowmSelection()
         {
-            throw new NotImplementedException();
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from m in _context.ProcessRepository.Query()
+                            where !m.Deleted
+                            orderby m.Name
+                            select new ProcessViewModel()
+                            {
+                                Id = m.ProcessId,
+                                Name = m.Name,
+                                Note = m.Note
+
+                            };
+                var listItems = await query.ToListAsync();
+
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         public async Task<ResponseModel> GetList(FilterModel filter)
@@ -63,7 +85,7 @@ namespace Services.Common.Implement
                             orderby m.Name
                             select new ProcessViewModel()
                             {
-                                ProcessId = m.ProcessId,
+                                Id = m.ProcessId,
                                 Name = m.Name,
                                 Note = m.Note
 
@@ -121,7 +143,7 @@ namespace Services.Common.Implement
 
                 ProcessViewModel model = new ProcessViewModel()
                 {
-                    ProcessId = md.ProcessId,
+                    Id = md.ProcessId,
                     Name = md.Name,
                     Note = md.Note
                 };
@@ -141,7 +163,7 @@ namespace Services.Common.Implement
             ResponseModel response = new ResponseModel();
             try
             {
-                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == model.ProcessId);
+                Process md = _context.ProcessRepository.FirstOrDefault(x => x.ProcessId == model.Id);
 
                 md.Name = model.Name;
                 md.Note = md.Note;

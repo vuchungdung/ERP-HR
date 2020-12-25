@@ -49,6 +49,33 @@ namespace Services.Recruitment.Implement
             return response;
         }
 
+        public async Task<ResponseModel> Dropdown()
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+                var query = from j in _context.JobDescriptionRepository.Query()
+                            join c in _context.JobCategoryRepository.Query()
+                            on j.CategoryId equals c.CategoryId
+                            where !j.Deleted && j.Status == JobStatus.Opened
+                            orderby j.CreateDate descending
+                            select new JobDescriptionViewModel()
+                            {
+                                JobId = j.JobId,
+                                Title = j.Title                               
+                            };
+
+                var listItems = await query.ToListAsync();
+                response.Result = listItems;
+                response.Status = ResponseStatus.Success;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
+        }
+
         public async Task<ResponseModel> GetList(FilterModel filter)
         {
             ResponseModel response = new ResponseModel();

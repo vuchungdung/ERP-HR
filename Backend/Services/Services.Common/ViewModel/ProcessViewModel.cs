@@ -6,7 +6,7 @@ namespace Services.Common.ViewModel
 {
     public class ProcessViewModel
     {
-        public int ProcessId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

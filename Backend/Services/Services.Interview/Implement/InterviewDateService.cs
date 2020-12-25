@@ -101,7 +101,7 @@ namespace Services.Interview.Implement
                 md.Deleted = false;
                 md.CandidateId = model.CandidateId;
                 md.EmployeeId = model.EmployeeId;
-                md.JodId = model.JodId;
+                md.JobId = model.JobId;
                 md.Time = md.Time;
                 md.RecruitType = model.RecruitType;
                 md.TimeDate = model.TimeDate;
@@ -133,7 +133,7 @@ namespace Services.Interview.Implement
                 model.Address = md.Address;
                 model.CandidateId = md.CandidateId;
                 model.EmployeeId = md.EmployeeId;
-                model.JodId = md.JodId;
+                model.JobId = md.JobId;
                 model.Time = md.Time;
                 model.RecruitType = md.RecruitType;
                 model.TimeDate = md.TimeDate;

@@ -62,5 +62,14 @@ namespace API.Common.Controllers
             var response = await _processService.Delete(id);
             return response;
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("drop-down")]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _processService.DropdowmSelection();
+            return response;
+        }
     }
 }

@@ -62,5 +62,14 @@ namespace API.Recruitment.Controllers
             var response = await _jobDescriptionService.Item(id);
             return response;
         }
+
+        [Route("drop-down")]
+        [HttpGet]
+        [Authorize]
+        public async Task<ResponseModel> Dropdown()
+        {
+            var response = await _jobDescriptionService.Dropdown();
+            return response;
+        }
     }
 }

@@ -28,7 +28,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.interviewForm = this.fb.group({
       dateId:[0,Validators.required],
-      cadidateId :[0,Validators.required],
+      candidateId :[0,Validators.required],
       timeDate : ['',Validators.required],
       address :['',Validators.required],
       recruitType : ['',Validators.required],

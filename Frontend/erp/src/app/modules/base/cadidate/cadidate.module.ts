@@ -22,6 +22,8 @@ import { JobCategoryService } from '../config-system/job-category/job-category.s
 import { ProviderService } from '../config-system/provider/provider.service';
 import { NotificationService } from 'src/app/shared/services/toastr.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ProcessService } from '../config-system/process/process.service';
+import { RecruitmentService } from '../recruitment/recruitment.service';
 
 @NgModule({
   declarations: [
@@ -51,8 +53,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CadidateService,
     SkillService,
     JobCategoryService,
+    RecruitmentService,
     ProviderService,
-    NotificationService
+    NotificationService,
+    ProcessService
   ]
 })
 export class CadidateModule { }

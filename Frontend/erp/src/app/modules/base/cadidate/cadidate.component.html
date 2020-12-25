@@ -7,23 +7,15 @@
           <h4 class="panel-title" style="margin:0;"><i class="icon-users2 icon"></i>DANH SÁCH ỨNG VIÊN</h4>
         </div>
         <div class="options" style="display: flex;height: 28px;">
-          <h3 style="padding-right: 8px;">Tìm kiếm nâng cao</h3>
-          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
-            <mat-option>None</mat-option>
-            <mat-option>Công việc</mat-option>
+          <h3 style="padding-right: 8px;">Phân loại</h3>
+          <mat-select class="form-input" [(ngModel)]="processId" style="height: 28px; line-height: 28px;margin-right: 5px;width:190px">
+            <mat-option [value]=0>Giai đoạn ứng tuyển</mat-option>
+            <mat-option *ngFor="let option of listProcess" [value]=option.id>{{option.name}}</mat-option>
           </mat-select>
-          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
-            <mat-option>None</mat-option>
-            <mat-option>Trình độ</mat-option>
-          </mat-select>
-          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
-            <mat-option>None</mat-option>
-            <mat-option>Kỹ năng</mat-option>
-          </mat-select>
-          <mat-select class="form-input" style="height: 28px; line-height: 28px;margin-right: 5px;">
-            <mat-option>None</mat-option>
-            <mat-option>Kinh nghiệm</mat-option>
-          </mat-select>          
+          <mat-select class="form-input" [(ngModel)]="jobId" style="height: 28px; line-height: 28px;margin-right: 5px;width:160px">
+            <mat-option [value]=0>Tin ứng tuyển</mat-option>
+            <mat-option *ngFor="let option of listJob" [value]=option.jobId>{{option.title}}</mat-option>
+          </mat-select>        
           <ng-container>
             <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
               <i class="icon-bin icon"></i>Xóa ứng viên

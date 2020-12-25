@@ -30,7 +30,7 @@ namespace Database.Sql.ERP.Entities.Interview
         public int Time { get; set; }
 
         [Required]
-        public int JodId { get; set; }
+        public int JobId { get; set; }
 
         public string Note { get; set; }
 

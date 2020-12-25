@@ -216,6 +216,7 @@ namespace Services.Candidates.Implement
                                 LinkedIn = m.LinkedIn,
                                 Skype = m.Skype,
                                 JobName = j.Title,
+                                JobId = j.JobId,
                                 CreatedDate = m.CreateDate,
                                 Dob = m.Dob,
                                 Img = Path.Combine(Path.Combine("wwwroot/cadidate-cv"), m.FileName),

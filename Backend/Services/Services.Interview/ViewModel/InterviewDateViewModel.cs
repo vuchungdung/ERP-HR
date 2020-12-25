@@ -19,7 +19,7 @@ namespace Services.Interview.ViewModel
 
         public int Time { get; set; }
 
-        public int JodId { get; set; }
+        public int JobId { get; set; }
 
         public string Note { get; set; }
 

@@ -62,6 +62,7 @@ export class DetailComponent implements OnInit {
     dialogRef.componentInstance.candidateId = candidateId;
     dialogRef.componentInstance.jobId = jobId;
     dialogRef.afterClosed().subscribe(result=>{
+      debugger
       if(result == true){
         this.notify.showSuccess("Đặt lịch ứng tuyển thành công!","Thông báo");
       }
