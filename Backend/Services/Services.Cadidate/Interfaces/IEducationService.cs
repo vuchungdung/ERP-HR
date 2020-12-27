@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Core.Services.InterfaceService;
+using Services.Cadidates.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Services.Cadidates.Interfaces
 {
-    class IEducationService
+    public interface IEducationService : IBaseInterfaceService<EducationViewModel>
     {
     }
 }

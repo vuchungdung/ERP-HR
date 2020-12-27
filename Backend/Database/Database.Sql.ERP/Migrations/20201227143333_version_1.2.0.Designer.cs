@@ -4,14 +4,16 @@ using Database.Sql.ERP;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Sql.ERP.Migrations
 {
     [DbContext(typeof(ERPContext))]
-    partial class ERPContextModelSnapshot : ModelSnapshot
+    [Migration("20201227143333_version_1.2.0")]
+    partial class version_120
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -524,14 +526,14 @@ namespace Database.Sql.ERP.Migrations
                     b.Property<int>("Result")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ResultDate")
+                        .HasColumnType("datetime");
+
                     b.Property<int?>("UpdateBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime");
-
-                    b.Property<bool>("isShow")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

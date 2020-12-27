@@ -6,7 +6,8 @@ namespace Core.CommonModel.Enum
 {
     public enum Result
     {
+        Delay = 0,
         Pass = 1,
-        Fail     
+        Fail    
     }
 }

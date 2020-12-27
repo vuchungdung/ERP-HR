@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using Aspose.Pdf;
+using Core.Services.InterfaceService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,14 +24,18 @@ namespace MVC.Controllers
         private readonly ICandidateService _cadidateService;
         private readonly IFileService _fileService;
         private readonly IInterviewProcessService _interviewProcessService;
+        private readonly ISequenceService _sequenceService;
+
         public CandidateController(ICandidateService cadidateService
-            ,IFileService fileService
+            , IFileService fileService
             , IInterviewProcessService interviewProcessService
+            , ISequenceService sequenceService
             )
         {
             _cadidateService = cadidateService;
             _fileService = fileService;
             _interviewProcessService = interviewProcessService;
+            _sequenceService = sequenceService;
         }
 
         [TypeFilter(typeof(AuthenController))]
@@ -206,7 +211,7 @@ namespace MVC.Controllers
                     HttpContext.Session.SetString(Common.CommonSession.USER_SESSION, s);
                     FileViewModel f = new FileViewModel();
                     var file = model.File;
-                    var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/candidate-cv");
+                    var folderName = Path.Combine(@"D:\ERP-Recruiting\Backend\APIGateway\wwwroot/cadidate-cv");
                     var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                     if (file.Length > 0)
                     {
@@ -228,7 +233,7 @@ namespace MVC.Controllers
                         _fileService.Create(f);
                     }
                     InterviewProcessViewModel i = new InterviewProcessViewModel();
-                    i.CandidateId = user.Id;
+                    i.ApplyId = _sequenceService.GetApplyNewId();
                     i.CreateBy = user.Id;
                     i.ProcessId = 1;
                     _interviewProcessService.Create(i);

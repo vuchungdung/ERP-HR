@@ -113,14 +113,14 @@ export class FormComponent implements OnInit {
     const formData = new FormData();
     for (const key of Object.keys(formValue)) {
       let value = formValue[key];
-      if(key === "timeStart" || key ==="timeEnd"){
-        const month = value.getMonth()+1;
-        const day = value.getDate();
-        const year = value.getFullYear();
-        value = `${month}-${day}-${year}`;
-        console.log(value);
-      }
-      else if(key==="skill"){
+      // if(key === "timeStart" || key ==="timeEnd"){
+      //   const month = value.getMonth()+1;
+      //   const day = value.getDate();
+      //   const year = value.getFullYear();
+      //   value = `${month}-${day}-${year}`;
+      //   console.log(value);
+      // }
+      if(key==="skill"){
         let tmp = "";
         value.forEach(element => {
           tmp = tmp + element + ",";

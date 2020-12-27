@@ -27,7 +27,6 @@
                                     <th scope="col">Ngày ứng tuyển</th>
                                     <th scope="col">Vòng ứng tuyển</th>
                                     <th scope="col">Kết quả</th>
-                                    <th scope="col">Ngày có kết quả</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,12 +44,6 @@
                                     </td>
                                     <td ng-if="item.result != 0">
                                         {{item.result | processFilter:item.result}}
-                                    </td>
-                                    <td ng-if="item.resultDate == null">
-                                        (Chờ)
-                                    </td>
-                                    <td ng-if="item.resultDate != null">
-                                        {{item.resultDate|date:"dd/MM/yyyy"}}
                                     </td>
                                 </tr>
                             </tbody>

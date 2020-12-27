@@ -10,20 +10,21 @@ import { environment } from 'src/environments/environment';
   providedIn:'root'
 })
 
-export class WorkHistoryService{
+export class EducationService{
 
   constructor(private api: ApiService){}
 
   url={
     insert: '/candidate/candidate/insert',
     update: '/candidate/candidate/update',
-    getlist: '/candidate/workhistory/get-list',
+    getlist: '/candidate/education/get-list',
     delete: '/candidate/candidate/delete',
     item: '/candidate/candidate/item',
     dropdown: '/common/skill/drop-down'
   }
 
   insert(model: FormData):Observable<ResponseModel>{
+    console.log(`${environment.apiUrl}${this.url.insert}`);
     return this.api.insert(`${environment.apiUrl}${this.url.insert}`,model);
   }
   

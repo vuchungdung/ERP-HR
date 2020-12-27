@@ -13,6 +13,5 @@ namespace MVC.Models
         public string p_Name { get; set; }
         public int JobId { get; set; }
         public int? Result { get; set; }
-        public DateTime? ResultDate { get; set; }
     }
 }

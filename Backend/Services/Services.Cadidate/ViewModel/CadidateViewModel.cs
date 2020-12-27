@@ -70,7 +70,7 @@ namespace Services.Candidates.ViewModel
         public string Img { get; set; }
 
         public string JobName { get; set; }
-
+        public int ProcessId { get; set; }
         public string ProcessName { get; set; }
         public DateTime CreatedDate { get; set; }
 

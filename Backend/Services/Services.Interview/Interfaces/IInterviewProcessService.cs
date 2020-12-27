@@ -8,5 +8,6 @@ namespace Services.Interview.Interfaces
 {
     public interface IInterviewProcessService : IBaseInterfaceService<InterviewProcessViewModel>
     {
+        bool UpdateStatus(InterviewProcessViewModel model);
     }
 }

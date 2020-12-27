@@ -1,3 +1,5 @@
+using Core.Services;
+using Core.Services.InterfaceService;
 using Database.Sql.ERP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +45,8 @@ namespace MVC
             services.AddScoped<IWorkHistoryService, WorkHistoryService>();
             services.AddScoped<IAwardService, AwardService>();
             services.AddScoped<IInterviewProcessService, InterviewProcessService>();
+            services.AddScoped<ISequenceService, SequenceService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

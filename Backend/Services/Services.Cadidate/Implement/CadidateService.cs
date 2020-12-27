@@ -90,10 +90,11 @@ namespace Services.Candidates.Implement
                             join j in _context.JobDescriptionRepository.Query()
                             on a.JobId equals j.JobId
                             join ip in _context.InterviewProcessRepository.Query()
-                            on m.CandidateId equals ip.CandidateId
+                            on a.Id equals ip.ApplyId
                             join ps in _context.ProcessRepository.Query()
                             on ip.ProcessId equals ps.ProcessId
-                            where !m.Deleted && !p.Deleted && !a.Deleted && !j.Deleted && !ps.Deleted && !ip.Deleted && ip.Result == 0
+                            where !m.Deleted && !p.Deleted && !a.Deleted 
+                            && !j.Deleted && !ps.Deleted && !ip.Deleted && ip.isShow == true
                             orderby m.CreateDate descending
                             select new ListCandidateViewModel()
                             {

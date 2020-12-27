@@ -447,10 +447,10 @@ create proc SP_GET_INTERVIEW
 (@ID int)
 AS
 	BEGIN
-		select c.Name,c.CandidateId,j.Title,a.ApplyDate,p.Name as p_Name,j.JobId,i.Result,i.ResultDate
+		select c.Name,c.CandidateId,j.Title,a.ApplyDate,p.Name as p_Name,j.JobId,i.Result
 		from dbo.Candidates as c join Applies as a on c.CandidateId = a.CandidateId
 		join dbo.JobDescriptions as j on a.JobId = j.JobId
-		join dbo.InterviewProcesses as i on c.CandidateId = i.CandidateId
+		join dbo.InterviewProcesses as i on a.Id = i.ApplyId
 		join dbo.Process as p on i.ProcessId = p.ProcessId
 		where c.CandidateId = @ID
 	END;
@@ -461,23 +461,28 @@ exec SP_GET_INTERVIEW 1
 go
 
 create proc SP_INTERVIEW_P_CREATE
-(@candidateid int,
+(@applyid int,
 @processid int,
 @createby int,
 @createdate datetime,
 @delete bit = 0)
 as
 	begin
-		insert dbo.InterviewProcesses(CandidateId,ProcessId,CreateBy,CreateDate,Deleted)
-		values(@candidateid,@processid,@createby,@createdate,@delete)
+		insert dbo.InterviewProcesses(ApplyId,ProcessId,CreateBy,CreateDate,Deleted,isShow)
+		values(@applyid,@processid,@createby,@createdate,@delete,1)
 	end;
 go
 
 
-select c.Name,c.CandidateId,j.Title,a.ApplyDate,p.Name as p_Name,j.JobId,i.Result,i.ResultDate
+select c.Name,c.CandidateId,j.Title,a.ApplyDate,p.Name as p_Name,j.JobId,i.Result,p.ProcessId
 		from dbo.Candidates as c join Applies as a on c.CandidateId = a.CandidateId
 		join dbo.JobDescriptions as j on a.JobId = j.JobId
-		join dbo.InterviewProcesses as i on c.CandidateId = i.CandidateId
+		join dbo.InterviewProcesses as i on a.Id = i.ApplyId
 		join dbo.Process as p on i.ProcessId = p.ProcessId
-		where i.Result = 0
+
+
+
+select * from dbo.InterviewProcesses
+
+
 

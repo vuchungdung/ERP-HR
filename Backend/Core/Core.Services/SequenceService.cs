@@ -32,5 +32,19 @@ namespace Core.Services
                 return result;
             }
         }
+
+        public int GetApplyNewId()
+        {
+            using (SqlConnection conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.OpenAsync();
+                }
+
+                var result = conn.ExecuteScalar<int>(@"SELECT MAX(Applies.Id) FROM DBO.Applies", null, null, 120, CommandType.Text);
+                return result;
+            }
+        }
     }
 }

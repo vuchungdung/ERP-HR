@@ -32,6 +32,8 @@ import { DetailCvComponent } from './detail-cv/detail-cv.component';
 import { EmployeeService } from '../../employee/employee.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WorkHistoryService } from './detail-workhistory/detail-workhistory.service';
+import { InterviewProcessService } from './detail-process/detail-process.service';
+import { FormComponentProcess } from '../detail/detail-process/form/form.component';
 
 
 const routes = [
@@ -45,7 +47,14 @@ const routes = [
 @NgModule({
   declarations: [
     DetailComponent,
-    DetailInterviewResultComponent, FormComponent, DetailAwardComponent, DetailEducationComponent, DetailWorkhistoryComponent, DetailProcessComponent, DetailCvComponent
+    DetailInterviewResultComponent,
+    FormComponent, 
+    DetailAwardComponent,
+    DetailEducationComponent, 
+    DetailWorkhistoryComponent, 
+    DetailProcessComponent, 
+    DetailCvComponent,
+    FormComponentProcess
   ],
   imports: [
     CommonModule,
@@ -76,7 +85,8 @@ const routes = [
     ApiService,
     InterviewService,
     EmployeeService,
-    WorkHistoryService
+    WorkHistoryService,
+    InterviewProcessService
   ]
 })
 export class DetailModule { }

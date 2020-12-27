@@ -10,6 +10,8 @@ namespace API.Interview
         public static IServiceCollection AddInterviewServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IInterviewDateService, InterviewDateService>();
+            services.AddScoped<IInterviewProcessService, InterviewProcessService>();
+
             return services;
         }
     }

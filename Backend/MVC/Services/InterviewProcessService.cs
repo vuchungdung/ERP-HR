@@ -22,10 +22,10 @@ namespace MVC.Services
             try
             {
                 var response = _helper.ExecuteSProcedure("SP_INTERVIEW_P_CREATE",
-                    "@candidateid", model.CandidateId,
+                    "@applyid", model.ApplyId,
                     "@processid", model.ProcessId,
                     "@createby", model.CreateBy,
-                    "createdate", DateTime.Now);
+                    "@createdate",DateTime.Now);
                 if(response != null)
                 {
                     return true;

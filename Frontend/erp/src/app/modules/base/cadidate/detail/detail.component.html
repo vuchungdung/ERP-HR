@@ -123,14 +123,17 @@
               </mat-tab>
               <mat-tab label="Dự án nổi bật">
                 <div class="page-container right" style="padding: 10px 20px"> 
+                  <app-detail-award [candidateId]="getId()"></app-detail-award>
                 </div>
               </mat-tab>
               <mat-tab label="Trình độ đào tạo">
-                <div class="page-container right" style="padding: 10px 20px"> 
+                <div class="page-container right" style="padding: 10px 20px">
+                  <app-detail-education [candidateId]="getId()"></app-detail-education> 
                 </div>
               </mat-tab>
               <mat-tab label="Quá trình ứng tuyển">
-                <div class="page-container right" style="padding: 10px 20px"> 
+                <div class="page-container right" style="padding: 10px 20px">
+                  <app-detail-process [candidateId]="getId()"></app-detail-process> 
                 </div>
               </mat-tab>
               <mat-tab label="Kết quả phỏng vấn">
