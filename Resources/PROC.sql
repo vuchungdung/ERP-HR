@@ -358,7 +358,7 @@ CREATE PROC SP_GET_WORK
 (@candidateid int)
 AS
 	BEGIN
-		select w.Company,w.Description,w.TimeEnd,w.TimeStart,w.Position
+		select w.Id,w.Company,w.Description,w.TimeEnd,w.TimeStart,w.Position
 		from dbo.WorkHistories as w where w.CandidateId = @candidateid
 	END;
 GO
@@ -367,7 +367,7 @@ CREATE PROC SP_GET_EDUCATION
 (@candidateid int)
 AS
 	BEGIN
-		select w.Title,w.Institute,w.Description,w._From,w._To
+		select w.Id,w.Title,w.Institute,w.Description,w._From,w._To
 		from dbo.Educations as w where w.CandidateId = @candidateid
 	END;
 GO
@@ -376,7 +376,7 @@ CREATE PROC SP_GET_AWARD
 (@candidateid int)
 AS
 	BEGIN
-		select w.Title,w.Institute,w.Description,w._From,w._To
+		select w.Id,w.Title,w.Institute,w.Description,w._From,w._To
 		from dbo.Awards as w where w.CandidateId = @candidateid
 	END;
 GO
@@ -486,3 +486,30 @@ select * from dbo.InterviewProcesses
 
 
 
+
+CREATE PROC SP_GET_WORK_ID
+(@id int)
+AS
+	BEGIN
+		select w.Id,w.Company,w.Description,w.TimeEnd,w.TimeStart,w.Position
+		from dbo.WorkHistories as w where w.Id = @id
+	END;
+GO
+
+CREATE PROC SP_GET_EDUCATION_ID
+(@id int)
+AS
+	BEGIN
+		select w.Id,w.Title,w.Institute,w.Description,w._From,w._To
+		from dbo.Educations as w where w.Id = @id
+	END;
+GO
+
+CREATE PROC SP_GET_AWARD_ID
+(@id int)
+AS
+	BEGIN
+		select w.Id,w.Title,w.Institute,w.Description,w._From,w._To
+		from dbo.Awards as w where w.Id = @id
+	END;
+GO

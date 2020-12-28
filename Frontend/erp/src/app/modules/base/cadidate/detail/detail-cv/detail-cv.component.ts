@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailCvComponent implements OnInit {
 
-  public src : any;
 
   constructor() { }
 
@@ -15,10 +14,6 @@ export class DetailCvComponent implements OnInit {
     
   }
 
-  getPath(filepath: string){
-    debugger
-    console.log("https://localhost:44379/wwwroot/cadidate-cv/"+filepath);
-    this.src = "https://localhost:44379/wwwroot/cadidate-cv/"+filepath;
-  }
+  src = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
 }

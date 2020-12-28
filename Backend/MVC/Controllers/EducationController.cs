@@ -42,14 +42,34 @@ namespace MVC.Controllers
             }
         }
 
-        public IActionResult Update()
+        public IActionResult Update(EducationViewModel model)
         {
-            return View();
+            var session = Convert.ToString(HttpContext.Session.GetString(CommonSession.USER_SESSION));
+            try
+            {
+                var user = JsonConvert.DeserializeObject<UserSession>(session);
+                model.CandidateId = user.Id;
+                model.UpdateBy = user.Id;
+                var response = _service.Update(model);
+                return Json(response);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var response = _service.Delete(id);
+                return Json(response);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IActionResult Get()
@@ -59,6 +79,19 @@ namespace MVC.Controllers
             {
                 var user = JsonConvert.DeserializeObject<UserSession>(session);
                 var response = _service.GetByCId(user.Id);
+                return Json(response);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult GetId(int id)
+        {
+            try
+            {
+                var response = _service.GetById(id);
                 return Json(response);
             }
             catch (Exception ex)

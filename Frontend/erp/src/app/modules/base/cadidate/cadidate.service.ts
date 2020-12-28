@@ -33,11 +33,13 @@ export class CadidateService{
     return this.api.update(`${environment.apiUrl}${this.url.update}`,model);
   }
 
-  getList(paging: PagingModel,searchText:string):Observable<ResponseModel>{
+  getList(paging: PagingModel,searchText:string,processId : number,jobId : number):Observable<ResponseModel>{
     const filter = new FilterModel();
     filter.text = searchText;
     filter.paging.pageIndex = paging.pageIndex;
     filter.paging.pageSize = paging.pageSize;
+    filter.jobId = jobId;
+    filter.processId = processId;
     return this.api.getList(`${environment.apiUrl}${this.url.getlist}`,filter);
   }
 

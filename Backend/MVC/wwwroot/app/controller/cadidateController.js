@@ -84,30 +84,6 @@
         }
 
         $scope.getDetail();
-
-        //$scope.getFile = function (element) {
-        //    var file = element.files[0];
-        //    if (typeof (file) == 'undefined') {
-        //    }
-        //    else {
-        //        $scope.listFile.push(file);
-        //        var formData = new FormData();
-        //        formData.append('file', file);
-        //        $http({
-        //            url: '/File/UpLoad',
-        //            method: 'POST',
-        //            data: formData,
-        //            headers: { 'Content-Type': undefined }
-        //        }).then(function (res) {
-        //            if (res.data.fileType == ".jpg") {
-        //                $scope.img = res.data.fileName;
-        //            }
-        //            else {
-        //                $scope.pdf = res.data.fileName;
-        //            }
-        //        })
-        //    }
-        //};
     }
 
 })(angular.module('erp'));

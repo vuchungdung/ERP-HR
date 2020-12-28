@@ -9,5 +9,6 @@ export class PagingModel {
     this.pageIndex = 1;
     this.pageSizeOptions = [5, 10, 20, 50];
     this.length = 0;
+
   }
 }

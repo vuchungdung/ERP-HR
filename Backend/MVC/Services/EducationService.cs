@@ -45,10 +45,6 @@ namespace MVC.Services
             }
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<EducationViewModel> GetByCId(int id)
         {
@@ -65,7 +61,56 @@ namespace MVC.Services
 
         public bool Update(EducationViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_UPDATE_EDUCATION", "@id",model.Id,
+                                                           "@updateby", model.CreateBy,
+                                                           "@delete",0,
+                                                           "@candidateid", model.CandidateId,
+                                                           "@title", model.Title,
+                                                           "@description", model.Description,
+                                                           "@institute", model.Institute,
+                                                           "@_from", model._From,
+                                                           "@_to", model._To,
+                                                           "@updatedate", DateTime.Now);
+                if (response != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public EducationViewModel GetById(int id)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_GET_EDUCATION_ID", "@id", id);
+                return response.ConvertTo<EducationViewModel>().ToList().ElementAt(0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                var response = _helper.ExecuteSProcedure("SP_DELETE_EDUCATION", "@id", id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -71,9 +71,13 @@ export class DetailProcessComponent implements OnInit {
     console.log(this.item);
     var formData = this.ToFormData(this.item);
     this.interviewprocessService.insert(formData).subscribe((res:ResponseModel)=>{
+      debugger
       if(res.status == ResponseStatus.success){
         this.getList();
         this.notify.showSuccess("Cập nhật thành công!","Thông báo");
+      }
+      else{
+        this.notify.showSuccess("Thí sinh đã được tuyển!","Thông báo");
       }
     },
     (err)=>{

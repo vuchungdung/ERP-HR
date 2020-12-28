@@ -96,8 +96,8 @@
                 <div class="dashboard-timeline-info">
                     <div class="dashboard-timeline-edit">
                         <ul class="list-unstyled d-flex">
-                            <li><a class="text-right" data-toggle="collapse" href="#dateposted-02" role="button" aria-expanded="false" aria-controls="dateposted"> <i class="fas fa-pencil-alt text-info mr-2"></i> </a></li>
-                            <li><a href="#"><i class="far fa-trash-alt text-danger"></i></a></li>
+                            <li><a class="text-right" data-toggle="collapse" ng-click="getId(item.id)" href="#dateposted-{{item.id}}" role="button" aria-expanded="false" aria-controls="dateposted"> <i class="fas fa-pencil-alt text-info mr-2"></i> </a></li>
+                            <li><a href="" ng-click="delete(item.id)"><i class="far fa-trash-alt text-danger"></i></a></li>
                         </ul>
                     </div>
                     <span class="jobber-timeline-time">{{item._From}} đến {{item._To}}</span>
@@ -105,52 +105,81 @@
                     <span>- {{item.institute}}</span>
                     <p class="mt-2">{{item.description}}.</p>
                 </div>
-                <div class="collapse" id="dateposted-02">
+                <div class="collapse" id="dateposted-{{item.id}}">
                     <div class="bg-light p-3">
-                        <form class="form-row collapse show" id="dateposted-01">
+                        <form class="form-row collapse show" id="dateposted">
                             <div class="form-group col-md-12">
-                                <label>Title</label>
-                                <input type="text" class="form-control" value="Masters in Software Engineering">
+                                <label>Trình độ</label>
+                                <input type="text" class="form-control" ng-model="e.title" value="">
                             </div>
-                            <div class="form-group col-md-6 select-border">
-                                <label>Year</label>
-                                <select class="form-control basic-select">
-                                    <option value="value 01" selected="selected">2020</option>
-                                    <option value="value 02">2008</option>
-                                    <option value="value 03">2009</option>
-                                    <option value="value 04">2010</option>
-                                    <option value="value 05">2011</option>
-                                    <option value="value 06">2012</option>
-                                    <option value="value 07">2013</option>
-                                    <option value="value 08">2014</option>
-                                    <option value="value 09">2015</option>
-                                    <option value="value 10">2016</option>
-                                    <option value="value 11">2017</option>
-                                    <option value="value 12">2018</option>
-                                    <option value="value 13">2019</option>
-                                    <option value="value 14">2020</option>
-                                    <option value="value 15">2021</option>
-                                    <option value="value 16">2022</option>
-                                    <option value="value 17">2023</option>
-                                    <option value="value 18">2024</option>
-                                    <option value="value 19">2025</option>
-                                    <option value="value 20">2026</option>
-                                    <option value="value 21">2027</option>
-                                    <option value="value 22">2028</option>
-                                    <option value="value 23">2029</option>
-                                    <option value="value 14">2030</option>
+                            <div class="form-group col-md-3 select-border">
+                                <label>Từ năm</label>
+                                <select class="form-control basic-select" ng-model="e._From">
+                                    <option value=2020 selected="selected">2020</option>
+                                    <option value=2008>2008</option>
+                                    <option value=2009>2009</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2011>2011</option>
+                                    <option value=2012>2012</option>
+                                    <option value=2013>2013</option>
+                                    <option value=2014>2014</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2016>2016</option>
+                                    <option value=2017>2017</option>
+                                    <option value=2018>2018</option>
+                                    <option value=2019>2019</option>
+                                    <option value=2020>2020</option>
+                                    <option value=2021>2021</option>
+                                    <option value=2022>2022</option>
+                                    <option value=2023>2023</option>
+                                    <option value=2024>2024</option>
+                                    <option value=2025>2025</option>
+                                    <option value=2026>2026</option>
+                                    <option value=2027>2027</option>
+                                    <option value=2028>2028</option>
+                                    <option value=2029>2029</option>
+                                    <option value=2030>2030</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 select-border">
+                                <label>Đến năm</label>
+                                <select ng-model="e._To" class="form-control basic-select">
+                                    <option value=2020 selected="selected">2020</option>
+                                    <option value=2008>2008</option>
+                                    <option value=2009>2009</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2011>2011</option>
+                                    <option value=2012>2012</option>
+                                    <option value=2013>2013</option>
+                                    <option value=2014>2014</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2016>2016</option>
+                                    <option value=2017>2017</option>
+                                    <option value=2018>2018</option>
+                                    <option value=2019>2019</option>
+                                    <option value=2020>2020</option>
+                                    <option value=2021>2021</option>
+                                    <option value=2022>2022</option>
+                                    <option value=2023>2023</option>
+                                    <option value=2024>2024</option>
+                                    <option value=2025>2025</option>
+                                    <option value=2026>2026</option>
+                                    <option value=2027>2027</option>
+                                    <option value=2028>2028</option>
+                                    <option value=2029>2029</option>
+                                    <option value=2030>2030</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Institute</label>
-                                <input type="text" class="form-control" value="Engineering University">
+                                <label>Nơi đào tạo</label>
+                                <input type="text" class="form-control" ng-model="e.institute" value="">
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Description</label>
-                                <textarea class="form-control" rows="4" placeholder="This is the beginning of creating the life that you want to live. Know what the future holds for you as a result of the choice you can make today."></textarea>
+                                <label>Mô tả</label>
+                                <textarea class="form-control" ng-model="e.description" rows="4"></textarea>
                             </div>
                             <div class="form-group col-md-12 mb-0">
-                                <a class="btn btn-md btn-primary" href="#">Update</a>
+                                <a class="btn btn-md btn-primary" ng-click="update()">Cập nhật</a>
                             </div>
                         </form>
                     </div>

@@ -27,7 +27,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItem();
-    //this.getDetailCv();
+    this.getDetailCv();
   }
 
   getId(){
@@ -41,7 +41,6 @@ export class DetailComponent implements OnInit {
     this.detailService.item(id).subscribe((res:ResponseModel) =>{
       if(res.status == ResponseStatus.success){
         this.items = res.result;
-        console.log(this.items);
       }
     })
   }
@@ -50,8 +49,6 @@ export class DetailComponent implements OnInit {
     var id = this.getId();
     this.detailService.pdfFile(id).subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
-        console.log(res.result.fileName);
-        this.form.getPath(res.result.fileName);
       }
     })
   }
@@ -62,7 +59,6 @@ export class DetailComponent implements OnInit {
     dialogRef.componentInstance.candidateId = candidateId;
     dialogRef.componentInstance.jobId = jobId;
     dialogRef.afterClosed().subscribe(result=>{
-      debugger
       if(result == true){
         this.notify.showSuccess("Đặt lịch ứng tuyển thành công!","Thông báo");
       }

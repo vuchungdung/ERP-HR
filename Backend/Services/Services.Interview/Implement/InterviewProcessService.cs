@@ -70,12 +70,19 @@ namespace Services.Interview.Implement
                 md.CreateDate = DateTime.Now;
                 md.Deleted = false;
                 md.ProcessId = model.ProcessId + 1;
-                md.isShow = true;
+                if(md.ProcessId > 3)
+                {
+                    response.Status = Core.CommonModel.Enum.ResponseStatus.Error;
+                }
+                else
+                {
+                    md.isShow = true;
 
-                await _context.InterviewProcessRepository.AddAsync(md);
+                    await _context.InterviewProcessRepository.AddAsync(md);
 
-                await _context.SaveChangesAsync();
-                response.Status = Core.CommonModel.Enum.ResponseStatus.Success;
+                    await _context.SaveChangesAsync();
+                    response.Status = Core.CommonModel.Enum.ResponseStatus.Success;
+                }
             }
             catch (Exception ex)
             {
@@ -113,11 +120,18 @@ namespace Services.Interview.Implement
             try
             {
                 InterviewProcess md = _context.InterviewProcessRepository.FirstOrDefault(x => x.ApplyId == model.ApplyId && x.isShow == true);
-                md.isShow = false;
-                _context.InterviewProcessRepository.Update(md);
+                if(model.ProcessId + 1 > 3)
+                {
+                    return true;
+                }
+                else
+                {
+                    md.isShow = false;
+                    _context.InterviewProcessRepository.Update(md);
 
-                _context.SaveChanges();
-                return true;
+                    _context.SaveChanges();
+                    return true;
+                }
             }
             catch (Exception ex)
             {

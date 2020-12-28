@@ -16,7 +16,6 @@ namespace MVC.Services
         {
             _helper = helper;
         }
-
         public bool AddFile(FileViewModel model)
         {
             try
@@ -36,7 +35,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public bool CreateProfile(CandidateViewModel model)
         {
             try
@@ -67,7 +65,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public CandidateViewModel GetByUsername(string username)
         {
             try
@@ -80,7 +77,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public bool Login(LoginViewModel model)
         {
             try
@@ -101,7 +97,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public List<ManageJobViewModel> Get(int Id)
         {
             try
@@ -114,7 +109,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public bool Regrister(RegisterViewModel model)
         {
             try
@@ -134,7 +128,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public CandidateViewModel GetDetail(int id)
         {
             try
@@ -147,7 +140,6 @@ namespace MVC.Services
                 throw ex;
             }
         }
-
         public bool Apply(ApplyViewModel model)
         {
             try

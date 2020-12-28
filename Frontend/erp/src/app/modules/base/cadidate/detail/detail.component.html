@@ -114,6 +114,7 @@
             <mat-tab-group>
               <mat-tab label="Hồ sơ ứng viên">
                 <div class="page-container right" style="padding: 0px;">
+                  <app-detail-cv></app-detail-cv>
                 </div>
               </mat-tab>
               <mat-tab label="Lịch sử làm việc">
@@ -134,10 +135,6 @@
               <mat-tab label="Quá trình ứng tuyển">
                 <div class="page-container right" style="padding: 10px 20px">
                   <app-detail-process [candidateId]="getId()"></app-detail-process> 
-                </div>
-              </mat-tab>
-              <mat-tab label="Kết quả phỏng vấn">
-                <div class="page-container right" style="padding: 10px 20px"> 
                 </div>
               </mat-tab>
             </mat-tab-group>

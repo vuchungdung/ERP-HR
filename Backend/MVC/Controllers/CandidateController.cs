@@ -37,19 +37,16 @@ namespace MVC.Controllers
             _interviewProcessService = interviewProcessService;
             _sequenceService = sequenceService;
         }
-
         [TypeFilter(typeof(AuthenController))]
         public IActionResult Index()
         {
             return View();
         }
-
         [TypeFilter(typeof(AuthenController))]
         public IActionResult ManageJob()
         {
             return View();
         }
-
         [TypeFilter(typeof(AuthenController))]
         public IActionResult GetApplyJob()
         {
@@ -65,12 +62,10 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-
         public IActionResult Error()
         {
             return View();
         }
-
         public JsonResult Register([FromBody]RegisterViewModel model)
         {
             try
@@ -115,13 +110,11 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-
         public JsonResult LogOut()
         {
             HttpContext.Session.Clear();
             return Json(true);
         }
-
         [HttpPost]
         public JsonResult Authen([FromBody] int id)
         {
@@ -159,7 +152,6 @@ namespace MVC.Controllers
                 throw ex;
             }
         }
-
         [TypeFilter(typeof(AuthenController))]
         public IActionResult GetCandidate()
         {
@@ -191,8 +183,6 @@ namespace MVC.Controllers
         {
             return View();
         }
-
-
         [TypeFilter(typeof(AuthenController))]
         public IActionResult Apply(ApplyViewModel model)
         {

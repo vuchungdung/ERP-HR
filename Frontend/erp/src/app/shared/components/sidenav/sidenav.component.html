@@ -12,11 +12,8 @@
 
   <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/recruitment'><i class="icon-magazine icon"></i>Quản lý tin tuyển dụng</button>
 
-  <button class="menu-mat" style="font-weight:400;" mat-button [matMenuTriggerFor]="beforeMenu1"><i class="icon-cog2 icon"></i>Quản lý ứng viên</button>
-  <mat-menu #beforeMenu1="matMenu">
-    <button mat-menu-item routerLink='/manager/cadidate'><i class="icon-arrow-small-right icon"></i>Ứng viên ứng tuyển</button>
-    <button mat-menu-item><i class="icon-arrow-small-right icon"></i>Tất cả ứng viên</button>
-  </mat-menu>
+  <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/cadidate'><i class="icon-cog2 icon"></i>Quản lý ứng viên</button>
+
   <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/interview'><i class="icon-calendar22 icon"></i>Lịch phỏng vấn</button>
 
   <button class="menu-mat" style="font-weight:400;" mat-button routerLink='/manager/common'><i class="icon-equalizer2 icon"></i>Thiếp lập thông tin</button>

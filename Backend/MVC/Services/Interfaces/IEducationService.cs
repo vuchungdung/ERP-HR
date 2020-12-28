@@ -12,5 +12,6 @@ namespace MVC.Services.Interfaces
         bool Update(EducationViewModel model);
         bool Delete(int id);
         List<EducationViewModel> GetByCId(int id);
+        EducationViewModel GetById(int id);
     }
 }

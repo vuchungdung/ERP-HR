@@ -104,6 +104,7 @@ namespace Services.Candidates.Implement
                                 Address = m.Address,
                                 Phone = m.Phone,
                                 JobId = j.JobId,
+                                ProcessId = ip.ProcessId,
                                 Gender = m.Gender,
                                 Provider = p.Name,
                                 JobName = j.Title,
@@ -119,6 +120,14 @@ namespace Services.Candidates.Implement
                                         || x.Address.ToLower().Contains(filter.Text.ToLower())
                                         || x.Phone.ToLower().Contains(filter.Text.ToLower())
                                         );
+                }
+                if(filter.ProcessId != 0)
+                {
+                    query = query.Where(x => x.ProcessId == filter.ProcessId);
+                }
+                if (filter.JobId != 0)
+                {
+                    query = query.Where(x => x.JobId == filter.JobId);
                 }
                 BaseListModel<ListCandidateViewModel> listItems = new BaseListModel<ListCandidateViewModel>();
 

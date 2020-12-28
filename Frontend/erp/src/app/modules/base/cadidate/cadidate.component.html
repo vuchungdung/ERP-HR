@@ -17,8 +17,8 @@
             <mat-option *ngFor="let option of listJob" [value]=option.jobId>{{option.title}}</mat-option>
           </mat-select>        
           <ng-container>
-            <button mat-raised-button style="margin-right: 5px;" class="btn-interview" color="primary">
-              <i class="icon-bin icon"></i>Xóa ứng viên
+            <button mat-raised-button style="margin-right: 5px;" (click)="getList()" class="btn-interview" color="primary">
+              <i class="icon-bin icon"></i>Lọc
             </button>
           </ng-container>
         </div>

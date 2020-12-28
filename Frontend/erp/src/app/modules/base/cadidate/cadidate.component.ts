@@ -73,15 +73,16 @@ export class CadidateComponent implements OnInit {
     }
   }
 
-  getList(){
-    this.cadidateService.getList(this.paging, this.searchText).subscribe((res:ResponseModel)=>{
-      if(res.status === ResponseStatus.success){
-        this.dataSource.data = res.result.items;
-        console.log(res.result.items);
-        this.paging.length = res.result.totalItems;
-      }
-    })
-  }
+  // getList(){
+  //   this.cadidateService.getList(this.paging, this.searchText,0,0).subscribe((res:ResponseModel)=>{
+  //     if(res.status === ResponseStatus.success){
+  //       this.dataSource.data = res.result.items;
+  //       console.log(res.result.items);
+  //       this.paging.length = res.result.totalItems;
+  //     }
+  //   })
+  // }
+  
   onPageChange(page:PageEvent){
     this.paging.pageSize = page.pageSize;
     this.paging.pageIndex = page.pageIndex+1;
@@ -107,6 +108,17 @@ export class CadidateComponent implements OnInit {
     this.jobService.dropdown().subscribe((res:ResponseModel)=>{
       if(res.status == ResponseStatus.success){
         this.listJob = res.result;
+      }
+    })
+  }
+
+
+  getList(){
+    this.cadidateService.getList(this.paging, this.searchText,this.processId,this.jobId).subscribe((res:ResponseModel)=>{
+      if(res.status === ResponseStatus.success){
+        this.dataSource.data = res.result.items;
+        console.log(res.result.items);
+        this.paging.length = res.result.totalItems;
       }
     })
   }
